@@ -1,0 +1,20 @@
+<customUI onLoad="OnLoad" loadImage="OnLoadImage" xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+  <ribbon startFromScratch="false">
+    <contextualTabs>
+      <tabSet idMso="TabSetPivotTableTools">
+        <tab id="tab1" label="Internal">
+          <group id="extraSettingsGroup" label="Extra settings" getVisible="GetVisible">
+            <comboBox id="colorsPicking" label="Colors" maxLength="15" sizeString="WWWWWWWWWWWWWWW" showLabel="true" showItemImage="false" showImage="false" getEnabled="GetEnabled" getVisible="GetVisible" onChange="OnChange" getText="GetText" tag="colorsPicking" supertip="Color Picking">
+              <item id="greenColor" label="Green" />
+              <item id="redColor" label="Red" />
+              <item id="blueColor" label="Blue" />
+            </comboBox>
+          </group>
+          <group id="timeZoneSettingsGroup" label="Time zone settings" getVisible="GetVisible">
+            <comboBox id="countryPicking" label="Country" maxLength="7" sizeString="WWWWWWW" showLabel="true" showItemImage="false" showImage="false" getEnabled="GetEnabled" getVisible="GetVisible" onChange="OnChange" getText="GetText" tag="countryPicking" getItemCount="GetItemCount" getItemID="GetItemId" getItemImage="GetItemImage" getItemLabel="GetItemLabel" getItemScreentip="GetItemScreentip" getItemSupertip="GetItemSupertip" supertip="Pick a country to know its current time" />
+          </group>
+        </tab>
+      </tabSet>
+    </contextualTabs>
+  </ribbon>
+</customUI>

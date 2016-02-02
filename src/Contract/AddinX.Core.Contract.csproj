@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8E0452BB-994C-4996-99FA-931EE5B7E661}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AddinX.Core.Contract</RootNamespace>
+    <AssemblyName>AddinX.Core.Contract</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Command\Field\ICheckboxPressedField.cs" />
+    <Compile Include="Command\Field\IDropDownField.cs" />
+    <Compile Include="Command\Field\IDynamicItemsField.cs" />
+    <Compile Include="Command\Field\ILabelField.cs" />
+    <Compile Include="Command\IBoxCommand.cs" />
+    <Compile Include="Command\IButtonGroupCommand.cs" />
+    <Compile Include="Command\IComboBoxCommand.cs" />
+    <Compile Include="Command\IDialogBoxLauncherCommand.cs" />
+    <Compile Include="Command\IDropDownCommand.cs" />
+    <Compile Include="Command\IGalleryCommand.cs" />
+    <Compile Include="Command\IGroupCommand.cs" />
+    <Compile Include="Command\IMenuCommand.cs" />
+    <Compile Include="Control\Box\IBoxIdUi.cs" />
+    <Compile Include="Control\Box\IBoxItems.cs" />
+    <Compile Include="Control\Box\IBoxStyle.cs" />
+    <Compile Include="Control\Box\IBoxUi.cs" />
+    <Compile Include="Control\ButtonGroup\IButtonGroupItems.cs" />
+    <Compile Include="Control\ButtonGroup\IButtonGroupUi.cs" />
+    <Compile Include="Control\ButtonGroup\IButtonIdUi.cs" />
+    <Compile Include="Control\ButtonItem\IButtonExtra.cs" />
+    <Compile Include="Control\ButtonItem\IButtonIdUi.cs" />
+    <Compile Include="Control\ButtonItem\IButtonImage.cs" />
+    <Compile Include="Control\ButtonItem\IButtonLabel.cs" />
+    <Compile Include="Control\ButtonItem\IButtonUi.cs" />
+    <Compile Include="Control\Button\IButtonIdUi.cs" />
+    <Compile Include="Control\Button\IButtonImage.cs" />
+    <Compile Include="Control\Button\IButtonLabel.cs" />
+    <Compile Include="Control\Button\IButtonSize.cs" />
+    <Compile Include="Control\Button\IButtonExtra.cs" />
+    <Compile Include="Control\Button\IButtonUi.cs" />
+    <Compile Include="Control\CheckBox\ICheckboxExtra.cs" />
+    <Compile Include="Control\CheckBox\ICheckboxIdUi.cs" />
+    <Compile Include="Control\CheckBox\ICheckboxUi.cs" />
+    <Compile Include="Control\ComboBox\IComboBoxExtra.cs" />
+    <Compile Include="Control\ComboBox\IComboBoxIdUi.cs" />
+    <Compile Include="Control\ComboBox\IComboBoxImage.cs" />
+    <Compile Include="Control\ComboBox\IComboBoxLabel.cs" />
+    <Compile Include="Control\ComboBox\IComboBoxUi.cs" />
+    <Compile Include="Control\ComboBox\IComboxBoxItems.cs" />
+    <Compile Include="Control\DialogBoxLauncher\IDialogBoxLauncherExtra.cs" />
+    <Compile Include="Control\DialogBoxLauncher\IDialogBoxLauncherIdUi.cs" />
+    <Compile Include="Control\DialogBoxLauncher\IDialogBoxLauncherUi.cs" />
+    <Compile Include="Control\DropDown\IDropDownExtra.cs" />
+    <Compile Include="Control\DropDown\IDropDownIdUi.cs" />
+    <Compile Include="Control\DropDown\IDropDownImage.cs" />
+    <Compile Include="Control\DropDown\IDropDownItemImage.cs" />
+    <Compile Include="Control\DropDown\IDropDownItemLabel.cs" />
+    <Compile Include="Control\DropDown\IDropDownItems.cs" />
+    <Compile Include="Control\DropDown\IDropDownLabel.cs" />
+    <Compile Include="Control\DropDown\IDropDownUi.cs" />
+    <Compile Include="Control\EditBox\IEditBoxExtra.cs" />
+    <Compile Include="Control\EditBox\IEditBoxImage.cs" />
+    <Compile Include="Control\EditBox\IEditBoxUi.cs" />
+    <Compile Include="Control\Gallery\IGalleryButtons.cs" />
+    <Compile Include="Control\Gallery\IGalleryExtra.cs" />
+    <Compile Include="Control\Gallery\IGalleryIdUi.cs" />
+    <Compile Include="Control\Gallery\IGalleryImage.cs" />
+    <Compile Include="Control\Gallery\IGalleryItemImage.cs" />
+    <Compile Include="Control\Gallery\IGalleryItemLabel.cs" />
+    <Compile Include="Control\Gallery\IGalleryItems.cs" />
+    <Compile Include="Control\Gallery\IGalleryLabel.cs" />
+    <Compile Include="Control\Gallery\IGalleryUi.cs" />
+    <Compile Include="Control\Box\IBoxControlsUi.cs" />
+    <Compile Include="Control\ButtonGroup\IButtonGroupControlsUi.cs" />
+    <Compile Include="Control\Gallery\IGalleryControlsUi.cs" />
+    <Compile Include="Control\Menu\IMenuExtra.cs" />
+    <Compile Include="Control\Menu\IMenuIdUi.cs" />
+    <Compile Include="Control\Menu\IMenuImage.cs" />
+    <Compile Include="Control\Menu\IMenuItems.cs" />
+    <Compile Include="Control\Menu\IMenuItemSize.cs" />
+    <Compile Include="Control\Menu\IMenuLabel.cs" />
+    <Compile Include="Control\Menu\IMenuSize.cs" />
+    <Compile Include="Control\ToggleButtonItem\IToggleButtonExtra.cs" />
+    <Compile Include="Control\ToggleButtonItem\IToggleButtonIdUi.cs" />
+    <Compile Include="Control\ToggleButtonItem\IToggleButtonImage.cs" />
+    <Compile Include="Control\ToggleButtonItem\IToggleButtonLabel.cs" />
+    <Compile Include="Control\ToggleButtonItem\IToggleButtonUi.cs" />
+    <Compile Include="Ribbon\Group\IGroupControlsUi.cs" />
+    <Compile Include="Ribbon\Group\IGroupDialogBox.cs" />
+    <Compile Include="Control\Menu\IMenuControlsUi.cs" />
+    <Compile Include="Control\Menu\IMenuUi.cs" />
+    <Compile Include="Enums\BoxStyle.cs" />
+    <Compile Include="Enums\ControlSize.cs" />
+    <Compile Include="Enums\IdType.cs" />
+    <Compile Include="Control\EditBox\IEditBoxIdUi.cs" />
+    <Compile Include="Control\IElementId.cs" />
+    <Compile Include="Control\Item\IItemExtra.cs" />
+    <Compile Include="Control\Item\IItemImage.cs" />
+    <Compile Include="Control\Item\IItemsUi.cs" />
+    <Compile Include="Control\Item\IITemUi.cs" />
+    <Compile Include="Control\Item\IItemUiId.cs" />
+    <Compile Include="Control\Label\ILabelControlExtra.cs" />
+    <Compile Include="Control\Label\ILabelControlIdUi.cs" />
+    <Compile Include="Control\Label\ILabelControlUi.cs" />
+    <Compile Include="Control\MenuSeparator\IMenuSeparatorIdUi.cs" />
+    <Compile Include="Control\MenuSeparator\IMenuSeparatorUi.cs" />
+    <Compile Include="Control\Separator\ISeparatorIdUi.cs" />
+    <Compile Include="Control\Separator\ISeparatorUi.cs" />
+    <Compile Include="Control\ToggleButton\IToggleButtonExtra.cs" />
+    <Compile Include="Control\ToggleButton\IToggleButtonIdUi.cs" />
+    <Compile Include="Command\Field\IEnabledField.cs" />
+    <Compile Include="Command\Field\IActionField.cs" />
+    <Compile Include="Command\Field\IPressedField.cs" />
+    <Compile Include="Command\Field\ITextField.cs" />
+    <Compile Include="Command\ICheckBoxCommand.cs" />
+    <Compile Include="Command\ICommand.cs" />
+    <Compile Include="Command\IEditBoxCommand.cs" />
+    <Compile Include="Command\ILabelCommand.cs" />
+    <Compile Include="Command\IRelayCommand.cs" />
+    <Compile Include="Command\IButtonCommand.cs" />
+    <Compile Include="Command\IRibbonCommands.cs" />
+    <Compile Include="Command\Field\IVisibleField.cs" />
+    <Compile Include="Command\ISeparatorCommand.cs" />
+    <Compile Include="Command\IToggleButtonCommand.cs" />
+    <Compile Include="Control\ToggleButton\IToggleButtonImage.cs" />
+    <Compile Include="Control\ToggleButton\IToggleButtonLabel.cs" />
+    <Compile Include="Control\ToggleButton\IToggleButtonSize.cs" />
+    <Compile Include="Control\ToggleButton\IToggleButtonUi.cs" />
+    <Compile Include="Enums\TabSetId.cs" />
+    <Compile Include="IRibbonBuilder.cs" />
+    <Compile Include="ICustomUi.cs" />
+    <Compile Include="IRibbonFluent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ribbon\Group\IGroupExtra.cs" />
+    <Compile Include="Ribbon\Group\IGroupItems.cs" />
+    <Compile Include="Ribbon\IContextualTabsUi.cs" />
+    <Compile Include="Ribbon\Group\IGroupIdUi.cs" />
+    <Compile Include="Ribbon\Group\IGroupsUi.cs" />
+    <Compile Include="Ribbon\Group\IGroupUi.cs" />
+    <Compile Include="Ribbon\IRibbonUi.cs" />
+    <Compile Include="Ribbon\TabSet\ITabSetIdUi.cs" />
+    <Compile Include="Ribbon\TabSet\ITabSetItem.cs" />
+    <Compile Include="Ribbon\Tab\ITabExtra.cs" />
+    <Compile Include="Ribbon\Tab\ITabIdUi.cs" />
+    <Compile Include="Ribbon\TabSet\ITabSetUi.cs" />
+    <Compile Include="Ribbon\Tab\ITabItems.cs" />
+    <Compile Include="Ribbon\Tab\ITabsUi.cs" />
+    <Compile Include="Ribbon\Tab\ITabUi.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
