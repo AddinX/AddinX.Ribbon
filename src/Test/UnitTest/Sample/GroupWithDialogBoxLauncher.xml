@@ -1,0 +1,15 @@
+<customUI onLoad="OnLoad" loadImage="OnLoadImage" xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+  <ribbon startFromScratch="false">
+    <tabs>
+      <tab id="tab1" label="test">
+        <group id="reportingGroup" label="reporting" getVisible="GetVisible">
+          <button id="portfolioAllocation" label="Allocation" showLabel="false" imageMso="HappyFace" size="large" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnAction" tag="portfolioAllocation" />
+          <button id="Contributor" label="Contributor" showLabel="true" showImage="false" size="normal" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnAction" tag="Contributor" screentip="Display the top / bottom X contributor to the portfolio performance." supertip="Portfolio best contributor" />
+          <dialogBoxLauncher>
+            <button id="ReportingConfig" showLabel="false" showImage="false" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnAction" tag="ReportingConfig" screentip="Configuration panel for the Allocation group" supertip="Allocation Configuration" />
+          </dialogBoxLauncher>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>

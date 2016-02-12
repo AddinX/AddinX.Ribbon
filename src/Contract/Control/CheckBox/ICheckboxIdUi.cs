@@ -1,0 +1,11 @@
+﻿namespace AddinX.Core.Contract.Control.CheckBox
+{
+    public interface ICheckboxIdUi
+    {
+        ICheckboxExtra SetId(string name);
+
+        ICheckboxExtra SetIdMso(string name);
+
+        ICheckboxExtra SetIdQ(string ns, string name);
+    }
+}

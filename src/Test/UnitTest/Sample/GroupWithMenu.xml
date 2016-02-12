@@ -1,0 +1,22 @@
+<customUI onLoad="OnLoad" loadImage="OnLoadImage" xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+  <ribbon startFromScratch="false">
+    <tabs>
+      <tab id="tab1" label="Internal">
+        <group id="extraSettingsGroup" label="Extra settings" getVisible="GetVisible">
+          <menu id="optionMenu" label="Options" size="large" showLabel="true" itemSize="large" showImage="false" getEnabled="GetEnabled" getVisible="GetVisible" tag="optionMenu">
+            <checkBox id="optionsOne" label="Option 1" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnActionPressed" getPressed="GetPressed" tag="optionsOne" screentip="CheckBox Option" />
+            <button id="BoutonOption" showLabel="false" imageMso="HappyFace" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnAction" tag="BoutonOption" label="Option 2" />
+            <button id="BoutonOptionTwo" showLabel="false" imageMso="HappyFace" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnAction" tag="BoutonOptionTwo" label="Option 3" />
+            <menuSeparator id="s" title="separatorMenu" />
+            <gallery id="ColorsSelection" label="Colors" sizeString="WWWWWWW" showLabel="true" showItemImage="false" showItemLabel="true" showImage="false" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnActionDropDown" getSelectedItemIndex="GetSelectedItemIndex" tag="ColorsSelection" supertip="Color Picking">
+              <item id="greenColor" label="Green" />
+              <item id="redColor" label="Red" />
+              <item id="blueColor" label="Blue" />
+              <button id="ExtraColors" showLabel="true" showImage="false" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnAction" tag="ExtraColors" label="Extra Colors" />
+            </gallery>
+          </menu>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
