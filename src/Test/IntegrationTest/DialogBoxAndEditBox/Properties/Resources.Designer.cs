@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AddIn.Core.IntegrationTest.DialogBoxAndEditBox.Properties {
+namespace AddinX.Core.IntegrationTest.DialogBoxAndEditBox.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace AddIn.Core.IntegrationTest.DialogBoxAndEditBox.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AddIn.Core.IntegrationTest.DialogBoxAndEditBox.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AddinX.Core.IntegrationTest.DialogBoxAndEditBox.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,6 +1,6 @@
 ﻿using NetOffice.ExcelApi;
 
-namespace AddIn.Core.IntegrationTest.ComboBoxAndDropDown
+namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown
 {
     // This class implements the ExcelDna.Integration.IExcelAddIn interface.
     // This allows the add-in to run code at start-up

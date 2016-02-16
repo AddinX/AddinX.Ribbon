@@ -5,7 +5,7 @@ using AddinX.Core.Contract;
 using AddinX.Core.Contract.Command;
 using AddinX.Core.ExcelDna;
 
-namespace AddIn.Core.IntegrationTest.ButtonAndBox
+namespace AddinX.Core.IntegrationTest.ButtonAndBox
 {
     [ComVisible(true)]
     public class Ribbon : RibbonFluent

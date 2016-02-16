@@ -3,7 +3,7 @@ using ExcelDna.Integration;
 using ExcelDna.Logging;
 using Application = NetOffice.ExcelApi.Application;
 
-namespace AddIn.Core.IntegrationTest.DialogBoxAndEditBox
+namespace AddinX.Core.IntegrationTest.DialogBoxAndEditBox
 {
     // This class implements the ExcelDna.Integration.IExcelAddIn interface.
     // This allows the add-in to run code at start-up

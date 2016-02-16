@@ -7,8 +7,8 @@
     <ProjectGuid>{214F235F-666C-4695-B7D5-A191194C586E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddIn.Core.IntegrationTest.ComboBoxAndDropDown</RootNamespace>
-    <AssemblyName>AddIn.Core.IntegrationTest.ComboBoxAndDropDown</AssemblyName>
+    <RootNamespace>AddinX.Core.IntegrationTest.ComboBoxAndDropDown</RootNamespace>
+    <AssemblyName>AddinX.Core.IntegrationTest.ComboBoxAndDropDown</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddinContext.cs" />
+    <Compile Include="Data\ListItems.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -71,6 +72,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Ribbon.cs" />
+    <Compile Include="Data\SingleItem.cs" />
     <Compile Include="Utils\ResizeImage.cs" />
   </ItemGroup>
   <ItemGroup>

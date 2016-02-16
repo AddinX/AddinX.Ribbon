@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AddIn.Core.IntegrationTest.GalleriesAndMenu.Properties {
+namespace AddinX.Core.IntegrationTest.GalleriesAndMenu.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace AddIn.Core.IntegrationTest.GalleriesAndMenu.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AddIn.Core.IntegrationTest.GalleriesAndMenu.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AddinX.Core.IntegrationTest.GalleriesAndMenu.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

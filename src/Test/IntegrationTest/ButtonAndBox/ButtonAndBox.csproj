@@ -7,8 +7,8 @@
     <ProjectGuid>{6F00458D-CCF9-46AD-A424-E22D7F1CB569}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddIn.Core.IntegrationTest.ButtonAndBox</RootNamespace>
-    <AssemblyName>AddIn.Core.IntegrationTest.ButtonAndBox</AssemblyName>
+    <RootNamespace>AddinX.Core.IntegrationTest.ButtonAndBox</RootNamespace>
+    <AssemblyName>AddinX.Core.IntegrationTest.ButtonAndBox</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

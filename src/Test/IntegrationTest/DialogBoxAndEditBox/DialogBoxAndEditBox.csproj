@@ -7,8 +7,8 @@
     <ProjectGuid>{8D216CE2-D639-4EE3-8AF0-BD479C8C1169}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddIn.Core.IntegrationTest.DialogBoxAndEditBox</RootNamespace>
-    <AssemblyName>AddIn.Core.IntegrationTest.DialogBoxAndEditBox</AssemblyName>
+    <RootNamespace>AddinX.Core.IntegrationTest.DialogBoxAndEditBox</RootNamespace>
+    <AssemblyName>AddinX.Core.IntegrationTest.DialogBoxAndEditBox</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -3,7 +3,7 @@ using ExcelDna.Integration;
 using ExcelDna.Logging;
 using NetOffice.ExcelApi;
 
-namespace AddIn.Core.IntegrationTest.ButtonAndBox
+namespace AddinX.Core.IntegrationTest.ButtonAndBox
 {
     // This class implements the ExcelDna.Integration.IExcelAddIn interface.
     // This allows the add-in to run code at start-up
