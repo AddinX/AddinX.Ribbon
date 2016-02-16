@@ -1,5 +1,5 @@
 <DnaLibrary Name="DialogBoxAndEditBox Add-In" RuntimeVersion="v4.0">
-  <ExternalLibrary Path="AddIn.Core.IntegrationTest.DialogBoxAndEditBox.dll" LoadFromBytes="true" Pack="true" />
+  <ExternalLibrary Path="AddinX.Core.IntegrationTest.DialogBoxAndEditBox.dll" LoadFromBytes="true" Pack="true" />
   
   <!-- 
        The RuntimeVersion attribute above allows two settings:

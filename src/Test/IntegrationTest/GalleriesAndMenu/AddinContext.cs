@@ -1,6 +1,6 @@
 using NetOffice.ExcelApi;
 
-namespace AddIn.Core.IntegrationTest.GalleriesAndMenu
+namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
 {
     public class AddinContext
     {

@@ -4,9 +4,8 @@ using System.Windows.Forms;
 using AddinX.Core.Contract;
 using AddinX.Core.Contract.Command;
 using AddinX.Core.ExcelDna;
-using ExcelDna.Integration;
 
-namespace AddIn.Core.IntegrationTest.DialogBoxAndEditBox
+namespace AddinX.Core.IntegrationTest.DialogBoxAndEditBox
 {
     [ComVisible(true)]
     public class Ribbon : RibbonFluent

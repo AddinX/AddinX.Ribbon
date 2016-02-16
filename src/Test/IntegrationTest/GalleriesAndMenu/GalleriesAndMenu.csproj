@@ -7,8 +7,8 @@
     <ProjectGuid>{A30364B4-BB94-43A2-A142-FCB78A3CEE0A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddIn.Core.IntegrationTest.GalleriesAndMenu</RootNamespace>
-    <AssemblyName>AddIn.Core.IntegrationTest.GalleriesAndMenu</AssemblyName>
+    <RootNamespace>AddinX.Core.IntegrationTest.GalleriesAndMenu</RootNamespace>
+    <AssemblyName>AddinX.Core.IntegrationTest.GalleriesAndMenu</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddinContext.cs" />
+    <Compile Include="Data\ListItems.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -71,6 +72,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Ribbon.cs" />
+    <Compile Include="Data\SingleItem.cs" />
     <Compile Include="Utils\ResizeImage.cs" />
   </ItemGroup>
   <ItemGroup>

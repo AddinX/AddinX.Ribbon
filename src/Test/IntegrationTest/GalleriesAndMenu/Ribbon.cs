@@ -1,14 +1,12 @@
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using AddinX.Core.Contract;
 using AddinX.Core.Contract.Command;
 using AddinX.Core.ExcelDna;
-using AddIn.Core.IntegrationTest.GalleriesAndMenu.Utils;
+using AddinX.Core.IntegrationTest.GalleriesAndMenu.Data;
+using AddinX.Core.IntegrationTest.GalleriesAndMenu.Utils;
 
-namespace AddIn.Core.IntegrationTest.GalleriesAndMenu
+namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
 {
     [ComVisible(true)]
     public class Ribbon : RibbonFluent
@@ -161,54 +159,4 @@ namespace AddIn.Core.IntegrationTest.GalleriesAndMenu
         }
 
     }
-
-    class ListItems
-    {
-        private readonly IDictionary<int, SingleItem> items;
-
-        public ListItems()
-        {
-            items = new Dictionary<int, SingleItem>();
-        }
-
-        public void Add(SingleItem item)
-        {
-            items.Add(items.Count + 1, item);
-        }
-
-        public int Count()
-        {
-            return items.Count;
-        }
-
-        public IList<object> Ids()
-        {
-            return new object[] { items.Keys };
-        }
-
-        public IList<string> Labels()
-        {
-            return items.Values.Select(o => o.Label).ToList();
-        }
-
-        public IList<object> Images()
-        {
-            return items.Values.Select(o => o.Image).Cast<object>().ToList();
-        }
-
-        public IList<string> SuperTips()
-        {
-            return items.Values.Select(o => o.SuperTip).ToList();
-        }
-    }
-
-    internal class SingleItem
-    {
-        public string Label { get; set; }
-
-        public Bitmap Image { get; set; }
-
-        public string SuperTip { get; set; }
-    }
-
 }
