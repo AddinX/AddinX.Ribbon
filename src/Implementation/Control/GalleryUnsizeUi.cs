@@ -1,15 +1,13 @@
-﻿using System;
+using System;
 using System.Xml.Linq;
-using AddinX.Core.Contract.Control.Gallery;
+using AddinX.Core.Contract.Control.GalleryUnsize;
 using AddinX.Core.Contract.Control.Item;
-using AddinX.Core.Contract.Enums;
 using AddinX.Core.Implementation.Ribbon;
 
 namespace AddinX.Core.Implementation.Control
 {
-    public class GalleryUi : ControlUi, IGalleryUi
+    public class GalleryUnsizeUi : ControlUi, IGalleryUnsizeUi
     {
-        private ControlSize size;
         private string imageMso;
         private string imagePath;
         private bool imageVisible;
@@ -26,13 +24,12 @@ namespace AddinX.Core.Implementation.Control
         private int itemWidth;
         private int rows;
         private int cols;
-        private readonly IGalleryControlsUi controls;
+        private readonly IGalleryUnsizeControlsUi controls;
 
-        public GalleryUi()
+        public GalleryUnsizeUi()
         {
             data = new ItemsUi();
             ElementName = "gallery";
-            size = ControlSize.normal;
             Id = new ElementId();
             controls = new ControlsUi();
             imageVisible = false;
@@ -43,7 +40,7 @@ namespace AddinX.Core.Implementation.Control
             cols = -1;
         }
 
-        protected internal IGalleryIdUi SetLabel(string value)
+        protected internal IGalleryUnsizeIdUi SetLabel(string value)
         {
             Label = value;
             return this;
@@ -51,7 +48,7 @@ namespace AddinX.Core.Implementation.Control
 
         protected internal override XElement ToXml(XNamespace ns)
         {
-            var tmpId = (ElementId) Id;
+            var tmpId = (ElementId)Id;
 
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
@@ -65,7 +62,6 @@ namespace AddinX.Core.Implementation.Control
                         ? new XAttribute("image", imagePath)
                         : new XAttribute("imageMso", imageMso)
                     : new XAttribute("showImage", "false")
-                 , new XAttribute("size", size.ToString())
                 , new XAttribute("getEnabled", "GetEnabled")
                 , new XAttribute("getVisible", "GetVisible")
                 , new XAttribute("onAction", "OnActionDropDown")
@@ -120,9 +116,9 @@ namespace AddinX.Core.Implementation.Control
             else
             {
                 // Add the Items first
-                if (((AddInList) data)?.ToXml(ns) != null)
+                if (((AddInList)data)?.ToXml(ns) != null)
                 {
-                    element.Add(((AddInList) data).ToXml(ns));
+                    element.Add(((AddInList)data).ToXml(ns));
                 }
             }
             // Then the buttons
@@ -134,154 +130,142 @@ namespace AddinX.Core.Implementation.Control
             return element;
         }
 
-        public IGalleryExtra SizeString(int size)
+        public IGalleryUnsizeExtra SizeString(int size)
         {
             gallerySize = size;
             return this;
         }
 
-        public IGalleryExtra ItemHeight(int height)
+        public IGalleryUnsizeExtra ItemHeight(int height)
         {
             itemHeight = height;
             return this;
         }
 
-        public IGalleryExtra ItemWidth(int width)
+        public IGalleryUnsizeExtra ItemWidth(int width)
         {
             itemWidth = width;
             return this;
         }
 
-        public IGalleryExtra NumberRows(int rows)
+        public IGalleryUnsizeExtra NumberRows(int rows)
         {
             this.rows = rows;
             return this;
         }
 
-        public IGalleryExtra NumberColumns(int cols)
+        public IGalleryUnsizeExtra NumberColumns(int cols)
         {
             this.cols = cols;
             return this;
         }
 
-        public IGalleryExtra Supertip(string supertip)
+        public IGalleryUnsizeExtra Supertip(string supertip)
         {
             this.supertip = supertip;
             return this;
         }
 
-        public IGalleryExtra Keytip(string keytip)
+        public IGalleryUnsizeExtra Keytip(string keytip)
         {
             this.keytip = keytip;
             return this;
         }
 
-        public IGalleryExtra Screentip(string screentip)
+        public IGalleryUnsizeExtra Screentip(string screentip)
         {
             this.screentip = screentip;
             return this;
         }
 
-        public IGalleryLabel SetId(string name)
+        public IGalleryUnsizeLabel SetId(string name)
         {
             Id.SetId(name);
             return this;
         }
 
-        public IGalleryLabel SetIdMso(string name)
+        public IGalleryUnsizeLabel SetIdMso(string name)
         {
             Id.SetMicrosoftId(name);
             return this;
         }
 
-        public IGalleryLabel SetIdQ(string ns, string name)
+        public IGalleryUnsizeLabel SetIdQ(string ns, string name)
         {
             Id.SetNamespaceId(ns, name);
             return this;
         }
 
-        public IGalleryItemLabel ImageMso(string name)
+        public IGalleryUnsizeItemLabel ImageMso(string name)
         {
             imageMso = name;
             return this;
         }
 
-        public IGalleryItemLabel ImagePath(string name)
+        public IGalleryUnsizeItemLabel ImagePath(string name)
         {
             imageVisible = true;
             imagePath = name;
             return this;
         }
 
-        public IGalleryItemLabel NoImage()
+        public IGalleryUnsizeItemLabel NoImage()
         {
             imageVisible = true;
             imageVisible = false;
             return this;
         }
 
-        public IGalleryItems ShowItemImage()
+        public IGalleryUnsizeItems ShowItemImage()
         {
             showItemImage = true;
             return this;
         }
 
-        public IGalleryItems HideItemImage()
+        public IGalleryUnsizeItems HideItemImage()
         {
             showItemImage = false;
             return this;
         }
 
-        public IGalleryItemImage ShowItemLabel()
+        public IGalleryUnsizeItemImage ShowItemLabel()
         {
             showItemLabel = true;
             return this;
         }
 
-        public IGalleryItemImage HideItemLabel()
+        public IGalleryUnsizeItemImage HideItemLabel()
         {
             showItemLabel = false;
             return this;
         }
 
-        public IGallerySize ShowLabel()
+        public IGalleryUnsizeImage ShowLabel()
         {
             showLabel = true;
             return this;
         }
 
-        public IGallerySize HideLabel()
+        public IGalleryUnsizeImage HideLabel()
         {
             showLabel = false;
             return this;
         }
 
-        public IGalleryExtra DynamicItems()
+        public IGalleryUnsizeExtra DynamicItems()
         {
             dynamicItemsLoading = true;
             return this;
         }
-
-        public IGalleryImage LargeSize()
-        {
-            size = ControlSize.large;
-            return this;
-        }
-
-        public IGalleryImage NormalSize()
-        {
-            size = ControlSize.normal;
-            return this;
-        }
-
-        public IGalleryExtra AddItems(Action<IItemsUi> items)
+        
+        public IGalleryUnsizeExtra AddItems(Action<IItemsUi> items)
         {
             dynamicItemsLoading = false;
             items.Invoke(data);
             return this;
         }
 
-        public IGalleryExtra AddButtons(Action<IGalleryControlsUi> items)
+        public IGalleryUnsizeExtra AddButtons(Action<IGalleryUnsizeControlsUi> items)
         {
             items.Invoke(controls);
             return this;

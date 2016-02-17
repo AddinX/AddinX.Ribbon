@@ -31,14 +31,14 @@ namespace AddinX.Core.UnitTest
                         g.AddGroup("reporting").SetId("reportingGroup")
                             .Items(i =>
                             {
-                                i.AddBouton("Allocation").SetId("portfolioAllocation").LargeSize().ImageMso("HappyFace");
-                                i.AddBouton("Contributor").SetId("Contributor").NormalSize()
+                                i.AddButton("Allocation").SetId("portfolioAllocation").LargeSize().ImageMso("HappyFace");
+                                i.AddButton("Contributor").SetId("Contributor").NormalSize()
                                     .NoImage().ShowLabel().Supertip("Portfolio best contributor")
                                     .Screentip("Display the top / bottom X contributor to the portfolio performance.");
                                 
                             });
                         g.AddGroup("Analytic").SetId("AnalyticGroup")
-                            .Items(i => i.AddBouton("Portfolio Analysis").SetId("portfolioAnalyser").NormalSize()
+                            .Items(i => i.AddButton("Portfolio Analysis").SetId("portfolioAnalyser").NormalSize()
                             .NoImage().ShowLabel());
                     });
             });
@@ -64,8 +64,8 @@ namespace AddinX.Core.UnitTest
                         g.AddGroup("reporting").SetId("reportingGroup")
                             .Items(i =>
                             {
-                                i.AddBouton("Allocation").SetId("portfolioAllocation").LargeSize().ImageMso("HappyFace");
-                                i.AddBouton("Contributor").SetId("Contributor").NormalSize()
+                                i.AddButton("Allocation").SetId("portfolioAllocation").LargeSize().ImageMso("HappyFace");
+                                i.AddButton("Contributor").SetId("Contributor").NormalSize()
                                     .NoImage().ShowLabel().Supertip("Portfolio best contributor")
                                     .Screentip("Display the top / bottom X contributor to the portfolio performance.");
                                 
@@ -100,11 +100,11 @@ namespace AddinX.Core.UnitTest
                                     g.AddGroup("reporting").SetId("reportingGroup")
                                         .Items(i =>
                                         {
-                                            i.AddBouton("Allocation")
+                                            i.AddButton("Allocation")
                                                 .SetId("portfolioAllocation")
                                                 .LargeSize()
                                                 .ImageMso("HappyFace");
-                                            i.AddBouton("Contributor").SetId("Contributor").NormalSize()
+                                            i.AddButton("Contributor").SetId("Contributor").NormalSize()
                                                 .NoImage().ShowLabel().Supertip("Portfolio best contributor")
                                                 .Screentip(
                                                     "Display the top / bottom X contributor to the portfolio performance.");
@@ -113,7 +113,7 @@ namespace AddinX.Core.UnitTest
                                     g.AddGroup("Analytic").SetId("AnalyticGroup")
                                         .Items(
                                             i =>
-                                                i.AddBouton("Portfolio Analysis")
+                                                i.AddButton("Portfolio Analysis")
                                                     .SetId("portfolioAnalyser")
                                                     .NormalSize()
                                                     .NoImage().ShowLabel());
@@ -145,20 +145,20 @@ namespace AddinX.Core.UnitTest
                             {
                                 i.AddBox().SetId("ButtonsVertical").VerticalDisplay().AddItems(b =>
                                 { 
-                                    b.AddBouton("Allocation")
+                                    b.AddButton("Allocation")
                                         .SetId("portfolioAllocation")
                                         .LargeSize()
                                         .ImageMso("HappyFace");
-                                    b.AddBouton("Contributor").SetId("Contributor").LargeSize()
+                                    b.AddButton("Contributor").SetId("Contributor").LargeSize()
                                         .NoImage().ShowLabel().Supertip("Portfolio best contributor")
                                         .Screentip("Display the top / bottom X contributor to the portfolio performance.");
                                 });
                                 i.AddBox().SetId("ButtonsHorizontal").HorizontalDisplay().AddItems(b =>
                                 {
-                                    b.AddBouton("Portfolio Analysis")
+                                    b.AddButton("Portfolio Analysis")
                                         .SetId("portfolioAnalyser").NormalSize()
                                         .NoImage().ShowLabel();
-                                    b.AddBouton("Return Analysis")
+                                    b.AddButton("Return Analysis")
                                         .SetId("ReturnAnalyser").NormalSize()
                                         .NoImage()
                                         .ShowLabel()
@@ -363,7 +363,7 @@ namespace AddinX.Core.UnitTest
                             .Items(i =>
                             {
                                 i.AddGallery("Colors").SetId("ColorsSelection")
-                                    .ShowLabel().NoImage().ShowItemLabel()
+                                    .ShowLabel().NormalSize().NoImage().ShowItemLabel()
                                     .HideItemImage()
                                     .AddItems(o =>
                                     {
@@ -371,7 +371,7 @@ namespace AddinX.Core.UnitTest
                                         o.AddItem("Red").SetId("redColor").NoImage();
                                         o.AddItem("Blue").SetId("blueColor").NoImage();
                                     }).AddButtons(o=>
-                                        o.AddBouton("Extra Colors").SetId("ExtraColors")
+                                        o.AddButton("Extra Colors").SetId("ExtraColors")
                                         .ImageMso("HappyFace") .ShowLabel()
                                     ).Supertip("Color Picking");
 
@@ -381,7 +381,7 @@ namespace AddinX.Core.UnitTest
                             .Items(i =>
                             {
                                 i.AddGallery("Unit To:").SetId("centimeter2Unit")
-                                    .ShowLabel().NoImage().ShowItemLabel().HideItemImage()
+                                    .ShowLabel().NormalSize().NoImage().ShowItemLabel().HideItemImage()
                                     .DynamicItems().Supertip("Centimeter Conversion")
                                     .Supertip("Convert centimeters to others units");
                             });
@@ -417,10 +417,10 @@ namespace AddinX.Core.UnitTest
                                     {
                                         l.AddCheckbox("Option 1").SetId("optionsOne")
                                             .Screentip("CheckBox Option");
-                                        l.AddBouton("Option 2")
+                                        l.AddButton("Option 2")
                                             .SetId("BoutonOption")
                                             .ImageMso("HappyFace");
-                                        l.AddBouton("Option 3")
+                                        l.AddButton("Option 3")
                                             .SetId("BoutonOptionTwo")
                                             .ImageMso("HappyFace");
 
@@ -434,7 +434,7 @@ namespace AddinX.Core.UnitTest
                                                 o.AddItem("Red").SetId("redColor").NoImage();
                                                 o.AddItem("Blue").SetId("blueColor").NoImage();
                                             }).AddButtons(o =>
-                                                o.AddBouton("Extra Colors").SetId("ExtraColors")
+                                                o.AddButton("Extra Colors").SetId("ExtraColors")
                                                     .NoImage().ShowLabel()
                                             ).Supertip("Color Picking");
                                     });

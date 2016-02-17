@@ -44,7 +44,7 @@ namespace AddinX.Core.IntegrationTest.DialogBoxAndEditBox
                                     .ImagePath("option").MaxLength(7)
                                     .SizeString(7);
                                 d.AddLabelControl().SetId(OutputText);
-                                d.AddBouton("Happy")
+                                d.AddButton("Happy")
                                     .SetId(HappyButtonId)
                                     .LargeSize()
                                     .ImageMso("HappyFace");

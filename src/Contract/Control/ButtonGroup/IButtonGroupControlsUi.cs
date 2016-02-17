@@ -1,18 +1,19 @@
-using AddinX.Core.Contract.Control.Button;
-using AddinX.Core.Contract.Control.Gallery;
+using AddinX.Core.Contract.Control.ButtonUnsize;
+using AddinX.Core.Contract.Control.GalleryUnsize;
 using AddinX.Core.Contract.Control.Menu;
-using AddinX.Core.Contract.Control.ToggleButton;
+using AddinX.Core.Contract.Control.MenuUnsize;
+using AddinX.Core.Contract.Control.ToggleButtonUnsize;
 
 namespace AddinX.Core.Contract.Control.ButtonGroup
 {
     public interface IButtonGroupControlsUi
     {
-        IButtonIdUi AddBouton(string label);
+        IButtonUnsizeIdUi AddButton(string label);
         
-        IToggleButtonIdUi AddToggleButton(string label);
+        IToggleButtonUnsizeIdUi AddToggleButton(string label);
 
-        IGalleryIdUi AddGallery(string label);
+        IGalleryUnsizeIdUi AddGallery(string label);
 
-        IMenuIdUi AddMenu(string label);
+        IMenuUnsizeIdUi AddMenu(string label);
     }
 }

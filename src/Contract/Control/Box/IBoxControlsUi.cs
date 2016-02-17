@@ -15,7 +15,7 @@ namespace AddinX.Core.Contract.Control.Box
     {
         IBoxUi AddBox();
 
-        IButtonIdUi AddBouton(string label);
+        IButtonIdUi AddButton(string label);
 
         IButtonGroupUi AddButtonGroup();
 

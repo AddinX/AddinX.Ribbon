@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using AddinX.Core.Contract.Control.DropDown;
 using AddinX.Core.Contract.Control.Item;
+using AddinX.Core.Implementation.Ribbon;
 
 namespace AddinX.Core.Implementation.Control
 {
@@ -19,12 +20,14 @@ namespace AddinX.Core.Implementation.Control
         private bool showItemLabel = true;
         private bool dynamicItemsLoading;
         private readonly IItemsUi data;
+        private readonly IDropDownControlsUi controls;
 
         public DropDowUi()
         {
             data = new ItemsUi();
             ElementName = "dropDown";
             Id = new ElementId();
+            controls = new ControlsUi();
             imageVisible = false;
             dropDownSize = 7;
         }
@@ -84,13 +87,25 @@ namespace AddinX.Core.Implementation.Control
             }
             else
             {
+                // Add the Items first
                 if (((AddInList)data).ToXml(ns) != null)
                 {
                     element.Add(((AddInList)data).ToXml(ns));
                 }
             }
+            // Then the buttons
+            if (((AddInList)controls)?.ToXml(ns) != null)
+            {
+                element.Add(((AddInList)controls).ToXml(ns));
+            }
 
             return element;
+        }
+
+        public IDropDownExtra AddButtons(Action<IDropDownControlsUi> items)
+        {
+            items.Invoke(controls);
+            return this;
         }
 
         public IDropDownExtra SizeString(int size)

@@ -1,7 +1,11 @@
+using System;
+
 namespace AddinX.Core.Contract.Control.Gallery
 {
     public interface IGalleryExtra
     {
+        IGalleryExtra AddButtons(Action<IGalleryControlsUi> items);
+
         IGalleryExtra SizeString(int size);
 
         IGalleryExtra ItemHeight(int height);

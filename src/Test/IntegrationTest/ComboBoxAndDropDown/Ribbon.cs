@@ -16,6 +16,7 @@ namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown
         private const string BookmarksDropDownId = "BookmarksDropDownId";
         private const string MyTabId = "MyTabId";
         private const string DataGroupId = "DataGroupId";
+        private const string ButtonMore = "buttonMore";
 
 
         private ListItems content;
@@ -39,7 +40,8 @@ namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown
                                 d.AddDropDown("With Image")
                                     .SetId(BookmarksDropDownId)
                                     .ShowLabel().NoImage()
-                                    .ShowItemLabel().ShowItemImage().DynamicItems();
+                                    .ShowItemLabel().ShowItemImage().DynamicItems()
+                                    .AddButtons(b=> b.AddButton("Button...").SetId(ButtonMore));
                             });
 
                     });
@@ -48,6 +50,8 @@ namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown
 
         protected override void CreateRibbonCommand(IRibbonCommands cmds)
         {
+            cmds.AddButtonCommand(ButtonMore).Action(() => MessageBox.Show(@"More..."));
+
             cmds.AddDropDownCommand(BookmarksDropDownId)
                 .ItemCounts(content.Count)
                 .ItemsId(content.Ids)

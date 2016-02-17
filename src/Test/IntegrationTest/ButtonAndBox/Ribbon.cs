@@ -29,18 +29,18 @@ namespace AddinX.Core.IntegrationTest.ButtonAndBox
                         g.AddGroup("reporting").SetId(ReportingGroup)
                             .Items(d =>
                             {
-                                d.AddBouton("Allocation")
+                                d.AddButton("Allocation")
                                     .SetId(PortfolioAllocationBtn)
                                     .LargeSize()
                                     .ImageMso("HappyFace");
                                 d.AddBox().SetId(ReportingBox)
                                     .HorizontalDisplay().AddItems(i =>
                                     {
-                                        i.AddBouton("Performance")
+                                        i.AddButton("Performance")
                                             .SetId(PortfolioPerformanceBtn)
                                             .NormalSize()
                                             .ImageMso("HappyFace");
-                                        i.AddBouton("Contributor").SetId(PortfolioContributorBtn)
+                                        i.AddButton("Contributor").SetId(PortfolioContributorBtn)
                                             .NormalSize().NoImage().ShowLabel()
                                             .Supertip("Portfolio best contributor")
                                             .Screentip(
@@ -49,7 +49,7 @@ namespace AddinX.Core.IntegrationTest.ButtonAndBox
                                     });
                             });
                         g.AddGroup("Analytic").SetId(AnalyticsGroup)
-                            .Items(i => i.AddBouton("Portfolio Analysis").SetId(PortfolioAnalyzerBtn).NormalSize()
+                            .Items(i => i.AddButton("Portfolio Analysis").SetId(PortfolioAnalyzerBtn).NormalSize()
                                 .NoImage().ShowLabel());
                     });
             });

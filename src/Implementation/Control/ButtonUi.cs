@@ -11,7 +11,7 @@ namespace AddinX.Core.Implementation.Control
         private string imagePath;
         private string description;
         private string supertip;
-        private string size;
+        private ControlSize size;
         private string screentip;
         private string keytip;
         private bool showLabel;
@@ -20,6 +20,7 @@ namespace AddinX.Core.Implementation.Control
         {
             ElementName = "button";
             Id = new ElementId();
+            size = ControlSize.normal;
             imageVisible = false;
         }
 
@@ -41,7 +42,7 @@ namespace AddinX.Core.Implementation.Control
                         ? new XAttribute("image", imagePath)
                         : new XAttribute("imageMso", imageMso)
                     : new XAttribute("showImage", "false")
-                , new XAttribute("size", size)
+                , new XAttribute("size", size.ToString())
                 , new XAttribute("getEnabled", "GetEnabled")
                 , new XAttribute("getVisible", "GetVisible")
                 , new XAttribute("onAction", "OnAction")
@@ -136,13 +137,13 @@ namespace AddinX.Core.Implementation.Control
 
         public IButtonImage LargeSize()
         {
-            size = ControlSize.large.ToString();
+            size = ControlSize.large;
             return this;
         }
 
         public IButtonImage NormalSize()
         {
-            size = ControlSize.normal.ToString();
+            size = ControlSize.normal;
             return this;
         }
 

@@ -20,6 +20,7 @@ namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
         private const string OptionId = "OptionId";
         private const string GalleryId = "GalleryId";
         private const string DynamicGalleryId = "DynamicGalleryId";
+        private const string ButtonMore = "buttonMoreId";
 
         private ListItems content;
         private int GallerySelectedIndex;
@@ -42,15 +43,17 @@ namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
                                         {
                                             v.AddCheckbox("Show numbers").SetId(ShowNumberId);
                                             v.AddSeparator("Mood");
-                                            v.AddBouton("Happy")
+                                            v.AddButton("Happy")
                                                 .SetId(HappyButtonId)
                                                 .ImageMso("HappyFace");
                                             v.AddGallery("Dynamic Option").SetId(DynamicGalleryId)
                                                 .ShowLabel().NoImage().ShowItemLabel().ShowItemImage()
-                                                .DynamicItems().NumberRows(6).NumberColumns(1);
+                                                .DynamicItems()
+                                                .AddButtons(b => b.AddButton("Button...").SetId(ButtonMore))
+                                                .NumberRows(6).NumberColumns(1);
                                         });
                                 d.AddGallery("Multi Option").SetId(GalleryId)
-                                    .ShowLabel().NoImage().ShowItemLabel().ShowItemImage()
+                                    .ShowLabel().LargeSize().NoImage().ShowItemLabel().ShowItemImage()
                                     .AddItems(v =>
                                     {
                                         v.AddItem("Show numbers").SetId(ShowNumberId2);
@@ -66,7 +69,9 @@ namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
 
         protected override void CreateRibbonCommand(IRibbonCommands cmds)
         {
+            cmds.AddButtonCommand(ButtonMore).Action(() => MessageBox.Show(@"More..."));
             cmds.AddButtonCommand(HappyButtonId).Action(() => MessageBox.Show("Be Happy !!!"));
+
             cmds.AddCheckBoxCommand(ShowNumberId).Action(isPressed =>
             {
                 checkboxPressed = isPressed;

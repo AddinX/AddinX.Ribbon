@@ -5,12 +5,12 @@ namespace AddinX.Core.Implementation.Control
 {
     public class DialogBoxLauncherUi : ControlUi, IDialogBoxLauncherUi
     {
-        private readonly ButtonItemUi btn;
+        private readonly ButtonUnsizeUi btn;
 
         public DialogBoxLauncherUi()
         {
             ElementName = "dialogBoxLauncher";
-            btn = new ButtonItemUi();
+            btn = new ButtonUnsizeUi();
             btn.HideLabel();
             btn.NoImage();
         }

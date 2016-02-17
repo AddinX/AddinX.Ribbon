@@ -17,7 +17,7 @@ namespace AddinX.Core.Contract.Ribbon.Group
     {
         IBoxUi AddBox();
 
-        IButtonIdUi AddBouton(string label);
+        IButtonIdUi AddButton(string label);
 
         ICheckboxIdUi AddCheckbox(string label);
 

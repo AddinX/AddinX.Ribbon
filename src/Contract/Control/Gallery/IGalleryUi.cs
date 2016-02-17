@@ -2,7 +2,7 @@
 {
     public interface IGalleryUi : IGalleryExtra, IGalleryIdUi,
         IGalleryImage, IGalleryItemImage, IGalleryItemLabel,
-        IGalleryLabel, IGalleryItems, IGalleryButtons
+        IGalleryLabel, IGalleryItems, IGallerySize
     {
 
     }

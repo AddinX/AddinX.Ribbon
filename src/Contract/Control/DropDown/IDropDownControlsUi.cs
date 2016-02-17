@@ -1,8 +1,8 @@
 using AddinX.Core.Contract.Control.ButtonUnsize;
 
-namespace AddinX.Core.Contract.Control.Gallery
+namespace AddinX.Core.Contract.Control.DropDown
 {
-    public interface IGalleryControlsUi
+    public interface IDropDownControlsUi
     {
         IButtonUnsizeIdUi AddButton(string label);
     }

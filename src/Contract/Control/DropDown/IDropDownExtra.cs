@@ -1,7 +1,11 @@
+using System;
+
 namespace AddinX.Core.Contract.Control.DropDown
 {
     public interface IDropDownExtra
     {
+        IDropDownExtra AddButtons(Action<IDropDownControlsUi> items);
+
         IDropDownExtra SizeString(int size);
 
         IDropDownExtra Supertip(string supertip);

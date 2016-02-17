@@ -1,27 +1,27 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract.Control.ToggleButtonItem;
+using AddinX.Core.Contract.Control.ButtonUnsize;
 
 namespace AddinX.Core.Implementation.Control
 {
-    public class ToggleButtonItemUi : ControlUi, IToggleButtonItemUi
+    public class ButtonUnsizeUi : ControlUi, IButtonUnsizeUi
     {
         private bool imageVisible;
         private string imageMso;
         private string imagePath;
-        private bool showLabel;
         private string description;
         private string supertip;
         private string screentip;
         private string keytip;
+        private bool showLabel;
 
-        public ToggleButtonItemUi()
+        public ButtonUnsizeUi()
         {
-            ElementName = "toggleButton";
+            ElementName = "button";
             Id = new ElementId();
             imageVisible = false;
         }
 
-        protected internal IToggleButtonItemIdUi SetLabel(string value)
+        protected internal IButtonUnsizeIdUi SetLabel(string value)
         {
             Label = value;
             return this;
@@ -32,19 +32,22 @@ namespace AddinX.Core.Implementation.Control
             var tmpId = (ElementId)Id;
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
-                , new XAttribute("label", Label)
+                , new XAttribute("showLabel", showLabel.ToString().ToLower())
                 , imageVisible
                     ? string.IsNullOrEmpty(imageMso)
                         ? new XAttribute("image", imagePath)
                         : new XAttribute("imageMso", imageMso)
                     : new XAttribute("showImage", "false")
-                , new XAttribute("showLabel", showLabel)
                 , new XAttribute("getEnabled", "GetEnabled")
                 , new XAttribute("getVisible", "GetVisible")
                 , new XAttribute("onAction", "OnAction")
-                , new XAttribute("getPressed", "GetPressed")
                 , new XAttribute("tag", tmpId.Value)
                 );
+
+            if (!string.IsNullOrEmpty(Label))
+            {
+                element.Add(new XAttribute("label", Label));
+            }
 
             if (!string.IsNullOrEmpty(screentip))
             {
@@ -69,77 +72,78 @@ namespace AddinX.Core.Implementation.Control
             return element;
         }
 
-        public IToggleButtonItemLabel SetId(string name)
-        {
-            Id = new ElementId().SetId(name);
-            return this;
-        }
-
-        public IToggleButtonItemLabel SetIdMso(string name)
+        public IButtonUnsizeImage SetIdMso(string name)
         {
             Id = new ElementId().SetMicrosoftId(name);
             return this;
         }
 
-        public IToggleButtonItemLabel SetIdQ(string ns, string name)
+        public IButtonUnsizeImage SetIdQ(string ns, string name)
         {
             Id = new ElementId().SetNamespaceId(ns, name);
             return this;
         }
 
-        public IToggleButtonItemExtra ImageMso(string name)
+        public IButtonUnsizeImage SetId(string name)
+        {
+            Id = new ElementId().SetId(name);
+            return this;
+        }
+
+
+        public IButtonUnsizeLabel ImageMso(string name)
         {
             imageVisible = true;
             imageMso = name;
             return this;
         }
 
-        public IToggleButtonItemExtra ImagePath(string name)
+        public IButtonUnsizeLabel ImagePath(string name)
         {
             imageVisible = true;
             imagePath = name;
             return this;
         }
 
-        public IToggleButtonItemExtra NoImage()
+        public IButtonUnsizeLabel NoImage()
         {
             imageVisible = false;
             return this;
         }
 
-        public IToggleButtonItemImage ShowLabel()
-        {
-            showLabel = true;
-            return this;
-        }
-
-        public IToggleButtonItemImage HideLabel()
-        {
-            showLabel = false;
-            return this;
-        }
-        
-        public IToggleButtonItemExtra Description(string description)
+        public IButtonUnsizeExtra Description(string description)
         {
             this.description = description;
             return this;
         }
 
-        public IToggleButtonItemExtra Supertip(string supertip)
-        {
-            this.supertip = supertip;
-            return this;
-        }
-
-        public IToggleButtonItemExtra Keytip(string keytip)
+        public IButtonUnsizeExtra Keytip(string keytip)
         {
             this.keytip = keytip;
             return this;
         }
 
-        public IToggleButtonItemExtra Screentip(string screentip)
+        public IButtonUnsizeExtra Supertip(string supertip)
+        {
+            this.supertip = supertip;
+            return this;
+        }
+
+        public IButtonUnsizeExtra Screentip(string screentip)
         {
             this.screentip = screentip;
+            return this;
+        }
+        
+        public IButtonUnsizeExtra ShowLabel()
+        {
+            showLabel = true;
+            return this;
+        }
+
+        public IButtonUnsizeExtra HideLabel()
+        {
+            showLabel = false;
             return this;
         }
     }
