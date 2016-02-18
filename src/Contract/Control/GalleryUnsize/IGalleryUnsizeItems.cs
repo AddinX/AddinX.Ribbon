@@ -7,6 +7,6 @@ namespace AddinX.Core.Contract.Control.GalleryUnsize
     {
         IGalleryUnsizeExtra DynamicItems();
 
-        IGalleryUnsizeExtra AddItems(Action<IItemsUi> items);
+        IGalleryUnsizeExtra AddItems(Action<IItems> items);
     }
 }

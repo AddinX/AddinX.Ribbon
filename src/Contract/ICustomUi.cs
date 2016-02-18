@@ -4,7 +4,7 @@ namespace AddinX.Core.Contract
 {
     public interface ICustomUi
     {
-        IRibbonUi Ribbon { get; }
+        IRibbon Ribbon { get; }
 
         ICustomUi AddNamespace(string letter, string privateNamespace);
     }

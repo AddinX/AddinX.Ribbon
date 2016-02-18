@@ -5,6 +5,6 @@ namespace AddinX.Core.Contract.Ribbon.TabSet
 {
     public interface ITabSetItem
     {
-        void Tabs(Action<ITabsUi> value);
+        void Tabs(Action<ITabs> value);
     }
 }

@@ -5,6 +5,6 @@ namespace AddinX.Core.Contract.Ribbon.Tab
 {
     public interface ITabItems
     {
-        ITabExtra Groups(Action<IGroupsUi> value);
+        ITabExtra Groups(Action<IGroups> value);
     }
 }

@@ -4,6 +4,6 @@ namespace AddinX.Core.Contract.Control.Box
 {
     public interface IBoxItems
     {
-        void AddItems(Action<IBoxControlsUi> items);
+        void AddItems(Action<IBoxControls> items);
     }
 }

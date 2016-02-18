@@ -5,7 +5,7 @@ namespace AddinX.Core.Contract.Control.ComboBox
 {
     public interface IComboxBoxItems
     {
-        IComboBoxExtra AddItems(Action<IItemsUi> items);
+        IComboBoxExtra AddItems(Action<IItems> items);
 
         IComboBoxExtra DynamicItems();
     }

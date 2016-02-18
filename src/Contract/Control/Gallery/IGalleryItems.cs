@@ -7,6 +7,6 @@ namespace AddinX.Core.Contract.Control.Gallery
     {
         IGalleryExtra DynamicItems();
 
-        IGalleryExtra AddItems(Action<IItemsUi> items);
+        IGalleryExtra AddItems(Action<IItems> items);
     }
 }

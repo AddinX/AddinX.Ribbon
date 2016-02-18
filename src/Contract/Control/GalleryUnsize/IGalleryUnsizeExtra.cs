@@ -4,7 +4,7 @@ namespace AddinX.Core.Contract.Control.GalleryUnsize
 {
     public interface IGalleryUnsizeExtra
     {
-        IGalleryUnsizeExtra AddButtons(Action<IGalleryUnsizeControlsUi> items);
+        IGalleryUnsizeExtra AddButtons(Action<IGalleryUnsizeControls> items);
 
         IGalleryUnsizeExtra SizeString(int size);
 

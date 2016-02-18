@@ -7,6 +7,6 @@ namespace AddinX.Core.Contract.Control.DropDown
     {
         IDropDownExtra DynamicItems();
 
-        IDropDownExtra AddItems(Action<IItemsUi> items);
+        IDropDownExtra AddItems(Action<IItems> items);
     }
 }
