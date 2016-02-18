@@ -17,40 +17,56 @@ namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown
         private const string MyTabId = "MyTabId";
         private const string DataGroupId = "DataGroupId";
         private const string ButtonMore = "buttonMore";
-
-
+        private const string ToggleButtonId = "ToggleButtonId";
         private ListItems content;
-        private int dropDownSelectedIndex = 1;
-
+        
         protected override void CreateFluentRibbon(IRibbonBuilder builder)
         {
-            builder.CustomUi.Ribbon.Tabs(c =>
+            builder.CustomUi.AddNamespace("acme","acme.addin.sync").Ribbon.Tabs(c =>
             {
-                c.AddTab("My Tab").SetId(MyTabId)
+                c.AddTab("My Tab").SetIdQ("acme",MyTabId)
                     .Groups(g =>
                     {
-                        g.AddGroup("Data").SetId(DataGroupId)
+                        g.AddGroup("Data").SetIdQ("acme", DataGroupId)
                         .Items(d =>
-                            {
-                                d.AddComboBox("numbers")
-                                    .SetId(BookmarksComboId)
-                                    .ShowLabel().NoImage()
-                                    .DynamicItems();
+                        {
+                            d.AddButton("My Save").SetIdMso("FileSave")
+                                .NormalSize().ImageMso("FileSave");
+                            d.AddButton("Button").SetId("buttonOne");
+                            d.AddComboBox("numbers")
+                                .SetId(BookmarksComboId)
+                                .ShowLabel().NoImage()
+                                .DynamicItems();
 
-                                d.AddDropDown("With Image")
-                                    .SetId(BookmarksDropDownId)
-                                    .ShowLabel().NoImage()
-                                    .ShowItemLabel().ShowItemImage().DynamicItems()
-                                    .AddButtons(b=> b.AddButton("Button...").SetId(ButtonMore));
-                            });
+                            d.AddDropDown("With Image")
+                                .SetId(BookmarksDropDownId)
+                                .ShowLabel().NoImage()
+                                .ShowItemLabel().ShowItemImage().DynamicItems()
+                                .AddButtons(b => b.AddButton("Button...").SetId(ButtonMore));
+
+
+
+                            d.AddToggleButton("Toggle Button")
+                                .SetId(ToggleButtonId);
+                        });
 
                     });
             });
         }
 
+        
+
         protected override void CreateRibbonCommand(IRibbonCommands cmds)
         {
             cmds.AddButtonCommand(ButtonMore).Action(() => MessageBox.Show(@"More..."));
+
+            cmds.AddToggleButtonCommand(ToggleButtonId)
+                .Action(isPressed =>
+                {
+                    MessageBox.Show(isPressed 
+                        ? @"Toggle button pressed" 
+                        : @"Toggle button NOT pressed");
+                }).Pressed(() => true);
 
             cmds.AddDropDownCommand(BookmarksDropDownId)
                 .ItemCounts(content.Count)
@@ -58,11 +74,9 @@ namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown
                 .ItemsLabel(content.Labels)
                 .ItemsImage(() => content.Images())
                 .ItemsSupertip(content.SuperTips)
-                .ItemSelectionIndex(() => dropDownSelectedIndex)
-                .Action(i =>
-                {
-                    dropDownSelectedIndex = i;
-                    MessageBox.Show(@"Your selection:" + dropDownSelectedIndex);
+                .Action(index =>
+                { 
+                    MessageBox.Show(@"Your selection:" + (index+1));
                 });
 
             cmds.AddComboBoxCommand(BookmarksComboId)
@@ -70,7 +84,7 @@ namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown
                 .ItemsId(content.Ids)
                 .ItemsLabel(content.Labels)
                 .ItemsSupertip(content.SuperTips)
-                .GetText(() => "Select a value")
+                .GetText(() => "Text")
                 .OnChange((value) => MessageBox.Show(@"Your selection:" + value));
         }
 

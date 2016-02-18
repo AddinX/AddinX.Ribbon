@@ -4,7 +4,7 @@ using AddinX.Core.Contract.Command.Field;
 
 namespace AddinX.Core.Implementation.Command
 {
-    class CheckBoxCommand:ICheckBoxCommand, IVisibleField, IEnabledField, IPressedField, ICheckboxPressedField
+    class CheckBoxCommand:ICheckBoxCommand, IVisibleField, IEnabledField, IPressedField, IActionPressedField
     {
         public CheckBoxCommand()
         {

@@ -23,7 +23,7 @@ namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
         private const string ButtonMore = "buttonMoreId";
 
         private ListItems content;
-        private int GallerySelectedIndex;
+        private int GallerySelectedIndex=3;
         private bool checkboxPressed;
 
         protected override void CreateFluentRibbon(IRibbonBuilder builder)
@@ -103,7 +103,7 @@ namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
                 .Action(i =>
                 {
                     GallerySelectedIndex = i;
-                    MessageBox.Show(@"Your selection: " + (GallerySelectedIndex+1));
+                    MessageBox.Show(@"Your selection: " + (i+1));
                 });
         }
 

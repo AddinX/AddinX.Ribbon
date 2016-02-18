@@ -41,7 +41,7 @@ namespace AddinX.Core.Implementation.Control
                 , new XAttribute("showLabel", showLabel)
                 , new XAttribute("getEnabled", "GetEnabled")
                 , new XAttribute("getVisible", "GetVisible")
-                , new XAttribute("onAction", "OnAction")
+                , new XAttribute("onAction", "OnActionPressed")
                 , new XAttribute("getPressed", "GetPressed")
                 , new XAttribute("tag", tmpId.Value)
                 );

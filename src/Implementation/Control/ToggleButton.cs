@@ -12,7 +12,7 @@ namespace AddinX.Core.Implementation.Control
         private bool showLabel;
         private string description;
         private string supertip;
-        private string size;
+        private ControlSize size;
         private string screentip;
         private string keytip;
 
@@ -21,6 +21,8 @@ namespace AddinX.Core.Implementation.Control
             ElementName = "toggleButton";
             Id = new ElementId();
             imageVisible = false;
+            size = ControlSize.normal;
+            showLabel = true;
         }
 
         protected internal IToggleButtonId SetLabel(string value)
@@ -41,10 +43,10 @@ namespace AddinX.Core.Implementation.Control
                         : new XAttribute("imageMso", imageMso)
                     : new XAttribute("showImage", "false")
                 , new XAttribute("showLabel", showLabel)
-                , new XAttribute("size", size)
+                , new XAttribute("size", size.ToString())
                 , new XAttribute("getEnabled", "GetEnabled")
                 , new XAttribute("getVisible", "GetVisible")
-                , new XAttribute("onAction", "OnAction")
+                , new XAttribute("onAction", "OnActionPressed")
                 , new XAttribute("getPressed", "GetPressed")
                 , new XAttribute("tag", tmpId.Value)
                 );
@@ -124,13 +126,13 @@ namespace AddinX.Core.Implementation.Control
 
         public IToggleButtonImage Large()
         {
-            size = ControlSize.large.ToString();
+            size = ControlSize.large;
             return this;
         }
 
         public IToggleButtonImage Normal()
         {
-            size = ControlSize.normal.ToString();
+            size = ControlSize.normal;
             return this;
         }
 

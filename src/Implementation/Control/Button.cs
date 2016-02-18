@@ -22,6 +22,7 @@ namespace AddinX.Core.Implementation.Control
             Id = new ElementId();
             size = ControlSize.normal;
             imageVisible = false;
+            showLabel = false;
         }
 
         protected internal IButtonId SetLabel(string value)

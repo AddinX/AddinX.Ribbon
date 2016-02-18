@@ -4,9 +4,9 @@ using AddinX.Core.Contract.Command.Field;
 
 namespace AddinX.Core.Implementation.Command
 {
-    class ToggleButtonCommand : IToggleButtonCommand, IVisibleField, IEnabledField, IActionField, IPressedField
+    class ToggleButtonCommand : IToggleButtonCommand, IVisibleField, IEnabledField, IPressedField, IActionPressedField
     {
-        public IRelayCommand OnActionField { get; private set; }
+        public Action<bool> OnActionField { get; private set; }
 
         public Func<bool> IsVisibleField { get; private set; }
 
@@ -21,14 +21,9 @@ namespace AddinX.Core.Implementation.Command
             PressedField = () => false;
         }
 
-        public IToggleButtonCommand Action(Action act)
+        public IToggleButtonCommand Action(Action<bool> act)
         {
-            return Action(act, () => true);
-        }
-
-        public IToggleButtonCommand Action(Action act, Func<bool> canExecute)
-        {
-            OnActionField = new RelayCommand(act, canExecute);
+            OnActionField = act;
             return this;
         }
 
@@ -44,7 +39,7 @@ namespace AddinX.Core.Implementation.Command
             return this;
         }
 
-        public IToggleButtonCommand GetPressed(Func<bool> defaultValue)
+        public IToggleButtonCommand Pressed(Func<bool> defaultValue)
         {
             PressedField = defaultValue;
             return this;

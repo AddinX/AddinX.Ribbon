@@ -18,7 +18,7 @@ namespace AddinX.Core.ExcelDna
 
         public void OnActionPressed(IRibbonControl control, bool pressed)
         {
-            var field = FindRibbonCmd(control.Id) as ICheckboxPressedField;
+            var field = FindRibbonCmd(control.Id) as IActionPressedField;
             field?.OnActionField(pressed);
         }
 

@@ -10,23 +10,23 @@ namespace AddinX.Core.IntegrationTest.ButtonAndBox
     [ComVisible(true)]
     public class Ribbon : RibbonFluent
     {
-        private const string ReportingGroup = "reportingGroup";
+        private const string DataGroupId = "DataGroupId";
         private const string PortfolioAllocationBtn = "portfolioAllocation";
         private const string PortfolioContributorBtn = "portfolioContributor";
         private const string AnalyticsGroup = "analyticsGroup";
-        private const string TestTab = "TestTab";
+        private const string MyTabId = "MyTabId";
         private const string PortfolioAnalyzerBtn = "portfolioAnalyzer";
         private const string ReportingBox = "reportingBox";
         private const string PortfolioPerformanceBtn = "portfolioPerformance";
 
         protected override void CreateFluentRibbon(IRibbonBuilder builder)
         {
-            builder.CustomUi.Ribbon.Tabs(c =>
+            builder.CustomUi.AddNamespace("acme", "acme.addin.sync").Ribbon.Tabs(c =>
             {
-                c.AddTab("test").SetId(TestTab)
+                c.AddTab("My Tab").SetIdQ("acme", MyTabId)
                     .Groups(g =>
                     {
-                        g.AddGroup("reporting").SetId(ReportingGroup)
+                        g.AddGroup("Data").SetIdQ("acme", DataGroupId)
                             .Items(d =>
                             {
                                 d.AddButton("Allocation")

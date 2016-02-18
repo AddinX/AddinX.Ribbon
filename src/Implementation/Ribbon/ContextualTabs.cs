@@ -18,7 +18,7 @@ namespace AddinX.Core.Implementation.Ribbon
             items = new List<ITabSet>();
         }
 
-        public IContextualTabs AddTabSet(Action<ITabSet> value)
+        public IContextualTabs AddTabSet(Action<ITabSetId> value)
         {
             var item = new TabSet();
             value.Invoke(item);

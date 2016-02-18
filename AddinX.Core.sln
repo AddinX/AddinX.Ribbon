@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComboBoxAndDropDown", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalleriesAndMenu", "src\Test\IntegrationTest\GalleriesAndMenu\GalleriesAndMenu.csproj", "{A30364B4-BB94-43A2-A142-FCB78A3CEE0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextualTab", "src\Test\IntegrationTest\ContextualTab\ContextualTab.csproj", "{68A77858-7C12-4334-8848-E9CD063ED643}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,18 @@ Global
 		{A30364B4-BB94-43A2-A142-FCB78A3CEE0A}.Release|x64.Build.0 = Release|Any CPU
 		{A30364B4-BB94-43A2-A142-FCB78A3CEE0A}.Release|x86.ActiveCfg = Release|Any CPU
 		{A30364B4-BB94-43A2-A142-FCB78A3CEE0A}.Release|x86.Build.0 = Release|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Debug|x64.Build.0 = Debug|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Debug|x86.Build.0 = Debug|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Release|x64.ActiveCfg = Release|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Release|x64.Build.0 = Release|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Release|x86.ActiveCfg = Release|Any CPU
+		{68A77858-7C12-4334-8848-E9CD063ED643}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,5 +154,6 @@ Global
 		{8D216CE2-D639-4EE3-8AF0-BD479C8C1169} = {C3A1F6C2-940F-49A6-8AD2-9B8B6A52731C}
 		{214F235F-666C-4695-B7D5-A191194C586E} = {C3A1F6C2-940F-49A6-8AD2-9B8B6A52731C}
 		{A30364B4-BB94-43A2-A142-FCB78A3CEE0A} = {C3A1F6C2-940F-49A6-8AD2-9B8B6A52731C}
+		{68A77858-7C12-4334-8848-E9CD063ED643} = {C3A1F6C2-940F-49A6-8AD2-9B8B6A52731C}
 	EndGlobalSection
 EndGlobal

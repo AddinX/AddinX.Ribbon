@@ -5,6 +5,6 @@ namespace AddinX.Core.Contract.Ribbon
 {
     public interface IContextualTabs
     {
-        IContextualTabs AddTabSet(Action<ITabSet> value);
+        IContextualTabs AddTabSet(Action<ITabSetId> value);
     }
 }

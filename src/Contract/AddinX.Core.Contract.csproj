@@ -70,7 +70,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command\Field\ICheckboxPressedField.cs" />
+    <Compile Include="Command\Field\IActionPressedField.cs" />
     <Compile Include="Command\Field\IDropDownField.cs" />
     <Compile Include="Command\Field\IDynamicItemsField.cs" />
     <Compile Include="Command\Field\ILabelField.cs" />

@@ -2,7 +2,7 @@ using System;
 
 namespace AddinX.Core.Contract.Command.Field
 {
-    public interface ICheckboxPressedField
+    public interface IActionPressedField
     {
         Action<bool> OnActionField { get; }
     }
