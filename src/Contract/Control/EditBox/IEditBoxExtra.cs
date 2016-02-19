@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Control.EditBox
+namespace AddinX.Ribbon.Contract.Control.EditBox
 {
     public interface IEditBoxExtra
     {

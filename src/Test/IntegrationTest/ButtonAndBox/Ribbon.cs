@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using AddinX.Core.Contract;
-using AddinX.Core.Contract.Command;
-using AddinX.Core.ExcelDna;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.ExcelDna;
 
-namespace AddinX.Core.IntegrationTest.ButtonAndBox
+namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox
 {
     [ComVisible(true)]
     public class Ribbon : RibbonFluent

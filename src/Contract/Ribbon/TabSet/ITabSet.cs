@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Ribbon.TabSet
+namespace AddinX.Ribbon.Contract.Ribbon.TabSet
 {
     public interface ITabSet: ITabSetId, ITabSetItem { }
 }

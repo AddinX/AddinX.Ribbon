@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract.Control.Item;
+using AddinX.Ribbon.Contract.Control.Item;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class Item : Control, IItem
     {

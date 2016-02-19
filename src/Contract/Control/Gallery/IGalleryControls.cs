@@ -1,6 +1,6 @@
-using AddinX.Core.Contract.Control.ButtonUnsize;
+using AddinX.Ribbon.Contract.Control.ButtonUnsize;
 
-namespace AddinX.Core.Contract.Control.Gallery
+namespace AddinX.Ribbon.Contract.Control.Gallery
 {
     public interface IGalleryControls
     {

@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract.Control.Label;
+using AddinX.Ribbon.Contract.Control.Label;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class LabelControl : Control, ILabelControl
     {

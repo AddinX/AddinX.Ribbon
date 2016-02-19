@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract.Control.CheckBox;
+using AddinX.Ribbon.Contract.Control.CheckBox;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class Checkbox : Control, ICheckbox
     {

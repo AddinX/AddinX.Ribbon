@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace AddinX.Core.Contract.Command
+namespace AddinX.Ribbon.Contract.Command
 {
     public interface IRibbonCommands
     {

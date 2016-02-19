@@ -7,8 +7,8 @@
     <ProjectGuid>{8D216CE2-D639-4EE3-8AF0-BD479C8C1169}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddinX.Core.IntegrationTest.DialogBoxAndEditBox</RootNamespace>
-    <AssemblyName>AddinX.Core.IntegrationTest.DialogBoxAndEditBox</AssemblyName>
+    <RootNamespace>AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox</RootNamespace>
+    <AssemblyName>AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -73,17 +73,17 @@
     <Compile Include="Ribbon.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Contract\AddinX.Core.Contract.csproj">
+    <ProjectReference Include="..\..\..\Contract\AddinX.Ribbon.Contract.csproj">
       <Project>{8e0452bb-994c-4996-99fa-931ee5b7e661}</Project>
-      <Name>AddinX.Core.Contract</Name>
+      <Name>AddinX.Ribbon.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\ExcelDna\AddinX.Core.ExcelDna.csproj">
+    <ProjectReference Include="..\..\..\ExcelDna\AddinX.Ribbon.ExcelDna.csproj">
       <Project>{2a669fe9-b98e-4ad8-b137-992f5d536938}</Project>
-      <Name>AddinX.Core.ExcelDna</Name>
+      <Name>AddinX.Ribbon.ExcelDna</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Implementation\AddinX.Core.Implementation.csproj">
+    <ProjectReference Include="..\..\..\Implementation\AddinX.Ribbon.Implementation.csproj">
       <Project>{563dfffc-6f88-4bbd-9ce0-98783a8511ce}</Project>
-      <Name>AddinX.Core.Implementation</Name>
+      <Name>AddinX.Ribbon.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

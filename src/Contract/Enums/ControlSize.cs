@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Enums
+namespace AddinX.Ribbon.Contract.Enums
 {
     public enum ControlSize
     {

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinX.Core.Contract", "src\Contract\AddinX.Core.Contract.csproj", "{8E0452BB-994C-4996-99FA-931EE5B7E661}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinX.Ribbon.Contract", "src\Contract\AddinX.Ribbon.Contract.csproj", "{8E0452BB-994C-4996-99FA-931EE5B7E661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinX.Core.Implementation", "src\Implementation\AddinX.Core.Implementation.csproj", "{563DFFFC-6F88-4BBD-9CE0-98783A8511CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinX.Ribbon.Implementation", "src\Implementation\AddinX.Ribbon.Implementation.csproj", "{563DFFFC-6F88-4BBD-9CE0-98783A8511CE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{08EE4270-B5C9-4014-9A33-305545A16A4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinX.Core.ExcelDna", "src\ExcelDna\AddinX.Core.ExcelDna.csproj", "{2A669FE9-B98E-4AD8-B137-992F5D536938}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinX.Ribbon.ExcelDna", "src\ExcelDna\AddinX.Ribbon.ExcelDna.csproj", "{2A669FE9-B98E-4AD8-B137-992F5D536938}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTest", "IntegrationTest", "{C3A1F6C2-940F-49A6-8AD2-9B8B6A52731C}"
 EndProject

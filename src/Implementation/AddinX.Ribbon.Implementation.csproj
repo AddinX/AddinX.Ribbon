@@ -7,8 +7,8 @@
     <ProjectGuid>{563DFFFC-6F88-4BBD-9CE0-98783A8511CE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddinX.Core.Implementation</RootNamespace>
-    <AssemblyName>AddinX.Core.Implementation</AssemblyName>
+    <RootNamespace>AddinX.Ribbon.Implementation</RootNamespace>
+    <AssemblyName>AddinX.Ribbon.Implementation</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AddinX.Core.Contract, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AddinX.Core.Contract.1.0.0\lib\net451\AddinX.Core.Contract.dll</HintPath>
+    <Reference Include="AddinX.Ribbon.Contract, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AddinX.Ribbon.Contract.1.0.0\lib\net451\AddinX.Ribbon.Contract.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

@@ -1,8 +1,8 @@
 ﻿using System;
-using AddinX.Core.Contract.Command;
-using AddinX.Core.Contract.Command.Field;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.Contract.Command.Field;
 
-namespace AddinX.Core.Implementation.Command
+namespace AddinX.Ribbon.Implementation.Command
 {
     class LabelCommand : ILabelCommand, IVisibleField, IEnabledField, ILabelField
     {

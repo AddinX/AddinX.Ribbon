@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using AddinX.Core.Contract;
-using AddinX.Core.Contract.Ribbon;
-using AddinX.Core.Implementation.Control;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Ribbon;
+using AddinX.Ribbon.Implementation.Control;
 
-namespace AddinX.Core.Implementation
+namespace AddinX.Ribbon.Implementation
 {
     public class CustomUi : AddInElement, ICustomUi
     {

@@ -1,7 +1,7 @@
-﻿using AddinX.Core.Contract.Command.Field;
+﻿using AddinX.Ribbon.Contract.Command.Field;
 using ExcelDna.Integration.CustomUI;
 
-namespace AddinX.Core.ExcelDna
+namespace AddinX.Ribbon.ExcelDna
 {
     public abstract partial class RibbonFluent
     {

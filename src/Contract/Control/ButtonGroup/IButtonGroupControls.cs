@@ -1,9 +1,9 @@
-using AddinX.Core.Contract.Control.ButtonUnsize;
-using AddinX.Core.Contract.Control.GalleryUnsize;
-using AddinX.Core.Contract.Control.MenuUnsize;
-using AddinX.Core.Contract.Control.ToggleButtonUnsize;
+using AddinX.Ribbon.Contract.Control.ButtonUnsize;
+using AddinX.Ribbon.Contract.Control.GalleryUnsize;
+using AddinX.Ribbon.Contract.Control.MenuUnsize;
+using AddinX.Ribbon.Contract.Control.ToggleButtonUnsize;
 
-namespace AddinX.Core.Contract.Control.ButtonGroup
+namespace AddinX.Ribbon.Contract.Control.ButtonGroup
 {
     public interface IButtonGroupControls
     {

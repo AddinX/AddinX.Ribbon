@@ -2,28 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using AddinX.Core.Contract.Control.Box;
-using AddinX.Core.Contract.Control.Button;
-using AddinX.Core.Contract.Control.ButtonGroup;
-using AddinX.Core.Contract.Control.ButtonUnsize;
-using AddinX.Core.Contract.Control.CheckBox;
-using AddinX.Core.Contract.Control.ComboBox;
-using AddinX.Core.Contract.Control.DialogBoxLauncher;
-using AddinX.Core.Contract.Control.DropDown;
-using AddinX.Core.Contract.Control.EditBox;
-using AddinX.Core.Contract.Control.Gallery;
-using AddinX.Core.Contract.Control.GalleryUnsize;
-using AddinX.Core.Contract.Control.Label;
-using AddinX.Core.Contract.Control.Menu;
-using AddinX.Core.Contract.Control.MenuSeparator;
-using AddinX.Core.Contract.Control.MenuUnsize;
-using AddinX.Core.Contract.Control.Separator;
-using AddinX.Core.Contract.Control.ToggleButton;
-using AddinX.Core.Contract.Control.ToggleButtonUnsize;
-using AddinX.Core.Contract.Ribbon.Group;
-using AddinX.Core.Implementation.Control;
+using AddinX.Ribbon.Contract.Control.Box;
+using AddinX.Ribbon.Contract.Control.Button;
+using AddinX.Ribbon.Contract.Control.ButtonGroup;
+using AddinX.Ribbon.Contract.Control.ButtonUnsize;
+using AddinX.Ribbon.Contract.Control.CheckBox;
+using AddinX.Ribbon.Contract.Control.ComboBox;
+using AddinX.Ribbon.Contract.Control.DialogBoxLauncher;
+using AddinX.Ribbon.Contract.Control.DropDown;
+using AddinX.Ribbon.Contract.Control.EditBox;
+using AddinX.Ribbon.Contract.Control.Gallery;
+using AddinX.Ribbon.Contract.Control.GalleryUnsize;
+using AddinX.Ribbon.Contract.Control.Label;
+using AddinX.Ribbon.Contract.Control.Menu;
+using AddinX.Ribbon.Contract.Control.MenuSeparator;
+using AddinX.Ribbon.Contract.Control.MenuUnsize;
+using AddinX.Ribbon.Contract.Control.Separator;
+using AddinX.Ribbon.Contract.Control.ToggleButton;
+using AddinX.Ribbon.Contract.Control.ToggleButtonUnsize;
+using AddinX.Ribbon.Contract.Ribbon.Group;
+using AddinX.Ribbon.Implementation.Control;
 
-namespace AddinX.Core.Implementation.Ribbon
+namespace AddinX.Ribbon.Implementation.Ribbon
 {
     public class Controls : AddInList, IGroupControls, IGalleryControls, IMenuControls
         , IDropDownControls, IGalleryUnsizeControls, IMenuUnsizeControls,

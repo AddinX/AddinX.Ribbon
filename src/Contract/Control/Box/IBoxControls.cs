@@ -1,15 +1,15 @@
-using AddinX.Core.Contract.Control.Button;
-using AddinX.Core.Contract.Control.ButtonGroup;
-using AddinX.Core.Contract.Control.CheckBox;
-using AddinX.Core.Contract.Control.ComboBox;
-using AddinX.Core.Contract.Control.DropDown;
-using AddinX.Core.Contract.Control.EditBox;
-using AddinX.Core.Contract.Control.Gallery;
-using AddinX.Core.Contract.Control.Label;
-using AddinX.Core.Contract.Control.Menu;
-using AddinX.Core.Contract.Control.ToggleButton;
+using AddinX.Ribbon.Contract.Control.Button;
+using AddinX.Ribbon.Contract.Control.ButtonGroup;
+using AddinX.Ribbon.Contract.Control.CheckBox;
+using AddinX.Ribbon.Contract.Control.ComboBox;
+using AddinX.Ribbon.Contract.Control.DropDown;
+using AddinX.Ribbon.Contract.Control.EditBox;
+using AddinX.Ribbon.Contract.Control.Gallery;
+using AddinX.Ribbon.Contract.Control.Label;
+using AddinX.Ribbon.Contract.Control.Menu;
+using AddinX.Ribbon.Contract.Control.ToggleButton;
 
-namespace AddinX.Core.Contract.Control.Box
+namespace AddinX.Ribbon.Contract.Control.Box
 {
     public interface IBoxControls
     {

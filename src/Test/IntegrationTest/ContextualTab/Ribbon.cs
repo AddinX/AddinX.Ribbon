@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using AddinX.Core.Contract;
-using AddinX.Core.Contract.Command;
-using AddinX.Core.Contract.Enums;
-using AddinX.Core.ExcelDna;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.Contract.Enums;
+using AddinX.Ribbon.ExcelDna;
 
 namespace ContextualTab
 {

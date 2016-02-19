@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Control.ToggleButtonUnsize
+namespace AddinX.Ribbon.Contract.Control.ToggleButtonUnsize
 {
     public interface IToggleButtonUnsizeImage
     {

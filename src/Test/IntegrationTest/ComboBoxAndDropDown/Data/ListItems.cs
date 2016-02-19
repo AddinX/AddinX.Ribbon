@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown.Data
+namespace AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown.Data
 {
     class ListItems
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AddinX.Core.IntegrationTest.GalleriesAndMenu.Data
+namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Data
 {
     class ListItems
     {

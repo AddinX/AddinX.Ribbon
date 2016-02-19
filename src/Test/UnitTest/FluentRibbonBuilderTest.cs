@@ -1,10 +1,10 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract;
-using AddinX.Core.Contract.Enums;
-using AddinX.Core.Implementation;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Enums;
+using AddinX.Ribbon.Implementation;
 using NUnit.Framework;
 
-namespace AddinX.Core.UnitTest
+namespace AddinX.Ribbon.UnitTest
 {
     [TestFixture]
     public class FluentRibbonBuilderTest

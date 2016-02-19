@@ -1,8 +1,8 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract.Control.ToggleButton;
-using AddinX.Core.Contract.Enums;
+using AddinX.Ribbon.Contract.Control.ToggleButton;
+using AddinX.Ribbon.Contract.Enums;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class ToggleButton : Control, IToggleButton
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace AddinX.Core.Contract.Control.Gallery
+namespace AddinX.Ribbon.Contract.Control.Gallery
 {
     public interface IGalleryExtra
     {

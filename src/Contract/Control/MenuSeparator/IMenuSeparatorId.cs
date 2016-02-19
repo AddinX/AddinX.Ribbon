@@ -1,4 +1,4 @@
-﻿namespace AddinX.Core.Contract.Control.MenuSeparator
+﻿namespace AddinX.Ribbon.Contract.Control.MenuSeparator
 {
     public interface IMenuSeparatorId
     {

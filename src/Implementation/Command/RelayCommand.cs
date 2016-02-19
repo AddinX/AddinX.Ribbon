@@ -1,7 +1,7 @@
 ﻿using System;
-using AddinX.Core.Contract.Command;
+using AddinX.Ribbon.Contract.Command;
 
-namespace AddinX.Core.Implementation.Command
+namespace AddinX.Ribbon.Implementation.Command
 {
     class RelayCommand : IRelayCommand
     {

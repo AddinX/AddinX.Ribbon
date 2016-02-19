@@ -1,6 +1,6 @@
 using System;
 
-namespace AddinX.Core.Contract.Control.DropDown
+namespace AddinX.Ribbon.Contract.Control.DropDown
 {
     public interface IDropDownExtra
     {

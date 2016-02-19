@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Xml.Linq;
-using AddinX.Core.Contract.Control.MenuUnsize;
-using AddinX.Core.Contract.Enums;
-using AddinX.Core.Implementation.Ribbon;
+using AddinX.Ribbon.Contract.Control.MenuUnsize;
+using AddinX.Ribbon.Contract.Enums;
+using AddinX.Ribbon.Implementation.Ribbon;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class MenuUnsize : Control, IMenuUnsize
     {

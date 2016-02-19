@@ -1,4 +1,4 @@
-﻿namespace AddinX.Core.Contract.Control.ButtonUnsize
+﻿namespace AddinX.Ribbon.Contract.Control.ButtonUnsize
 {
     public interface IButtonUnsizeId
     {

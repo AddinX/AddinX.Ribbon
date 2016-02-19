@@ -7,8 +7,8 @@
     <ProjectGuid>{8E0452BB-994C-4996-99FA-931EE5B7E661}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddinX.Core.Contract</RootNamespace>
-    <AssemblyName>AddinX.Core.Contract</AssemblyName>
+    <RootNamespace>AddinX.Ribbon.Contract</RootNamespace>
+    <AssemblyName>AddinX.Ribbon.Contract</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

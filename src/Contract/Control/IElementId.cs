@@ -1,4 +1,4 @@
-﻿namespace AddinX.Core.Contract.Control
+﻿namespace AddinX.Ribbon.Contract.Control
 {
     public interface IElementId
     {

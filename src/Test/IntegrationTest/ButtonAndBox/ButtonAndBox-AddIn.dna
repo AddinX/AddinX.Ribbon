@@ -1,5 +1,5 @@
 <DnaLibrary Name="ButtonAndBox Add-In" RuntimeVersion="v4.0">
-  <ExternalLibrary Path="AddinX.Core.IntegrationTest.ButtonAndBox.dll" LoadFromBytes="true" Pack="true" />
+  <ExternalLibrary Path="AddinX.Ribbon.IntegrationTest.ButtonAndBox.dll" LoadFromBytes="true" Pack="true" />
   
   <!-- 
        The RuntimeVersion attribute above allows two settings:

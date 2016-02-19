@@ -1,12 +1,12 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using AddinX.Core.Contract;
-using AddinX.Core.Contract.Command;
-using AddinX.Core.ExcelDna;
-using AddinX.Core.IntegrationTest.GalleriesAndMenu.Data;
-using AddinX.Core.IntegrationTest.GalleriesAndMenu.Utils;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.ExcelDna;
+using AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Data;
+using AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Utils;
 
-namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
+namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu
 {
     [ComVisible(true)]
     public class Ribbon : RibbonFluent

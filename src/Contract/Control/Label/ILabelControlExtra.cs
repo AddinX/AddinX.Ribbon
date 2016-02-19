@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Control.Label
+namespace AddinX.Ribbon.Contract.Control.Label
 {
     public interface ILabelControlExtra
     {

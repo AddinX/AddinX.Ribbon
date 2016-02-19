@@ -1,6 +1,6 @@
 using NetOffice.ExcelApi;
 
-namespace AddinX.Core.IntegrationTest.DialogBoxAndEditBox
+namespace AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox
 {
     public class AddinContext
     {

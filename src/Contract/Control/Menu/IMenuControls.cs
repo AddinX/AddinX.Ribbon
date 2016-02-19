@@ -1,11 +1,11 @@
-using AddinX.Core.Contract.Control.ButtonUnsize;
-using AddinX.Core.Contract.Control.CheckBox;
-using AddinX.Core.Contract.Control.GalleryUnsize;
-using AddinX.Core.Contract.Control.MenuSeparator;
-using AddinX.Core.Contract.Control.MenuUnsize;
-using AddinX.Core.Contract.Control.ToggleButtonUnsize;
+using AddinX.Ribbon.Contract.Control.ButtonUnsize;
+using AddinX.Ribbon.Contract.Control.CheckBox;
+using AddinX.Ribbon.Contract.Control.GalleryUnsize;
+using AddinX.Ribbon.Contract.Control.MenuSeparator;
+using AddinX.Ribbon.Contract.Control.MenuUnsize;
+using AddinX.Ribbon.Contract.Control.ToggleButtonUnsize;
 
-namespace AddinX.Core.Contract.Control.Menu
+namespace AddinX.Ribbon.Contract.Control.Menu
 {
     public interface IMenuControls
     {

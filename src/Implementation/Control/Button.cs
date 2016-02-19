@@ -1,8 +1,8 @@
 using System.Xml.Linq;
-using AddinX.Core.Contract.Control.Button;
-using AddinX.Core.Contract.Enums;
+using AddinX.Ribbon.Contract.Control.Button;
+using AddinX.Ribbon.Contract.Enums;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class Button : Control, IButton
     {

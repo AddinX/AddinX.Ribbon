@@ -1,6 +1,6 @@
-﻿using AddinX.Core.Contract.Ribbon;
+﻿using AddinX.Ribbon.Contract.Ribbon;
 
-namespace AddinX.Core.Contract
+namespace AddinX.Ribbon.Contract
 {
     public interface ICustomUi
     {

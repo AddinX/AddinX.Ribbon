@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Ribbon.Tab
+namespace AddinX.Ribbon.Contract.Ribbon.Tab
 {
     public interface ITabs
     {

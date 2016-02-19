@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Control.GalleryUnsize
+namespace AddinX.Ribbon.Contract.Control.GalleryUnsize
 {
     public interface IGalleryUnsizeItemImage
     {

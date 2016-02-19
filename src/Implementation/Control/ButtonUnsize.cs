@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract.Control.ButtonUnsize;
+using AddinX.Ribbon.Contract.Control.ButtonUnsize;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class ButtonUnsize : Control, IButtonUnsize
     {

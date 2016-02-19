@@ -1,10 +1,10 @@
 using System;
 using System.Xml.Linq;
-using AddinX.Core.Contract.Ribbon;
-using AddinX.Core.Contract.Ribbon.Tab;
-using AddinX.Core.Implementation.Control;
+using AddinX.Ribbon.Contract.Ribbon;
+using AddinX.Ribbon.Contract.Ribbon.Tab;
+using AddinX.Ribbon.Implementation.Control;
 
-namespace AddinX.Core.Implementation.Ribbon
+namespace AddinX.Ribbon.Implementation.Ribbon
 {
     public class Ribbon : AddInElement, IRibbon
     {

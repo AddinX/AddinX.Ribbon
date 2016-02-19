@@ -1,6 +1,6 @@
 using System;
 
-namespace AddinX.Core.Contract.Control.MenuUnsize
+namespace AddinX.Ribbon.Contract.Control.MenuUnsize
 {
     public interface IMenuUnsizeItems
     {

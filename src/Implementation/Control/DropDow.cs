@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Xml.Linq;
-using AddinX.Core.Contract.Control.DropDown;
-using AddinX.Core.Contract.Control.Item;
-using AddinX.Core.Implementation.Ribbon;
+using AddinX.Ribbon.Contract.Control.DropDown;
+using AddinX.Ribbon.Contract.Control.Item;
+using AddinX.Ribbon.Implementation.Ribbon;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class DropDow : Control, IDropDown
     {

@@ -1,5 +1,5 @@
 <DnaLibrary Name="ComboBoxAndDropDown Add-In" RuntimeVersion="v4.0">
-  <ExternalLibrary Path="AddinX.Core.IntegrationTest.ComboBoxAndDropDown.dll" LoadFromBytes="true" Pack="true" />
+  <ExternalLibrary Path="AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown.dll" LoadFromBytes="true" Pack="true" />
   
   <!-- 
        The RuntimeVersion attribute above allows two settings:

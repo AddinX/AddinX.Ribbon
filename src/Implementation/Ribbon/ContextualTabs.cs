@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using AddinX.Core.Contract.Ribbon;
-using AddinX.Core.Contract.Ribbon.TabSet;
-using AddinX.Core.Implementation.Control;
+using AddinX.Ribbon.Contract.Ribbon;
+using AddinX.Ribbon.Contract.Ribbon.TabSet;
+using AddinX.Ribbon.Implementation.Control;
 
-namespace AddinX.Core.Implementation.Ribbon
+namespace AddinX.Ribbon.Implementation.Ribbon
 {
     public class ContextualTabs : AddInElement, IContextualTabs
     {

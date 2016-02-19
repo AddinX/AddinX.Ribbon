@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract.Control.MenuSeparator;
+using AddinX.Ribbon.Contract.Control.MenuSeparator;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class MenuSeparator : Control, IMenuSeparator
     {

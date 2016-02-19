@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Control.Menu
+namespace AddinX.Ribbon.Contract.Control.Menu
 {
     public interface IMenuId
     {

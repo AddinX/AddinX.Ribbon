@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract.Control.EditBox;
+using AddinX.Ribbon.Contract.Control.EditBox;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class EditBox : Control, IEditBox
     {

@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract.Control.DialogBoxLauncher;
+using AddinX.Ribbon.Contract.Control.DialogBoxLauncher;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class DialogBoxLauncher : Control, IDialogBoxLauncher
     {

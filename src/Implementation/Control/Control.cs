@@ -1,6 +1,6 @@
-﻿using AddinX.Core.Contract.Control;
+﻿using AddinX.Ribbon.Contract.Control;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public abstract class Control : AddInElement
     {

@@ -1,6 +1,6 @@
-using AddinX.Core.Contract.Enums;
+using AddinX.Ribbon.Contract.Enums;
 
-namespace AddinX.Core.Contract.Ribbon.TabSet
+namespace AddinX.Ribbon.Contract.Ribbon.TabSet
 {
     public interface ITabSetId
     {

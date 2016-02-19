@@ -2,7 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace AddinX.Core.IntegrationTest.GalleriesAndMenu.Utils
+namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Utils
 {
     public class ResizeImage
     {

@@ -3,7 +3,7 @@ using ExcelDna.Integration;
 using ExcelDna.Logging;
 using NetOffice.ExcelApi;
 
-namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown
+namespace AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown
 {
     public class Program : IExcelAddIn
     {

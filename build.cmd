@@ -8,7 +8,7 @@
 @echo  build.cmd clear to remove all previous build for this solution
 set config=Release
 set platform="Any Cpu"
-set solution = AddinX.Core.sln
+set solution = AddinX.Ribbon.sln
 
 IF [%1] EQU [clean]  GOTO CleanAll 
 IF [%1] EQU [clear]  GOTO CleanAll

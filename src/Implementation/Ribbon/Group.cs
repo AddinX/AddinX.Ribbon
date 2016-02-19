@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Xml.Linq;
-using AddinX.Core.Contract.Control;
-using AddinX.Core.Contract.Ribbon.Group;
-using AddinX.Core.Implementation.Control;
+using AddinX.Ribbon.Contract.Control;
+using AddinX.Ribbon.Contract.Ribbon.Group;
+using AddinX.Ribbon.Implementation.Control;
 
-namespace AddinX.Core.Implementation.Ribbon
+namespace AddinX.Ribbon.Implementation.Ribbon
 {
     public class Group : AddInElement, IGroup
     {

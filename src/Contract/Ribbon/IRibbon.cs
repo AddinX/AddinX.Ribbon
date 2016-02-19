@@ -1,7 +1,7 @@
 using System;
-using AddinX.Core.Contract.Ribbon.Tab;
+using AddinX.Ribbon.Contract.Ribbon.Tab;
 
-namespace AddinX.Core.Contract.Ribbon
+namespace AddinX.Ribbon.Contract.Ribbon
 {
     public interface IRibbon
     {

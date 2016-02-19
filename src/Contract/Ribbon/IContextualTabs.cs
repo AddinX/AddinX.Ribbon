@@ -1,7 +1,7 @@
 using System;
-using AddinX.Core.Contract.Ribbon.TabSet;
+using AddinX.Ribbon.Contract.Ribbon.TabSet;
 
-namespace AddinX.Core.Contract.Ribbon
+namespace AddinX.Ribbon.Contract.Ribbon
 {
     public interface IContextualTabs
     {

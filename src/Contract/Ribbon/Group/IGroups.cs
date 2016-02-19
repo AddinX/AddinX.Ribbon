@@ -1,4 +1,4 @@
-﻿namespace AddinX.Core.Contract.Ribbon.Group
+﻿namespace AddinX.Ribbon.Contract.Ribbon.Group
 {
     public interface IGroups
     {

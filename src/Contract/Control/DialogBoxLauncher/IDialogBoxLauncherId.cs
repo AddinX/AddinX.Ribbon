@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Control.DialogBoxLauncher
+namespace AddinX.Ribbon.Contract.Control.DialogBoxLauncher
 {
     public interface IDialogBoxLauncherId
     {

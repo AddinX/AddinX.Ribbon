@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Xml.Linq;
-using AddinX.Core.Contract.Control.ButtonGroup;
-using AddinX.Core.Implementation.Ribbon;
+using AddinX.Ribbon.Contract.Control.ButtonGroup;
+using AddinX.Ribbon.Implementation.Ribbon;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public class ButtonGroup : Control, IButtonGroup
     {

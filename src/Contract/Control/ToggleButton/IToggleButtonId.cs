@@ -1,4 +1,4 @@
-﻿namespace AddinX.Core.Contract.Control.ToggleButton
+﻿namespace AddinX.Ribbon.Contract.Control.ToggleButton
 {
     public interface IToggleButtonId
     {

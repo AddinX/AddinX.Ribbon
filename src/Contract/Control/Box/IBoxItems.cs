@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AddinX.Core.Contract.Control.Box
+namespace AddinX.Ribbon.Contract.Control.Box
 {
     public interface IBoxItems
     {

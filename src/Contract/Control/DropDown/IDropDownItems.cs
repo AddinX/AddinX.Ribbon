@@ -1,7 +1,7 @@
 using System;
-using AddinX.Core.Contract.Control.Item;
+using AddinX.Ribbon.Contract.Control.Item;
 
-namespace AddinX.Core.Contract.Control.DropDown
+namespace AddinX.Ribbon.Contract.Control.DropDown
 {
     public interface IDropDownItems
     {

@@ -1,6 +1,6 @@
-using AddinX.Core.Contract.Control.DialogBoxLauncher;
+using AddinX.Ribbon.Contract.Control.DialogBoxLauncher;
 
-namespace AddinX.Core.Contract.Ribbon.Group
+namespace AddinX.Ribbon.Contract.Ribbon.Group
 {
     public interface IGroupDialogBox
     {

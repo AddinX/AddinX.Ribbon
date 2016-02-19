@@ -1,12 +1,12 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using AddinX.Core.Contract;
-using AddinX.Core.Contract.Command;
-using AddinX.Core.ExcelDna;
-using AddinX.Core.IntegrationTest.ComboBoxAndDropDown.Data;
-using AddinX.Core.IntegrationTest.ComboBoxAndDropDown.Utils;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.ExcelDna;
+using AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown.Data;
+using AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown.Utils;
 
-namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown
+namespace AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown
 {
     [ComVisible(true)]
     public class Ribbon : RibbonFluent

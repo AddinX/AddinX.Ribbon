@@ -7,8 +7,8 @@
     <ProjectGuid>{2A669FE9-B98E-4AD8-B137-992F5D536938}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddinX.Core.ExcelDna</RootNamespace>
-    <AssemblyName>AddinX.Core.ExcelDna</AssemblyName>
+    <RootNamespace>AddinX.Ribbon.ExcelDna</RootNamespace>
+    <AssemblyName>AddinX.Ribbon.ExcelDna</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,12 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AddinX.Core.Contract, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AddinX.Core.Contract.1.0.0\lib\net451\AddinX.Core.Contract.dll</HintPath>
+    <Reference Include="AddinX.Ribbon.Contract, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AddinX.Ribbon.Contract.1.0.0\lib\net451\AddinX.Ribbon.Contract.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AddinX.Core.Implementation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AddinX.Core.Implementation.1.0.0\lib\net451\AddinX.Core.Implementation.dll</HintPath>
+    <Reference Include="AddinX.Ribbon.Implementation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AddinX.Ribbon.Implementation.1.0.0\lib\net451\AddinX.Ribbon.Implementation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ExcelDna.Integration, Version=0.33.5730.40390, Culture=neutral, processorArchitecture=MSIL">

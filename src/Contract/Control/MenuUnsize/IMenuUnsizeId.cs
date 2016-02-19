@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Control.MenuUnsize
+namespace AddinX.Ribbon.Contract.Control.MenuUnsize
 {
     public interface IMenuUnsizeId
     {
