@@ -2,7 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace AddinX.Core.IntegrationTest.ComboBoxAndDropDown.Utils
+namespace AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown.Utils
 {
     public class ResizeImage
     {

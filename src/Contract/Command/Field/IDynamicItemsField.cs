@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AddinX.Core.Contract.Command.Field
+namespace AddinX.Ribbon.Contract.Command.Field
 {
     public interface IDynamicItemsField
     {

@@ -1,10 +1,10 @@
 using System;
-using AddinX.Core.Contract.Ribbon.Group;
+using AddinX.Ribbon.Contract.Ribbon.Group;
 
-namespace AddinX.Core.Contract.Ribbon.Tab
+namespace AddinX.Ribbon.Contract.Ribbon.Tab
 {
     public interface ITabItems
     {
-        ITabExtra Groups(Action<IGroupsUi> value);
+        ITabExtra Groups(Action<IGroups> value);
     }
 }

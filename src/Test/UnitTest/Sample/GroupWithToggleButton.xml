@@ -3,7 +3,7 @@
     <tabs>
       <tab id="tab1" label="Internal">
         <group id="extraSettingsGroup" label="Extra settings" getVisible="GetVisible">
-          <toggleButton id="HideViewTab" label="Hide View Tab" showImage="false" showLabel="true" size="large" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnAction" getPressed="GetPressed" tag="HideViewTab" supertip="Hide View Tab" />
+          <toggleButton id="HideViewTab" label="Hide View Tab" showImage="false" showLabel="true" size="large" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnActionPressed" getPressed="GetPressed" tag="HideViewTab" supertip="Hide View Tab" />
         </group>
       </tab>
     </tabs>

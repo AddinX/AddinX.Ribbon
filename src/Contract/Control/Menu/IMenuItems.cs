@@ -1,9 +1,9 @@
 using System;
 
-namespace AddinX.Core.Contract.Control.Menu
+namespace AddinX.Ribbon.Contract.Control.Menu
 {
     public interface IMenuItems
     {
-        IMenuExtra AddItems(Action<IMenuControlsUi> items);
+        IMenuExtra AddItems(Action<IMenuControls> items);
     }
 }

@@ -1,23 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using AddinX.Core.Contract;
-using AddinX.Core.Contract.Ribbon;
-using AddinX.Core.Implementation.Control;
-using AddinX.Core.Implementation.Ribbon;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Ribbon;
+using AddinX.Ribbon.Implementation.Control;
 
-namespace AddinX.Core.Implementation
+namespace AddinX.Ribbon.Implementation
 {
     public class CustomUi : AddInElement, ICustomUi
     {
         private readonly IDictionary<string, string> privateNamespaces;
-        public IRibbonUi Ribbon { get; }
+        public IRibbon Ribbon { get; }
 
         public CustomUi()
         {
             ElementName = "customUI";
             privateNamespaces = new Dictionary<string, string>();
-            Ribbon = new RibbonUi();
+            Ribbon = new Ribbon.Ribbon();
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
 ﻿using NetOffice.ExcelApi;
 
-namespace AddinX.Core.IntegrationTest.ButtonAndBox
+namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox
 {
     public class AddinContext
     {

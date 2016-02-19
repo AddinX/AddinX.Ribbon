@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using AddinX.Core.Contract.Command;
-using AddinX.Core.Contract.Command.Field;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.Contract.Command.Field;
 
-namespace AddinX.Core.Implementation.Command
+namespace AddinX.Ribbon.Implementation.Command
 {
     public class GalleryCommand : IGalleryCommand, IEnabledField, IVisibleField, IDynamicItemsField, IDropDownField
     {

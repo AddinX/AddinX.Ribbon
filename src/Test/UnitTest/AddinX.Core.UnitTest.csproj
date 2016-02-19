@@ -7,8 +7,8 @@
     <ProjectGuid>{200833ED-6DE6-443F-BE1F-EE5BE20F69AB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddinX.Core.UnitTest</RootNamespace>
-    <AssemblyName>AddinX.Core.UnitTest</AssemblyName>
+    <RootNamespace>AddinX.Ribbon.UnitTest</RootNamespace>
+    <AssemblyName>AddinX.Ribbon.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -95,13 +95,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Contract\AddinX.Core.Contract.csproj">
+    <ProjectReference Include="..\..\Contract\AddinX.Ribbon.Contract.csproj">
       <Project>{8e0452bb-994c-4996-99fa-931ee5b7e661}</Project>
-      <Name>AddinX.Core.Contract</Name>
+      <Name>AddinX.Ribbon.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Implementation\AddinX.Core.Implementation.csproj">
+    <ProjectReference Include="..\..\Implementation\AddinX.Ribbon.Implementation.csproj">
       <Project>{563dfffc-6f88-4bbd-9ce0-98783a8511ce}</Project>
-      <Name>AddinX.Core.Implementation</Name>
+      <Name>AddinX.Ribbon.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

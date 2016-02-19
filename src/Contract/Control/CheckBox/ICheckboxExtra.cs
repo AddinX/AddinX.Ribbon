@@ -1,4 +1,4 @@
-namespace AddinX.Core.Contract.Control.CheckBox
+namespace AddinX.Ribbon.Contract.Control.CheckBox
 {
     public interface ICheckboxExtra
     {

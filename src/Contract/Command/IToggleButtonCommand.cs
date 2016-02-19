@@ -1,12 +1,10 @@
 ﻿using System;
 
-namespace AddinX.Core.Contract.Command
+namespace AddinX.Ribbon.Contract.Command
 {
     public interface IToggleButtonCommand : ICommand
     {
-        IToggleButtonCommand Action(Action act);
-
-        IToggleButtonCommand Action(Action act, Func<bool> canExecute);
+        IToggleButtonCommand Action(Action<bool> act);
 
         IToggleButtonCommand IsVisible(Func<bool> condition);
 
@@ -17,6 +15,6 @@ namespace AddinX.Core.Contract.Command
         /// </summary>
         /// <param name="defaultValue">a boolean value</param>
         /// <returns>Fluent Builder</returns>
-        IToggleButtonCommand GetPressed(Func<bool> defaultValue);
+        IToggleButtonCommand Pressed(Func<bool> defaultValue);
     }
 }

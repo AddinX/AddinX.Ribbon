@@ -3,7 +3,7 @@
     <tabs>
       <tab id="tab1" label="Internal">
         <group id="extraSettingsGroup" label="Extra settings" getVisible="GetVisible">
-          <gallery id="ColorsSelection" label="Colors" sizeString="WWWWWWW" showLabel="true" showItemImage="false" showItemLabel="true" showImage="false" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnActionDropDown" getSelectedItemIndex="GetSelectedItemIndex" tag="ColorsSelection" supertip="Color Picking">
+          <gallery id="ColorsSelection" label="Colors" sizeString="WWWWWWW" showLabel="true" showItemImage="false" showItemLabel="true" showImage="false" size="normal" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnActionDropDown" getSelectedItemIndex="GetSelectedItemIndex" tag="ColorsSelection" supertip="Color Picking">
             <item id="greenColor" label="Green" />
             <item id="redColor" label="Red" />
             <item id="blueColor" label="Blue" />
@@ -11,7 +11,7 @@
           </gallery>
         </group>
         <group id="UnitsSettingsGroup" label="Units Settings" getVisible="GetVisible">
-          <gallery id="centimeter2Unit" label="Unit To:" sizeString="WWWWWWW" showLabel="true" showItemImage="false" showItemLabel="true" showImage="false" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnActionDropDown" getSelectedItemIndex="GetSelectedItemIndex" tag="centimeter2Unit" supertip="Convert centimeters to others units" getItemCount="GetItemCount" getItemID="GetItemId" getItemImage="GetItemImage" getItemLabel="GetItemLabel" getItemScreentip="GetItemScreentip" getItemSupertip="GetItemSupertip" />
+          <gallery id="centimeter2Unit" label="Unit To:" sizeString="WWWWWWW" showLabel="true" showItemImage="false" showItemLabel="true" showImage="false" size="normal" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnActionDropDown" getSelectedItemIndex="GetSelectedItemIndex" tag="centimeter2Unit" supertip="Convert centimeters to others units" getItemCount="GetItemCount" getItemID="GetItemId" getItemImage="GetItemImage" getItemLabel="GetItemLabel" getItemScreentip="GetItemScreentip" getItemSupertip="GetItemSupertip" />
         </group>
       </tab>
     </tabs>

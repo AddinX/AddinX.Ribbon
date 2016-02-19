@@ -1,9 +1,9 @@
-namespace AddinX.Core.Contract.Control.Gallery
+namespace AddinX.Ribbon.Contract.Control.Gallery
 {
     public interface IGalleryLabel
     {
-        IGalleryImage ShowLabel();
+        IGallerySize ShowLabel();
 
-        IGalleryImage HideLabel();
+        IGallerySize HideLabel();
     }
 }

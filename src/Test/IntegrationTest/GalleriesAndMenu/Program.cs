@@ -3,7 +3,7 @@ using ExcelDna.Integration;
 using ExcelDna.Logging;
 using Application = NetOffice.ExcelApi.Application;
 
-namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
+namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu
 {
     // This class implements the ExcelDna.Integration.IExcelAddIn interface.
     // This allows the add-in to run code at start-up

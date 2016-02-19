@@ -1,7 +1,7 @@
-﻿using AddinX.Core.Contract.Command.Field;
+﻿using AddinX.Ribbon.Contract.Command.Field;
 using ExcelDna.Integration.CustomUI;
 
-namespace AddinX.Core.ExcelDna
+namespace AddinX.Ribbon.ExcelDna
 {
     public abstract partial class RibbonFluent
     {
@@ -18,7 +18,7 @@ namespace AddinX.Core.ExcelDna
 
         public void OnActionPressed(IRibbonControl control, bool pressed)
         {
-            var field = FindRibbonCmd(control.Id) as ICheckboxPressedField;
+            var field = FindRibbonCmd(control.Id) as IActionPressedField;
             field?.OnActionField(pressed);
         }
 

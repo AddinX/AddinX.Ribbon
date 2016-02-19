@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using AddinX.Core.Contract.Command;
-using AddinX.Core.Implementation.Command;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.Implementation.Command;
 
-namespace AddinX.Core.Implementation
+namespace AddinX.Ribbon.Implementation
 {
     public class RibbonCommands : IRibbonCommands
     {

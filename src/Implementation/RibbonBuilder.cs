@@ -1,8 +1,8 @@
 ﻿using System.Xml.Linq;
-using AddinX.Core.Contract;
-using AddinX.Core.Implementation.Control;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Implementation.Control;
 
-namespace AddinX.Core.Implementation
+namespace AddinX.Ribbon.Implementation
 {
     public class RibbonBuilder : IRibbonBuilder
     {

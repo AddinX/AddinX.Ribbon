@@ -1,4 +1,4 @@
-﻿namespace AddinX.Core.Contract
+﻿namespace AddinX.Ribbon.Contract
 {
     public interface IRibbonBuilder
     {

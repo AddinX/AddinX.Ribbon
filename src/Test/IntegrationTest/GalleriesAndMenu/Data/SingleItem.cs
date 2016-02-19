@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace AddinX.Core.IntegrationTest.GalleriesAndMenu.Data
+namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Data
 {
     internal class SingleItem
     {

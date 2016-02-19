@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace AddinX.Core.Implementation.Control
+namespace AddinX.Ribbon.Implementation.Control
 {
     public abstract class AddInElement
     {

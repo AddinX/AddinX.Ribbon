@@ -1,46 +1,46 @@
 ﻿using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using AddinX.Core.Contract;
-using AddinX.Core.Contract.Command;
-using AddinX.Core.ExcelDna;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.ExcelDna;
 
-namespace AddinX.Core.IntegrationTest.ButtonAndBox
+namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox
 {
     [ComVisible(true)]
     public class Ribbon : RibbonFluent
     {
-        private const string ReportingGroup = "reportingGroup";
+        private const string DataGroupId = "DataGroupId";
         private const string PortfolioAllocationBtn = "portfolioAllocation";
         private const string PortfolioContributorBtn = "portfolioContributor";
         private const string AnalyticsGroup = "analyticsGroup";
-        private const string TestTab = "TestTab";
+        private const string MyTabId = "MyTabId";
         private const string PortfolioAnalyzerBtn = "portfolioAnalyzer";
         private const string ReportingBox = "reportingBox";
         private const string PortfolioPerformanceBtn = "portfolioPerformance";
 
         protected override void CreateFluentRibbon(IRibbonBuilder builder)
         {
-            builder.CustomUi.Ribbon.Tabs(c =>
+            builder.CustomUi.AddNamespace("acme", "acme.addin.sync").Ribbon.Tabs(c =>
             {
-                c.AddTab("test").SetId(TestTab)
+                c.AddTab("My Tab").SetIdQ("acme", MyTabId)
                     .Groups(g =>
                     {
-                        g.AddGroup("reporting").SetId(ReportingGroup)
+                        g.AddGroup("Data").SetIdQ("acme", DataGroupId)
                             .Items(d =>
                             {
-                                d.AddBouton("Allocation")
+                                d.AddButton("Allocation")
                                     .SetId(PortfolioAllocationBtn)
                                     .LargeSize()
                                     .ImageMso("HappyFace");
                                 d.AddBox().SetId(ReportingBox)
                                     .HorizontalDisplay().AddItems(i =>
                                     {
-                                        i.AddBouton("Performance")
+                                        i.AddButton("Performance")
                                             .SetId(PortfolioPerformanceBtn)
                                             .NormalSize()
                                             .ImageMso("HappyFace");
-                                        i.AddBouton("Contributor").SetId(PortfolioContributorBtn)
+                                        i.AddButton("Contributor").SetId(PortfolioContributorBtn)
                                             .NormalSize().NoImage().ShowLabel()
                                             .Supertip("Portfolio best contributor")
                                             .Screentip(
@@ -49,7 +49,7 @@ namespace AddinX.Core.IntegrationTest.ButtonAndBox
                                     });
                             });
                         g.AddGroup("Analytic").SetId(AnalyticsGroup)
-                            .Items(i => i.AddBouton("Portfolio Analysis").SetId(PortfolioAnalyzerBtn).NormalSize()
+                            .Items(i => i.AddButton("Portfolio Analysis").SetId(PortfolioAnalyzerBtn).NormalSize()
                                 .NoImage().ShowLabel());
                     });
             });

@@ -1,6 +1,6 @@
-﻿using AddinX.Core.Contract.Command;
+﻿using AddinX.Ribbon.Contract.Command;
 
-namespace AddinX.Core.Contract
+namespace AddinX.Ribbon.Contract
 {
     public interface IRibbonFluent
     {

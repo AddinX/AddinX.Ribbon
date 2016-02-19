@@ -1,12 +1,12 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using AddinX.Core.Contract;
-using AddinX.Core.Contract.Command;
-using AddinX.Core.ExcelDna;
-using AddinX.Core.IntegrationTest.GalleriesAndMenu.Data;
-using AddinX.Core.IntegrationTest.GalleriesAndMenu.Utils;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.ExcelDna;
+using AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Data;
+using AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Utils;
 
-namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
+namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu
 {
     [ComVisible(true)]
     public class Ribbon : RibbonFluent
@@ -20,9 +20,10 @@ namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
         private const string OptionId = "OptionId";
         private const string GalleryId = "GalleryId";
         private const string DynamicGalleryId = "DynamicGalleryId";
+        private const string ButtonMore = "buttonMoreId";
 
         private ListItems content;
-        private int GallerySelectedIndex;
+        private int GallerySelectedIndex=3;
         private bool checkboxPressed;
 
         protected override void CreateFluentRibbon(IRibbonBuilder builder)
@@ -42,15 +43,17 @@ namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
                                         {
                                             v.AddCheckbox("Show numbers").SetId(ShowNumberId);
                                             v.AddSeparator("Mood");
-                                            v.AddBouton("Happy")
+                                            v.AddButton("Happy")
                                                 .SetId(HappyButtonId)
                                                 .ImageMso("HappyFace");
                                             v.AddGallery("Dynamic Option").SetId(DynamicGalleryId)
                                                 .ShowLabel().NoImage().ShowItemLabel().ShowItemImage()
-                                                .DynamicItems().NumberRows(6).NumberColumns(1);
+                                                .DynamicItems()
+                                                .AddButtons(b => b.AddButton("Button...").SetId(ButtonMore))
+                                                .NumberRows(6).NumberColumns(1);
                                         });
                                 d.AddGallery("Multi Option").SetId(GalleryId)
-                                    .ShowLabel().NoImage().ShowItemLabel().ShowItemImage()
+                                    .ShowLabel().LargeSize().NoImage().ShowItemLabel().ShowItemImage()
                                     .AddItems(v =>
                                     {
                                         v.AddItem("Show numbers").SetId(ShowNumberId2);
@@ -66,7 +69,9 @@ namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
 
         protected override void CreateRibbonCommand(IRibbonCommands cmds)
         {
+            cmds.AddButtonCommand(ButtonMore).Action(() => MessageBox.Show(@"More..."));
             cmds.AddButtonCommand(HappyButtonId).Action(() => MessageBox.Show("Be Happy !!!"));
+
             cmds.AddCheckBoxCommand(ShowNumberId).Action(isPressed =>
             {
                 checkboxPressed = isPressed;
@@ -98,7 +103,7 @@ namespace AddinX.Core.IntegrationTest.GalleriesAndMenu
                 .Action(i =>
                 {
                     GallerySelectedIndex = i;
-                    MessageBox.Show(@"Your selection: " + (GallerySelectedIndex+1));
+                    MessageBox.Show(@"Your selection: " + (i+1));
                 });
         }
 

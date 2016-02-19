@@ -1,4 +1,4 @@
-﻿namespace AddinX.Core.Contract.Command
+﻿namespace AddinX.Ribbon.Contract.Command
 {
     public interface ICommand { }
 }

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using AddinX.Core.Contract;
-using AddinX.Core.Contract.Command;
-using AddinX.Core.Implementation;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.Implementation;
 using ExcelDna.Integration.CustomUI;
 
-namespace AddinX.Core.ExcelDna
+namespace AddinX.Ribbon.ExcelDna
 {
     [ComVisible(true)]
     public abstract partial class RibbonFluent : ExcelRibbon, IRibbonFluent

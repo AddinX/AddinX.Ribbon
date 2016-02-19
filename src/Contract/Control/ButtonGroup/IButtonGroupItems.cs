@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace AddinX.Core.Contract.Control.ButtonGroup
+namespace AddinX.Ribbon.Contract.Control.ButtonGroup
 {
     public interface IButtonGroupItems
     {
-        void AddItems(Action<IButtonGroupControlsUi> items);
+        void AddItems(Action<IButtonGroupControls> items);
     }
 }
