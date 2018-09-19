@@ -1,0 +1,9 @@
+﻿using System;
+
+namespace AddinX.Ribbon.Contract.Command
+{
+    public interface IButtonGroupCommand : ICommand
+    {
+        void IsVisible(Func<bool> condition);
+    }
+}

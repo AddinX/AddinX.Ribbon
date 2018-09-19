@@ -5,11 +5,9 @@ using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.ExcelDna;
 
-namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox
-{
+namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox {
     [ComVisible(true)]
-    public class Ribbon : RibbonFluent
-    {
+    public class Ribbon : RibbonFluent {
         private const string DataGroupId = "DataGroupId";
         private const string PortfolioAllocationBtn = "portfolioAllocation";
         private const string PortfolioContributorBtn = "portfolioContributor";
@@ -19,23 +17,18 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox
         private const string ReportingBox = "reportingBox";
         private const string PortfolioPerformanceBtn = "portfolioPerformance";
 
-        protected override void CreateFluentRibbon(IRibbonBuilder builder)
-        {
-            builder.CustomUi.AddNamespace("acme", "acme.addin.sync").Ribbon.Tabs(c =>
-            {
+        protected override void CreateFluentRibbon(IRibbonBuilder builder) {
+            builder.CustomUi.AddNamespace("acme", "acme.addin.sync").Ribbon.Tabs(c => {
                 c.AddTab("My Tab").SetIdQ("acme", MyTabId)
-                    .Groups(g =>
-                    {
+                    .Groups(g => {
                         g.AddGroup("Data").SetIdQ("acme", DataGroupId)
-                            .Items(d =>
-                            {
+                            .Items(d => {
                                 d.AddButton("Allocation")
                                     .SetId(PortfolioAllocationBtn)
                                     .LargeSize()
                                     .ImageMso("HappyFace");
                                 d.AddBox().SetId(ReportingBox)
-                                    .HorizontalDisplay().AddItems(i =>
-                                    {
+                                    .HorizontalDisplay().AddItems(i => {
                                         i.AddButton("Performance")
                                             .SetId(PortfolioPerformanceBtn)
                                             .NormalSize()
@@ -45,7 +38,6 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox
                                             .Supertip("Portfolio best contributor")
                                             .Screentip(
                                                 "Display the top / bottom X contributor to the portfolio performance.");
-
                                     });
                             });
                         g.AddGroup("Analytic").SetId(AnalyticsGroup)
@@ -55,8 +47,7 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox
             });
         }
 
-        protected override void CreateRibbonCommand(IRibbonCommands cmds)
-        {
+        protected override void CreateRibbonCommand(IRibbonCommands cmds) {
             cmds.AddButtonCommand(PortfolioAnalyzerBtn).IsEnabled(() => AddinContext.ExcelApp.Worksheets.Count() > 1)
                 .Action(() => MessageBox.Show("Analyzer button clicked"));
             cmds.AddButtonCommand(PortfolioContributorBtn)
@@ -66,8 +57,7 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox
             cmds.AddBoxCommand(ReportingBox).IsVisible(() => AddinContext.ExcelApp.Worksheets.Count() > 1);
         }
 
-        public override void OnClosing()
-        {
+        public override void OnClosing() {
             AddinContext.ExcelApp.SheetActivateEvent -= (e) => RefreshRibbon();
             AddinContext.ExcelApp.SheetChangeEvent -= (a, e) => RefreshRibbon();
 
@@ -75,14 +65,12 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox
             AddinContext.ExcelApp = null;
         }
 
-        public override void OnOpening()
-        {
+        public override void OnOpening() {
             AddinContext.ExcelApp.SheetActivateEvent += (e) => RefreshRibbon();
             AddinContext.ExcelApp.SheetChangeEvent += (a, e) => RefreshRibbon();
         }
 
-        private void RefreshRibbon()
-        {
+        private void RefreshRibbon() {
             Ribbon?.Invalidate();
         }
     }

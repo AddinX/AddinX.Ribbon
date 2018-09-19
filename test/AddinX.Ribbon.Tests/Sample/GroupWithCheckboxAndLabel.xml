@@ -1,0 +1,18 @@
+<customUI onLoad="OnLoad" loadImage="OnLoadImage" xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+  <ribbon startFromScratch="false">
+    <contextualTabs>
+      <tabSet idMso="TabSetPivotTableTools">
+        <tab id="tab1" label="Internal">
+          <group id="printSettingsGroup" label="Print settings" getVisible="GetVisible">
+            <checkBox id="centerHorizontal" label="Center Horizontal" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnActionPressed" getPressed="GetPressed" tag="centerHorizontal" screentip="Center Content Horizontally" />
+            <checkBox id="centerVertical" label="Center Vertical" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnActionPressed" getPressed="GetPressed" tag="centerVertical" screentip="Center Content Vertically" />
+            <separator id="separatorOne" getVisible="GetVisible" />
+            <checkBox id="FitToPage" label="Fit To 1 Page Width" getEnabled="GetEnabled" getVisible="GetVisible" onAction="OnActionPressed" getPressed="GetPressed" tag="FitToPage" screentip="Fit Content to the page width" />
+            <labelControl id="printZoomLabel" getEnabled="GetEnabled" getVisible="GetVisible" getLabel="GetLabel" tag="printZoomLabel" />
+            <editBox id="printZoomValue" label="Zoom" maxLength="5" sizeString="WWWWW" showImage="false" getEnabled="GetEnabled" getVisible="GetVisible" onChange="OnChange" getText="GetText" tag="printZoomValue" screentip="Zooming percentage for printing" />
+          </group>
+        </tab>
+      </tabSet>
+    </contextualTabs>
+  </ribbon>
+</customUI>

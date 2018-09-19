@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net4</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Sample\ContextualTabWithBoxes.xml" />
+    <None Remove="Sample\GroupWithBoxes.xml" />
+    <None Remove="Sample\GroupWithButtons.xml" />
+    <None Remove="Sample\GroupWithCheckboxAndLabel.xml" />
+    <None Remove="Sample\GroupWithComboBox.xml" />
+    <None Remove="Sample\GroupWithDialogBoxLauncher.xml" />
+    <None Remove="Sample\GroupWithDropDown.xml" />
+    <None Remove="Sample\GroupWithGallery.xml" />
+    <None Remove="Sample\GroupWithMenu.xml" />
+    <None Remove="Sample\GroupWithToggleButton.xml" />
+    <None Remove="Schemas\CustomUI_2006.xsd" />
+    <None Remove="Schemas\CustomUI_2009.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Sample\ContextualTabWithBoxes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample\GroupWithBoxes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample\GroupWithButtons.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample\GroupWithCheckboxAndLabel.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample\GroupWithComboBox.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample\GroupWithDialogBoxLauncher.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample\GroupWithDropDown.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample\GroupWithGallery.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample\GroupWithMenu.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sample\GroupWithToggleButton.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schemas\CustomUI_2006.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="NUnit" Version="3.2.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AddinX.Ribbon\AddinX.Ribbon.csproj" />
+  </ItemGroup>
+
+</Project>

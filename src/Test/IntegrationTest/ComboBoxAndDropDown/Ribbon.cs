@@ -43,9 +43,6 @@ namespace AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown
                                 .ShowLabel().NoImage()
                                 .ShowItemLabel().ShowItemImage().DynamicItems()
                                 .AddButtons(b => b.AddButton("Button...").SetId(ButtonMore));
-
-
-
                             d.AddToggleButton("Toggle Button")
                                 .SetId(ToggleButtonId);
                         });
