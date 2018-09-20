@@ -1,4 +1,5 @@
 using System;
+using AddinX.Ribbon.Contract.Command;
 
 namespace AddinX.Ribbon.Contract.Control {
     public interface IRibbonControl {
@@ -28,6 +29,12 @@ namespace AddinX.Ribbon.Contract.Control {
         T SetId(string name);
 
         T SetIdQ(string ns, string name);
+    }
+
+    public interface IRibbonItemId<out T> {
+
+        T SetId(string name);
+
     }
 
     public interface IRibbonImage<out T>  {
@@ -84,6 +91,25 @@ namespace AddinX.Ribbon.Contract.Control {
         T Screentip(string screentip);
     }
 
+    public interface IRibbonSupertip<out T> {
+        
+        T Supertip(string supertip);
+
+        T Screentip(string screentip);
+    }
+
+    public interface IRibbonGalleryExtra<out T> :IRibbonExtra<T> {
+        T SizeString(int size);
+
+        T ItemHeight(int height);
+
+        T ItemWidth(int width);
+
+        T NumberRows(int rows);
+
+        T NumberColumns(int cols);
+    }
+
     public interface IRibbonListExtra<out T> : IRibbonExtra<T> {
         T MaxLength(int maxLength);
 
@@ -100,9 +126,34 @@ namespace AddinX.Ribbon.Contract.Control {
         T AddItems(Action<TItems> items);
     }
 
+    public interface IRibbonDynamic<out T, out TItems>:IRibbonItems<T,TItems> {
+        T DynamicItems();
+    }
+
+    public interface IRibbonItemImage<out T> {
+        T ShowItemImage();
+
+        T HideItemImage();
+    }
+
+    public interface IRibbonItemLabel<out T> {
+        T ShowItemLabel();
+
+        T HideItemLabel();
+    }
+
     public interface IRibbonItemSize<out T> {
         T ItemNormalSize();
 
         T ItemLargeSize();
+    }
+
+    /// <summary>
+    /// Ribbon callback ±ê¼Ç
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TCommand"></typeparam>
+    public interface IRibbonCallback<out T,out TCommand> where TCommand:ICommand {
+        T Callback(Action<TCommand> builder);
     }
 }

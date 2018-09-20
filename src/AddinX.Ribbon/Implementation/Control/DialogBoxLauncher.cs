@@ -1,13 +1,16 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.DialogBoxLauncher;
+using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class DialogBoxLauncher : Control, IDialogBoxLauncher {
         private readonly ButtonUnsize _btn;
 
-        public DialogBoxLauncher() {
-            ElementName = "dialogBoxLauncher";
-            _btn = new ButtonUnsize();
+        public DialogBoxLauncher(ICallbackRigister register) : base(register, "dialogBoxLauncher") {
+            _btn = new ButtonUnsize(register);
             _btn.HideLabel();
             _btn.NoImage();
         }
@@ -19,34 +22,43 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        public IDialogBoxLauncherExtra Description(string description) {
+        public IDialogBoxLauncher Description(string description) {
             _btn.Description(description);
             return this;
         }
 
-        public IDialogBoxLauncherExtra Supertip(string supertip) {
+        public IDialogBoxLauncher Supertip(string supertip) {
             _btn.Supertip(supertip);
             return this;
         }
 
-        public IDialogBoxLauncherExtra Keytip(string keytip) {
+        public IDialogBoxLauncher Keytip(string keytip) {
             _btn.Keytip(keytip);
             return this;
         }
 
-        public IDialogBoxLauncherExtra Screentip(string screentip) {
+        public IDialogBoxLauncher Screentip(string screentip) {
             _btn.Screentip(screentip);
             return this;
         }
 
-        public IDialogBoxLauncherExtra SetId(string name) {
+        public IDialogBoxLauncher SetId(string name) {
             _btn.SetId(name);
             return this;
         }
 
-        public IDialogBoxLauncherExtra SetIdQ(string ns, string name) {
+        public IDialogBoxLauncher SetIdQ(string ns, string name) {
             _btn.SetIdQ(ns, name);
             return this;
         }
+
+        #region Implementation of IRibbonCallback<out IDialogBoxLauncher,out IDialogBoxLauncherCommand>
+
+        public IDialogBoxLauncher Callback(Action<IDialogBoxLauncherCommand> builder) {
+            builder(GetCommand<DialogBoxLauncherCommand>());
+            return this;
+        }
+
+        #endregion
     }
 }

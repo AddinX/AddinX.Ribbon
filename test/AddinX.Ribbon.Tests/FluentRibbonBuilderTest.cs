@@ -8,6 +8,7 @@ using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation;
 using AddinX.Ribbon.Implementation.Control;
+using AddinX.Ribbon.Tests;
 using NUnit.Framework;
 
 namespace AddinX.Ribbon.UnitTest
@@ -29,11 +30,22 @@ namespace AddinX.Ribbon.UnitTest
             return XDocument.Load(fullPath).ToString();
         }
 
+        private void AssertXml(string expectedFile, IRibbonBuilder builder) {
+            var expected = LoadXml(expectedFile);
+            // Act
+            var str = builder.GetXmlString();
+            Console.WriteLine(str);
+
+            Assert.True(ValidateHelper.Validate(str));
+            // Assert
+            //Assert.AreEqual(expected, str);
+        }
+
         [Test]
         public void GroupWithButtons()
         {
             // Prepare
-            var expected = LoadXml("Sample/GroupWithButtons.xml");
+            var expected = "Sample/GroupWithButtons.xml";
             
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -55,63 +67,47 @@ namespace AddinX.Ribbon.UnitTest
                     });
             });
 
-            // Act
-            var str = builder.GetXmlString();
-           Console.WriteLine(str);
-            // Assert
-            Assert.AreEqual(expected,str);
+           AssertXml(expected,builder);
         }
 
         [Test]
-        public void GroupWithBoxLauncher()
-        {
+        public void GroupWithBoxLauncher() {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithDialogBoxLauncher.xml").ToString();
+            var expected = "Sample/GroupWithDialogBoxLauncher.xml";
 
-            builder.CustomUi.Ribbon.Tabs(c =>
-            {
+            builder.CustomUi.Ribbon.Tabs(c => {
                 c.AddTab("test").SetId("tab1")
-                    .Groups(g =>
-                    {
+                    .Groups(g => {
                         g.AddGroup("reporting").SetId("reportingGroup")
-                            .Items(i =>
-                            {
-                                i.AddButton("Allocation").SetId("portfolioAllocation").LargeSize().ImageMso("HappyFace");
+                            .Items(i => {
+                                i.AddButton("Allocation").SetId("portfolioAllocation").LargeSize()
+                                    .ImageMso("HappyFace");
                                 i.AddButton("Contributor").SetId("Contributor").NormalSize()
                                     .NoImage().ShowLabel().Supertip("Portfolio best contributor")
                                     .Screentip("Display the top / bottom X contributor to the portfolio performance.");
-                                
-                            }).DialogBoxLauncher(o=> o.AddDialogBoxLauncher().SetId("ReportingConfig")
-                                .Supertip("Allocation Configuration").Screentip("Configuration panel for the Allocation group"));
-                        
+
+                            }).DialogBoxLauncher(o => o.AddDialogBoxLauncher().SetId("ReportingConfig")
+                                .Supertip("Allocation Configuration")
+                                .Screentip("Configuration panel for the Allocation group"));
                     });
             });
 
-            // Act
-            var str = builder.GetXmlString();
-
-            // Assert
-            Assert.AreEqual(expected, str);
+            AssertXml(expected, builder);
         }
 
         [Test]
-        public void ContextualTabWithButtons()
-        {
+        public void ContextualTabWithButtons() {
             // Prepare
-            var expected = XDocument.Load("Sample/ContextualTabWithBoxes.xml").ToString();
+            var expected = "Sample/ContextualTabWithBoxes.xml";
 
-            builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts =>
-            {
+            builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts => {
                 ts.SetIdMso(TabSetId.TabSetPivotTableTools)
                     .Tabs(
-                        c =>
-                        {
+                        c => {
                             c.AddTab("Portfolio").SetId("tab1")
-                                .Groups(g =>
-                                {
+                                .Groups(g => {
                                     g.AddGroup("reporting").SetId("reportingGroup")
-                                        .Items(i =>
-                                        {
+                                        .Items(i => {
                                             i.AddButton("Allocation")
                                                 .SetId("portfolioAllocation")
                                                 .LargeSize()
@@ -134,39 +130,30 @@ namespace AddinX.Ribbon.UnitTest
             }));
 
 
-            // Act
-            var str = builder.GetXmlString();
-
-            // Assert
-            Assert.AreEqual(expected, str);
+            AssertXml(expected, builder);
         }
 
         [Test]
-        public void GroupWithBoxes()
-        {
+        public void GroupWithBoxes() {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithBoxes.xml").ToString();
+            var expected = "Sample/GroupWithBoxes.xml";
 
-            builder.CustomUi.Ribbon.Tabs(c =>
-            {
+            builder.CustomUi.Ribbon.Tabs(c => {
                 c.AddTab("test").SetId("tab1")
-                    .Groups(g =>
-                    {
+                    .Groups(g => {
                         g.AddGroup("reporting").SetId("reportingGroup")
-                            .Items(i =>
-                            {
-                                i.AddBox().SetId("ButtonsVertical").VerticalDisplay().AddItems(b =>
-                                { 
+                            .Items(i => {
+                                i.AddBox().SetId("ButtonsVertical").VerticalDisplay().AddItems(b => {
                                     b.AddButton("Allocation")
                                         .SetId("portfolioAllocation")
                                         .LargeSize()
                                         .ImageMso("HappyFace");
                                     b.AddButton("Contributor").SetId("Contributor").LargeSize()
                                         .NoImage().ShowLabel().Supertip("Portfolio best contributor")
-                                        .Screentip("Display the top / bottom X contributor to the portfolio performance.");
+                                        .Screentip(
+                                            "Display the top / bottom X contributor to the portfolio performance.");
                                 });
-                                i.AddBox().SetId("ButtonsHorizontal").HorizontalDisplay().AddItems(b =>
-                                {
+                                i.AddBox().SetId("ButtonsHorizontal").HorizontalDisplay().AddItems(b => {
                                     b.AddButton("Portfolio Analysis")
                                         .SetId("portfolioAnalyser").NormalSize()
                                         .NoImage().ShowLabel();
@@ -180,31 +167,22 @@ namespace AddinX.Ribbon.UnitTest
                     });
             });
 
-            // Act
-            var str = builder.GetXmlString();
-
-            // Assert
-            Assert.AreEqual(expected, str);
+            AssertXml(expected, builder);
         }
 
         [Test]
-        public void GroupWithCheckBoxAndLabel()
-        {
+        public void GroupWithCheckBoxAndLabel() {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithCheckboxAndLabel.xml").ToString();
+            var expected = "Sample/GroupWithCheckboxAndLabel.xml";
 
-            builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts =>
-            {
+            builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts => {
                 ts.SetIdMso(TabSetId.TabSetPivotTableTools)
                     .Tabs(
-                        c =>
-                        {
+                        c => {
                             c.AddTab("Internal").SetId("tab1")
-                                .Groups(g =>
-                                {
+                                .Groups(g => {
                                     g.AddGroup("Print settings").SetId("printSettingsGroup")
-                                        .Items(i =>
-                                        {
+                                        .Items(i => {
                                             i.AddCheckbox("Center Horizontal").SetId("centerHorizontal")
                                                 .Screentip("Center Content Horizontally");
                                             i.AddCheckbox("Center Vertical").SetId("centerVertical")
@@ -222,211 +200,155 @@ namespace AddinX.Ribbon.UnitTest
             }));
 
 
-            // Act
-            var str = builder.GetXmlString();
-
-            // Assert
-            Assert.AreEqual(expected, str);
+            AssertXml(expected, builder);
         }
 
         [Test]
-        public void GroupWithComboBox()
-        {
+        public void GroupWithComboBox() {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithComboBox.xml").ToString();
+            var expected = "Sample/GroupWithComboBox.xml";
 
-            builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts =>
-            {
+            builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts => {
                 ts.SetIdMso(TabSetId.TabSetPivotTableTools)
                     .Tabs(
-                        c =>
-                        {
+                        c => {
                             c.AddTab("Internal").SetId("tab1")
-                                .Groups(g =>
-                                {
+                                .Groups(g => {
                                     g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                                        .Items(i =>
-                                        {
+                                        .Items(i => {
                                             i.AddComboBox("Colors").SetId("colorsPicking")
                                                 .ShowLabel().NoImage()
-                                                .AddItems(o =>
-                                                {
+                                                .AddItems(o => {
                                                     o.AddItem("Green").SetId("greenColor");
                                                     o.AddItem("Red").SetId("redColor").NoImage();
                                                     o.AddItem("Blue").SetId("blueColor").NoImage();
                                                 }).Supertip("Color Picking")
                                                 .MaxLength(15).SizeString(15);
-
                                         });
 
                                     g.AddGroup("Time zone settings").SetId("timeZoneSettingsGroup")
-                                        .Items(i =>
-                                        {
+                                        .Items(i => {
                                             i.AddComboBox("Country").SetId("countryPicking")
                                                 .ShowLabel().NoImage()
                                                 .DynamicItems().Supertip("Country Picking")
                                                 .Supertip("Pick a country to know its current time")
                                                 ;
-
                                         });
                                 });
                         });
             }));
 
 
-            // Act
-            var str = builder.GetXmlString();
-
-            // Assert
-            Assert.AreEqual(expected, str);
+            AssertXml(expected, builder);
         }
 
         [Test]
-        public void GroupWithToggleButton()
-        {
+        public void GroupWithToggleButton() {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithToggleButton.xml").ToString();
+            var expected = "Sample/GroupWithToggleButton.xml";
 
             builder.CustomUi.Ribbon.Tabs(
-                c =>
-                {
+                c => {
                     c.AddTab("Internal").SetId("tab1")
-                        .Groups(g =>
-                        {
+                        .Groups(g => {
                             g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                                .Items(i =>
-                                {
+                                .Items(i => {
                                     i.AddToggleButton("Hide View Tab").SetId("HideViewTab")
                                         .ShowLabel().LargeSize().NoImage().Supertip("Hide View Tab");
-
                                 });
                         });
                 });
-            
 
 
-            // Act
-            var str = builder.GetXmlString();
 
-            // Assert
-            Assert.AreEqual(expected, str);
+            AssertXml(expected, builder);
         }
 
         [Test]
-        public void GroupWithDropDown()
-        {
+        public void GroupWithDropDown() {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithDropDown.xml").ToString();
+            var expected = "Sample/GroupWithDropDown.xml";
 
-            builder.CustomUi.Ribbon.Tabs(c =>
-            {
+            builder.CustomUi.Ribbon.Tabs(c => {
                 c.AddTab("Internal").SetId("tab1")
-                    .Groups(g =>
-                    {
+                    .Groups(g => {
                         g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                            .Items(i =>
-                            {
+                            .Items(i => {
                                 i.AddDropDown("Colors").SetId("ColorsSelection")
                                     .ShowLabel().NoImage().ShowItemLabel()
                                     .HideItemImage()
-                                    .AddItems(o =>
-                                    {
+                                    .AddItems(o => {
                                         o.AddItem("Green").SetId("greenColor");
                                         o.AddItem("Red").SetId("redColor").NoImage();
                                         o.AddItem("Blue").SetId("blueColor").NoImage();
                                     }).Supertip("Color Picking");
-
                             });
 
                         g.AddGroup("Units Settings").SetId("UnitsSettingsGroup")
-                            .Items(i =>
-                            {
+                            .Items(i => {
                                 i.AddDropDown("Unit To:").SetId("centimeter2Unit")
                                     .ShowLabel().NoImage().ShowItemLabel().HideItemImage()
                                     .DynamicItems().Supertip("Centimeter Conversion")
                                     .Supertip("Convert centimeters to others units")
                                     ;
-
                             });
                     });
-
             });
 
 
-            // Act
-            var str = builder.GetXmlString();
-
-            // Assert
-            Assert.AreEqual(expected, str);
+            AssertXml(expected, builder);
         }
 
         [Test]
-        public void GroupWithGallery()
-        {
+        public void GroupWithGallery() {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithGallery.xml").ToString();
+            var expected = "Sample/GroupWithGallery.xml";
 
-            builder.CustomUi.Ribbon.Tabs(c =>
-            {
+            builder.CustomUi.Ribbon.Tabs(c => {
                 c.AddTab("Internal").SetId("tab1")
-                    .Groups(g =>
-                    {
+                    .Groups(g => {
                         g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                            .Items(i =>
-                            {
+                            .Items(i => {
                                 i.AddGallery("Colors").SetId("ColorsSelection")
                                     .ShowLabel().NormalSize().NoImage().ShowItemLabel()
                                     .HideItemImage()
-                                    .AddItems(o =>
-                                    {
+                                    .AddItems(o => {
                                         o.AddItem("Green").SetId("greenColor");
                                         o.AddItem("Red").SetId("redColor").NoImage();
                                         o.AddItem("Blue").SetId("blueColor").NoImage();
-                                    }).AddButtons(o=>
+                                    }).AddButtons(o =>
                                         o.AddButton("Extra Colors").SetId("ExtraColors")
-                                        .ImageMso("HappyFace") .ShowLabel()
+                                            .ImageMso("HappyFace").ShowLabel()
                                     ).Supertip("Color Picking");
-
                             });
 
                         g.AddGroup("Units Settings").SetId("UnitsSettingsGroup")
-                            .Items(i =>
-                            {
+                            .Items(i => {
                                 i.AddGallery("Unit To:").SetId("centimeter2Unit")
                                     .ShowLabel().NormalSize().NoImage().ShowItemLabel().HideItemImage()
                                     .DynamicItems().Supertip("Centimeter Conversion")
                                     .Supertip("Convert centimeters to others units");
                             });
                     });
-
             });
 
 
-            // Act
-            var str = builder.GetXmlString();
-
-            // Assert
-            Assert.AreEqual(expected, str);
+            AssertXml(expected, builder);
         }
 
         [Test]
-        public void GroupWithMenu()
-        {
+        public void GroupWithMenu() {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithMenu.xml").ToString();
+            var expected = "Sample/GroupWithMenu.xml";
 
-            builder.CustomUi.Ribbon.Tabs(c =>
-            {
+            builder.CustomUi.Ribbon.Tabs(c => {
                 c.AddTab("Internal").SetId("tab1")
-                    .Groups(g =>
-                    {
+                    .Groups(g => {
                         g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                            .Items(i =>
-                            {
+                            .Items(i => {
                                 i.AddMenu("Options").SetId("optionMenu")
                                     .ShowLabel().NoImage().LargeSize().ItemLargeSize()
-                                    .AddItems(l =>
-                                    {
+                                    .AddItems(l => {
                                         l.AddCheckbox("Option 1").SetId("optionsOne")
                                             .Screentip("CheckBox Option");
                                         l.AddButton("Option 2")
@@ -440,8 +362,7 @@ namespace AddinX.Ribbon.UnitTest
                                         l.AddGallery("Colors").SetId("ColorsSelection")
                                             .ShowLabel().NoImage().ShowItemLabel()
                                             .HideItemImage()
-                                            .AddItems(o =>
-                                            {
+                                            .AddItems(o => {
                                                 o.AddItem("Green").SetId("greenColor");
                                                 o.AddItem("Red").SetId("redColor").NoImage();
                                                 o.AddItem("Blue").SetId("blueColor").NoImage();
@@ -450,51 +371,33 @@ namespace AddinX.Ribbon.UnitTest
                                                     .NoImage().ShowLabel()
                                             ).Supertip("Color Picking");
                                     });
-
                             });
                     });
-
             });
 
-            // Act
-            var str = builder.GetXmlString();
-
-            // Assert
-            Assert.AreEqual(expected, str);
-
-            Assert.IsTrue(ValidateHelper.Validate(str));
-        }
-    }
-
-    public class ValidateHelper {
-
-        public static bool Validate(string xmlStr) {
-            return true;
+            AssertXml(expected, builder);
         }
 
-        public static bool Validate2010(string xmlStr) {
-            return true;
-        }
-
-        public static bool Validate2007(string xmlStr) {
-            return true;
-        }
     }
 
     public class XmlValidateTest {
         public const string NamespaceCustomUI2010 = "http://schemas.microsoft.com/office/2009/07/customui";
         public const string NamespaceCustomUI2007 = "http://schemas.microsoft.com/office/2006/01/customui";
 
+        private string GetFullPath(string path) {
+            var basePath = typeof(FluentRibbonBuilderTest).Assembly.Location;
+            return Path.Combine(Path.GetDirectoryName(basePath), path);
+        }
 
         private XmlSchema GetSchema2007() {
-            using (var reader = File.OpenRead("Schemas\\CustomUI_2006.xsd")) {
+            using (var reader = File.OpenRead(GetFullPath("Schemas\\CustomUI_2006.xsd"))) {
                 return XmlSchema.Read(reader, (s, e) => {
                     Console.WriteLine(e);
                 });
             }
         }
         private XmlSchema GetSchema2010() {
-            using (var reader = File.OpenRead("Schemas\\CustomUI14.xsd")) {
+            using (var reader = File.OpenRead(GetFullPath("Schemas\\CustomUI14.xsd"))) {
                 return XmlSchema.Read(reader, (s, e) => {
                     Console.WriteLine(e);
                 });

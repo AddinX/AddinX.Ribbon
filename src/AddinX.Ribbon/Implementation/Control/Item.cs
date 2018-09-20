@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control.Item;
 
 namespace AddinX.Ribbon.Implementation.Control {
@@ -9,9 +10,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _supertip;
         private string _screentip;
 
-        public Item() {
-            ElementName = "item";
-            Id = new ElementId();
+        public Item(ICallbackRigister register) : base(register, "item") {
             _imageVisible = false;
         }
 
@@ -40,35 +39,35 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        public IItemImage SetId(string name) {
+        public IItem SetId(string name) {
             Id.SetId(name);
             return this;
         }
 
-        public IItemExtra ImageMso(string name) {
-            _imageVisible = true;
+        public IItem ImageMso(string name) {
+            _imageVisible = !string.IsNullOrEmpty(name);
             _imageMso = name;
             return this;
         }
 
-        public IItemExtra ImagePath(string name) {
-            _imageVisible = true;
+        public IItem ImagePath(string name) {
+            _imageVisible = !string.IsNullOrEmpty(name);
             _imagePath = name;
             return this;
         }
 
-        public IItemExtra NoImage() {
+        public IItem NoImage() {
             _imageVisible = false;
             return this;
         }
 
-        public IItemExtra Supertip(string supertip) {
-            this._supertip = supertip;
+        public IItem Supertip(string supertip) {
+            _supertip = supertip;
             return this;
         }
 
-        public IItemExtra Screentip(string screentip) {
-            this._screentip = screentip;
+        public IItem Screentip(string screentip) {
+            _screentip = screentip;
             return this;
         }
     }

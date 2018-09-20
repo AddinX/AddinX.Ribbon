@@ -1,5 +1,7 @@
 using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Control.GalleryUnsize;
 using AddinX.Ribbon.Contract.Control.Item;
 using AddinX.Ribbon.Implementation.Ribbon;
@@ -24,11 +26,9 @@ namespace AddinX.Ribbon.Implementation.Control {
         private int _cols;
         private readonly IGalleryUnsizeControls _controls;
 
-        public GalleryUnsize() {
-            _data = new Items();
-            ElementName = "gallery";
-            Id = new ElementId();
-            _controls = new Controls();
+        public GalleryUnsize(ICallbackRigister register) : base(register, "gallery") {
+            _data = new Items(register);
+            _controls = new Controls(register);
             _imageVisible = false;
             _gallerySize = 7;
             _itemHeight = 0;
@@ -109,120 +109,121 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        public IGalleryUnsizeExtra SizeString(int size) {
+        public IGalleryUnsize SizeString(int size) {
             _gallerySize = size;
             return this;
         }
 
-        public IGalleryUnsizeExtra ItemHeight(int height) {
+        public IGalleryUnsize ItemHeight(int height) {
             _itemHeight = height;
             return this;
         }
 
-        public IGalleryUnsizeExtra ItemWidth(int width) {
+        public IGalleryUnsize ItemWidth(int width) {
             _itemWidth = width;
             return this;
         }
 
-        public IGalleryUnsizeExtra NumberRows(int rows) {
-            this._rows = rows;
+        public IGalleryUnsize NumberRows(int rows) {
+            _rows = rows;
             return this;
         }
 
-        public IGalleryUnsizeExtra NumberColumns(int cols) {
-            this._cols = cols;
+        public IGalleryUnsize NumberColumns(int cols) {
+            _cols = cols;
             return this;
         }
 
-        public IGalleryUnsizeExtra Supertip(string supertip) {
-            this._supertip = supertip;
+        public IGalleryUnsize Supertip(string supertip) {
+            _supertip = supertip;
             return this;
         }
 
-        public IGalleryUnsizeExtra Keytip(string keytip) {
-            this._keytip = keytip;
+        public IGalleryUnsize Keytip(string keytip) {
+            _keytip = keytip;
             return this;
         }
 
-        public IGalleryUnsizeExtra Screentip(string screentip) {
-            this._screentip = screentip;
+        public IGalleryUnsize Screentip(string screentip) {
+            _screentip = screentip;
             return this;
         }
 
-        public IGalleryUnsizeLabel SetId(string name) {
+        public IGalleryUnsize SetId(string name) {
             Id.SetId(name);
             return this;
         }
 
-        public IGalleryUnsizeLabel SetIdMso(string name) {
+        public IGalleryUnsize SetIdMso(string name) {
             Id.SetMicrosoftId(name);
             return this;
         }
 
-        public IGalleryUnsizeLabel SetIdQ(string ns, string name) {
+        public IGalleryUnsize SetIdQ(string ns, string name) {
             Id.SetNamespaceId(ns, name);
             return this;
         }
 
-        public IGalleryUnsizeItemLabel ImageMso(string name) {
+        public IGalleryUnsize ImageMso(string name) {
+            _imageVisible = !string.IsNullOrEmpty(name);
             _imageMso = name;
             return this;
         }
 
-        public IGalleryUnsizeItemLabel ImagePath(string name) {
+        public IGalleryUnsize ImagePath(string name) {
             _imageVisible = true;
             _imagePath = name;
             return this;
         }
 
-        public IGalleryUnsizeItemLabel NoImage() {
+        public IGalleryUnsize NoImage() {
             _imageVisible = true;
             _imageVisible = false;
             return this;
         }
 
-        public IGalleryUnsizeItems ShowItemImage() {
+        public IGalleryUnsize ShowItemImage() {
             _showItemImage = true;
             return this;
         }
 
-        public IGalleryUnsizeItems HideItemImage() {
+        public IGalleryUnsize HideItemImage() {
             _showItemImage = false;
             return this;
         }
 
-        public IGalleryUnsizeItemImage ShowItemLabel() {
+        public IGalleryUnsize ShowItemLabel() {
             _showItemLabel = true;
             return this;
         }
 
-        public IGalleryUnsizeItemImage HideItemLabel() {
+        public IGalleryUnsize HideItemLabel() {
             _showItemLabel = false;
             return this;
         }
 
-        public IGalleryUnsizeImage ShowLabel() {
+        public IGalleryUnsize ShowLabel() {
             _showLabel = true;
             return this;
         }
 
-        public IGalleryUnsizeImage HideLabel() {
+        public IGalleryUnsize HideLabel() {
             _showLabel = false;
             return this;
         }
 
-        public IGalleryUnsizeExtra DynamicItems() {
+        public IGalleryUnsize DynamicItems() {
             _dynamicItemsLoading = true;
             return this;
         }
 
-        public IGalleryUnsizeExtra AddItems(Action<IItems> items) {
+        public IGalleryUnsize AddItems(Action<IItems> items) {
             _dynamicItemsLoading = false;
             items.Invoke(_data);
             return this;
         }
 
-        public IGalleryUnsizeExtra AddButtons(Action<IGalleryUnsizeControls> items) {
+        public IRibbonGalleryExtra<IGalleryUnsize> AddButtons(Action<IGalleryUnsizeControls> items) {
             items.Invoke(_controls);
             return this;
         }

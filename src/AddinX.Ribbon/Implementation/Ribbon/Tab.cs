@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Ribbon.Group;
 using AddinX.Ribbon.Contract.Ribbon.Tab;
@@ -12,14 +13,14 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         private IElementId _id;
         private string _keytip;
 
-        public Tab() {
-            ElementName = "tab";
-            _items = new Groups();
+        public Tab(ICallbackRigister register) : base("tab"){
             _id = new ElementId();
+            _items = new Groups(register);
+            
         }
 
         protected internal ITab SetLabel(string label) {
-            this._label = label;
+            _label = label;
             return this;
         }
 
@@ -68,7 +69,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         }
 
         public void Keytip(string keytip) {
-            this._keytip = keytip;
+            _keytip = keytip;
         }
     }
 }

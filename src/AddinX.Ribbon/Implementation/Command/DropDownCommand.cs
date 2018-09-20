@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
@@ -17,14 +18,14 @@ namespace AddinX.Ribbon.Implementation.Command {
         public Func<int> SelectedItemIndex { get; private set; }
 
         public DropDownCommand() {
-            IsVisibleField = () => true;
-            IsEnabledField = () => true;
-            ItemCount = () => 0;
-            ItemScreentip = () => null;
-            ItemSupertip = () => null;
-            ItemLabel = () => null;
-            ItemImage = () => null;
-            ItemId = () => null;
+            //IsVisibleField = () => true;
+            //IsEnabledField = () => true;
+            //ItemCount = () => 0;
+            //ItemScreentip = () => null;
+            //ItemSupertip = () => null;
+            //ItemLabel = () => null;
+            //ItemImage = () => null;
+            //ItemId = () => null;
         }
 
         public IDropDownCommand IsVisible(Func<bool> condition) {
@@ -76,5 +77,27 @@ namespace AddinX.Ribbon.Implementation.Command {
             ItemImage = itemsImage;
             return this;
         }
+
+        #region Implementation of ICommand
+
+        /// <summary>
+        /// 写入回调Xml属性
+        /// </summary>
+        /// <param name="element"></param>
+        public void WriteCallbackXml(XElement element) {
+            element.AddCallbackAttribute("onAction",OnActionField);
+            element.AddCallbackAttribute("getEnabled", IsEnabledField);
+            element.AddCallbackAttribute("getVisible", IsVisibleField);
+
+            element.AddCallbackAttribute("getItemCount", ItemCount);
+            element.AddCallbackAttribute("getItemID", "GetItemId", ItemId);
+            element.AddCallbackAttribute("getItemImage", ItemImage);
+            element.AddCallbackAttribute("getItemLabel", ItemLabel);
+            element.AddCallbackAttribute("getItemScreentip", ItemScreentip);
+            element.AddCallbackAttribute("getItemSupertip", ItemSupertip);
+            element.AddCallbackAttribute("getSelectedItemIndex",SelectedItemIndex);
+        }
+
+        #endregion
     }
 }

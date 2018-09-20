@@ -1,13 +1,14 @@
 using System;
+using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
     class CheckBoxCommand : ICheckBoxCommand, IVisibleField, IEnabledField, IPressedField, IActionPressedField {
         public CheckBoxCommand() {
-            IsVisibleField = () => true;
-            IsEnabledField = () => true;
-            PressedField = () => false;
+            //IsVisibleField = () => true;
+            //IsEnabledField = () => true;
+            //PressedField = () => false;
         }
 
         public ICheckBoxCommand IsVisible(Func<bool> condition) {
@@ -34,5 +35,12 @@ namespace AddinX.Ribbon.Implementation.Command {
         public Func<bool> IsEnabledField { get; private set; }
         public Func<bool> PressedField { get; private set; }
         public Action<bool> OnActionField { get; private set; }
+
+        public void WriteCallbackXml(XElement element) {
+            element.AddCallbackAttribute("onAction",OnActionField);
+            element.AddCallbackAttribute("getPressed",PressedField);
+            element.AddCallbackAttribute("getVisible",IsVisibleField);
+            element.AddCallbackAttribute("getEnabled",IsEnabledField);
+        }
     }
 }

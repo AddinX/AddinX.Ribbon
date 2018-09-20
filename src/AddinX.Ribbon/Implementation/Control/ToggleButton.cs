@@ -1,6 +1,10 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.ToggleButton;
 using AddinX.Ribbon.Contract.Enums;
+using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class ToggleButton : Control, IToggleButton {
@@ -14,9 +18,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _screentip;
         private string _keytip;
 
-        public ToggleButton() {
-            ElementName = "toggleButton";
-            Id = new ElementId();
+        public ToggleButton(ICallbackRigister register) : base(register, "toggleButton") {
             _imageVisible = false;
             _size = ControlSize.normal;
             _showLabel = true;
@@ -76,13 +78,13 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IToggleButton ImageMso(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);
             _imageMso = name;
             return this;
         }
 
         public IToggleButton ImagePath(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);
             _imagePath = name;
             return this;
         }
@@ -113,23 +115,32 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IToggleButton Description(string description) {
-            this._description = description;
+            _description = description;
             return this;
         }
 
         public IToggleButton Supertip(string supertip) {
-            this._supertip = supertip;
+            _supertip = supertip;
             return this;
         }
 
         public IToggleButton Keytip(string keytip) {
-            this._keytip = keytip;
+            _keytip = keytip;
             return this;
         }
 
         public IToggleButton Screentip(string screentip) {
-            this._screentip = screentip;
+            _screentip = screentip;
             return this;
         }
+
+        #region Implementation of IRibbonCallback<out IToggleButton,out IToggleButtonCommand>
+
+        public IToggleButton Callback(Action<IToggleButtonCommand> builder) {
+            builder(GetCommand<ToggleButtonCommand>());
+            return this;
+        }
+
+        #endregion
     }
 }

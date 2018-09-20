@@ -1,5 +1,6 @@
 using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Contract.Ribbon.Tab;
@@ -11,10 +12,9 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         private readonly ITabs _tabs;
         private readonly IElementId _id;
 
-        public TabSet() {
-            ElementName = "tabSet";
+        public TabSet(ICallbackRigister register) :base("tabSet") {
             _id = new ElementId();
-            _tabs = new TabSetTabs();
+            _tabs = new TabSetTabs(register);
         }
 
         protected internal override XElement ToXml(XNamespace ns) {

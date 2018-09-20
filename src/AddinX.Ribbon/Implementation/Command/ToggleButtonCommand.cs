@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
@@ -13,9 +14,9 @@ namespace AddinX.Ribbon.Implementation.Command {
         public Func<bool> PressedField { get; private set; }
 
         public ToggleButtonCommand() {
-            IsVisibleField = () => true;
-            IsEnabledField = () => true;
-            PressedField = () => false;
+            //IsVisibleField = () => true;
+            //IsEnabledField = () => true;
+            //PressedField = () => false;
         }
 
         public IToggleButtonCommand Action(Action<bool> act) {
@@ -37,5 +38,20 @@ namespace AddinX.Ribbon.Implementation.Command {
             PressedField = defaultValue;
             return this;
         }
+
+        #region Implementation of ICommand
+
+        /// <summary>
+        /// 写入回调Xml属性
+        /// </summary>
+        /// <param name="element"></param>
+        public void WriteCallbackXml(XElement element) {
+            element.AddCallbackAttribute("onAction", OnActionField);
+            element.AddCallbackAttribute("getPressed",PressedField);
+            element.AddCallbackAttribute("getEnabled", IsEnabledField);
+            element.AddCallbackAttribute("getVisible", IsVisibleField);
+        }
+
+        #endregion
     }
 }

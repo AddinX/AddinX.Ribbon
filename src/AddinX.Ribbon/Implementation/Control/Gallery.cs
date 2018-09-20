@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Control.Gallery;
 using AddinX.Ribbon.Contract.Control.Item;
 using AddinX.Ribbon.Contract.Enums;
+using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
@@ -26,12 +30,10 @@ namespace AddinX.Ribbon.Implementation.Control {
         private int _cols;
         private readonly IGalleryControls _controls;
 
-        public Gallery() {
-            _data = new Items();
-            ElementName = "gallery";
+        public Gallery(ICallbackRigister register) : base(register, "gallery") {
+            _data = new Items(register);
             _size = ControlSize.normal;
-            Id = new ElementId();
-            _controls = new Controls();
+            _controls = new Controls(register);
             _imageVisible = false;
             _gallerySize = 7;
             _itemHeight = 0;
@@ -109,132 +111,141 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        public IGalleryExtra SizeString(int size) {
+        public IGallery SizeString(int size) {
             _gallerySize = size;
             return this;
         }
 
-        public IGalleryExtra ItemHeight(int height) {
+        public IGallery ItemHeight(int height) {
             _itemHeight = height;
             return this;
         }
 
-        public IGalleryExtra ItemWidth(int width) {
+        public IGallery ItemWidth(int width) {
             _itemWidth = width;
             return this;
         }
 
-        public IGalleryExtra NumberRows(int rows) {
-            this._rows = rows;
+        public IGallery NumberRows(int rows) {
+            _rows = rows;
             return this;
         }
 
-        public IGalleryExtra NumberColumns(int cols) {
-            this._cols = cols;
+        public IGallery NumberColumns(int cols) {
+            _cols = cols;
             return this;
         }
 
-        public IGalleryExtra Supertip(string supertip) {
-            this._supertip = supertip;
+        public IGallery Supertip(string supertip) {
+            _supertip = supertip;
             return this;
         }
 
-        public IGalleryExtra Keytip(string keytip) {
-            this._keytip = keytip;
+        public IGallery Keytip(string keytip) {
+            _keytip = keytip;
             return this;
         }
 
-        public IGalleryExtra Screentip(string screentip) {
-            this._screentip = screentip;
+        public IGallery Screentip(string screentip) {
+            _screentip = screentip;
             return this;
         }
 
-        public IGalleryLabel SetId(string name) {
+        public IGallery SetId(string name) {
             Id.SetId(name);
             return this;
         }
 
-        public IGalleryLabel SetIdMso(string name) {
+        public IGallery SetIdMso(string name) {
             Id.SetMicrosoftId(name);
             return this;
         }
 
-        public IGalleryLabel SetIdQ(string ns, string name) {
+        public IGallery SetIdQ(string ns, string name) {
             Id.SetNamespaceId(ns, name);
             return this;
         }
 
-        public IGalleryItemLabel ImageMso(string name) {
-            _imageVisible = true;
+        public IGallery ImageMso(string name) {
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imageMso = name;
             return this;
         }
 
-        public IGalleryItemLabel ImagePath(string name) {
-            _imageVisible = true;
+        public IGallery ImagePath(string name) {
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imagePath = name;
             return this;
         }
 
-        public IGalleryItemLabel NoImage() {
+        public IGallery NoImage() {
             _imageVisible = false;
             return this;
         }
 
-        public IGalleryItems ShowItemImage() {
+        public IGallery ShowItemImage() {
             _showItemImage = true;
             return this;
         }
 
-        public IGalleryItems HideItemImage() {
+        public IGallery HideItemImage() {
             _showItemImage = false;
             return this;
         }
 
-        public IGalleryItemImage ShowItemLabel() {
+        public IGallery ShowItemLabel() {
             _showItemLabel = true;
             return this;
         }
 
-        public IGalleryItemImage HideItemLabel() {
+        public IGallery HideItemLabel() {
             _showItemLabel = false;
             return this;
         }
 
-        public IGallerySize ShowLabel() {
+        public IGallery ShowLabel() {
             _showLabel = true;
             return this;
         }
 
-        public IGallerySize HideLabel() {
+        public IGallery HideLabel() {
             _showLabel = false;
             return this;
         }
 
-        public IGalleryExtra DynamicItems() {
+        public IGallery DynamicItems() {
             _dynamicItemsLoading = true;
             return this;
         }
 
-        public IGalleryImage LargeSize() {
+        public IGallery LargeSize() {
             _size = ControlSize.large;
             return this;
         }
 
-        public IGalleryImage NormalSize() {
+        public IGallery NormalSize() {
             _size = ControlSize.normal;
             return this;
         }
 
-        public IGalleryExtra AddItems(Action<IItems> items) {
+        public IGallery AddItems(Action<IItems> items) {
             _dynamicItemsLoading = false;
             items.Invoke(_data);
             return this;
         }
 
-        public IGalleryExtra AddButtons(Action<IGalleryControls> items) {
+        public IRibbonGalleryExtra<IGallery> AddButtons(Action<IGalleryControls> items) {
             items.Invoke(_controls);
             return this;
         }
+
+        #region Implementation of IRibbonCallback<out IGallery,out IGalleryCommand>
+
+        public IGallery Callback(Action<IGalleryCommand> builder) {
+            builder(GetCommand<GalleryCommand>());
+            return this;
+        }
+
+        #endregion
     }
 }

@@ -1,11 +1,13 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.Separator;
+using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class Separator : Control, ISeparator {
-        public Separator() {
-            ElementName = "separator";
-            Id = new ElementId();
+        public Separator(ICallbackRigister register) : base(register, "separator") {
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
@@ -25,5 +27,14 @@ namespace AddinX.Ribbon.Implementation.Control {
         public void SetIdQ(string ns, string name) {
             Id = new ElementId().SetNamespaceId(ns, name);
         }
+
+        #region Implementation of IRibbonCallback<out ISeparator,out ISeparatorCommand>
+
+        public ISeparator Callback(Action<ISeparatorCommand> builder) {
+            builder(GetCommand<SeparatorCommand>());
+            return this;
+        }
+
+        #endregion
     }
 }

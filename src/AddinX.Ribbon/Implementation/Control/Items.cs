@@ -1,18 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control.Item;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class Items : AddInList, IItems {
         private readonly IList<IItem> _items;
+        private readonly ICallbackRigister _register;
 
-        public Items() {
+        public Items(ICallbackRigister register) {
+            _register = register;
             _items = new List<IItem>();
         }
 
         public IItem AddItem(string label) {
-            var item = new Item();
+            var item = new Item(_register);
              item.SetLabel(label);
             _items.Add(item);
             return item;

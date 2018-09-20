@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Control.DropDown;
 using AddinX.Ribbon.Contract.Control.Item;
+using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
@@ -20,11 +24,9 @@ namespace AddinX.Ribbon.Implementation.Control {
         private readonly IItems _data;
         private readonly IDropDownControls _controls;
 
-        public DropDow() {
-            _data = new Items();
-            ElementName = "dropDown";
-            Id = new ElementId();
-            _controls = new Controls();
+        public DropDow(ICallbackRigister register) : base(register, "dropDown") {
+            _data = new Items(register);
+            _controls = new Controls(register);
             _imageVisible = false;
             _dropDownSize = 7;
         }
@@ -85,102 +87,111 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        public IDropDownExtra AddButtons(Action<IDropDownControls> items) {
+        public IRibbonExtra<IDropDown> AddButtons(Action<IDropDownControls> items) {
             items.Invoke(_controls);
             return this;
         }
 
-        public IDropDownExtra SizeString(int size) {
+        public IDropDown SizeString(int size) {
             _dropDownSize = size;
             return this;
         }
 
-        public IDropDownExtra Supertip(string supertip) {
-            this._supertip = supertip;
+        public IDropDown Supertip(string supertip) {
+            _supertip = supertip;
             return this;
         }
 
-        public IDropDownExtra Keytip(string keytip) {
-            this._keytip = keytip;
+        public IDropDown Keytip(string keytip) {
+            _keytip = keytip;
             return this;
         }
 
-        public IDropDownExtra Screentip(string screentip) {
-            this._screentip = screentip;
+        public IDropDown Screentip(string screentip) {
+            _screentip = screentip;
             return this;
         }
 
-        public IDropDownLabel SetId(string name) {
+        public IDropDown SetId(string name) {
             Id = new ElementId().SetId(name);
             return this;
         }
 
-        public IDropDownLabel SetIdMso(string name) {
+        public IDropDown SetIdMso(string name) {
             Id = new ElementId().SetMicrosoftId(name);
             return this;
         }
 
-        public IDropDownLabel SetIdQ(string ns, string name) {
+        public IDropDown SetIdQ(string ns, string name) {
             Id = new ElementId().SetNamespaceId(ns, name);
             return this;
         }
 
-        public IDropDownItemLabel ImageMso(string name) {
-            _imageVisible = true;
+        public IDropDown ImageMso(string name) {
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imageMso = name;
             return this;
         }
 
-        public IDropDownItemLabel ImagePath(string name) {
-            _imageVisible = true;
+        public IDropDown ImagePath(string name) {
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imagePath = name;
             return this;
         }
 
-        public IDropDownItemLabel NoImage() {
+        public IDropDown NoImage() {
             _imageVisible = false;
             return this;
         }
 
-        public IDropDownItems ShowItemImage() {
+        public IDropDown ShowItemImage() {
             _showItemImage = true;
             return this;
         }
 
-        public IDropDownItems HideItemImage() {
+        public IDropDown HideItemImage() {
             _showItemImage = false;
             return this;
         }
 
-        public IDropDownImage ShowLabel() {
+        public IDropDown ShowLabel() {
             _showLabel = true;
             return this;
         }
 
-        public IDropDownImage HideLabel() {
+        public IDropDown HideLabel() {
             _showLabel = false;
             return this;
         }
 
-        public IDropDownItemImage ShowItemLabel() {
+        public IDropDown ShowItemLabel() {
             _showItemLabel = true;
             return this;
         }
 
-        public IDropDownItemImage HideItemLabel() {
+        public IDropDown HideItemLabel() {
             _showItemLabel = false;
             return this;
         }
 
-        public IDropDownExtra DynamicItems() {
+        public IDropDown DynamicItems() {
             _dynamicItemsLoading = true;
             return this;
         }
 
-        public IDropDownExtra AddItems(Action<IItems> items) {
+        public IDropDown AddItems(Action<IItems> items) {
             _dynamicItemsLoading = false;
             items.Invoke(_data);
             return this;
         }
+
+        #region Implementation of IRibbonCallback<out IDropDown,out IDropDownCommand>
+
+        public IDropDown Callback(Action<IDropDownCommand> builder) {
+            builder(GetCommand<DropDownCommand>());
+            return this;
+        }
+
+        #endregion
     }
 }

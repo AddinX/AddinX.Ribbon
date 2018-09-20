@@ -1,5 +1,9 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.EditBox;
+using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class EditBox : Control, IEditBox {
@@ -12,9 +16,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private int _maxlength;
         private int _editBoxSize;
 
-        public EditBox() {
-            ElementName = "editBox";
-            Id = new ElementId();
+        public EditBox(ICallbackRigister register) : base(register, "editBox") {
             _imageVisible = false;
             _maxlength = 15;
             _editBoxSize = _maxlength;
@@ -71,13 +73,13 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IEditBox ImageMso(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imageMso = name;
             return this;
         }
 
         public IEditBox ImagePath(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imagePath = name;
             return this;
         }
@@ -88,28 +90,37 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IEditBox MaxLength(int maxLength) {
-            this._maxlength = maxLength;
+            _maxlength = maxLength;
             return this;
         }
 
         public IEditBox SizeString(int editBoxSize) {
-            this._editBoxSize = editBoxSize;
+            _editBoxSize = editBoxSize;
             return this;
         }
 
         public IEditBox Supertip(string supertip) {
-            this._supertip = supertip;
+            _supertip = supertip;
             return this;
         }
 
         public IEditBox Keytip(string keytip) {
-            this._keytip = keytip;
+            _keytip = keytip;
             return this;
         }
 
         public IEditBox Screentip(string screentip) {
-            this._screentip = screentip;
+            _screentip = screentip;
             return this;
         }
+
+        #region Implementation of IRibbonCallback<out IEditBox,out IEditBoxCommand>
+
+        public IEditBox Callback(Action<IEditBoxCommand> builder) {
+            builder(GetCommand<EditBoxCommand>());
+            return this;
+        }
+
+        #endregion
     }
 }

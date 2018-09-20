@@ -67,4 +67,16 @@
     <ProjectReference Include="..\..\src\AddinX.Ribbon\AddinX.Ribbon.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>C:\Program Files (x86)\Open XML SDK\V2.0\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Schemas\customui14.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

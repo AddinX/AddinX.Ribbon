@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control.MenuUnsize;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation.Ribbon;
@@ -18,30 +19,28 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         private readonly IMenuUnsizeControls _controls;
 
-        public MenuUnsize() {
-            ElementName = "menu";
-            Id = new ElementId();
-            _controls = new Controls();
+        public MenuUnsize(ICallbackRigister register) : base(register, "menu") {
+            _controls = new Controls(register);
             _imageVisible = false;
         }
 
         public IMenuUnsize Description(string description) {
-            this._description = description;
+            _description = description;
             return this;
         }
 
         public IMenuUnsize Supertip(string supertip) {
-            this._supertip = supertip;
+            _supertip = supertip;
             return this;
         }
 
         public IMenuUnsize Keytip(string keytip) {
-            this._keytip = keytip;
+            _keytip = keytip;
             return this;
         }
 
         public IMenuUnsize Screentip(string screentip) {
-            this._screentip = screentip;
+            _screentip = screentip;
             return this;
         }
 
@@ -61,13 +60,13 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IMenuUnsize ImageMso(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);
             _imageMso = name;
             return this;
         }
 
         public IMenuUnsize ImagePath(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);
             _imagePath = name;
             return this;
         }

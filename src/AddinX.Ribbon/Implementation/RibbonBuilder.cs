@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation {
-    public class RibbonBuilder : IRibbonBuilder {
+    public class RibbonBuilder : IRibbonBuilder,ICallbackRigister {
         private readonly XNamespace _ns;
         private const string CustomUiNamespace = "http://schemas.microsoft.com/office/2009/07/customui";
 
@@ -12,7 +15,7 @@ namespace AddinX.Ribbon.Implementation {
         }
 
         public RibbonBuilder(string customUiNamespace) {
-            CustomUi = new CustomUi(customUiNamespace);
+            CustomUi = new CustomUi(this, customUiNamespace);
             _ns = XNamespace.Get(customUiNamespace);
         }
 
@@ -23,15 +26,46 @@ namespace AddinX.Ribbon.Implementation {
             doc.Add(((AddInElement) CustomUi).ToXml(_ns));
             return doc.ToString();
         }
+
+        #region Implementation of ICallbackRigister
+
+        private readonly IDictionary<string, ICommand> _commands = new Dictionary<string, ICommand>();
+
+        /// <summary>
+        /// 注册命令
+        /// </summary>
+        /// <param name="elementId"></param>
+        /// <param name="command"></param>
+        public void Add(IElementId elementId, ICommand command) {
+            Console.WriteLine("Add Command {0} {1}",elementId,command.GetType());
+            _commands.Add(elementId.Id,command);
+        }
+
+        public ICommand Find(string id) {
+            return !_commands.Keys.Contains(id)
+                ? null
+                : _commands[id];
+        }
+
+        #endregion
     }
 
     internal static class RibbonXmlBuilderExtensions {
 
         public static void AddAttribute<T>(this XElement owner, XName attrName,T value,T defaultValue) {
-            if (object.Equals(value,defaultValue)) {
+            if (Equals(value,defaultValue)) {
                 return;
             }
             owner.Add(new XAttribute(attrName,value));
+        }
+
+        public static void AddImageAttribute(this XElement owner,bool imageVisible,string imagePath,string imageMso) {
+            if (imageVisible) {
+                owner.AddAttribute("image", imagePath);
+                owner.AddAttribute("imageMso", imageMso);
+            } else {
+                owner.AddAttribute("showImage", false);
+            }
         }
 
         public static void AddAttribute(this XElement owner, XName attrName, string value) {
@@ -48,6 +82,13 @@ namespace AddinX.Ribbon.Implementation {
             owner.Add(new XAttribute(attrName, value));
         }
 
+        public static void AddAttribute<T>(this XElement owner, XName attrName, T value) {
+            if (value == null || Equals(value ,default(T))) {
+                return;
+            }
+            owner.Add(new XAttribute(attrName, value));
+        }
+
         public static void AddAttribute(this XElement owner, XName attrName, string value, object condition) {
             if (condition == null) {
                 return;
@@ -59,33 +100,9 @@ namespace AddinX.Ribbon.Implementation {
             var callbackFuncName = Char.ToUpper(attrName[0]) + attrName.Substring(1);
             owner.AddAttribute(attrName,callbackFuncName,condition);
         }
-    }
 
-    internal static class RibbonCallback {
-        public const string OnAction = "onAction";
-
-        public const string OnActionPressed = "onActionPressed";
-
-        public const string OnChange = "onChange";
-        public const string OnActionDropDown = "onActionDropDown";
-        public const string GetEnabled = "getEnabled";
-        public const string GetVisible = "getVisible";
-        public const string GetPressed = "getPressed";
-        public const string GetText = "getText";
-
-        public const string GetItemImage = "getItemImage";
-        public const string GetItemCount = "getItemCount";
-        public const string GetItemId = "getItemId";
-
-        public const string GetItemLabel = "getItemLabel";
-
-        public const string GetItemScreentip = "getItemScreentip";
-
-        public const string GetItemSupertip = "getItemSupertip";
-
-        public const string GetLabel = "getLabel";
-
-        public const string SelectedItemIndex = "selectedItemIndex";
-
+        public static void AddCallbackAttribute(this XElement owner, string attrName, string callbackFuncName, object condition) {
+            owner.AddAttribute(attrName, callbackFuncName, condition);
+        }
     }
 }

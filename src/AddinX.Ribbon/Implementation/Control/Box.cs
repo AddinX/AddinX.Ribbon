@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.Box;
 using AddinX.Ribbon.Contract.Control.Gallery;
 using AddinX.Ribbon.Contract.Enums;
+using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
@@ -11,19 +14,12 @@ namespace AddinX.Ribbon.Implementation.Control {
         private readonly Controls _items;
         private BoxStyle _style;
 
-        public Box() {
-            _items = new Controls();
-            ElementName = "box";
-            Id = new ElementId();
+        public Box(ICallbackRigister register) : base(register, "box") {
+            _items = new Controls(register);
         }
 
         public IBox SetId(string name) {
             Id.SetId(name);
-            return this;
-        }
-
-        public IBox SetIdMso(string name) {
-           // throw new NotImplementedException();
             return this;
         }
 
@@ -43,24 +39,24 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IBox AddItems(Action<IBoxControls> items) {
-            items.Invoke(this._items);
+            items.Invoke(_items);
             return this;
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
             var element = base.ToXml(ns);
-            element.AddCallbackAttribute("getVisible",this.IsVisibleField);
+            //element.AddCallbackAttribute("getVisible",this.IsVisibleField);
             element.AddAttribute("boxStyle",_style);
             element.AddControls(_items, ns);
             return element;
         }
 
-        #region Implementation of IBoxCommand
 
-        public Func<bool> IsVisibleField { get; private set; }
+        #region Implementation of IRibbonCallback<out IBoxCommand>
 
-        public void IsVisible(Func<bool> condition) {
-            IsVisibleField = condition;
+        public IBox Callback(Action<IBoxCommand> builder) {
+            builder(GetCommand<BoxCommand>());
+            return this;
         }
 
         #endregion

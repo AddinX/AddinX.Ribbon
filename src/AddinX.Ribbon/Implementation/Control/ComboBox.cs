@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.ComboBox;
 using AddinX.Ribbon.Contract.Control.Item;
+using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class ComboBox : Control, IComboBox {
@@ -18,10 +21,8 @@ namespace AddinX.Ribbon.Implementation.Control {
         private bool _dynamicItemLoading;
         private readonly IItems _data;
 
-        public ComboBox() {
-            _data = new Items();
-            ElementName = "comboBox";
-            Id = new ElementId();
+        public ComboBox(ICallbackRigister register) : base(register, "comboBox") {
+            _data = new Items(register);
             _imageVisible = false;
             _maxLength = 7;
             _comboBoxSize = _maxLength;
@@ -43,13 +44,13 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IComboBox ImageMso(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imageMso = name;
             return this;
         }
 
         public IComboBox ImagePath(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imagePath = name;
             return this;
         }
@@ -80,32 +81,32 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IComboBox Supertip(string supertip) {
-            this._supertip = supertip;
+            _supertip = supertip;
             return this;
         }
 
         public IComboBox Keytip(string keytip) {
-            this._keytip = keytip;
+            _keytip = keytip;
             return this;
         }
 
         public IComboBox Screentip(string screentip) {
-            this._screentip = screentip;
+            _screentip = screentip;
             return this;
         }
 
         public IComboBox MaxLength(int maxLength) {
-            this._maxLength = maxLength;
+            _maxLength = maxLength;
             return this;
         }
 
         public IComboBox SizeString(int comboBoxSize) {
-            this._comboBoxSize = comboBoxSize;
+            _comboBoxSize = comboBoxSize;
             return this;
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
+            /*var tmpId = (ElementId) Id;
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
                 , new XAttribute("label", Label)
@@ -123,7 +124,14 @@ namespace AddinX.Ribbon.Implementation.Control {
                 , new XAttribute("onChange", "OnChange")
                 , new XAttribute("getText", "GetText")
                 , new XAttribute("tag", tmpId.Value)
-            );
+            );*/
+
+            var element = base.ToXml(ns);
+            element.AddImageAttribute(_imageVisible, _imagePath, _imageMso);
+            element.AddAttribute("maxLength", _maxLength);
+            element.AddAttribute("sizeString", new string('W', _comboBoxSize));
+            element.AddAttribute("showLabel", _showLabel);
+            element.AddAttribute("showItemImage", _showItemImage);
 
             if (_dynamicItemLoading) {
                 element.Add(new XAttribute("getItemCount", "GetItemCount")
@@ -139,17 +147,9 @@ namespace AddinX.Ribbon.Implementation.Control {
                 }
             }
 
-            if (!string.IsNullOrEmpty(_screentip)) {
-                element.Add(new XAttribute("screentip", _screentip));
-            }
-
-            if (!string.IsNullOrEmpty(_supertip)) {
-                element.Add(new XAttribute("supertip", _supertip));
-            }
-
-            if (!string.IsNullOrEmpty(_keytip)) {
-                element.Add(new XAttribute("keytip", _keytip));
-            }
+            element.AddAttribute("screentip", _screentip);
+            element.AddAttribute("supertip", _supertip);
+            element.AddAttribute("keytip", _keytip);
 
             return element;
         }
@@ -164,5 +164,14 @@ namespace AddinX.Ribbon.Implementation.Control {
             _dynamicItemLoading = true;
             return this;
         }
+
+        #region Implementation of IRibbonCallback<out IComboBox,out IComboBoxCommand>
+
+        public IComboBox Callback(Action<IComboBoxCommand> builder) {
+            builder(GetCommand<ComboBoxCommand>());
+            return this;
+        }
+
+        #endregion
     }
 }

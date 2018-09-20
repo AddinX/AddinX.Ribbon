@@ -1,11 +1,10 @@
 ﻿using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control.MenuSeparator;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class MenuSeparator : Control, IMenuSeparator {
-        public MenuSeparator() {
-            ElementName = "menuSeparator";
-            Id = new ElementId();
+        public MenuSeparator(ICallbackRigister register) : base(register, "menuSeparator") {
         }
 
         protected internal override XElement ToXml(XNamespace ns) {

@@ -1,19 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Ribbon.Tab;
 using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
     public class TabSetTabs : AddInList, ITabs {
         private readonly IList<ITab> _items;
+        private readonly ICallbackRigister _register;
 
-        public TabSetTabs() {
+        public TabSetTabs(ICallbackRigister register) {
+            _register = register;
             _items = new List<ITab>();
         }
 
-        public ITabId AddTab(string label) {
-            var tab = new Tab().SetLabel(label);
+        public ITab AddTab(string label) {
+            var tab = new Tab(_register).SetLabel(label);
             _items.Add(tab);
             return tab;
         }

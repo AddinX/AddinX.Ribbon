@@ -9,13 +9,13 @@ namespace AddinX.Ribbon.Implementation {
     public class CustomUi : AddInElement, ICustomUi {
         private readonly IDictionary<string, string> _privateNamespaces;
         private readonly string _defaultNamespace;
+
         public IRibbon Ribbon { get; }
 
-        public CustomUi(string defaultNamespace) {
-            this._defaultNamespace = defaultNamespace;
-            ElementName = "customUI";
+        public CustomUi(ICallbackRigister register,string defaultNamespace):base("customUI") {
+            _defaultNamespace = defaultNamespace;
             _privateNamespaces = new Dictionary<string, string>();
-            Ribbon = new Ribbon.Ribbon();
+            Ribbon = new Ribbon.Ribbon(register);
         }
 
         /// <summary>

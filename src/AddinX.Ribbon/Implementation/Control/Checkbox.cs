@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
-using AddinX.Ribbon.Contract.Command.Field;
 using AddinX.Ribbon.Contract.Control.CheckBox;
+using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class Checkbox : Control, ICheckbox {
@@ -11,9 +12,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _screentip;
         private string _keytip;
 
-        public Checkbox() {
-            ElementName = "checkBox";
-            Id = new ElementId();
+        public Checkbox(ICallbackRigister register) : base(register, "checkBox") {
         }
 
         public ICheckbox SetId(string name) {
@@ -32,81 +31,48 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public ICheckbox Description(string description) {
-            this._description = description;
+            _description = description;
             return this;
         }
 
         public ICheckbox Supertip(string supertip) {
-            this._supertip = supertip;
+            _supertip = supertip;
             return this;
         }
 
         public ICheckbox Keytip(string keytip) {
-            this._keytip = keytip;
+            _keytip = keytip;
             return this;
         }
 
         public ICheckbox Screentip(string screentip) {
-            this._screentip = screentip;
+            _screentip = screentip;
             return this;
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
-
             var element = base.ToXml(ns); //new XElement(ns + ElementName
-                //, new XAttribute(tmpId.Type.ToString(), tmpId.Value)
-                //, new XAttribute("label", Label)
-                //, new XAttribute("getEnabled", "GetEnabled")
-                //, new XAttribute("getVisible", "GetVisible")
-                //, new XAttribute("onAction", "OnActionPressed")
-                //, new XAttribute("getPressed", "GetPressed")
-                //, new XAttribute("tag", tmpId.Value)
-            //);
+                                          //, new XAttribute(tmpId.Type.ToString(), tmpId.Value)
+                                          //, new XAttribute("label", Label)
+                                          //, new XAttribute("getEnabled", "GetEnabled")
+                                          //, new XAttribute("getVisible", "GetVisible")
+                                          //, new XAttribute("onAction", "OnActionPressed")
+                                          //, new XAttribute("getPressed", "GetPressed")
+                                          //, new XAttribute("tag", tmpId.Value)
+                                          //);
 
-            if (!string.IsNullOrEmpty(_screentip)) {
-                element.Add(new XAttribute("screentip", _screentip));
-            }
-
-            if (!string.IsNullOrEmpty(_supertip)) {
-                element.Add(new XAttribute("supertip", _supertip));
-            }
-
-            if (!string.IsNullOrEmpty(_keytip)) {
-                element.Add(new XAttribute("keytip", _keytip));
-            }
-
-            if (!string.IsNullOrEmpty(_description)) {
-                element.Add(new XAttribute("description", _description));
-            }
+            element.AddAttribute("screentip", _screentip);
+            element.AddAttribute("supertip", _supertip);
+            element.AddAttribute("keytip", _keytip);
+            element.AddAttribute("description", _description);
 
             return element;
         }
 
-        #region Implementation of ICheckBoxCommand
+        #region Implementation of IRibbonCallback<out ICheckBoxCommand>
 
-        public ICheckBoxCommand OnAction(Action<bool> act) {
-            base.RegisteCallback("OnActionPressed", new CallbackActionField<Action<bool>>(act));
-            return this;
-        }
-
-        public ICheckBoxCommand IsVisible(Func<bool> condition) {
-            base.RegisteCallback("getVisible", new CallbackFuncField<Func<bool>>(condition));
-            return this;
-        }
-
-        public ICheckBoxCommand IsEnabled(Func<bool> condition) {
-            base.RegisteCallback("getEnabled", new CallbackFuncField<Func<bool>>(condition));
-            return this;
-        }
-
-        /// <summary>
-        /// determined whether the check-box is checked or not when the application is launched.
-        /// </summary>
-        /// <param name="defaultValue">a boolean value</param>
-        /// <returns>Fluent Builder</returns>
-        public ICheckBoxCommand Pressed(Func<bool> defaultValue) {
-            base.RegisteCallback("getPressed", new CallbackFuncField<Func<bool>>(defaultValue));
+        public ICheckbox Callback(Action<ICheckBoxCommand> builder) {
+            builder(GetCommand<CheckBoxCommand>());
             return this;
         }
 

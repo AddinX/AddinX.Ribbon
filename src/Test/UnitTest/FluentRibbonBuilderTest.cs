@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
@@ -8,9 +7,6 @@ using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation;
 using AddinX.Ribbon.Implementation.Control;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Office.CustomUI;
-using DocumentFormat.OpenXml.Validation;
 using NUnit.Framework;
 
 namespace AddinX.Ribbon.UnitTest
@@ -460,52 +456,6 @@ namespace AddinX.Ribbon.UnitTest
             Assert.AreEqual(expected, str);
 
             Assert.IsTrue(ValidateHelper.Validate(str));
-        }
-    }
-
-    public class ValidateHelper {
-
-        public static bool Validate(string xmlStr) {
-            var xml = XDocument.Parse(xmlStr);
-           var validator = new OpenXmlValidator(FileFormatVersions.Office2010);
-            var errors = validator.Validate(new DocumentFormat.OpenXml.Office2010.CustomUI.CustomUI(xmlStr));
-            if (errors != null && errors.Any()) {
-                foreach (var info in errors) {
-                    Console.WriteLine(info);
-                }
-            }
-
-            return !errors.Any();
-        }
-
-        public static bool Validate2010(string xmlStr) {
-            var xml = XDocument.Parse(xmlStr);
-            var validator = new OpenXmlValidator(FileFormatVersions.Office2010);
-            var errors = validator.Validate(new DocumentFormat.OpenXml.Office2010.CustomUI.CustomUI(xmlStr));
-            if (errors != null && errors.Any()) {
-                foreach (var info in errors) {
-                    Console.WriteLine(info);
-                }
-            }
-
-            return !errors.Any();
-        }
-
-        public static bool Validate2007(string xmlStr) {
-            var xml = XDocument.Parse(xmlStr);
-            var validator = new OpenXmlValidator(FileFormatVersions.Office2007);
-            var errors = validator.Validate(new DocumentFormat.OpenXml.Office.CustomUI.CustomUI(xmlStr));
-            if (errors != null && errors.Any()) {
-                foreach (var info in errors) {
-                    Console.WriteLine(info);
-                }
-            }
-
-            return !errors.Any();
-        }
-
-        private void CreateCustomUi() {
-            new CustomUI();
         }
     }
 

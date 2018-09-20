@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control.ButtonUnsize;
 
 namespace AddinX.Ribbon.Implementation.Control {
@@ -12,15 +13,14 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _keytip;
         private bool _showLabel;
 
-        public ButtonUnsize() {
-            ElementName = "button";
-            Id = new ElementId();
+        public ButtonUnsize(ICallbackRigister register) : base(register, "button") {
             _imageVisible = false;
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
-            var element = new XElement(ns + ElementName
+            //var tmpId = (ElementId) Id;
+            var element = base.ToXml(ns);
+            /*var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
                 , new XAttribute("showLabel", _showLabel)
                 , _imageVisible
@@ -32,27 +32,15 @@ namespace AddinX.Ribbon.Implementation.Control {
                 , new XAttribute("getVisible", "GetVisible")
                 , new XAttribute("onAction", "OnAction")
                 , new XAttribute("tag", tmpId.Value)
-            );
+            );*/
 
-            if (!string.IsNullOrEmpty(Label)) {
-                element.Add(new XAttribute("label", Label));
-            }
+                element.AddAttribute("showLabel", _showLabel);
+            element.AddImageAttribute(_imageVisible,_imagePath,_imageMso);
 
-            if (!string.IsNullOrEmpty(_screentip)) {
-                element.Add(new XAttribute("screentip", _screentip));
-            }
-
-            if (!string.IsNullOrEmpty(_supertip)) {
-                element.Add(new XAttribute("supertip", _supertip));
-            }
-
-            if (!string.IsNullOrEmpty(_keytip)) {
-                element.Add(new XAttribute("keytip", _keytip));
-            }
-
-            if (!string.IsNullOrEmpty(_description)) {
-                element.Add(new XAttribute("description", _description));
-            }
+            element.AddAttribute("screentip", _screentip);
+            element.AddAttribute("supertip", _supertip);
+            element.AddAttribute("keytip", _keytip);
+            element.AddAttribute("description", _description);
 
             return element;
         }
@@ -74,13 +62,13 @@ namespace AddinX.Ribbon.Implementation.Control {
 
 
         public IButtonUnsize ImageMso(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imageMso = name;
             return this;
         }
 
         public IButtonUnsize ImagePath(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imagePath = name;
             return this;
         }
@@ -91,22 +79,22 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IButtonUnsize Description(string description) {
-            this._description = description;
+            _description = description;
             return this;
         }
 
         public IButtonUnsize Keytip(string keytip) {
-            this._keytip = keytip;
+            _keytip = keytip;
             return this;
         }
 
         public IButtonUnsize Supertip(string supertip) {
-            this._supertip = supertip;
+            _supertip = supertip;
             return this;
         }
 
         public IButtonUnsize Screentip(string screentip) {
-            this._screentip = screentip;
+            _screentip = screentip;
             return this;
         }
 

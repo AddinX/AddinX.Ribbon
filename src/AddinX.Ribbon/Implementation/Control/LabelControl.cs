@@ -1,14 +1,16 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.Label;
+using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class LabelControl : Control, ILabelControl {
         private string _supertip;
         private string _screentip;
 
-        public LabelControl() {
-            ElementName = "labelControl";
-            Id = new ElementId();
+        public LabelControl(ICallbackRigister register) : base(register, "labelControl") {
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
@@ -49,17 +51,26 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public ILabelControl Supertip(string supertip) {
-            this._supertip = supertip;
+            _supertip = supertip;
             return this;
         }
 
         public ILabelControl Keytip(string keytip) {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public ILabelControl Screentip(string screentip) {
-            this._screentip = screentip;
+            _screentip = screentip;
             return this;
         }
+
+        #region Implementation of IRibbonCallback<out ILabelControl,out ILabelCommand>
+
+        public ILabelControl Callback(Action<ILabelCommand> builder) {
+            builder(GetCommand<LabelCommand>());
+            return this;
+        }
+
+        #endregion
     }
 }

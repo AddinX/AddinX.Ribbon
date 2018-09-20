@@ -1,8 +1,7 @@
 using System;
 using System.Xml.Linq;
-using System.Xml.Serialization;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
-using AddinX.Ribbon.Contract.Command.Field;
 using AddinX.Ribbon.Contract.Control.Button;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation.Command;
@@ -19,9 +18,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _keytip;
         private bool _showLabel;
 
-        public Button() {
-            ElementName = "button";
-            Id = new ElementId();
+        public Button(ICallbackRigister register) :base(register, "button") {
             _size = ControlSize.normal;
             _imageVisible = false;
             _showLabel = false;
@@ -40,16 +37,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             }
             element.AddAttribute("size", _size);
 
-            /*
-            element.AddCallbackAttribute(RibbonCallback.GetEnabled,GetEnabledField);
-            element.AddCallbackAttribute(RibbonCallback.GetVisible, GetVisibleField);
-            element.AddCallbackAttribute(RibbonCallback.OnAction,OnActionField);
-            */
-
-            if (!string.IsNullOrEmpty(_screentip)) {
-                element.AddAttribute("screentip", _screentip);
-            }
-
+            element.AddAttribute("screentip", _screentip);
             element.AddAttribute("supertip", _supertip);
             element.AddAttribute("keytip", _keytip);
             element.AddAttribute("description", _description);
@@ -73,13 +61,13 @@ namespace AddinX.Ribbon.Implementation.Control {
 
 
         public IButton ImageMso(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);
             _imageMso = name;
             return this;
         }
 
         public IButton ImagePath(string name) {
-            _imageVisible = true;
+            _imageVisible = !string.IsNullOrEmpty(name);;
             _imagePath = name;
             return this;
         }
@@ -90,22 +78,22 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IButton Description(string description) {
-            this._description = description;
+            _description = description;
             return this;
         }
 
         public IButton Keytip(string keytip) {
-            this._keytip = keytip;
+            _keytip = keytip;
             return this;
         }
 
         public IButton Supertip(string supertip) {
-            this._supertip = supertip;
+            _supertip = supertip;
             return this;
         }
 
         public IButton Screentip(string screentip) {
-            this._screentip = screentip;
+            _screentip = screentip;
             return this;
         }
 
@@ -129,21 +117,10 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        #region Implementation of IButtonCommand
+        #region Implementation of IRibbonCommands<out IButtonCommand>
 
-        
-        public IButton OnAction(Action act) {
-            base.RegisteCallback("OnAction",new CallbackActionField<Action>(act));
-            return this;
-        }
-
-        public IButton GetVisible(Func<bool> condition) {
-            this.RegisteCallback("GetVisible",new CallbackFuncField<Func<bool>>(condition));
-            return this;
-        }
-
-        public IButton GetEnabled(Func<bool> condition) {
-            this.RegisteCallback("GetEnabled", new CallbackFuncField<Func<bool>>(condition));
+        public IButton Callback(Action<IButtonCommand> builder) {
+            builder(GetCommand<ButtonCommand>());
             return this;
         }
 

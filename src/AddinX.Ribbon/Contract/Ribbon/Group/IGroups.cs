@@ -2,6 +2,6 @@
 {
     public interface IGroups
     {
-        IGroupId AddGroup(string label);
+        IGroup AddGroup(string label);
     }
 }

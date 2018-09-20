@@ -1,30 +1,25 @@
 ﻿using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Ribbon.Group;
+using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
-    public class Group : AddInElement, IGroup {
+    public class Group : Control.Control, IGroup {
         private IElementId _id;
         private readonly IGroupControls _controls;
         private IGroupDialogBox _boxLauncher;
 
-        private string _label;
         private string _supertip;
         private string _screentip;
         private string _keytip;
 
 
-        public Group() {
-            ElementName = "group";
-            _id = new ElementId();
-            _controls = new Controls();
-        }
-
-        protected internal Group SetLabel(string value) {
-            _label = value;
-            return this;
+        public Group(ICallbackRigister register) :base(register,"group") {
+            _controls = new Controls(register);
         }
 
         public IGroupExtra Items(Action<IGroupControls> value) {
@@ -36,11 +31,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         protected internal override XElement ToXml(XNamespace ns) {
             var tmpId = (ElementId) _id;
 
-            var element = new XElement(ns + ElementName
-                , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
-                , new XAttribute("label", _label)
-                , new XAttribute("getVisible", "GetVisible")
-            );
+            var element = base.ToXml(ns);
 
             element.AddControls((AddInList) _controls, ns);
 
@@ -80,24 +71,33 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         }
 
         public IGroupExtra Supertip(string supertip) {
-            this._supertip = supertip;
+            _supertip = supertip;
             return this;
         }
 
         public IGroupExtra Keytip(string keytip) {
-            this._keytip = keytip;
+            _keytip = keytip;
             return this;
         }
 
         public IGroupExtra Screentip(string screentip) {
-            this._screentip = screentip;
+            _screentip = screentip;
             return this;
         }
 
         public IGroupExtra DialogBoxLauncher(Action<IGroupDialogBox> dialogBox) {
-            _boxLauncher = new Controls();
+            _boxLauncher = new Controls(base.Register);
             dialogBox.Invoke(_boxLauncher);
             return this;
         }
+
+        #region Implementation of IRibbonCallback<out IGroup,out IGroupCommand>
+
+        public IGroup Callback(Action<IGroupCommand> builder) {
+            builder(base.GetCommand<GroupCommand>());
+            return this;
+        }
+
+        #endregion
     }
 }

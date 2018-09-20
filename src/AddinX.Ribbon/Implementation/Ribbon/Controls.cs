@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control.Box;
 using AddinX.Ribbon.Contract.Control.Button;
 using AddinX.Ribbon.Contract.Control.ButtonGroup;
@@ -28,9 +29,11 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         , IDropDownControls, IGalleryUnsizeControls, IMenuUnsizeControls,
         IGroupDialogBox, IButtonGroupControls, IBoxControls {
         private readonly IList<Control.Control> _items;
+        private ICallbackRigister _register;
 
-        public Controls() {
+        public Controls(ICallbackRigister register) {
             _items = new List<Control.Control>();
+            _register = register;
         }
 
         internal bool HasItems {
@@ -38,48 +41,48 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         }
 
         public IBox AddBox() {
-            var item = new Box();
+            var item = new Box(_register);
             _items.Add(item);
             return item;
         }
 
         public IButton AddButton(string label) {
-            var item = new Button();
+            var item = new Button(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IToggleButtonUnsize IButtonGroupControls.AddToggleButton(string label) {
-            var item = new ToggleButtonUnsize();
+            var item = new ToggleButtonUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IGalleryUnsize IMenuUnsizeControls.AddGallery(string label) {
-            var item = new GalleryUnsize();
+            var item = new GalleryUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IMenuUnsize IButtonGroupControls.AddMenu(string label) {
-            var item = new MenuUnsize();
+            var item = new MenuUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IMenuUnsize IMenuUnsizeControls.AddMenu(string label) {
-            var item = new MenuUnsize();
+            var item = new MenuUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IMenuUnsize IMenuControls.AddMenu(string label) {
-            var item = new MenuUnsize();
+            var item = new MenuUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
@@ -87,123 +90,123 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
 
 
         IToggleButtonUnsize IMenuUnsizeControls.AddToggleButton(string label) {
-            var item = new ToggleButtonUnsize();
+            var item = new ToggleButtonUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IGalleryUnsize IButtonGroupControls.AddGallery(string label) {
-            var item = new GalleryUnsize();
+            var item = new GalleryUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IButtonUnsize IMenuControls.AddButton(string label) {
-            var item = new ButtonUnsize();
+            var item = new ButtonUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IButtonUnsize IMenuUnsizeControls.AddButton(string label) {
-            var item = new ButtonUnsize();
+            var item = new ButtonUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         public ICheckbox AddCheckbox(string label) {
-            var item = new Checkbox();
+            var item = new Checkbox(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IButtonUnsize IButtonGroupControls.AddButton(string label) {
-            var item = new ButtonUnsize();
+            var item = new ButtonUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IToggleButtonUnsize IMenuControls.AddToggleButton(string label) {
-            var item = new ToggleButtonUnsize();
+            var item = new ToggleButtonUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IGalleryUnsize IMenuControls.AddGallery(string label) {
-            var item = new GalleryUnsize();
+            var item = new GalleryUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         public IEditBox AddEditbox(string label) {
-            var item = new EditBox();
+            var item = new EditBox(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         public ILabelControl AddLabelControl() {
-            var item = new LabelControl();
+            var item = new LabelControl(_register);
             _items.Add(item);
             return item;
         }
 
         public ISeparator AddSeparator() {
-            var item = new Separator();
+            var item = new Separator(_register);
             _items.Add(item);
             return item;
         }
 
         public IToggleButton AddToggleButton(string label) {
-            var item = new ToggleButton();
+            var item = new ToggleButton(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         public IComboBox AddComboBox(string label) {
-            var item = new ComboBox();
+            var item = new ComboBox(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         public IDropDown AddDropDown(string label) {
-            var item = new DropDow();
+            var item = new DropDow(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         public IGallery AddGallery(string label) {
-            var item = new Gallery();
+            var item = new Gallery(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         public IMenu AddMenu(string label) {
-            var item = new Menu();
+            var item = new Menu(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         public IButtonGroup AddButtonGroup() {
-            var item = new ButtonGroup();
+            var item = new ButtonGroup(_register);
             _items.Add(item);
             return item;
         }
 
         public IMenuSeparator AddSeparator(string title) {
-            var item = new MenuSeparator();
+            var item = new MenuSeparator(_register);
             item.SetLabel(title);
             _items.Add(item);
             return item;
@@ -217,28 +220,28 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
             return _items.Select(o => o.ToXml(ns)).ToArray();
         }
 
-        public IDialogBoxLauncherId AddDialogBoxLauncher() {
-            var item = new DialogBoxLauncher();
+        public IDialogBoxLauncher AddDialogBoxLauncher() {
+            var item = new DialogBoxLauncher(_register);
             _items.Add(item);
             return item;
         }
 
         IButtonUnsize IGalleryControls.AddButton(string label) {
-            var item = new ButtonUnsize();
+            var item = new ButtonUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IButtonUnsize IDropDownControls.AddButton(string label) {
-            var item = new ButtonUnsize();
+            var item = new ButtonUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
         }
 
         IButtonUnsize IGalleryUnsizeControls.AddButton(string label) {
-            var item = new ButtonUnsize();
+            var item = new ButtonUnsize(_register);
             item.SetLabel(label);
             _items.Add(item);
             return item;
