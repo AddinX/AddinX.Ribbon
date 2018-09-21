@@ -18,16 +18,18 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _keytip;
         private bool _showLabel;
 
-        public Button(ICallbackRigister register) :base(register, "button") {
+        public Button() :base("button") {
             _size = ControlSize.normal;
             _imageVisible = false;
             _showLabel = false;
         }
 
+        /*
         protected internal override XElement ToXml(XNamespace ns) {
            
             var element = base.ToXml(ns);
-                // new XElement(ns + ElementName
+            // new XElement(ns + ElementName
+            
             element.AddAttribute("showLabel", _showLabel,false);
             if (_imageVisible) {
                 element.AddAttribute("image", _imagePath);
@@ -41,79 +43,93 @@ namespace AddinX.Ribbon.Implementation.Control {
             element.AddAttribute("supertip", _supertip);
             element.AddAttribute("keytip", _keytip);
             element.AddAttribute("description", _description);
+            
             return element;
-        }
+        }*/
 
         public IButton SetIdMso(string name) {
-            Id = new ElementId().SetMicrosoftId(name);
+            Id.SetMicrosoftId(name);
             return this;
         }
 
         public IButton SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
 
         public IButton SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
 
         public IButton ImageMso(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);
-            _imageMso = name;
+            //_imageVisible = !string.IsNullOrEmpty(name);
+            //_imageMso = name;
+            this.ImageMsoImpl(name);
             return this;
         }
 
-        public IButton ImagePath(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);;
-            _imagePath = name;
+        public IButton ImagePath(string path) {
+            this.ImagePathImpl(path);
+            //_imageVisible = !string.IsNullOrEmpty(path);;
+            //_imagePath = path;
             return this;
         }
 
         public IButton NoImage() {
-            _imageVisible = false;
+            base.SetAttribute(tag_showImage,false);
+            base.RemoveAttribute(tag_image);
+            base.RemoveAttribute(tag_imageMso);
+            // _imageVisible = false;
             return this;
         }
 
         public IButton Description(string description) {
-            _description = description;
+            base.SetAttribute(tag_description,description);
+            //_description = description;
             return this;
         }
 
         public IButton Keytip(string keytip) {
-            _keytip = keytip;
+            base.SetAttribute(tag_keytip,keytip);
+            //_keytip = keytip;
             return this;
         }
 
         public IButton Supertip(string supertip) {
-            _supertip = supertip;
+            base.SetAttribute(tag_supertip,supertip);
+            //_supertip = supertip;
             return this;
         }
 
         public IButton Screentip(string screentip) {
-            _screentip = screentip;
+            this.ScreentipImpl(screentip);
+            //_screentip = screentip;
             return this;
         }
 
         public IButton LargeSize() {
-            _size = ControlSize.large;
+            base.SetAttribute(tag_size,ControlSize.large);
+            //_size = ControlSize.large;
             return this;
         }
 
         public IButton NormalSize() {
-            _size = ControlSize.normal;
+            base.SetAttribute(tag_size, ControlSize.normal);
+            //_size = ControlSize.normal;
             return this;
         }
 
         public IButton ShowLabel() {
-            _showLabel = true;
+            base.SetAttribute(tag_showLabel,true);
+            //_showLabel = true;
             return this;
         }
 
         public IButton HideLabel() {
-            _showLabel = false;
+            base.SetAttribute(tag_showLabel, false);
+            //_showLabel = false;
             return this;
         }
 

@@ -8,16 +8,25 @@ using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
     public class Tab : AddInElement, ITab {
-        private readonly IGroups _items;
+        private readonly Groups _groups;
         private string _label = "";
         private IElementId _id;
         private string _keytip;
 
-        public Tab(ICallbackRigister register) : base("tab"){
+        public Tab() : base("tab"){
             _id = new ElementId();
-            _items = new Groups(register);
+            _groups = new Groups();
             
         }
+
+        #region Overrides of AddInElement
+
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            _groups.SetRegister(register);
+        }
+
+        #endregion
 
         protected internal ITab SetLabel(string label) {
             _label = label;
@@ -41,7 +50,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
 
 
         public ITabExtra Groups(Action<IGroups> value) {
-            value.Invoke(_items);
+            value.Invoke(_groups);
             return this;
         }
 
@@ -56,13 +65,8 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
                 element.Add(new XAttribute("keytip", _keytip));
             }
 
-            if (_items is AddInList groups) {
-                var children = groups.ToXml(ns);
-                if (children != null) {
-                    foreach (var child in children) {
-                        element.Add(child);
-                    }
-                }
+            foreach (var child in _groups.ToXml(ns)) {
+                element.Add(child);
             }
 
             return element;

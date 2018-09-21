@@ -7,16 +7,22 @@ using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
     public class Tabs : AddInElement, ITabs {
-        private readonly IList<ITab> _items;
-        private readonly ICallbackRigister _register;
+        private readonly IList<Tab> _items;
 
-        public Tabs(ICallbackRigister register) :base("tabs") {
-            _register = register;
-            _items = new List<ITab>();
+        public Tabs() :base("tabs") {
+            _items = new List<Tab>();
+        }
+
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            foreach (var item in _items) {
+                item.SetRegister(register);
+            }
         }
 
         public ITab AddTab(string label) {
-            var tab = new Tab(_register).SetLabel(label);
+            var tab = new Tab();
+            tab.SetLabel(label);
             _items.Add(tab);
             return tab;
         }
@@ -27,7 +33,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
             }
 
             return new XElement(ns + ElementName
-                , _items.Select(tab => ((AddInElement) tab).ToXml(ns))
+                , _items.Select(tab => tab.ToXml(ns))
             );
         }
     }

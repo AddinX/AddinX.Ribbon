@@ -7,7 +7,7 @@ using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class Separator : Control, ISeparator {
-        public Separator(ICallbackRigister register) : base(register, "separator") {
+        public Separator(): base( "separator") {
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
@@ -21,11 +21,11 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public void SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
         }
 
         public void SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
         }
 
         #region Implementation of IRibbonCallback<out ISeparator,out ISeparatorCommand>

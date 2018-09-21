@@ -13,7 +13,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _screentip;
         private string _keytip;
 
-        public ToggleButtonUnsize(ICallbackRigister register) : base(register, "toggleButton") {
+        public ToggleButtonUnsize(): base( "toggleButton") {
             _imageVisible = false;
         }
 
@@ -55,17 +55,17 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IToggleButtonUnsize SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
         public IToggleButtonUnsize SetIdMso(string name) {
-            Id = new ElementId().SetMicrosoftId(name);
+            Id.SetMicrosoftId(name);
             return this;
         }
 
         public IToggleButtonUnsize SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
 
@@ -75,9 +75,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IToggleButtonUnsize ImagePath(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);
-            _imagePath = name;
+        public IToggleButtonUnsize ImagePath(string path) {
+            _imageVisible = !string.IsNullOrEmpty(path);
+            _imagePath = path;
             return this;
         }
 

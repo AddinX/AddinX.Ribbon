@@ -10,12 +10,12 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _supertip;
         private string _screentip;
 
-        public Item(ICallbackRigister register) : base(register, "item") {
+        public Item(): base( "item") {
             _imageVisible = false;
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
+            /*var tmpId = (ElementId) Id;
 
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
@@ -26,15 +26,12 @@ namespace AddinX.Ribbon.Implementation.Control {
                 element.Add(string.IsNullOrEmpty(_imageMso)
                     ? new XAttribute("image", _imagePath)
                     : new XAttribute("imageMso", _imageMso));
-            }
+            }*/
+            var element = base.ToXml(ns);
+            element.AddImageAttribute(_imageVisible,_imagePath,_imageMso);
 
-            if (!string.IsNullOrEmpty(_screentip)) {
-                element.Add(new XAttribute("screentip", _screentip));
-            }
-
-            if (!string.IsNullOrEmpty(_supertip)) {
-                element.Add(new XAttribute("supertip", _supertip));
-            }
+            element.AddAttribute("screentip", _screentip);
+            element.AddAttribute("supertip", _supertip);
 
             return element;
         }
@@ -50,9 +47,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IItem ImagePath(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);
-            _imagePath = name;
+        public IItem ImagePath(string path) {
+            _imageVisible = !string.IsNullOrEmpty(path);
+            _imagePath = path;
             return this;
         }
 

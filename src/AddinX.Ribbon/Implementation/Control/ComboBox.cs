@@ -19,27 +19,32 @@ namespace AddinX.Ribbon.Implementation.Control {
         private int _comboBoxSize;
         private int _maxLength;
         private bool _dynamicItemLoading;
-        private readonly IItems _data;
+        private readonly Items _data;
 
-        public ComboBox(ICallbackRigister register) : base(register, "comboBox") {
-            _data = new Items(register);
+        public ComboBox(): base( "comboBox") {
+            _data = new Items();
             _imageVisible = false;
             _maxLength = 7;
             _comboBoxSize = _maxLength;
         }
 
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            _data.SetRegister(register);
+        }
+
         public IComboBox SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
         public IComboBox SetIdMso(string name) {
-            Id = new ElementId().SetMicrosoftId(name);
+            Id.SetMicrosoftId(name);
             return this;
         }
 
         public IComboBox SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
 
@@ -49,9 +54,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IComboBox ImagePath(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);;
-            _imagePath = name;
+        public IComboBox ImagePath(string path) {
+            _imageVisible = !string.IsNullOrEmpty(path);;
+            _imagePath = path;
             return this;
         }
 
@@ -142,8 +147,8 @@ namespace AddinX.Ribbon.Implementation.Control {
                     , new XAttribute("getItemSupertip", "GetItemSupertip")
                 );
             } else {
-                if (((AddInList) _data)?.ToXml(ns) != null) {
-                    element.Add(((AddInList) _data).ToXml(ns));
+                if (_data?.ToXml(ns) != null) {
+                    element.Add(_data.ToXml(ns));
                 }
             }
 

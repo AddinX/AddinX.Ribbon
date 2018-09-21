@@ -12,10 +12,15 @@ namespace AddinX.Ribbon.Implementation {
 
         public IRibbon Ribbon { get; }
 
-        public CustomUi(ICallbackRigister register,string defaultNamespace):base("customUI") {
+        public CustomUi(string defaultNamespace):base("customUI") {
             _defaultNamespace = defaultNamespace;
             _privateNamespaces = new Dictionary<string, string>();
-            Ribbon = new Ribbon.Ribbon(register);
+            Ribbon = new Ribbon.Ribbon();
+        }
+
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            ((AddInElement)Ribbon).SetRegister(register);
         }
 
         /// <summary>

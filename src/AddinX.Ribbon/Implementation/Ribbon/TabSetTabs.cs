@@ -6,27 +6,20 @@ using AddinX.Ribbon.Contract.Ribbon.Tab;
 using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
-    public class TabSetTabs : AddInList, ITabs {
-        private readonly IList<ITab> _items;
-        private readonly ICallbackRigister _register;
+    public class TabSetTabs : AddInList<Tab>, ITabs {
 
-        public TabSetTabs(ICallbackRigister register) {
-            _register = register;
-            _items = new List<ITab>();
+        public TabSetTabs() {
         }
 
         public ITab AddTab(string label) {
-            var tab = new Tab(_register).SetLabel(label);
-            _items.Add(tab);
+            var tab = new Tab();
+                tab.SetLabel(label);
+            InnerList.Add(tab);
             return tab;
         }
 
-        protected internal override XElement[] ToXml(XNamespace ns) {
-            if (_items == null || !_items.Any()) {
-                return null;
-            }
-
-            return _items.Select(tab => ((AddInElement) tab).ToXml(ns)).ToArray();
+        protected internal override IEnumerable<XElement> ToXml(XNamespace ns) {
+            return InnerList.Select(tab => tab.ToXml(ns));
         }
     }
 }

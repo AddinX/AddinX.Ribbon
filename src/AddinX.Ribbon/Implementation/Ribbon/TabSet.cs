@@ -9,12 +9,17 @@ using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
     public class TabSet : AddInElement, ITabSet {
-        private readonly ITabs _tabs;
+        private readonly TabSetTabs _tabs;
         private readonly IElementId _id;
 
-        public TabSet(ICallbackRigister register) :base("tabSet") {
+        public TabSet() :base("tabSet") {
             _id = new ElementId();
-            _tabs = new TabSetTabs(register);
+            _tabs = new TabSetTabs();
+        }
+
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            _tabs.SetRegister(register);
         }
 
         protected internal override XElement ToXml(XNamespace ns) {

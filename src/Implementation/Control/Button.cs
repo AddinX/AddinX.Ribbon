@@ -37,7 +37,7 @@ namespace AddinX.Ribbon.Implementation.Control
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
                 , new XAttribute("label", Label)
-                , new XAttribute("showLabel", showLabel.ToString().ToLower())
+                , new XAttribute("showLabel", showLabel)
                 , imageVisible
                     ? string.IsNullOrEmpty(imageMso)
                         ? new XAttribute("image", imagePath)
@@ -92,15 +92,13 @@ namespace AddinX.Ribbon.Implementation.Control
         }
 
 
-        public IButtonLabel ImageMso(string name)
-        {
+        public IButtonLabel ImageMso(string name){
             imageVisible = true;
             imageMso = name;
             return this;
         }
 
-        public IButtonLabel ImagePath(string name)
-        {
+        public IButtonLabel ImagePath(string name){
             imageVisible = true;
             imagePath = name;
             return this;
@@ -112,8 +110,7 @@ namespace AddinX.Ribbon.Implementation.Control
             return this;
         }
 
-        public IButtonExtra Description(string description)
-        {
+        public IButtonExtra Description(string description){
             this.description = description;
             return this;
         }

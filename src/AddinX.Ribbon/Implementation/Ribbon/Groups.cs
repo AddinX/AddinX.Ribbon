@@ -6,29 +6,22 @@ using AddinX.Ribbon.Contract.Ribbon.Group;
 using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
-    public class Groups : AddInList, IGroups {
-        private readonly IList<IGroup> _groups;
-        private readonly ICallbackRigister _register;
+    public class Groups : AddInList<Group>, IGroups {
+        
+        public Groups() {
 
-        public Groups(ICallbackRigister register) {
-            _register = register;
-            _groups = new List<IGroup>();
         }
 
         public IGroup AddGroup(string label) {
-            var tab = new Group(_register);
+            var tab = new Group();
             tab.SetLabel(label);
-            _groups.Add(tab);
+            InnerList.Add(tab);
             return tab;
         }
 
-        protected internal override XElement[] ToXml(XNamespace ns) {
-            if (_groups == null || !_groups.Any()) {
-                return null;
-            }
-
-            return _groups.Select(
-                gp => ((AddInElement) gp).ToXml(ns)).ToArray();
+        protected internal override IEnumerable<XElement> ToXml(XNamespace ns) {
+            return InnerList.Select(
+                gp => gp.ToXml(ns)).ToArray();
         }
     }
 }

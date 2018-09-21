@@ -11,9 +11,13 @@ using NUnit.Framework;
 namespace AddinX.Ribbon.Tests {
     public class RibbonXmlTests {
 
-        private XmlSchema GetSchema2007() {
+        private string GetLocalPath(string path) {
             var basePath = typeof(RibbonXmlTests).Assembly.Location;
-            var path = Path.Combine(Path.GetDirectoryName(basePath), "Schemas\\CustomUI_2006.xsd");
+            return Path.Combine(Path.GetDirectoryName(basePath), path);
+        }
+
+        private XmlSchema GetSchema2007() {
+            var path = GetLocalPath("Schemas\\CustomUI_2006.xsd");
             Console.WriteLine("Load Schema " + path);
             using (var reader = File.OpenRead(path)) {
                 return XmlSchema.Read(reader, (s, e) => {
@@ -22,7 +26,7 @@ namespace AddinX.Ribbon.Tests {
             }
         }
         private XmlSchema GetSchema2010() {
-            var path = Path.GetFullPath("Schemas\\CustomUI14.xsd");
+            var path = GetLocalPath("Schemas\\CustomUI14.xsd");
             Console.WriteLine("Load Schema "+path);
             using (var reader = File.OpenRead(path)) {
                 return XmlSchema.Read(reader, (s, e) => {
@@ -33,50 +37,51 @@ namespace AddinX.Ribbon.Tests {
 
         [Test]
         public void TestSchema() {
-            var schema = GetSchema2007();
+            var schema = GetSchema2010(); //GetSchema2007();
             var schemaSet = new XmlSchemaSet();
             schemaSet.Add(schema);
             schemaSet.Compile();
 
             //WriteXml(schemaSet.GlobalElements[new XmlQualifiedName("customUI", "http://schemas.microsoft.com/office/2009/07/customui")]);
-            foreach (XmlSchemaObject gt in schemaSet.GlobalTypes.Values) {
-                //Console.WriteLine(gt);
-                   WriteXml(gt);
+            var ns = schema.Namespaces.ToArray()[0].Namespace;
+           var ctbutton = schemaSet.GlobalTypes[new XmlQualifiedName("CT_Button", ns)];
+
+            WriteAttribute(schemaSet, ctbutton);
+            return;
+
+            foreach (XmlSchemaObject typesValue in schemaSet.GlobalTypes.Values) {
+                WriteAttribute(schemaSet, typesValue);
+                Console.WriteLine();
+            }
+            
+        }
+
+        private void WriteAttribute(XmlSchemaSet schema, XmlSchemaObject target) {
+            if (target is XmlSchemaComplexType complex) {
+                Console.WriteLine("Complex " + complex.Name);
+                if (complex.Parent != null && complex.Parent.Parent!=null) {
+                    Console.WriteLine(" Parent " + complex.Parent);
+                    return;
+                }
+                int i = 1;
+                foreach (XmlSchemaAttribute item in complex.AttributeUses.Values) {
+                    Console.WriteLine($"\t{i++}:\t{item.Name}\t{GetAttribeType(schema,item.AttributeSchemaType)}\t{item.Use}\t{item.DefaultValue}");
+                }
             }
         }
 
-        private void WriteXml(XmlSchemaObject item) {
-            var typeName = item.GetType().Name;
-            switch (typeName) {
-                case nameof(XmlSchemaAnnotation):
-                    Console.WriteLine(item);
-                    break;
-                case nameof(XmlSchemaAttribute):
-                    WriteXml((XmlSchemaAttribute)item);
-                    break; 
-                case nameof(XmlSchemaAttributeGroup):
-                    Console.WriteLine("AttributeGroup " + ((XmlSchemaAttributeGroup) item).Name);
-                    break;
-                case nameof(XmlSchemaComplexType):
-                    WriteXml((XmlSchemaComplexType) item);
-                    break;
-                case nameof(XmlSchemaSimpleType):
-                    Console.WriteLine("SimpleType " + ((XmlSchemaSimpleType)item).Name);
-                    break; 
-                case nameof(XmlSchemaElement):
-                    WriteXml((XmlSchemaElement)item);
-                    break;
-                case nameof(XmlSchemaGroup):
-                    Console.WriteLine(((XmlSchemaGroup)item).Name);
-                    break;
-                case nameof(XmlSchemaNotation):
-                    Console.WriteLine(((XmlSchemaNotation)item).Name);
-                    break; 
+        private string GetAttribeType(XmlSchemaSet schema,XmlSchemaSimpleType simpleType) {
+            if (simpleType == null) {
+                return string.Empty;
+            }
+            switch (simpleType.TypeCode) {
+                case XmlTypeCode.NCName:
+                    return simpleType.QualifiedName.ToString(); //schema.GlobalTypes[simpleType.QualifiedName].ToString();
                 default:
-                    Console.WriteLine("unknown item " + item);
-                    break;
-                }
+                    return simpleType.TypeCode.ToString();
+            }
         }
+
 
         private void WriteXml(XmlSchemaAttribute attribute) {
             Console.Write("Attribute {0} ", attribute.Name);
@@ -86,6 +91,10 @@ namespace AddinX.Ribbon.Tests {
             var spaces = new string(' ', deep);
             Console.Write("{1}Element {0} ", element.Name,spaces);
             WriteXml(element.ElementSchemaType);
+        }
+
+        private void WriteXml(XmlSchemaType elementElementSchemaType) {
+            throw new NotImplementedException();
         }
 
         private int deep = 0;
@@ -109,6 +118,10 @@ namespace AddinX.Ribbon.Tests {
             } finally {
                 deep--;
             }
+        }
+
+        private void WriteXml(XmlSchemaObject elementElementSchemaType) {
+            throw new NotImplementedException();
         }
 
         private readonly PropertyInfo _localElementProperty = typeof(XmlSchemaComplexType)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
@@ -21,19 +22,25 @@ namespace AddinX.Ribbon.Implementation.Control {
         private int _dropDownSize;
         private bool _showItemLabel = true;
         private bool _dynamicItemsLoading;
-        private readonly IItems _data;
-        private readonly IDropDownControls _controls;
+        private readonly Items _data;
+        private readonly Controls _controls;
 
-        public DropDow(ICallbackRigister register) : base(register, "dropDown") {
-            _data = new Items(register);
-            _controls = new Controls(register);
+        public DropDow(): base( "dropDown") {
+            _data = new Items();
+            _controls = new Controls();
             _imageVisible = false;
             _dropDownSize = 7;
         }
 
-        protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            _data.SetRegister(register);
+            _controls.SetRegister(register);
+        }
 
+        protected internal override XElement ToXml(XNamespace ns) {
+            
+            /*
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
                 , new XAttribute("label", Label)
@@ -51,19 +58,17 @@ namespace AddinX.Ribbon.Implementation.Control {
                 , new XAttribute("onAction", "OnActionDropDown")
                 , new XAttribute("getSelectedItemIndex", "GetSelectedItemIndex")
                 , new XAttribute("tag", tmpId.Value)
-            );
+            );*/
+            var element = base.ToXml(ns);
+            element.AddAttribute("sizeString", new string('W', _dropDownSize));
+            element.AddAttribute("showLabel", _showLabel);
+            element.AddAttribute("showItemImage", _showItemImage);
+            element.AddAttribute("showItemLabel", _showItemLabel);
+            element.AddImageAttribute(_imageVisible,_imagePath,_imageMso);
 
-            if (!string.IsNullOrEmpty(_screentip)) {
-                element.Add(new XAttribute("screentip", _screentip));
-            }
-
-            if (!string.IsNullOrEmpty(_supertip)) {
-                element.Add(new XAttribute("supertip", _supertip));
-            }
-
-            if (!string.IsNullOrEmpty(_keytip)) {
-                element.Add(new XAttribute("keytip", _keytip));
-            }
+            element.AddAttribute("screentip", _screentip);
+            element.AddAttribute("supertip", _supertip);
+            element.AddAttribute("keytip", _keytip);
 
             if (_dynamicItemsLoading) {
                 element.Add(new XAttribute("getItemCount", "GetItemCount")
@@ -74,14 +79,14 @@ namespace AddinX.Ribbon.Implementation.Control {
                     , new XAttribute("getItemSupertip", "GetItemSupertip"));
             } else {
                 // Add the Items first
-                if (((AddInList) _data).ToXml(ns) != null) {
-                    element.Add(((AddInList) _data).ToXml(ns));
+                if (_data.Any()) {
+                    element.Add(_data.ToXml(ns));
                 }
             }
 
             // Then the buttons
-            if (((AddInList) _controls)?.ToXml(ns) != null) {
-                element.Add(((AddInList) _controls).ToXml(ns));
+            if (_controls.Any()) {
+                element.Add(_controls.ToXml(ns));
             }
 
             return element;
@@ -113,17 +118,17 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IDropDown SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
         public IDropDown SetIdMso(string name) {
-            Id = new ElementId().SetMicrosoftId(name);
+            Id.SetMicrosoftId(name);
             return this;
         }
 
         public IDropDown SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
 
@@ -133,9 +138,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IDropDown ImagePath(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);;
-            _imagePath = name;
+        public IDropDown ImagePath(string path) {
+            _imageVisible = !string.IsNullOrEmpty(path);;
+            _imagePath = path;
             return this;
         }
 

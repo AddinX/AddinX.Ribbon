@@ -10,8 +10,8 @@ namespace AddinX.Ribbon.Implementation.Control {
     public class ButtonGroup : Control, IButtonGroup {
         private readonly Controls _items;
 
-        public ButtonGroup(ICallbackRigister register) : base(register, "buttonGroup") {
-            _items = new Controls(register);
+        public ButtonGroup(): base( "buttonGroup") {
+            _items = new Controls();
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
@@ -32,16 +32,17 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IButtonGroup SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
         public IButtonGroup SetIdMso(string name) {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
+            return this;
         }
 
         public IButtonGroup SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
 

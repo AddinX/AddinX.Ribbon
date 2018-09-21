@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control.MenuUnsize;
@@ -6,7 +7,7 @@ using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class MenuUnsize : Control, IMenuUnsize {
+    public class MenuUnsize : ControlContainer, IMenuUnsize {
         private string _imageMso;
         private string _imagePath;
         private bool _imageVisible;
@@ -17,10 +18,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private bool _showLabel = true;
         private ControlSize _itemSize = ControlSize.normal;
 
-        private readonly IMenuUnsizeControls _controls;
-
-        public MenuUnsize(ICallbackRigister register) : base(register, "menu") {
-            _controls = new Controls(register);
+        public MenuUnsize(): base( "menu") {
             _imageVisible = false;
         }
 
@@ -65,9 +63,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IMenuUnsize ImagePath(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);
-            _imagePath = name;
+        public IMenuUnsize ImagePath(string path) {
+            _imageVisible = !string.IsNullOrEmpty(path);
+            _imagePath = path;
             return this;
         }
 
@@ -97,12 +95,12 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IMenuUnsize AddItems(Action<IMenuUnsizeControls> items) {
-            items.Invoke(_controls);
+            items.Invoke(Controls);
             return this;
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
+            /*var tmpId = (ElementId) Id;
 
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
@@ -117,7 +115,11 @@ namespace AddinX.Ribbon.Implementation.Control {
                 , new XAttribute("getEnabled", "GetEnabled")
                 , new XAttribute("getVisible", "GetVisible")
                 , new XAttribute("tag", tmpId.Value)
-            );
+            );*/
+            var element = base.ToXml(ns);
+            element.AddAttribute("showLabel", _showLabel);
+            element.AddAttribute("itemSize", _itemSize);
+            element.AddImageAttribute(_imageVisible,_imagePath,_imageMso);
 
             if (!string.IsNullOrEmpty(_screentip)) {
                 element.Add(new XAttribute("screentip", _screentip));
@@ -135,8 +137,8 @@ namespace AddinX.Ribbon.Implementation.Control {
                 element.Add(new XAttribute("description", _description));
             }
 
-            if (((AddInList) _controls)?.ToXml(ns) != null) {
-                element.Add(((AddInList) _controls).ToXml(ns));
+            if (Controls.Any()) {
+                element.Add(Controls.ToXml(ns));
             }
 
             return element;

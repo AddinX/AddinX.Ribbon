@@ -13,7 +13,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _keytip;
         private bool _showLabel;
 
-        public ButtonUnsize(ICallbackRigister register) : base(register, "button") {
+        public ButtonUnsize(): base( "button") {
             _imageVisible = false;
         }
 
@@ -46,17 +46,17 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IButtonUnsize SetIdMso(string name) {
-            Id = new ElementId().SetMicrosoftId(name);
+            Id.SetMicrosoftId(name);
             return this;
         }
 
         public IButtonUnsize SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
 
         public IButtonUnsize SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
@@ -67,9 +67,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IButtonUnsize ImagePath(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);;
-            _imagePath = name;
+        public IButtonUnsize ImagePath(string path) {
+            _imageVisible = !string.IsNullOrEmpty(path);;
+            _imagePath = path;
             return this;
         }
 

@@ -18,14 +18,14 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _screentip;
         private string _keytip;
 
-        public ToggleButton(ICallbackRigister register) : base(register, "toggleButton") {
+        public ToggleButton(): base( "toggleButton") {
             _imageVisible = false;
             _size = ControlSize.normal;
             _showLabel = true;
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
+            /*var tmpId = (ElementId) Id;
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
                 , new XAttribute("label", Label)
@@ -41,7 +41,12 @@ namespace AddinX.Ribbon.Implementation.Control {
                 , new XAttribute("onAction", "OnActionPressed")
                 , new XAttribute("getPressed", "GetPressed")
                 , new XAttribute("tag", tmpId.Value)
-            );
+            );*/
+
+            var element = base.ToXml(ns);
+            element.AddAttribute("showLabel", _showLabel);
+            element.AddAttribute("size", _size);
+            element.AddImageAttribute(_imageVisible, _imagePath, _imageMso);
 
             if (!string.IsNullOrEmpty(_screentip)) {
                 element.Add(new XAttribute("screentip", _screentip));
@@ -63,17 +68,17 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IToggleButton SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
         public IToggleButton SetIdMso(string name) {
-            Id = new ElementId().SetMicrosoftId(name);
+            Id.SetMicrosoftId(name);
             return this;
         }
 
         public IToggleButton SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
 
@@ -83,9 +88,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IToggleButton ImagePath(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);
-            _imagePath = name;
+        public IToggleButton ImagePath(string path) {
+            _imageVisible = !string.IsNullOrEmpty(path);
+            _imagePath = path;
             return this;
         }
 

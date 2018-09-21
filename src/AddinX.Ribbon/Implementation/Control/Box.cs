@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.Box;
-using AddinX.Ribbon.Contract.Control.Gallery;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
@@ -14,8 +12,8 @@ namespace AddinX.Ribbon.Implementation.Control {
         private readonly Controls _items;
         private BoxStyle _style;
 
-        public Box(ICallbackRigister register) : base(register, "box") {
-            _items = new Controls(register);
+        public Box(): base( "box") {
+            _items = new Controls();
         }
 
         public IBox SetId(string name) {
@@ -45,7 +43,6 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         protected internal override XElement ToXml(XNamespace ns) {
             var element = base.ToXml(ns);
-            //element.AddCallbackAttribute("getVisible",this.IsVisibleField);
             element.AddAttribute("boxStyle",_style);
             element.AddControls(_items, ns);
             return element;
@@ -75,14 +72,18 @@ namespace AddinX.Ribbon.Implementation.Control {
             }
         }
 
-        public static void AddControls(this XElement element, IGalleryControls controls, XNamespace ns) {
-            if (controls is Controls ctls) {
-                element.AddControls(ctls, ns);
+        public static void AddControls<T>(this XElement element, AddInList<T> items, XNamespace ns) where T : AddInElement {
+            if (items == null) {
+                return;
+            }
+
+            foreach (var item in items) {
+                element.Add(item.ToXml(ns));
             }
         }
 
         public static void AddControls(this XElement element, AddInList list, XNamespace ns) {
-            var items = list?.ToXml(ns);
+            var items = list?.ToXml(ns).ToArray();
             if (items != null && items.Any()) {
                 foreach (var item in items) {
                     element.Add(item);

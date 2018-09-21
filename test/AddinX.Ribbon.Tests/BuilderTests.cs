@@ -19,7 +19,7 @@ namespace AddinX.Ribbon.Tests {
         [Test]
         public void BuildButton() {
             var builder = new RibbonBuilder();
-            var btn = new Button(builder).Supertip("test").ShowLabel().Description("test button").NoImage()
+            var btn = new Button().Supertip("test").ShowLabel().Description("test button").NoImage()
                 .SetId("test_btn");
             builder.CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test")
@@ -58,6 +58,15 @@ namespace AddinX.Ribbon.Tests {
             });
 
             Console.WriteLine(builder.GetXmlString());
+        }
+
+        [Test]
+        public void TestAddControl() {
+            var builder = new RibbonBuilder();
+            builder.CustomUi.Ribbon.Tabs(t => t.AddTab("table")
+                .Groups(g => g.AddGroup("group1").Items(gc=>gc.AddButton("测试"))
+                )
+            );
         }
     }
 }

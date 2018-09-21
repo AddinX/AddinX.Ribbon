@@ -9,10 +9,15 @@ namespace AddinX.Ribbon.Implementation.Control {
     public class DialogBoxLauncher : Control, IDialogBoxLauncher {
         private readonly ButtonUnsize _btn;
 
-        public DialogBoxLauncher(ICallbackRigister register) : base(register, "dialogBoxLauncher") {
-            _btn = new ButtonUnsize(register);
+        public DialogBoxLauncher(): base( "dialogBoxLauncher") {
+            _btn = new ButtonUnsize();
             _btn.HideLabel();
             _btn.NoImage();
+        }
+
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            _btn.SetRegister(register);
         }
 
         protected internal override XElement ToXml(XNamespace ns) {

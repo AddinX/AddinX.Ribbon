@@ -5,26 +5,20 @@ using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control.Item;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class Items : AddInList, IItems {
-        private readonly IList<IItem> _items;
-        private readonly ICallbackRigister _register;
+    public class Items : AddInList<Item>, IItems {
 
-        public Items(ICallbackRigister register) {
-            _register = register;
-            _items = new List<IItem>();
+        public Items() {
         }
 
         public IItem AddItem(string label) {
-            var item = new Item(_register);
+            var item = new Item();
              item.SetLabel(label);
-            _items.Add(item);
+            InnerList.Add(item);
             return item;
         }
 
-        protected internal override XElement[] ToXml(XNamespace ns) {
-            return _items == null || !_items.Any()
-                ? null
-                : _items.Select(o => ((Control) o).ToXml(ns)).ToArray();
+        protected internal override IEnumerable<XElement> ToXml(XNamespace ns) {
+            return InnerList.Select(o => o.ToXml(ns));
         }
     }
 }

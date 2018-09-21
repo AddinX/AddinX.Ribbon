@@ -4,7 +4,7 @@ using AddinX.Ribbon.Contract.Control.MenuSeparator;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class MenuSeparator : Control, IMenuSeparator {
-        public MenuSeparator(ICallbackRigister register) : base(register, "menuSeparator") {
+        public MenuSeparator(): base( "menuSeparator") {
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
@@ -21,12 +21,12 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IMenuSeparator SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
         public IMenuSeparator SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
     }

@@ -221,6 +221,7 @@
     <Compile Include="Implementation\Control\Checkbox.cs" />
     <Compile Include="Implementation\Control\ComboBox.cs" />
     <Compile Include="Implementation\Control\Control.cs" />
+    <Compile Include="Implementation\Control\AddInElementExtensions.cs" />
     <Compile Include="Implementation\Control\DialogBoxLauncher.cs" />
     <Compile Include="Implementation\Control\DropDow.cs" />
     <Compile Include="Implementation\Control\EditBox.cs" />

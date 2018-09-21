@@ -19,16 +19,16 @@ namespace AddinX.Ribbon.Implementation.Control {
         private int _gallerySize;
         private bool _showItemLabel = true;
         private bool _dynamicItemsLoading;
-        private readonly IItems _data;
+        private readonly Items _data;
         private int _itemHeight;
         private int _itemWidth;
         private int _rows;
         private int _cols;
-        private readonly IGalleryUnsizeControls _controls;
+        private readonly Controls _controls;
 
-        public GalleryUnsize(ICallbackRigister register) : base(register, "gallery") {
-            _data = new Items(register);
-            _controls = new Controls(register);
+        public GalleryUnsize(): base( "gallery") {
+            _data = new Items();
+            _controls = new Controls();
             _imageVisible = false;
             _gallerySize = 7;
             _itemHeight = 0;
@@ -37,9 +37,14 @@ namespace AddinX.Ribbon.Implementation.Control {
             _cols = -1;
         }
 
-        protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            _data.SetRegister(register);
+            _controls.SetRegister(register);
+        }
 
+        protected internal override XElement ToXml(XNamespace ns) {
+            /*var tmpId = (ElementId) Id;
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
                 , new XAttribute("label", Label)
@@ -57,7 +62,14 @@ namespace AddinX.Ribbon.Implementation.Control {
                 , new XAttribute("onAction", "OnActionDropDown")
                 , new XAttribute("getSelectedItemIndex", "GetSelectedItemIndex")
                 , new XAttribute("tag", tmpId.Value)
-            );
+            );*/
+
+            var element = base.ToXml(ns);
+            element.AddImageAttribute(_imageVisible, _imagePath, _imageMso);
+            element.AddAttribute("sizeString", new string('W', _gallerySize));
+            element.AddAttribute("showLabel", _showLabel);
+            element.AddAttribute("showItemImage", _showItemImage);
+            element.AddAttribute("showItemLabel", _showItemLabel);
 
             if (_itemHeight > 0) {
                 element.Add(new XAttribute("itemHeight", _itemHeight));
@@ -96,14 +108,14 @@ namespace AddinX.Ribbon.Implementation.Control {
                     , new XAttribute("getItemSupertip", "GetItemSupertip"));
             } else {
                 // Add the Items first
-                if (((AddInList) _data)?.ToXml(ns) != null) {
-                    element.Add(((AddInList) _data).ToXml(ns));
+                if (_data?.ToXml(ns) != null) {
+                    element.Add(_data.ToXml(ns));
                 }
             }
 
             // Then the buttons
-            if (((AddInList) _controls)?.ToXml(ns) != null) {
-                element.Add(((AddInList) _controls).ToXml(ns));
+            if (_controls?.ToXml(ns) != null) {
+                element.Add(_controls.ToXml(ns));
             }
 
             return element;
@@ -170,9 +182,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IGalleryUnsize ImagePath(string name) {
+        public IGalleryUnsize ImagePath(string path) {
             _imageVisible = true;
-            _imagePath = name;
+            _imagePath = path;
             return this;
         }
 

@@ -10,43 +10,38 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _supertip;
         private string _screentip;
 
-        public LabelControl(ICallbackRigister register) : base(register, "labelControl") {
+        public LabelControl(): base( "labelControl") {
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
-
+            /*var tmpId = (ElementId) Id;
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
                 , new XAttribute("getEnabled", "GetEnabled")
                 , new XAttribute("getVisible", "GetVisible")
                 , new XAttribute("getLabel", "GetLabel")
                 , new XAttribute("tag", tmpId.Value)
-            );
+            );*/
 
-            if (!string.IsNullOrEmpty(_screentip)) {
-                element.Add(new XAttribute("screentip", _screentip));
-            }
-
-            if (!string.IsNullOrEmpty(_supertip)) {
-                element.Add(new XAttribute("supertip", _supertip));
-            }
+            var element = base.ToXml(ns);
+            element.AddAttribute("screentip", _screentip);
+            element.AddAttribute("supertip", _supertip);
 
             return element;
         }
 
         public ILabelControl SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
         public ILabelControl SetIdMso(string name) {
-            Id = new ElementId().SetMicrosoftId(name);
+            Id.SetMicrosoftId(name);
             return this;
         }
 
         public ILabelControl SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
 
@@ -56,7 +51,8 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public ILabelControl Keytip(string keytip) {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return this;
         }
 
         public ILabelControl Screentip(string screentip) {

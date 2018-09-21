@@ -45,7 +45,7 @@ namespace AddinX.Ribbon.Contract.Control {
         /// <returns></returns>
         T ImageMso(string name);
 
-        T ImagePath(string name);
+        T ImagePath(string path);
 
         T NoImage();
     }

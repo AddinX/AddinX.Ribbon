@@ -4,26 +4,24 @@ using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 using AddinX.Ribbon.Contract.Control;
+using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public abstract class Control : AddInElement {
        
-        protected IElementId Id { get; set; }
+        protected IElementId Id { get; }
         protected string Label { get; private set; }
-
-        protected ICallbackRigister Register { get; }
 
         private ICommand _command;
 
-
-        protected Control(ICallbackRigister register,string elementName) :base(elementName) {
+        protected Control(string elementName) :base(elementName) {
             Id = new ElementId();
             Label = string.Empty;
-            Register = register;
         }
 
         protected internal void SetLabel(string label) {
             Label = label;
+            base.SetAttribute("label",label);
         }
 
         protected TCmd GetCommand<TCmd>() where TCmd : ICommand, new() {
@@ -33,7 +31,7 @@ namespace AddinX.Ribbon.Implementation.Control {
 
             return (TCmd) _command;
         }
-        
+
         private void ToCallbackXml(XElement element) {
             if (_command != null) {
                 _command.WriteCallbackXml(element);
@@ -42,15 +40,25 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
         
         protected internal override XElement ToXml(XNamespace ns) {
-            var element = base.ToXml(ns);
-            element.Add(((ElementId)Id).ToXml());
-            element.AddAttribute("label", Label,string.Empty);
-
+            var element = base.ToXml(ns,new XAttribute(Id.Type.ToString(), Id.Value));
             ToCallbackXml(element);
             return element;
         }
     }
-   
+    
+
+    public abstract class ControlContainer : Control {
+        protected ControlContainer(string elementName) : base(elementName) {
+            Controls = new Controls();
+        }
+
+        protected Controls Controls { get; }
+
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            Controls.SetRegister(register);
+        }
+    }
 
     internal class CallbackRegister {
 

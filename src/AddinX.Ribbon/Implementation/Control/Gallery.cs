@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Authentication.ExtendedProtection.Configuration;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
@@ -23,17 +24,17 @@ namespace AddinX.Ribbon.Implementation.Control {
         private int _gallerySize;
         private bool _showItemLabel = true;
         private bool _dynamicItemsLoading;
-        private readonly IItems _data;
+        private readonly Items _data;
         private int _itemHeight;
         private int _itemWidth;
         private int _rows;
         private int _cols;
-        private readonly IGalleryControls _controls;
+        private readonly Controls _controls;
 
-        public Gallery(ICallbackRigister register) : base(register, "gallery") {
-            _data = new Items(register);
+        public Gallery(): base( "gallery") {
+            _data = new Items();
             _size = ControlSize.normal;
-            _controls = new Controls(register);
+            _controls = new Controls();
             _imageVisible = false;
             _gallerySize = 7;
             _itemHeight = 0;
@@ -42,9 +43,14 @@ namespace AddinX.Ribbon.Implementation.Control {
             _cols = -1;
         }
 
-        protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            _data.SetRegister(register);
+            _controls.SetRegister(register);
+        }
 
+        protected internal override XElement ToXml(XNamespace ns) {
+            /*var tmpId = (ElementId) Id;
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
                 , new XAttribute("label", Label)
@@ -63,7 +69,15 @@ namespace AddinX.Ribbon.Implementation.Control {
                 , new XAttribute("onAction", "OnActionDropDown")
                 , new XAttribute("getSelectedItemIndex", "GetSelectedItemIndex")
                 , new XAttribute("tag", tmpId.Value)
-            );
+            );*/
+
+            var element = base.ToXml(ns);
+            element.AddImageAttribute(_imageVisible, _imagePath, _imageMso);
+            element.AddAttribute("sizeString",new string('W',_gallerySize));
+            element.AddAttribute("showLabel",_showLabel);
+            element.AddAttribute("showItemImage", _showItemImage);
+            element.AddAttribute("showItemLabel",_showItemLabel);
+            element.AddAttribute("size",_size);
 
             if (_itemHeight > 0) {
                 element.Add(new XAttribute("itemHeight", _itemHeight));
@@ -102,7 +116,7 @@ namespace AddinX.Ribbon.Implementation.Control {
                     , new XAttribute("getItemSupertip", "GetItemSupertip"));
             } else {
                 // Add the Items first
-                element.AddControls((AddInList) _data, ns);
+                element.AddControls(_data, ns);
             }
 
             // Then the buttons
@@ -172,9 +186,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IGallery ImagePath(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);;
-            _imagePath = name;
+        public IGallery ImagePath(string path) {
+            _imageVisible = !string.IsNullOrEmpty(path);;
+            _imagePath = path;
             return this;
         }
 

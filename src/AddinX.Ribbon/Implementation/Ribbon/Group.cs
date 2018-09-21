@@ -10,17 +10,27 @@ using AddinX.Ribbon.Implementation.Control;
 namespace AddinX.Ribbon.Implementation.Ribbon {
     public class Group : Control.Control, IGroup {
         private IElementId _id;
-        private readonly IGroupControls _controls;
-        private IGroupDialogBox _boxLauncher;
+        private readonly Controls _controls;
+        private Controls _boxLauncher;
 
         private string _supertip;
         private string _screentip;
         private string _keytip;
 
 
-        public Group(ICallbackRigister register) :base(register,"group") {
-            _controls = new Controls(register);
+        public Group() :base("group") {
+            _controls = new Controls();
         }
+
+        #region Overrides of AddInElement
+
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            _controls.SetRegister(register);
+            _boxLauncher?.SetRegister(register);
+        }
+
+        #endregion
 
         public IGroupExtra Items(Action<IGroupControls> value) {
             value.Invoke(_controls);
@@ -33,7 +43,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
 
             var element = base.ToXml(ns);
 
-            element.AddControls((AddInList) _controls, ns);
+            element.AddControls(_controls, ns);
 
             if (!string.IsNullOrEmpty(_screentip)) {
                 element.Add(new XAttribute("screentip", _screentip));
@@ -86,7 +96,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         }
 
         public IGroupExtra DialogBoxLauncher(Action<IGroupDialogBox> dialogBox) {
-            _boxLauncher = new Controls(base.Register);
+            _boxLauncher = new Controls();
             dialogBox.Invoke(_boxLauncher);
             return this;
         }

@@ -9,19 +9,24 @@ using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
     public class ContextualTabs : AddInElement, IContextualTabs {
-        private readonly IList<ITabSet> _items;
-        private readonly ICallbackRigister _register;
+        private readonly IList<TabSet> _items;
 
-        public ContextualTabs(ICallbackRigister register) :base("contextualTabs") {
-            _register = register;
-            _items = new List<ITabSet>();
+        public ContextualTabs() :base("contextualTabs") {
+            _items = new List<TabSet>();
         }
 
         public IContextualTabs AddTabSet(Action<ITabSetId> value) {
-            var item = new TabSet(_register);
+            var item = new TabSet();
             value.Invoke(item);
             _items.Add(item);
             return this;
+        }
+
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            foreach (var item in _items) {
+                item.SetRegister(register);
+            }
         }
 
         protected internal override XElement ToXml(XNamespace ns) {

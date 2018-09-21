@@ -15,13 +15,14 @@ namespace AddinX.Ribbon.Implementation {
         }
 
         public RibbonBuilder(string customUiNamespace) {
-            CustomUi = new CustomUi(this, customUiNamespace);
+            CustomUi = new CustomUi(customUiNamespace);
             _ns = XNamespace.Get(customUiNamespace);
         }
 
         public ICustomUi CustomUi { get; }
 
         public string GetXmlString() {
+            ((AddInElement)CustomUi).SetRegister(this);
             var doc = new XDocument(new XDeclaration("1.0", "utf-8", null));
             doc.Add(((AddInElement) CustomUi).ToXml(_ns));
             return doc.ToString();
@@ -38,7 +39,11 @@ namespace AddinX.Ribbon.Implementation {
         /// <param name="command"></param>
         public void Add(IElementId elementId, ICommand command) {
             Console.WriteLine("Add Command {0} {1}",elementId,command.GetType());
-            _commands.Add(elementId.Id,command);
+            if (_commands.ContainsKey(elementId.Value)) {
+                _commands[elementId.Value] = command;
+            } else {
+                _commands.Add(elementId.Value, command);
+            }
         }
 
         public ICommand Find(string id) {

@@ -16,7 +16,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private int _maxlength;
         private int _editBoxSize;
 
-        public EditBox(ICallbackRigister register) : base(register, "editBox") {
+        public EditBox(): base( "editBox") {
             _imageVisible = false;
             _maxlength = 15;
             _editBoxSize = _maxlength;
@@ -58,17 +58,17 @@ namespace AddinX.Ribbon.Implementation.Control {
 
 
         public IEditBox SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
         public IEditBox SetIdMso(string name) {
-            Id = new ElementId().SetMicrosoftId(name);
+            Id.SetMicrosoftId(name);
             return this;
         }
 
         public IEditBox SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
 
@@ -78,9 +78,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IEditBox ImagePath(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);;
-            _imagePath = name;
+        public IEditBox ImagePath(string path) {
+            _imageVisible = !string.IsNullOrEmpty(path);;
+            _imagePath = path;
             return this;
         }
 

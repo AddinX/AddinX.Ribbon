@@ -12,21 +12,21 @@ namespace AddinX.Ribbon.Implementation.Control {
         private string _screentip;
         private string _keytip;
 
-        public Checkbox(ICallbackRigister register) : base(register, "checkBox") {
+        public Checkbox(): base( "checkBox") {
         }
 
         public ICheckbox SetId(string name) {
-            Id = new ElementId().SetId(name);
+            Id.SetId(name);
             return this;
         }
 
         public ICheckbox SetIdMso(string name) {
-            Id = new ElementId().SetMicrosoftId(name);
+            Id.SetMicrosoftId(name);
             return this;
         }
 
         public ICheckbox SetIdQ(string ns, string name) {
-            Id = new ElementId().SetNamespaceId(ns, name);
+            Id.SetNamespaceId(ns, name);
             return this;
         }
 

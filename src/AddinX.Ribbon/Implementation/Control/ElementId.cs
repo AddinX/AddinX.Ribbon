@@ -5,8 +5,8 @@ using AddinX.Ribbon.Contract.Enums;
 namespace AddinX.Ribbon.Implementation.Control {
     public class ElementId : IElementId {
         private static int _autoId = 1;
-        protected internal IdType Type = IdType.id;
-        protected internal string Value;
+        public IdType Type { get; private set; }
+        public  string Value { get; private set; }
 
         public ElementId() {
             Value = $"id_{_autoId++:0000}";
@@ -29,8 +29,6 @@ namespace AddinX.Ribbon.Implementation.Control {
             Type = IdType.idQ;
             return this;
         }
-
-        public string Id => Value;
 
         #region Overrides of Object
 
