@@ -5,7 +5,7 @@ namespace AddinX.Ribbon.Contract.Control.ComboBox
 {
     public interface IComboBox :IRibbonId<IComboBox>,IRibbonExtra<IComboBox>,IRibbonImage<IComboBox>
             ,IRibbonLabel<IComboBox>,IRibbonItems<IComboBox, IItems>,
-            IRibbonCallback<IComboBox,IComboBoxCommand>
+            IRibbonCallback<IComboBoxCommand>
         //IComboBoxExtra, IComboBoxId, IComboBoxImage, IComboBoxLabel, IComboxBoxItems
     {
 

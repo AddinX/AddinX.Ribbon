@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
@@ -53,7 +54,7 @@ namespace AddinX.Ribbon.UnitTest
                     .Groups(g=>
                     {
                         g.AddGroup("reporting").SetId("reportingGroup")
-                            .Items(i =>
+                            .AddItems(i =>
                             {
                                 i.AddButton("Allocation").SetId("portfolioAllocation").LargeSize().ImageMso("HappyFace");
                                 i.AddButton("Contributor").SetId("Contributor").NormalSize()
@@ -62,7 +63,7 @@ namespace AddinX.Ribbon.UnitTest
                                 
                             });
                         g.AddGroup("Analytic").SetId("AnalyticGroup")
-                            .Items(i => i.AddButton("Portfolio Analysis").SetId("portfolioAnalyser").NormalSize()
+                            .AddItems(i => i.AddButton("Portfolio Analysis").SetId("portfolioAnalyser").NormalSize()
                             .NoImage().ShowLabel());
                     });
             });
@@ -79,7 +80,7 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("test").SetId("tab1")
                     .Groups(g => {
                         g.AddGroup("reporting").SetId("reportingGroup")
-                            .Items(i => {
+                            .AddItems(i => {
                                 i.AddButton("Allocation").SetId("portfolioAllocation").LargeSize()
                                     .ImageMso("HappyFace");
                                 i.AddButton("Contributor").SetId("Contributor").NormalSize()
@@ -107,7 +108,7 @@ namespace AddinX.Ribbon.UnitTest
                             c.AddTab("Portfolio").SetId("tab1")
                                 .Groups(g => {
                                     g.AddGroup("reporting").SetId("reportingGroup")
-                                        .Items(i => {
+                                        .AddItems(i => {
                                             i.AddButton("Allocation")
                                                 .SetId("portfolioAllocation")
                                                 .LargeSize()
@@ -119,7 +120,7 @@ namespace AddinX.Ribbon.UnitTest
 
                                         });
                                     g.AddGroup("Analytic").SetId("AnalyticGroup")
-                                        .Items(
+                                        .AddItems(
                                             i =>
                                                 i.AddButton("Portfolio Analysis")
                                                     .SetId("portfolioAnalyser")
@@ -142,7 +143,7 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("test").SetId("tab1")
                     .Groups(g => {
                         g.AddGroup("reporting").SetId("reportingGroup")
-                            .Items(i => {
+                            .AddItems(i => {
                                 i.AddBox().SetId("ButtonsVertical").VerticalDisplay().AddItems(b => {
                                     b.AddButton("Allocation")
                                         .SetId("portfolioAllocation")
@@ -182,7 +183,7 @@ namespace AddinX.Ribbon.UnitTest
                             c.AddTab("Internal").SetId("tab1")
                                 .Groups(g => {
                                     g.AddGroup("Print settings").SetId("printSettingsGroup")
-                                        .Items(i => {
+                                        .AddItems(i => {
                                             i.AddCheckbox("Center Horizontal").SetId("centerHorizontal")
                                                 .Screentip("Center Content Horizontally");
                                             i.AddCheckbox("Center Vertical").SetId("centerVertical")
@@ -215,7 +216,7 @@ namespace AddinX.Ribbon.UnitTest
                             c.AddTab("Internal").SetId("tab1")
                                 .Groups(g => {
                                     g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                                        .Items(i => {
+                                        .AddItems(i => {
                                             i.AddComboBox("Colors").SetId("colorsPicking")
                                                 .ShowLabel().NoImage()
                                                 .AddItems(o => {
@@ -227,7 +228,7 @@ namespace AddinX.Ribbon.UnitTest
                                         });
 
                                     g.AddGroup("Time zone settings").SetId("timeZoneSettingsGroup")
-                                        .Items(i => {
+                                        .AddItems(i => {
                                             i.AddComboBox("Country").SetId("countryPicking")
                                                 .ShowLabel().NoImage()
                                                 .DynamicItems().Supertip("Country Picking")
@@ -252,9 +253,14 @@ namespace AddinX.Ribbon.UnitTest
                     c.AddTab("Internal").SetId("tab1")
                         .Groups(g => {
                             g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                                .Items(i => {
+                                .AddItems(i => {
                                     i.AddToggleButton("Hide View Tab").SetId("HideViewTab")
-                                        .ShowLabel().LargeSize().NoImage().Supertip("Hide View Tab");
+                                        .ShowLabel().LargeSize()
+                                        .NoImage().Supertip("Hide View Tab")
+                                        .Callback(cmd => {
+                                            cmd.onActionPressed = Console.WriteLine;
+                                            cmd.getPressed = () => true;
+                                        });
                                 });
                         });
                 });
@@ -273,7 +279,7 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("Internal").SetId("tab1")
                     .Groups(g => {
                         g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                            .Items(i => {
+                            .AddItems(i => {
                                 i.AddDropDown("Colors").SetId("ColorsSelection")
                                     .ShowLabel().NoImage().ShowItemLabel()
                                     .HideItemImage()
@@ -285,7 +291,7 @@ namespace AddinX.Ribbon.UnitTest
                             });
 
                         g.AddGroup("Units Settings").SetId("UnitsSettingsGroup")
-                            .Items(i => {
+                            .AddItems(i => {
                                 i.AddDropDown("Unit To:").SetId("centimeter2Unit")
                                     .ShowLabel().NoImage().ShowItemLabel().HideItemImage()
                                     .DynamicItems().Supertip("Centimeter Conversion")
@@ -308,7 +314,7 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("Internal").SetId("tab1")
                     .Groups(g => {
                         g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                            .Items(i => {
+                            .AddItems(i => {
                                 i.AddGallery("Colors").SetId("ColorsSelection")
                                     .ShowLabel().NormalSize().NoImage().ShowItemLabel()
                                     .HideItemImage()
@@ -323,7 +329,7 @@ namespace AddinX.Ribbon.UnitTest
                             });
 
                         g.AddGroup("Units Settings").SetId("UnitsSettingsGroup")
-                            .Items(i => {
+                            .AddItems(i => {
                                 i.AddGallery("Unit To:").SetId("centimeter2Unit")
                                     .ShowLabel().NormalSize().NoImage().ShowItemLabel().HideItemImage()
                                     .DynamicItems().Supertip("Centimeter Conversion")
@@ -345,7 +351,7 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("Internal").SetId("tab1")
                     .Groups(g => {
                         g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                            .Items(i => {
+                            .AddItems(i => {
                                 i.AddMenu("Options").SetId("optionMenu")
                                     .ShowLabel().NoImage().LargeSize().ItemLargeSize()
                                     .AddItems(l => {
@@ -443,7 +449,7 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("My Tab").SetIdQ("acme", MyTabId)
                     .Groups(g => {
                         g.AddGroup("Data").SetIdQ("acme", DataGroupId)
-                            .Items(d => {
+                            .AddItems(d => {
                                 d.AddButton("My Save").SetIdMso("FileSave")
                                     .NormalSize().ImageMso("FileSave");
                                 d.AddButton("Button").SetId("buttonOne");

@@ -6,27 +6,15 @@ using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
     public class GalleryCommand : IGalleryCommand, IEnabledField, IVisibleField, IDynamicItemsField, IDropDownField {
-        public Action<int> OnActionField { get; private set; }
-        public Func<bool> IsEnabledField { get; private set; }
-        public Func<bool> IsVisibleField { get; private set; }
-        public Func<int> ItemCount { get; private set; }
-        public Func<IList<object>> ItemId { get; private set; }
-        public Func<IList<object>> ItemImage { get; private set; }
-        public Func<IList<string>> ItemLabel { get; private set; }
-        public Func<IList<string>> ItemScreentip { get; private set; }
-        public Func<IList<string>> ItemSupertip { get; private set; }
-        public Func<int> SelectedItemIndex { get; private set; }
-
-        public GalleryCommand() {
-            //IsVisibleField = () => true;
-            //IsEnabledField = () => true;
-            //ItemCount = () => 0;
-            //ItemScreentip = () => null;
-            //ItemSupertip = () => null;
-            //ItemLabel = () => null;
-            //ItemImage = () => null;
-            //ItemId = () => null;
-        }
+        public Action<int> OnActionField { get;  set; }
+        public Func<int> SelectedItemIndex { get;  set; }
+        public Func<int> ItemCount { get;  set; }
+        public Func<IList<object>> ItemId { get;  set; }
+        public Func<IList<object>> ItemImage { get;  set; }
+        public Func<IList<string>> ItemLabel { get;  set; }
+        public Func<IList<string>> ItemScreentip { get;  set; }
+        public Func<IList<string>> ItemSupertip { get;  set; }
+        public Func<bool> getEnabled { get;  set; }
 
         public IGalleryCommand IsVisible(Func<bool> condition) {
             IsVisibleField = condition;
@@ -34,7 +22,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         public IGalleryCommand IsEnabled(Func<bool> condition) {
-            IsEnabledField = condition;
+            getEnabled = condition;
             return this;
         }
 
@@ -81,12 +69,12 @@ namespace AddinX.Ribbon.Implementation.Command {
         #region Implementation of ICommand
 
         /// <summary>
-        /// 写入回调Xml属性
+        ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
         public void WriteCallbackXml(XElement element) {
             element.AddCallbackAttribute("onAction", OnActionField);
-            element.AddCallbackAttribute("getEnabled", IsEnabledField);
+            element.AddCallbackAttribute("getEnabled", getEnabled);
             element.AddCallbackAttribute("getVisible", IsVisibleField);
 
             element.AddCallbackAttribute("getItemCount", ItemCount);
@@ -99,5 +87,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         #endregion
+
+        public Func<bool> IsVisibleField { get; private set; }
     }
 }

@@ -6,35 +6,13 @@ using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
     public class DropDownCommand : IDropDownCommand, IEnabledField, IVisibleField, IDynamicItemsField, IDropDownField {
-        public Action<int> OnActionField { get; private set; }
-        public Func<bool> IsEnabledField { get; private set; }
-        public Func<bool> IsVisibleField { get; private set; }
-        public Func<int> ItemCount { get; private set; }
-        public Func<IList<object>> ItemId { get; private set; }
-        public Func<IList<object>> ItemImage { get; private set; }
-        public Func<IList<string>> ItemLabel { get; private set; }
-        public Func<IList<string>> ItemScreentip { get; private set; }
-        public Func<IList<string>> ItemSupertip { get; private set; }
-        public Func<int> SelectedItemIndex { get; private set; }
-
-        public DropDownCommand() {
-            //IsVisibleField = () => true;
-            //IsEnabledField = () => true;
-            //ItemCount = () => 0;
-            //ItemScreentip = () => null;
-            //ItemSupertip = () => null;
-            //ItemLabel = () => null;
-            //ItemImage = () => null;
-            //ItemId = () => null;
-        }
-
         public IDropDownCommand IsVisible(Func<bool> condition) {
             IsVisibleField = condition;
             return this;
         }
 
         public IDropDownCommand IsEnabled(Func<bool> condition) {
-            IsEnabledField = condition;
+            getEnabled = condition;
             return this;
         }
 
@@ -81,12 +59,12 @@ namespace AddinX.Ribbon.Implementation.Command {
         #region Implementation of ICommand
 
         /// <summary>
-        /// 写入回调Xml属性
+        ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
         public void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("onAction",OnActionField);
-            element.AddCallbackAttribute("getEnabled", IsEnabledField);
+            element.AddCallbackAttribute("onAction", OnActionField);
+            element.AddCallbackAttribute("getEnabled", getEnabled);
             element.AddCallbackAttribute("getVisible", IsVisibleField);
 
             element.AddCallbackAttribute("getItemCount", ItemCount);
@@ -95,9 +73,20 @@ namespace AddinX.Ribbon.Implementation.Command {
             element.AddCallbackAttribute("getItemLabel", ItemLabel);
             element.AddCallbackAttribute("getItemScreentip", ItemScreentip);
             element.AddCallbackAttribute("getItemSupertip", ItemSupertip);
-            element.AddCallbackAttribute("getSelectedItemIndex",SelectedItemIndex);
+            element.AddCallbackAttribute("getSelectedItemIndex", SelectedItemIndex);
         }
 
         #endregion
+
+        public Action<int> OnActionField { get;  set; }
+        public Func<int> SelectedItemIndex { get;  set; }
+        public Func<int> ItemCount { get;  set; }
+        public Func<IList<object>> ItemId { get;  set; }
+        public Func<IList<object>> ItemImage { get;  set; }
+        public Func<IList<string>> ItemLabel { get;  set; }
+        public Func<IList<string>> ItemScreentip { get;  set; }
+        public Func<IList<string>> ItemSupertip { get;  set; }
+        public Func<bool> getEnabled { get;  set; }
+        public Func<bool> IsVisibleField { get;  set; }
     }
 }

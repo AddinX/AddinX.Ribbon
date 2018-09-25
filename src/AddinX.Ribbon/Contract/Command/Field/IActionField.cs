@@ -4,7 +4,6 @@ namespace AddinX.Ribbon.Contract.Command.Field
 {
     public interface IActionField
     {
-        Action OnActionField { get; }
-
+        Action OnAction { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 using AddinX.Ribbon.Contract.Command;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    class RelayCommand : IRelayCommand {
+    internal class RelayCommand : IRelayCommand {
         public RelayCommand(Action execute, Func<bool> canExecute) {
             Execute = execute;
             CanExecute = canExecute;

@@ -12,7 +12,7 @@ namespace AddinX.Ribbon.Tests {
             builder.CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test").SetId("item1")
                     .Groups(g1 => g1.AddGroup("group").SetId("id")
-                        .Items(buildAction)));
+                        .AddItems(buildAction)));
             return builder;
         }
 
@@ -21,13 +21,18 @@ namespace AddinX.Ribbon.Tests {
             var builder = new RibbonBuilder();
             var btn = new Button().Supertip("test").ShowLabel().Description("test button").NoImage()
                 .SetId("test_btn");
+
+            btn.Callback(cmd => {
+                cmd.OnAction = ()=> { Console.WriteLine("test"); };
+            });
+
             builder.CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test")
-                    .Groups(g1 => g1.AddGroup("group").Items(g => g.AddButton("b")
-                        .Callback(cb => cb.OnAction(
-                                () => { Console.WriteLine("Test Button"); }
-                            ).GetEnabled(() => true)
-                        ))));
+                    .Groups(g1 => g1.AddGroup("group").AddItems(g => g.AddButton("b")
+                        .Callback(cb => {
+                            cb.OnAction =() => { Console.WriteLine("Test Button"); };
+                            cb.getEnabled = () => true;
+                        }))));
             Console.WriteLine(builder.GetXmlString());
         }
 
@@ -37,7 +42,7 @@ namespace AddinX.Ribbon.Tests {
             builder.CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test").SetId("item1")
                     .Groups(g1 => g1.AddGroup("group").SetId("id")
-                        .Items(g => g.AddCheckbox("checkbox")
+                        .AddItems(g => g.AddCheckbox("checkbox")
                             .Callback(cb =>
                                 cb.OnAction(b => { Console.WriteLine("Test Checkbox press:" + b); }
                                 )))));
@@ -64,7 +69,7 @@ namespace AddinX.Ribbon.Tests {
         public void TestAddControl() {
             var builder = new RibbonBuilder();
             builder.CustomUi.Ribbon.Tabs(t => t.AddTab("table")
-                .Groups(g => g.AddGroup("group1").Items(gc=>gc.AddButton("测试"))
+                .Groups(g => g.AddGroup("group1").AddItems(gc=>gc.AddButton("测试"))
                 )
             );
         }

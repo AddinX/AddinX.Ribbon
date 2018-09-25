@@ -7,25 +7,15 @@ using AddinX.Ribbon.Contract.Control.Item;
 using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class ComboBox : Control, IComboBox {
-        private string _imageMso;
-        private string _imagePath;
-        private bool _imageVisible;
-        private string _supertip;
-        private string _screentip;
-        private string _keytip;
-        private bool _showLabel;
-        private bool _showItemImage;
-        private int _comboBoxSize;
-        private int _maxLength;
+    public class ComboBox : Control<IComboBox, IComboBoxCommand>, IComboBox {
         private bool _dynamicItemLoading;
         private readonly Items _data;
 
         public ComboBox(): base( "comboBox") {
             _data = new Items();
-            _imageVisible = false;
-            _maxLength = 7;
-            _comboBoxSize = _maxLength;
+            //NoImage();
+            MaxLength(7);
+            SizeString(7);
         }
 
         protected internal override void SetRegister(ICallbackRigister register) {
@@ -33,82 +23,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             _data.SetRegister(register);
         }
 
-        public IComboBox SetId(string name) {
-            Id.SetId(name);
-            return this;
-        }
+        protected override IComboBox Interface => this;
 
-        public IComboBox SetIdMso(string name) {
-            Id.SetMicrosoftId(name);
-            return this;
-        }
-
-        public IComboBox SetIdQ(string ns, string name) {
-            Id.SetNamespaceId(ns, name);
-            return this;
-        }
-
-        public IComboBox ImageMso(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);;
-            _imageMso = name;
-            return this;
-        }
-
-        public IComboBox ImagePath(string path) {
-            _imageVisible = !string.IsNullOrEmpty(path);;
-            _imagePath = path;
-            return this;
-        }
-
-        public IComboBox NoImage() {
-            _imageVisible = false;
-            return this;
-        }
-
-        public IComboBox ShowItemImage() {
-            _showItemImage = false;
-            return this;
-        }
-
-        public IComboBox HideItemImage() {
-            _showItemImage = false;
-            return this;
-        }
-
-        public IComboBox ShowLabel() {
-            _showLabel = true;
-            return this;
-        }
-
-        public IComboBox HideLabel() {
-            _showLabel = false;
-            return this;
-        }
-
-        public IComboBox Supertip(string supertip) {
-            _supertip = supertip;
-            return this;
-        }
-
-        public IComboBox Keytip(string keytip) {
-            _keytip = keytip;
-            return this;
-        }
-
-        public IComboBox Screentip(string screentip) {
-            _screentip = screentip;
-            return this;
-        }
-
-        public IComboBox MaxLength(int maxLength) {
-            _maxLength = maxLength;
-            return this;
-        }
-
-        public IComboBox SizeString(int comboBoxSize) {
-            _comboBoxSize = comboBoxSize;
-            return this;
-        }
+        
 
         protected internal override XElement ToXml(XNamespace ns) {
             /*var tmpId = (ElementId) Id;
@@ -132,12 +49,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             );*/
 
             var element = base.ToXml(ns);
-            element.AddImageAttribute(_imageVisible, _imagePath, _imageMso);
-            element.AddAttribute("maxLength", _maxLength);
-            element.AddAttribute("sizeString", new string('W', _comboBoxSize));
-            element.AddAttribute("showLabel", _showLabel);
-            element.AddAttribute("showItemImage", _showItemImage);
-
+           
             if (_dynamicItemLoading) {
                 element.Add(new XAttribute("getItemCount", "GetItemCount")
                     , new XAttribute("getItemID", "GetItemId")
@@ -151,10 +63,6 @@ namespace AddinX.Ribbon.Implementation.Control {
                     element.Add(_data.ToXml(ns));
                 }
             }
-
-            element.AddAttribute("screentip", _screentip);
-            element.AddAttribute("supertip", _supertip);
-            element.AddAttribute("keytip", _keytip);
 
             return element;
         }
@@ -172,9 +80,8 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         #region Implementation of IRibbonCallback<out IComboBox,out IComboBoxCommand>
 
-        public IComboBox Callback(Action<IComboBoxCommand> builder) {
+        public void Callback(Action<IComboBoxCommand> builder) {
             builder(GetCommand<ComboBoxCommand>());
-            return this;
         }
 
         #endregion

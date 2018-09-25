@@ -5,17 +5,13 @@ using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
     public class DialogBoxLauncherCommand : IDialogBoxLauncherCommand, IVisibleField, IEnabledField, IActionField {
-        public Func<bool> IsVisibleField { get; private set; }
-        public Func<bool> IsEnabledField { get; private set; }
-        public Action OnActionField { get; private set; }
 
-        public DialogBoxLauncherCommand() {
-            //IsVisibleField = () => true;
-            //IsEnabledField = () => true;
-        }
+        public Action OnAction { get;  set; }
+        public Func<bool> getEnabled { get; set; }
+        public Func<bool> IsVisibleField { get; set; }
 
         public IDialogBoxLauncherCommand Action(Action act) {
-            OnActionField = act;
+            OnAction = act;
             return this;
         }
 
@@ -25,22 +21,24 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         public IDialogBoxLauncherCommand IsEnabled(Func<bool> condition) {
-            IsEnabledField = condition;
+            getEnabled = condition;
             return this;
         }
 
         #region Implementation of ICommand
 
         /// <summary>
-        /// 写入回调Xml属性
+        ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
         public void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("onAction", OnActionField);
-            element.AddCallbackAttribute("getEnabled", IsEnabledField);
+            element.AddCallbackAttribute("onAction", OnAction);
+            element.AddCallbackAttribute("getEnabled", getEnabled);
             element.AddCallbackAttribute("getVisible", IsVisibleField);
         }
 
         #endregion
+
+        
     }
 }

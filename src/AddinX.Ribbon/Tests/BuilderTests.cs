@@ -10,10 +10,9 @@ namespace AddinX.Ribbon.Tests {
             new RibbonBuilder().CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test").SetId("item1")
                     .Groups(g1 => g1.AddGroup("group").SetId("id")
-                        .Items(g => g.AddButton("b")
-                            .Callback(cb=>cb.OnAction(
-                                () => { Console.WriteLine("Test Button"); }
-                        )))));
+                        .AddItems(g => g.AddButton("b")
+                            .Callback(cb=> { cb.OnAction = () => { Console.WriteLine("Test Button"); }; }
+                                ))));
         }
     }
 }

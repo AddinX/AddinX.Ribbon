@@ -6,7 +6,7 @@ namespace AddinX.Ribbon.Contract
     {
         string GetRibbonXml();
 
-        ICommand FindRibbonCmd(string id);
+        ICommand FindCallback(string id);
 
         void OnClosing();
 

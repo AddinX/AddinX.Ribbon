@@ -6,7 +6,7 @@ using AddinX.Ribbon.Contract.Control.DialogBoxLauncher;
 using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class DialogBoxLauncher : Control, IDialogBoxLauncher {
+    public class DialogBoxLauncher : Control<IDialogBoxLauncher, IDialogBoxLauncherCommand>, IDialogBoxLauncher {
         private readonly ButtonUnsize _btn;
 
         public DialogBoxLauncher(): base( "dialogBoxLauncher") {
@@ -27,41 +27,13 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        public IDialogBoxLauncher Description(string description) {
-            _btn.Description(description);
-            return this;
-        }
+        protected override IDialogBoxLauncher Interface => this;
 
-        public IDialogBoxLauncher Supertip(string supertip) {
-            _btn.Supertip(supertip);
-            return this;
-        }
-
-        public IDialogBoxLauncher Keytip(string keytip) {
-            _btn.Keytip(keytip);
-            return this;
-        }
-
-        public IDialogBoxLauncher Screentip(string screentip) {
-            _btn.Screentip(screentip);
-            return this;
-        }
-
-        public IDialogBoxLauncher SetId(string name) {
-            _btn.SetId(name);
-            return this;
-        }
-
-        public IDialogBoxLauncher SetIdQ(string ns, string name) {
-            _btn.SetIdQ(ns, name);
-            return this;
-        }
 
         #region Implementation of IRibbonCallback<out IDialogBoxLauncher,out IDialogBoxLauncherCommand>
 
-        public IDialogBoxLauncher Callback(Action<IDialogBoxLauncherCommand> builder) {
+        public void Callback(Action<IDialogBoxLauncherCommand> builder) {
             builder(GetCommand<DialogBoxLauncherCommand>());
-            return this;
         }
 
         #endregion

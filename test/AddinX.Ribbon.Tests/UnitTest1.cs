@@ -44,7 +44,7 @@ namespace AddinX.Ribbon.Tests {
 
             //WriteXml(schemaSet.GlobalElements[new XmlQualifiedName("customUI", "http://schemas.microsoft.com/office/2009/07/customui")]);
             var ns = schema.Namespaces.ToArray()[0].Namespace;
-           var ctbutton = schemaSet.GlobalTypes[new XmlQualifiedName("CT_Button", ns)];
+           var ctbutton = schemaSet.GlobalTypes[new XmlQualifiedName("CT_LabelControl", ns)];
 
             WriteAttribute(schemaSet, ctbutton);
             return;
@@ -65,7 +65,11 @@ namespace AddinX.Ribbon.Tests {
                 }
                 int i = 1;
                 foreach (XmlSchemaAttribute item in complex.AttributeUses.Values) {
-                    Console.WriteLine($"\t{i++}:\t{item.Name}\t{GetAttribeType(schema,item.AttributeSchemaType)}\t{item.Use}\t{item.DefaultValue}");
+                    //Console.WriteLine($"\t{i++}:\t{item.Name}\t{GetAttribeType(schema,item.AttributeSchemaType)}\t{item.Use}\t{item.DefaultValue}");
+                    if (item.Parent is XmlSchemaAttributeGroup group) {
+                        Console.WriteLine($"\t//attrGroup: {group.Name} {item.AttributeSchemaType.Datatype}");
+                    }
+                    Console.WriteLine($"private const string tag_{item.Name}=\"{item.Name}\";");
                 }
             }
         }
@@ -130,16 +134,6 @@ namespace AddinX.Ribbon.Tests {
         private XmlSchemaObjectTable GetLocalElements(XmlSchemaComplexType complex) {
             var result = _localElementProperty.GetValue(complex, new object[0]);
             return (XmlSchemaObjectTable) result;
-        }
-        
-
-        [Test]
-        public void ValidateXmlTest() {
-
-            var xdoc = XDocument.Load("Sample/GroupWithButtons.xml");
-
-            
-
         }
     }
 }

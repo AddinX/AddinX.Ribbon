@@ -4,13 +4,7 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    class SeparatorCommand : ISeparatorCommand, IVisibleField {
-        public Func<bool> IsVisibleField { get; private set; }
-
-        public SeparatorCommand() {
-            //IsVisibleField = () => true;
-        }
-
+    public class SeparatorCommand : ISeparatorCommand, IVisibleField {
         public void IsVisible(Func<bool> condition) {
             IsVisibleField = condition;
         }
@@ -18,7 +12,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         #region Implementation of ICommand
 
         /// <summary>
-        /// 写入回调Xml属性
+        ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
         public void WriteCallbackXml(XElement element) {
@@ -26,5 +20,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         #endregion
+
+        public Func<bool> IsVisibleField { get; private set; }
     }
 }

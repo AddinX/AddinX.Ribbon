@@ -13,7 +13,7 @@ namespace AddinX.Ribbon.Tests {
             var errors = validator.Validate(new DocumentFormat.OpenXml.Office2010.CustomUI.CustomUI(xmlStr));
             if (errors != null && errors.Any()) {
                 foreach (var info in errors) {
-                    Console.WriteLine(info);
+                    Console.WriteLine($"{info.Id} {info.Description} {info.Node.OuterXml}  {info.ErrorType} \tPath:{info.Path?.XPath}");
                 }
             }
 

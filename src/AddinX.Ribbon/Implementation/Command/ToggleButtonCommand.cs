@@ -2,55 +2,115 @@
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
+using AddinX.Ribbon.Contract.Enums;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    class ToggleButtonCommand : IToggleButtonCommand, IVisibleField, IEnabledField, IPressedField, IActionPressedField {
-        public Action<bool> OnActionField { get; private set; }
+    public class ToggleButtonCommand : ToggleRegularCommand, IToggleButtonCommand, IVisibleField{
 
-        public Func<bool> IsVisibleField { get; private set; }
+        #region Implementation of ICommand
 
-        public Func<bool> IsEnabledField { get; private set; }
-
-        public Func<bool> PressedField { get; private set; }
-
-        public ToggleButtonCommand() {
-            //IsVisibleField = () => true;
-            //IsEnabledField = () => true;
-            //PressedField = () => false;
+        /// <summary>
+        ///     写入回调Xml属性
+        /// </summary>
+        /// <param name="element"></param>
+        public override void WriteCallbackXml(XElement element) {
+            base.WriteCallbackXml(element);
+            element.AddCallbackAttribute("getVisible",IsVisibleField);
         }
 
-        public IToggleButtonCommand Action(Action<bool> act) {
-            OnActionField = act;
-            return this;
+        #endregion
+
+
+        #region Implementation of IVisibleField
+
+        public Func<bool> IsVisibleField { get; set; }
+
+        #endregion
+    }
+
+
+    public class ToggleRegularCommand : IToggleRegularCommand {
+
+        /// <summary>
+        /// 写入回调Xml属性
+        /// </summary>
+        /// <param name="element"></param>
+        public virtual void WriteCallbackXml(XElement element) {
+            element.AddCallbackAttribute("onAction", "OnActionPressed", onActionPressed);
+            element.AddCallbackAttribute("getPressed", getPressed);
+            element.AddCallbackAttribute("getEnabled", getEnabled);
+            element.AddCallbackAttribute("getImage", getImage);
+            element.AddCallbackAttribute("getDescription", GetDescription);
         }
 
-        public IToggleButtonCommand IsVisible(Func<bool> condition) {
-            IsVisibleField = condition;
-            return this;
-        }
+        #region Implementation of IPressedField
 
-        public IToggleButtonCommand IsEnabled(Func<bool> condition) {
-            IsEnabledField = condition;
-            return this;
-        }
+        public Func<bool> getPressed { get; set; }
 
-        public IToggleButtonCommand Pressed(Func<bool> defaultValue) {
-            PressedField = defaultValue;
-            return this;
-        }
+        #endregion
 
+        #region Implementation of IDescriptionField
+
+        public Func<string> GetDescription { get; set; }
+
+        #endregion
+
+        #region Implementation of IEnabledField
+
+        public Func<bool> getEnabled { get; set; }
+
+        #endregion
+
+        #region Implementation of IImageField
+
+        public Func<object> getImage { get; set; }
+
+        #endregion
+
+        #region Implementation of IActionPressedField
+
+        public Action<bool> onActionPressed { get; set; }
+
+        #endregion
+    }
+
+    public class ButtonRegularCommand: IButtonRegularCommand {
         #region Implementation of ICommand
 
         /// <summary>
         /// 写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("onAction", OnActionField);
-            element.AddCallbackAttribute("getPressed",PressedField);
-            element.AddCallbackAttribute("getEnabled", IsEnabledField);
-            element.AddCallbackAttribute("getVisible", IsVisibleField);
+        public virtual void WriteCallbackXml(XElement element) {
+            element.AddCallbackAttribute("getEnabled", getEnabled);
+            element.AddCallbackAttribute("getImage", getImage);
+            element.AddCallbackAttribute("onAction", OnAction);
+            element.AddCallbackAttribute("getDescription",GetDescription);
         }
+
+        #endregion
+
+        #region Implementation of IEnabledField
+
+        public Func<bool> getEnabled { get; set; }
+
+        #endregion
+
+        #region Implementation of IImageField
+
+        public Func<object> getImage { get; set; }
+
+        #endregion
+
+        #region Implementation of IActionField
+
+        public Action OnAction { get; set; }
+
+        #endregion
+
+        #region Implementation of IDescriptionField
+
+        public Func<string> GetDescription { get; set; }
 
         #endregion
     }

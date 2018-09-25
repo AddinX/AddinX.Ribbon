@@ -7,7 +7,7 @@ using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class ButtonGroup : Control, IButtonGroup {
+    public class ButtonGroup : Control<IButtonGroup, IButtonGroupCommand>, IButtonGroup {
         private readonly Controls _items;
 
         public ButtonGroup(): base( "buttonGroup") {
@@ -31,20 +31,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        public IButtonGroup SetId(string name) {
-            Id.SetId(name);
-            return this;
-        }
-
-        public IButtonGroup SetIdMso(string name) {
-           // throw new NotImplementedException();
-            return this;
-        }
-
-        public IButtonGroup SetIdQ(string ns, string name) {
-            Id.SetNamespaceId(ns, name);
-            return this;
-        }
+        protected override IButtonGroup Interface => this;
 
         public IButtonGroup AddItems(Action<IButtonGroupControls> items) {
             items.Invoke(_items);
@@ -53,9 +40,8 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         #region Implementation of IRibbonCallback<out IButtonGroup,out IButtonGroupCommand>
 
-        public IButtonGroup Callback(Action<IButtonGroupCommand> builder) {
+        public void Callback(Action<IButtonGroupCommand> builder) {
             builder(GetCommand<ButtonGroupCommand>());
-            return this;
         }
 
         #endregion

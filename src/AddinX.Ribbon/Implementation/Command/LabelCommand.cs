@@ -4,43 +4,39 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    class LabelCommand : ILabelCommand, IVisibleField, IEnabledField, ILabelField {
-        public LabelCommand() {
-            //IsVisibleField = () => true;
-            //IsEnabledField = () => true;
-        }
+    public class LabelCommand : ILabelCommand, IVisibleField, IEnabledField, ILabelField {
+        public Func<bool> getEnabled { get;  set; }
 
-        public ILabelCommand IsVisible(Func<bool> condition) {
+        public Func<string> LabelField { get; set; }
+
+        public Func<bool> IsVisibleField { get; set; }
+
+        public void IsVisible(Func<bool> condition) {
             IsVisibleField = condition;
-            return this;
         }
 
-        public ILabelCommand IsEnabled(Func<bool> condition) {
-            IsEnabledField = condition;
-            return this;
+        public void IsEnabled(Func<bool> condition) {
+            getEnabled = condition;
         }
 
-        public ILabelCommand GetLabel(Func<string> text) {
+        public void GetLabel(Func<string> text) {
             LabelField = text;
-            return this;
         }
-
-        public Func<bool> IsVisibleField { get; private set; }
-        public Func<bool> IsEnabledField { get; private set; }
-        public Func<string> LabelField { get; private set; }
 
         #region Implementation of ICommand
 
         /// <summary>
-        /// 写入回调Xml属性
+        ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public void WriteCallbackXml(XElement element) {
+        public virtual void WriteCallbackXml(XElement element) {
             element.AddCallbackAttribute("getLabel", LabelField);
-            element.AddCallbackAttribute("getEnabled", IsEnabledField);
+            element.AddCallbackAttribute("getEnabled", getEnabled);
             element.AddCallbackAttribute("getVisible", IsVisibleField);
         }
 
         #endregion
+
+        
     }
 }

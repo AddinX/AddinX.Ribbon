@@ -153,7 +153,9 @@ namespace AddinX.Ribbon.Contract.Control {
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TCommand"></typeparam>
-    public interface IRibbonCallback<out T,out TCommand> where TCommand:ICommand {
-        T Callback(Action<TCommand> builder);
+    public interface IRibbonCallback<TCommand> where TCommand:ICommand {
+        void Callback(Action<TCommand> builder);
+
+        void Callback(TCommand command);
     }
 }

@@ -4,6 +4,6 @@ namespace AddinX.Ribbon.Contract.Command.Field
 {
     public interface IActionPressedField
     {
-        Action<bool> OnActionField { get; }
+        Action<bool> onActionPressed { get; set; }
     }
 }

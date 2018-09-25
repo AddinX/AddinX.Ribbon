@@ -3,7 +3,7 @@
 namespace AddinX.Ribbon.Contract.Control.DialogBoxLauncher
 {
     public interface IDialogBoxLauncher : IRibbonIdQ<IDialogBoxLauncher>,IRibbonExtra<IDialogBoxLauncher>,
-            IRibbonCallback<IDialogBoxLauncher,IDialogBoxLauncherCommand>
+            IRibbonCallback<IDialogBoxLauncherCommand>
         //IDialogBoxLauncherExtra, IDialogBoxLauncherId
     {
 

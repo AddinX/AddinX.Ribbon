@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
-using AddinX.Ribbon.Contract.Command.Field;
 using AddinX.Ribbon.Contract.Control;
+using AddinX.Ribbon.Contract.Control.Button;
+using AddinX.Ribbon.Contract.Control.DropDown;
+using AddinX.Ribbon.Contract.Control.Item;
+using AddinX.Ribbon.Contract.Enums;
+using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
@@ -32,10 +36,14 @@ namespace AddinX.Ribbon.Implementation.Control {
             return (TCmd) _command;
         }
 
+        protected void SetCommand<TCmd>(TCmd command) where TCmd : ICommand {
+            _command = command;
+        }
+
         private void ToCallbackXml(XElement element) {
             if (_command != null) {
                 _command.WriteCallbackXml(element);
-                Register.Add(Id,_command);
+                Register?.Add(Id,_command);
             }
         }
         
@@ -47,7 +55,8 @@ namespace AddinX.Ribbon.Implementation.Control {
     }
     
 
-    public abstract class ControlContainer : Control {
+    public abstract class ControlContainer<TElement> : Control<TElement> {
+        private const string tag_itemSize = "itemSize";
         protected ControlContainer(string elementName) : base(elementName) {
             Controls = new Controls();
         }
@@ -58,82 +67,246 @@ namespace AddinX.Ribbon.Implementation.Control {
             base.SetRegister(register);
             Controls.SetRegister(register);
         }
+
+        public TElement ItemNormalSize() {
+            base.SetAttribute(tag_itemSize,ControlSize.normal);
+            return this.Interface;
+        }
+
+        public TElement ItemLargeSize() {
+            base.SetAttribute(tag_itemSize, ControlSize.large);
+            return this.Interface;
+        }
+
+        protected internal override XElement ToXml(XNamespace ns) {
+            var element = base.ToXml(ns);
+            foreach (var control in Controls) {
+                element.Add(control.ToXml(ns));
+            }
+            return element;
+        }
     }
 
-    internal class CallbackRegister {
-
-        private IDictionary<string, IActionField> _actionFields;
-        private IDictionary<string, IActionPressedField> _actionPressedFields;
-        private IDictionary<string, IDropDownField> _dropDownFields;
-        private IDictionary<string, IDynamicItemsField> _dynamicItemsFields;
-        private IDictionary<string, IEnabledField> _enabledFields;
-        private IDictionary<string, ILabelField> _labelFields;
-        private IDictionary<string, IVisibleField> _visibleFields;
-        private IDictionary<string, ITextField> _textFields;
-        private IDictionary<string, IPressedField> _pressedFields;
-
-        public void Regist(string name, IActionField action) {
-            if (_actionFields == null) {
-                _actionFields = new Dictionary<string,IActionField>();
-            }
-            _actionFields.Add(name,action);
+    public abstract class Control<TElement, TCommand> : Control<TElement> where TCommand : ICommand {
+        protected Control(string elementName) : base(elementName) {
         }
 
-        public void Regist(string name, IActionPressedField action) {
-            if (_actionPressedFields == null) {
-                _actionPressedFields = new Dictionary<string, IActionPressedField>();
-            }
-            _actionPressedFields.Add(name, action);
+        public void Callback(TCommand command) {
+            base.SetCommand<TCommand>(command);
         }
 
-        public void Regist(string name, IDropDownField dropDownField) {
-            if (_dropDownFields == null) {
-                _dropDownFields = new Dictionary<string, IDropDownField>();
-            }
-            _dropDownFields.Add(name,dropDownField);
+        protected TElement BuildCallback<TCmd>(Action<TCommand> builder) where TCmd:TCommand, new() {
+            builder?.Invoke(base.GetCommand<TCmd>());
+            return Interface;
+        }
+    }
+
+    public abstract class Control<TElement> :Control{
+        private const string tag_size = "size";
+        private const string tag_getSize = "getSize";
+        private const string tag_onAction = "onAction";
+        private const string tag_enabled = "enabled";
+        private const string tag_getEnabled = "getEnabled";
+        private const string tag_description = "description";
+        private const string tag_getDescription = "getDescription";
+        private const string tag_image = "image";
+        private const string tag_imageMso = "imageMso";
+        private const string tag_getImage = "getImage";
+        private const string tag_id = "id";
+        private const string tag_idQ = "idQ";
+        private const string tag_tag = "tag";
+        private const string tag_idMso = "idMso";
+        private const string tag_screentip = "screentip";
+        private const string tag_getScreentip = "getScreentip";
+        private const string tag_supertip = "supertip";
+        private const string tag_getSupertip = "getSupertip";
+        private const string tag_label = "label";
+        private const string tag_getLabel = "getLabel";
+        private const string tag_insertAfterMso = "insertAfterMso";
+        private const string tag_insertBeforeMso = "insertBeforeMso";
+        private const string tag_insertAfterQ = "insertAfterQ";
+        private const string tag_insertBeforeQ = "insertBeforeQ";
+        private const string tag_visible = "visible";
+        private const string tag_getVisible = "getVisible";
+        private const string tag_keytip = "keytip";
+        private const string tag_getKeytip = "getKeytip";
+        private const string tag_showLabel = "showLabel";
+        private const string tag_getShowLabel = "getShowLabel";
+        private const string tag_showImage = "showImage";
+        private const string tag_getShowImage = "getShowImage";
+        private const string tag_showItemLabel = "showItemLabel";
+        private const string tag_showItemImage = "showItemImage";
+        private const string tag_invalidateContentOnDrop = "invalidateContentOnDrop";
+        private const string tag_columns = "columns";
+        private const string tag_rows = "rows";
+        private const string tag_itemWidth = "itemWidth";
+        private const string tag_itemHeight = "itemHeight";
+        private const string tag_getItemWidth = "getItemWidth";
+        private const string tag_getItemHeight = "getItemHeight";
+        private const string tag_showInRibbon = "showInRibbon";
+        private const string tag_getItemCount = "getItemCount";
+        private const string tag_getItemLabel = "getItemLabel";
+        private const string tag_getItemScreentip = "getItemScreentip";
+        private const string tag_getItemSupertip = "getItemSupertip";
+        private const string tag_getItemImage = "getItemImage";
+        private const string tag_getItemID = "getItemID";
+        private const string tag_sizeString = "sizeString";
+        private const string tag_getSelectedItemID = "getSelectedItemID";
+        private const string tag_getSelectedItemIndex = "getSelectedItemIndex";
+
+        private const string tag_maxLength = "maxLength";
+        private const string tag_getText = "getText";
+        private const string tag_onChange = "onChange";
+ 
+
+
+        protected Control(string elementName) : base(elementName) {
         }
 
-        public void Regist(string name, IDynamicItemsField field) {
-            if (_dynamicItemsFields == null) {
-                _dynamicItemsFields = new Dictionary<string, IDynamicItemsField>();
-            }
-            _dynamicItemsFields.Add(name,field);
+        protected abstract TElement Interface { get; }
+
+
+        public TElement SetIdMso(string name) {
+            Id.SetMicrosoftId(name);
+            return Interface;
         }
 
-        public void Regist(string name, IEnabledField enabledField) {
-            if (_enabledFields == null) {
-                _enabledFields = new Dictionary<string, IEnabledField>();
-            }
-            _enabledFields.Add(name,enabledField);
+        public TElement SetIdQ(string ns, string name) {
+            Id.SetNamespaceId(ns, name);
+            return Interface;
         }
 
-        public void Regist(string name, ILabelField field) {
-            if (_labelFields == null) {
-                _labelFields = new Dictionary<string, ILabelField>();
-            }
-            _labelFields.Add(name,field);
+        public TElement SetId(string name) {
+            Id.SetId(name);
+            return Interface;
         }
 
-        public void Regist(string name, IPressedField field) {
-            if (_pressedFields == null) {
-                _pressedFields = new Dictionary<string, IPressedField>();
-            }
-            _pressedFields.Add(name, field);
+
+        public TElement ImageMso(string name) {
+            //_imageVisible = !string.IsNullOrEmpty(name);
+            //_imageMso = name;
+            this.SetAttribute(tag_showImage, true);
+            this.SetAttribute(tag_imageMso, name);
+            return Interface;
         }
 
-        public void Regist(string name, ITextField field) {
-            if (_textFields == null) {
-                _textFields = new Dictionary<string, ITextField>();
-            }
-            _textFields.Add(name, field);
+        public TElement ImagePath(string path) {
+            this.SetAttribute(tag_showImage, true);
+            this.SetAttribute(tag_image, path);
+            //_imageVisible = !string.IsNullOrEmpty(path);;
+            //_imagePath = path;
+            return Interface;
         }
-        public void Regist(string name, IVisibleField field) {
-            if (_visibleFields == null) {
-                _visibleFields = new Dictionary<string, IVisibleField>();
-            }
-            _visibleFields.Add(name, field);
+
+        public TElement NoImage() {
+            //this.SetAttribute(tag_showImage, false);
+            this.RemoveAttribute(tag_showImage);
+            this.RemoveAttribute(tag_image);
+            this.RemoveAttribute(tag_imageMso);
+            return Interface;
+        }
+
+        public TElement Description(string description) {
+            this.SetAttribute(tag_description, description);
+            //_description = description;
+            return Interface;
+        }
+
+        public TElement Keytip(string keytip) {
+            this.SetAttribute(tag_keytip, keytip);
+            //_keytip = keytip;
+            return Interface;
+        }
+
+        public TElement Supertip(string supertip) {
+            this.SetAttribute(tag_supertip, supertip);
+            //_supertip = supertip;
+            return Interface;
+        }
+
+        public TElement Screentip(string screentip) {
+            this.SetAttribute(tag_screentip, screentip);
+            //_screentip = screentip;
+            return Interface;
+        }
+
+        public TElement LargeSize() {
+            this.SetAttribute(tag_size, ControlSize.large);
+            //_size = ControlSize.large;
+            return Interface;
+        }
+
+        public TElement NormalSize() {
+            this.SetAttribute(tag_size, ControlSize.normal);
+            //_size = ControlSize.normal;
+            return Interface;
+        }
+
+        public TElement ShowLabel() {
+            this.SetAttribute(tag_showLabel, true);
+            //_showLabel = true;
+            return Interface;
+        }
+
+        public TElement HideLabel() {
+            this.SetAttribute(tag_showLabel, false);
+            //_showLabel = false;
+            return Interface;
+        }
+
+        public TElement ShowItemLabel() {
+            this.SetAttribute(tag_showItemLabel, true);
+            return Interface;
+        }
+
+        public TElement HideItemLabel() {
+            this.SetAttribute(tag_showItemLabel, true);
+            return Interface;
+        }
+
+
+        public TElement ShowItemImage() {
+            this.SetAttribute(tag_showItemImage, true);
+            return Interface;
+        }
+
+        public TElement HideItemImage() {
+            this.SetAttribute(tag_showItemImage, false);
+            return Interface;
+        }
+
+
+        public TElement SizeString(int size) {
+            //this.SetAttribute(tag_size, size);
+            this.SetAttribute(tag_sizeString, new string('W', size));
+            return this.Interface;
+        }
+
+        public TElement ItemHeight(int height) {
+            this.SetAttribute(tag_itemHeight, height);
+            return this.Interface;
+        }
+
+        public TElement ItemWidth(int width) {
+            this.SetAttribute(tag_itemWidth, width);
+            return this.Interface;
+        }
+
+        public TElement NumberRows(int rows) {
+            this.SetAttribute(tag_rows, rows);
+            return this.Interface;
+        }
+
+        public TElement NumberColumns(int cols) {
+            this.SetAttribute(tag_columns, cols);
+            return this.Interface;
+        }
+
+
+        public TElement MaxLength(int maxLength) {
+            SetAttribute(tag_maxLength,maxLength);
+            return this.Interface;
         }
 
     }
-
 }

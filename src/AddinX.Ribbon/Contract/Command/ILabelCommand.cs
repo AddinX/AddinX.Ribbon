@@ -4,10 +4,10 @@ namespace AddinX.Ribbon.Contract.Command
 {
     public interface ILabelCommand : ICommand
     {
-        ILabelCommand IsVisible(Func<bool> condition);
+        void IsVisible(Func<bool> condition);
 
-        ILabelCommand IsEnabled(Func<bool> condition);
+        void IsEnabled(Func<bool> condition);
 
-        ILabelCommand GetLabel(Func<string> text);
+        void GetLabel(Func<string> text);
     }
 }

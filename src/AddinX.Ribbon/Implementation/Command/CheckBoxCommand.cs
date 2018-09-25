@@ -4,12 +4,9 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    class CheckBoxCommand : ICheckBoxCommand, IVisibleField, IEnabledField, IPressedField, IActionPressedField {
-        public CheckBoxCommand() {
-            //IsVisibleField = () => true;
-            //IsEnabledField = () => true;
-            //PressedField = () => false;
-        }
+    internal class CheckBoxCommand : ICheckBoxCommand, IVisibleField, IEnabledField, IPressedField,
+        IActionPressedField {
+        public Action<bool> onActionPressed { get; set; }
 
         public ICheckBoxCommand IsVisible(Func<bool> condition) {
             IsVisibleField = condition;
@@ -17,30 +14,30 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         public ICheckBoxCommand IsEnabled(Func<bool> condition) {
-            IsEnabledField = condition;
+            getEnabled = condition;
             return this;
         }
 
         public ICheckBoxCommand Pressed(Func<bool> defaultValue) {
-            PressedField = defaultValue;
+            getPressed = defaultValue;
             return this;
         }
 
         public ICheckBoxCommand OnAction(Action<bool> act) {
-            OnActionField = act;
+            onActionPressed = act;
             return this;
         }
 
-        public Func<bool> IsVisibleField { get; private set; }
-        public Func<bool> IsEnabledField { get; private set; }
-        public Func<bool> PressedField { get; private set; }
-        public Action<bool> OnActionField { get; private set; }
-
         public void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("onAction",OnActionField);
-            element.AddCallbackAttribute("getPressed",PressedField);
-            element.AddCallbackAttribute("getVisible",IsVisibleField);
-            element.AddCallbackAttribute("getEnabled",IsEnabledField);
+            element.AddCallbackAttribute("onAction", "OnActionPressed", onActionPressed);
+            element.AddCallbackAttribute("getPressed", getPressed);
+            element.AddCallbackAttribute("getVisible", IsVisibleField);
+            element.AddCallbackAttribute("getEnabled", getEnabled);
         }
+
+        public Func<bool> getEnabled { get;  set; }
+        public Func<bool> getPressed { get;  set; }
+
+        public Func<bool> IsVisibleField { get;  set; }
     }
 }

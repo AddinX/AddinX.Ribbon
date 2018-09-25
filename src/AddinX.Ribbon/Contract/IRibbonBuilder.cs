@@ -21,5 +21,12 @@ namespace AddinX.Ribbon.Contract
         /// <param name="elementId"></param>
         /// <param name="command"></param>
         void Add(IElementId elementId, ICommand command);
+
+        /// <summary>
+        /// 根据 ControlId 查找命令对象
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        ICommand Find(string id);
     }
 }

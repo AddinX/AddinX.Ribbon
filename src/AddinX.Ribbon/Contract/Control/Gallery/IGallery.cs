@@ -7,7 +7,7 @@ namespace AddinX.Ribbon.Contract.Control.Gallery
     public interface IGallery :IRibbonId<IGallery>,IRibbonGalleryExtra<IGallery>,
             IRibbonImage<IGallery>,IRibbonItemImage<IGallery>,IRibbonItemLabel<IGallery>,
             IRibbonLabel<IGallery>,IRibbonDynamic<IGallery, IItems>,IRibbonSize<IGallery>,
-            IRibbonCallback<IGallery,IGalleryCommand>
+            IRibbonCallback<IGalleryCommand>
         //IGalleryExtra, IGalleryId,
         //IGalleryImage, IGalleryItemImage, IGalleryItemLabel,
         //IGalleryLabel, IGalleryItems, IGallerySize

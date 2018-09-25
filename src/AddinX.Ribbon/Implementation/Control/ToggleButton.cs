@@ -7,21 +7,13 @@ using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class ToggleButton : Control, IToggleButton {
-        private bool _imageVisible;
-        private string _imageMso;
-        private string _imagePath;
-        private bool _showLabel;
-        private string _description;
-        private string _supertip;
-        private ControlSize _size;
-        private string _screentip;
-        private string _keytip;
+    public class ToggleButton : Control<IToggleButton,IToggleButtonCommand>, IToggleButton {
+
 
         public ToggleButton(): base( "toggleButton") {
-            _imageVisible = false;
-            _size = ControlSize.normal;
-            _showLabel = true;
+            NoImage();
+            NormalSize();
+            ShowLabel();
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
@@ -44,106 +36,16 @@ namespace AddinX.Ribbon.Implementation.Control {
             );*/
 
             var element = base.ToXml(ns);
-            element.AddAttribute("showLabel", _showLabel);
-            element.AddAttribute("size", _size);
-            element.AddImageAttribute(_imageVisible, _imagePath, _imageMso);
-
-            if (!string.IsNullOrEmpty(_screentip)) {
-                element.Add(new XAttribute("screentip", _screentip));
-            }
-
-            if (!string.IsNullOrEmpty(_supertip)) {
-                element.Add(new XAttribute("supertip", _supertip));
-            }
-
-            if (!string.IsNullOrEmpty(_keytip)) {
-                element.Add(new XAttribute("keytip", _keytip));
-            }
-
-            if (!string.IsNullOrEmpty(_description)) {
-                element.Add(new XAttribute("description", _description));
-            }
 
             return element;
         }
 
-        public IToggleButton SetId(string name) {
-            Id.SetId(name);
-            return this;
-        }
+        protected override IToggleButton Interface => this;
 
-        public IToggleButton SetIdMso(string name) {
-            Id.SetMicrosoftId(name);
-            return this;
-        }
+        #region Implementation of IRibbonCallback<IToggleButtonCommand>
 
-        public IToggleButton SetIdQ(string ns, string name) {
-            Id.SetNamespaceId(ns, name);
-            return this;
-        }
-
-        public IToggleButton ImageMso(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);
-            _imageMso = name;
-            return this;
-        }
-
-        public IToggleButton ImagePath(string path) {
-            _imageVisible = !string.IsNullOrEmpty(path);
-            _imagePath = path;
-            return this;
-        }
-
-        public IToggleButton NoImage() {
-            _imageVisible = false;
-            return this;
-        }
-
-        public IToggleButton ShowLabel() {
-            _showLabel = true;
-            return this;
-        }
-
-        public IToggleButton HideLabel() {
-            _showLabel = false;
-            return this;
-        }
-
-        public IToggleButton LargeSize() {
-            _size = ControlSize.large;
-            return this;
-        }
-
-        public IToggleButton NormalSize() {
-            _size = ControlSize.normal;
-            return this;
-        }
-
-        public IToggleButton Description(string description) {
-            _description = description;
-            return this;
-        }
-
-        public IToggleButton Supertip(string supertip) {
-            _supertip = supertip;
-            return this;
-        }
-
-        public IToggleButton Keytip(string keytip) {
-            _keytip = keytip;
-            return this;
-        }
-
-        public IToggleButton Screentip(string screentip) {
-            _screentip = screentip;
-            return this;
-        }
-
-        #region Implementation of IRibbonCallback<out IToggleButton,out IToggleButtonCommand>
-
-        public IToggleButton Callback(Action<IToggleButtonCommand> builder) {
-            builder(GetCommand<ToggleButtonCommand>());
-            return this;
+        public void Callback(Action<IToggleButtonCommand> builder) {
+            builder?.Invoke(GetCommand<ToggleButtonCommand>());
         }
 
         #endregion

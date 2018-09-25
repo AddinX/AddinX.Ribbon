@@ -1,20 +1,17 @@
 ﻿using System;
+using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Contract.Command
 {
-    public interface IToggleButtonCommand : ICommand
-    {
-        IToggleButtonCommand Action(Action<bool> act);
+    public interface IToggleButtonCommand : IToggleRegularCommand{
 
-        IToggleButtonCommand IsVisible(Func<bool> condition);
+    }
 
-        IToggleButtonCommand IsEnabled(Func<bool> condition);
+    public interface IToggleRegularCommand: ICommand, IDescriptionField, IEnabledField, IImageField, IPressedField,IActionPressedField{
+         //getPressed
+    }
 
-        /// <summary>
-        /// determined whether the toggle button is checked or not when the application is launched.
-        /// </summary>
-        /// <param name="defaultValue">a boolean value</param>
-        /// <returns>Fluent Builder</returns>
-        IToggleButtonCommand Pressed(Func<bool> defaultValue);
+    public interface IButtonRegularCommand : ICommand,IDescriptionField, IActionField, IEnabledField,IImageField {
+
     }
 }

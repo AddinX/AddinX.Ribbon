@@ -9,112 +9,19 @@ using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class Menu : ControlContainer, IMenu {
-        private string _imageMso;
-        private string _imagePath;
-        private bool _imageVisible;
-        private string _supertip;
-        private string _screentip;
-        private string _keytip;
-        private string _description;
-        private bool _showLabel = true;
-        private ControlSize _itemSize = ControlSize.normal;
-        private ControlSize _size = ControlSize.normal;
+    public class Menu : ControlContainer<IMenu>, IMenu {
 
         public Menu(): base( "menu") {
-            _imageVisible = false;
-        }
-
-
-        public IMenu Description(string description) {
-            _description = description;
-            return this;
-        }
-
-        public IMenu Supertip(string supertip) {
-            _supertip = supertip;
-            return this;
-        }
-
-        public IMenu Keytip(string keytip) {
-            _keytip = keytip;
-            return this;
-        }
-
-        public IMenu Screentip(string screentip) {
-            _screentip = screentip;
-            return this;
-        }
-
-        public IMenu SetId(string name) {
-            Id.SetId(name);
-            return this;
-        }
-
-        public IMenu SetIdMso(string name) {
-            Id.SetMicrosoftId(name);
-            return this;
-        }
-
-        public IMenu SetIdQ(string ns, string name) {
-            Id.SetNamespaceId(ns, name);
-            return this;
-        }
-
-        public IMenu ImageMso(string name) {
-            _imageVisible = !string.IsNullOrEmpty(name);
-            _imageMso = name;
-            return this;
-        }
-
-        public IMenu ImagePath(string path) {
-            _imageVisible = !string.IsNullOrEmpty(path);
-            _imagePath = path;
-            return this;
-        }
-
-        public IMenu NoImage() {
-            _imageVisible = false;
-            return this;
-        }
-
-        public IMenu NormalSize() {
-            _size = ControlSize.normal;
-            return this;
-        }
-
-        public IMenu LargeSize() {
-            _size = ControlSize.large;
-            return this;
-        }
-
-        public IMenu ItemNormalSize() {
-            _itemSize = ControlSize.normal;
-            return this;
-        }
-
-        public IMenu ItemLargeSize() {
-            _itemSize = ControlSize.large;
-            return this;
-        }
-
-        public IMenu ShowLabel() {
-            _showLabel = true;
-            return this;
-        }
-
-        public IMenu HideLabel() {
-            _showLabel = false;
-            return this;
+            NoImage();
         }
 
         public IMenu AddItems(Action<IMenuControls> items) {
             items.Invoke(Controls);
             return this;
         }
-
+        /*
         protected internal override XElement ToXml(XNamespace ns) {
-            /*var tmpId = (ElementId) Id;
+            var tmpId = (ElementId) Id;
             var element = new XElement(ns + ElementName
                 , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
                 , new XAttribute("label", Label)
@@ -129,41 +36,35 @@ namespace AddinX.Ribbon.Implementation.Control {
                 , new XAttribute("getEnabled", "GetEnabled")
                 , new XAttribute("getVisible", "GetVisible")
                 , new XAttribute("tag", tmpId.Value)
-            );*/
+            );
             var element = base.ToXml(ns);
-            element.AddAttribute("showLabel", _showLabel);
-            element.AddAttribute("size", _size);
-            element.AddAttribute("itemSize", _itemSize);
-            element.AddImageAttribute(_imageVisible, _imagePath, _imageMso);
-            
-            if (!string.IsNullOrEmpty(_screentip)) {
-                element.Add(new XAttribute("screentip", _screentip));
-            }
-
-            if (!string.IsNullOrEmpty(_supertip)) {
-                element.Add(new XAttribute("supertip", _supertip));
-            }
-
-            if (!string.IsNullOrEmpty(_keytip)) {
-                element.Add(new XAttribute("keytip", _keytip));
-            }
-
-            if (!string.IsNullOrEmpty(_description)) {
-                element.Add(new XAttribute("description", _description));
-            }
-
+           
             if (Controls.Any()) {
                 element.Add(Controls.ToXml(ns));
             }
 
             return element;
         }
+        */
 
         #region Implementation of IRibbonCallback<out IMenu,out IMenuCommand>
 
-        public IMenu Callback(Action<IMenuCommand> builder) {
+        public void Callback(Action<IMenuCommand> builder) {
             builder(GetCommand<MenuCommand>());
-            return this;
+        }
+
+        #endregion
+
+        #region Overrides of Control<IMenu>
+
+        protected override IMenu Interface => this;
+
+        #endregion
+
+        #region Implementation of IRibbonCallback<out IMenu,IMenuCommand>
+
+        public void Callback(IMenuCommand command) {
+            base.SetCommand(command);
         }
 
         #endregion

@@ -8,31 +8,23 @@ using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class Box : Control, IBox {
+    public class Box : Control<IBox,IBoxCommand>, IBox {
+        private const string tag_boxStyle = "boxStyle";
         private readonly Controls _items;
-        private BoxStyle _style;
 
         public Box(): base( "box") {
             _items = new Controls();
         }
 
-        public IBox SetId(string name) {
-            Id.SetId(name);
-            return this;
-        }
-
-        public IBox SetIdQ(string ns, string name) {
-            Id.SetNamespaceId(ns, name);
-            return this;
-        }
+        protected override IBox Interface => this;
 
         public IBox HorizontalDisplay() {
-            _style = BoxStyle.horizontal;
+            SetAttribute(tag_boxStyle, BoxStyle.horizontal);
             return this;
         }
 
         public IBox VerticalDisplay() {
-            _style = BoxStyle.vertical;
+            SetAttribute(tag_boxStyle, BoxStyle.vertical); 
             return this;
         }
 
@@ -43,7 +35,6 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         protected internal override XElement ToXml(XNamespace ns) {
             var element = base.ToXml(ns);
-            element.AddAttribute("boxStyle",_style);
             element.AddControls(_items, ns);
             return element;
         }
@@ -51,9 +42,8 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         #region Implementation of IRibbonCallback<out IBoxCommand>
 
-        public IBox Callback(Action<IBoxCommand> builder) {
+        public void Callback(Action<IBoxCommand> builder) {
             builder(GetCommand<BoxCommand>());
-            return this;
         }
 
         #endregion

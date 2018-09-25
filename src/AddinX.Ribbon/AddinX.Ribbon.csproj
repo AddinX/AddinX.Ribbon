@@ -41,11 +41,14 @@
   <ItemGroup>
     <Compile Include="Contract\Command\Field\IActionField.cs" />
     <Compile Include="Contract\Command\Field\IActionPressedField.cs" />
+    <Compile Include="Contract\Command\Field\IDescriptionField.cs" />
     <Compile Include="Contract\Command\Field\IDropDownField.cs" />
     <Compile Include="Contract\Command\Field\IDynamicItemsField.cs" />
     <Compile Include="Contract\Command\Field\IEnabledField.cs" />
+    <Compile Include="Contract\Command\Field\IImageField.cs" />
     <Compile Include="Contract\Command\Field\ILabelField.cs" />
     <Compile Include="Contract\Command\Field\IPressedField.cs" />
+    <Compile Include="Contract\Command\Field\ISizeField.cs" />
     <Compile Include="Contract\Command\Field\ITextField.cs" />
     <Compile Include="Contract\Command\Field\IVisibleField.cs" />
     <Compile Include="Contract\Command\IBoxCommand.cs" />
@@ -221,7 +224,6 @@
     <Compile Include="Implementation\Control\Checkbox.cs" />
     <Compile Include="Implementation\Control\ComboBox.cs" />
     <Compile Include="Implementation\Control\Control.cs" />
-    <Compile Include="Implementation\Control\AddInElementExtensions.cs" />
     <Compile Include="Implementation\Control\DialogBoxLauncher.cs" />
     <Compile Include="Implementation\Control\DropDow.cs" />
     <Compile Include="Implementation\Control\EditBox.cs" />

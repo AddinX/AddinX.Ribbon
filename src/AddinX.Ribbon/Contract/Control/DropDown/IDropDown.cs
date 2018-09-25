@@ -6,7 +6,7 @@ namespace AddinX.Ribbon.Contract.Control.DropDown
 {
     public interface IDropDown :IRibbonId<IDropDown>,IRibbonExtra<IDropDown>,IRibbonImage<IDropDown>,
         IRibbonItemImage<IDropDown>,IRibbonItemLabel<IDropDown>,IRibbonLabel<IDropDown>,IRibbonDynamic<IDropDown, IItems>,
-            IRibbonCallback<IDropDown,IDropDownCommand>
+            IRibbonCallback<IDropDownCommand>
         //IDropDownExtra, IDropDownId,
         //IDropDownImage, IDropDownItemImage, IDropDownItemLabel,
         //IDropDownLabel, IDropDownItems
