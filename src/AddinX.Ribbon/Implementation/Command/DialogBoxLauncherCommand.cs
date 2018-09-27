@@ -4,19 +4,19 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class DialogBoxLauncherCommand : IDialogBoxLauncherCommand, IVisibleField, IEnabledField, IActionField {
+    public class DialogBoxLauncherCommand : AbstractCommand, IDialogBoxLauncherCommand, IVisibleField, IEnabledField, IActionField {
 
-        public Action OnAction { get;  set; }
+        public Action onAction { get;  set; }
         public Func<bool> getEnabled { get; set; }
-        public Func<bool> IsVisibleField { get; set; }
+        public Func<bool> getVisible { get; set; }
 
         public IDialogBoxLauncherCommand Action(Action act) {
-            OnAction = act;
+            onAction = act;
             return this;
         }
 
         public IDialogBoxLauncherCommand IsVisible(Func<bool> condition) {
-            IsVisibleField = condition;
+            getVisible = condition;
             return this;
         }
 
@@ -31,10 +31,10 @@ namespace AddinX.Ribbon.Implementation.Command {
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("onAction", OnAction);
+        public override void WriteCallbackXml(XElement element) {
+            element.AddCallbackAttribute("onAction", onAction);
             element.AddCallbackAttribute("getEnabled", getEnabled);
-            element.AddCallbackAttribute("getVisible", IsVisibleField);
+            element.AddCallbackAttribute("getVisible", getVisible);
         }
 
         #endregion

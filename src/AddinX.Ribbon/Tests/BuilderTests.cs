@@ -11,7 +11,7 @@ namespace AddinX.Ribbon.Tests {
                 c => c.AddTab("test").SetId("item1")
                     .Groups(g1 => g1.AddGroup("group").SetId("id")
                         .AddItems(g => g.AddButton("b")
-                            .Callback(cb=> { cb.OnAction = () => { Console.WriteLine("Test Button"); }; }
+                            .Callback(cb=> { cb.onAction = () => { Console.WriteLine("Test Button"); }; }
                                 ))));
         }
     }

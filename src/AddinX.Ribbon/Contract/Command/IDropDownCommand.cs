@@ -15,9 +15,9 @@ namespace AddinX.Ribbon.Contract.Command
         
         IDropDownCommand ItemCounts(Func<int> numberItems);
 
-        IDropDownCommand ItemsId(Func<IList<object>> itemsId);
+        IDropDownCommand ItemsId(Func<int, string> itemsId);
 
-        IDropDownCommand ItemsLabel(Func<IList<string>> itemsLabel);
+        IDropDownCommand ItemsLabel(Func<int, string> itemsLabel);
 
         IDropDownCommand ItemsScreentip(Func<IList<string>> itemsScreentip);
 

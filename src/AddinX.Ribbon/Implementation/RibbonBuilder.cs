@@ -1,39 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
-using AddinX.Ribbon.Contract.Command;
-using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation {
-
-    public class CallbackRegister : ICallbackRigister {
-        private readonly IDictionary<string, ICommand> _commands = new SortedDictionary<string, ICommand>();
-
-        /// <summary>
-        /// 注册命令
-        /// </summary>
-        /// <param name="elementId"></param>
-        /// <param name="command"></param>
-        public void Add(IElementId elementId, ICommand command) {
-            Debug.WriteLine("Add Command {0} {1}", elementId, command.GetType());
-            if (_commands.ContainsKey(elementId.Value)) {
-                _commands[elementId.Value] = command;
-            } else {
-                _commands.Add(elementId.Value, command);
-            }
-        }
-
-        public ICommand Find(string id){
-            return  !_commands.Keys.Contains(id)
-                ? null
-                : _commands[id];
-        }
-
-    }
-
     public class RibbonBuilder : IRibbonBuilder {
         private readonly XNamespace _ns;
         private const string CustomUiNamespace = "http://schemas.microsoft.com/office/2009/07/customui";
@@ -50,7 +20,7 @@ namespace AddinX.Ribbon.Implementation {
 
         public string GetXmlString() {
             if (CallbackRigister == null) {
-                CallbackRigister = new CallbackRegister();
+                CallbackRigister = new RibbonCommands();
             }
             ((AddInElement)CustomUi).SetRegister(CallbackRigister);
             var doc = new XDocument(new XDeclaration("1.0", "utf-8", null));

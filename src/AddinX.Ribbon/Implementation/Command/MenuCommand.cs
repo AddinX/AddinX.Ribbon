@@ -4,11 +4,11 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class MenuCommand : IMenuCommand, IVisibleField, IEnabledField {
+    public class MenuCommand : AbstractCommand,IMenuCommand, IVisibleField, IEnabledField {
         public Func<bool> getEnabled { get; set; }
 
         public IMenuCommand IsVisible(Func<bool> condition) {
-            IsVisibleField = condition;
+            getVisible = condition;
             return this;
         }
 
@@ -23,13 +23,13 @@ namespace AddinX.Ribbon.Implementation.Command {
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public void WriteCallbackXml(XElement element) {
+        public override void WriteCallbackXml(XElement element) {
             element.AddCallbackAttribute("getEnabled", getEnabled);
-            element.AddCallbackAttribute("getVisible", IsVisibleField);
+            element.AddCallbackAttribute("getVisible", getVisible);
         }
 
         #endregion
 
-        public Func<bool> IsVisibleField { get; private set; }
+        public Func<bool> getVisible { get; set; }
     }
 }

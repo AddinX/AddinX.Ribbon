@@ -21,8 +21,7 @@ namespace AddinX.Ribbon.ExcelDna
 
         protected RibbonFluent()
         {
-            //cmds = new RibbonCommands();
-            _callbackRigister = new CallbackRegister();
+            _callbackRigister = new RibbonCommands();
         }
 
         public override void OnBeginShutdown(ref Array custom)

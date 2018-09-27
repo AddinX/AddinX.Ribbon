@@ -5,9 +5,9 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class ComboBoxCommand : IComboBoxCommand, ITextField, IEnabledField, IVisibleField, IDynamicItemsField {
+    public class ComboBoxCommand : AbstractCommand, IComboBoxCommand, ITextField, IEnabledField, IVisibleField, IDynamicItemsField {
         public IComboBoxCommand IsVisible(Func<bool> condition) {
-            IsVisibleField = condition;
+            getVisible = condition;
             return this;
         }
 
@@ -17,27 +17,27 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         public IComboBoxCommand GetText(Func<string> defaultValue) {
-            TextField = defaultValue;
+            getText = defaultValue;
             return this;
         }
 
         public IComboBoxCommand OnChange(Action<string> newText) {
-            OnChangeFieldAction = newText;
+            onChange = newText;
             return this;
         }
 
         public IComboBoxCommand ItemCounts(Func<int> numberItems) {
-            ItemCount = numberItems;
+            getItemCount = numberItems;
             return this;
         }
 
-        public IComboBoxCommand ItemsId(Func<IList<object>> itemsId) {
-            ItemId = itemsId;
+        public IComboBoxCommand ItemsId(Func<int, string> itemsId) {
+            getItemID = itemsId;
             return this;
         }
 
-        public IComboBoxCommand ItemsLabel(Func<IList<string>> itemsLabel) {
-            ItemLabel = itemsLabel;
+        public IComboBoxCommand ItemsLabel(Func<int, string> itemsLabel) {
+            getItemLabel = itemsLabel;
             return this;
         }
 
@@ -57,32 +57,32 @@ namespace AddinX.Ribbon.Implementation.Command {
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("onChange", OnChangeFieldAction);
-            element.AddCallbackAttribute("getText", TextField);
+        public override void WriteCallbackXml(XElement element) {
+            element.AddCallbackAttribute("onChange", onChange);
+            element.AddCallbackAttribute("getText", getText);
             element.AddCallbackAttribute("getEnabled", getEnabled);
-            element.AddCallbackAttribute("getVisible", IsVisibleField);
+            element.AddCallbackAttribute("getVisible", getVisible);
 
-            element.AddCallbackAttribute("getItemCount", ItemCount);
-            element.AddCallbackAttribute("getItemID", ItemId);
+            element.AddCallbackAttribute("getItemCount", getItemCount);
+            element.AddCallbackAttribute("getItemID", getItemID);
             element.AddCallbackAttribute("getItemImage", ItemImage);
-            element.AddCallbackAttribute("getItemLabel", ItemLabel);
+            element.AddCallbackAttribute("getItemLabel", getItemLabel);
             element.AddCallbackAttribute("getItemScreentip", ItemScreentip);
             element.AddCallbackAttribute("getItemSupertip", ItemSupertip);
         }
 
         #endregion
 
-        public Func<int> ItemCount { get;  set; }
-        public Func<IList<object>> ItemId { get;  set; }
+        public Func<int> getItemCount { get;  set; }
+        public Func<int, string> getItemID { get;  set; }
         public Func<IList<object>> ItemImage { get;  set; }
-        public Func<IList<string>> ItemLabel { get;  set; }
+        public Func<int, string> getItemLabel { get;  set; }
         public Func<IList<string>> ItemScreentip { get;  set; }
         public Func<IList<string>> ItemSupertip { get;  set; }
         public Func<bool> getEnabled { get;  set; }
-        public Func<string> TextField { get;  set; }
-        public Action<string> OnChangeFieldAction { get;  set; }
-        public Func<bool> IsVisibleField { get;  set; }
+        public Func<string> getText { get;  set; }
+        public Action<string> onChange { get;  set; }
+        public Func<bool> getVisible { get;  set; }
 
         public IComboBoxCommand ItemsImage(Func<IList<object>> itemsImage) {
             ItemImage = itemsImage;

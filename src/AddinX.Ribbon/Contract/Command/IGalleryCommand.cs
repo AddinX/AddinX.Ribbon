@@ -15,9 +15,9 @@ namespace AddinX.Ribbon.Contract.Command
         
         IGalleryCommand ItemCounts(Func<int> numberItems);
 
-        IGalleryCommand ItemsId(Func<IList<object>> itemsId);
+        IGalleryCommand ItemsId(Func<int, string> itemsId);
 
-        IGalleryCommand ItemsLabel(Func<IList<string>> itemsLabel);
+        IGalleryCommand ItemsLabel(Func<int, string> itemsLabel);
 
         IGalleryCommand ItemsScreentip(Func<IList<string>> itemsScreentip);
 

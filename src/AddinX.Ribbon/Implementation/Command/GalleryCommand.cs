@@ -5,19 +5,19 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class GalleryCommand : IGalleryCommand, IEnabledField, IVisibleField, IDynamicItemsField, IDropDownField {
-        public Action<int> OnActionField { get;  set; }
-        public Func<int> SelectedItemIndex { get;  set; }
-        public Func<int> ItemCount { get;  set; }
-        public Func<IList<object>> ItemId { get;  set; }
+    public class GalleryCommand : AbstractCommand,IGalleryCommand, IEnabledField, IVisibleField, IDynamicItemsField, IDropDownField {
+        public Action<int> onItemAction { get;  set; }
+        public Func<int> getSelectedItemIndex { get;  set; }
+        public Func<int> getItemCount { get;  set; }
+        public Func<int, string> getItemID { get;  set; }
         public Func<IList<object>> ItemImage { get;  set; }
-        public Func<IList<string>> ItemLabel { get;  set; }
+        public Func<int, string> getItemLabel { get;  set; }
         public Func<IList<string>> ItemScreentip { get;  set; }
         public Func<IList<string>> ItemSupertip { get;  set; }
         public Func<bool> getEnabled { get;  set; }
 
         public IGalleryCommand IsVisible(Func<bool> condition) {
-            IsVisibleField = condition;
+            getVisible = condition;
             return this;
         }
 
@@ -27,27 +27,27 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         public IGalleryCommand Action(Action<int> act) {
-            OnActionField = act;
+            onItemAction = act;
             return this;
         }
 
         public IGalleryCommand ItemSelectionIndex(Func<int> selectedItemIndex) {
-            SelectedItemIndex = selectedItemIndex;
+            getSelectedItemIndex = selectedItemIndex;
             return this;
         }
 
         public IGalleryCommand ItemCounts(Func<int> numberItems) {
-            ItemCount = numberItems;
+            getItemCount = numberItems;
             return this;
         }
 
-        public IGalleryCommand ItemsId(Func<IList<object>> itemsId) {
-            ItemId = itemsId;
+        public IGalleryCommand ItemsId(Func<int, string> itemsId) {
+            getItemID = itemsId;
             return this;
         }
 
-        public IGalleryCommand ItemsLabel(Func<IList<string>> itemsLabel) {
-            ItemLabel = itemsLabel;
+        public IGalleryCommand ItemsLabel(Func<int, string> itemsLabel) {
+            getItemLabel = itemsLabel;
             return this;
         }
 
@@ -72,22 +72,22 @@ namespace AddinX.Ribbon.Implementation.Command {
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("onAction", OnActionField);
+        public override void WriteCallbackXml(XElement element) {
+            element.AddCallbackAttribute("onAction", "OnItemAction", onItemAction);
             element.AddCallbackAttribute("getEnabled", getEnabled);
-            element.AddCallbackAttribute("getVisible", IsVisibleField);
+            element.AddCallbackAttribute("getVisible", getVisible);
 
-            element.AddCallbackAttribute("getItemCount", ItemCount);
-            element.AddCallbackAttribute("getItemID", "GetItemId", ItemId);
+            element.AddCallbackAttribute("getItemCount", getItemCount);
+            element.AddCallbackAttribute("getItemID", "GetItemId", getItemID);
             element.AddCallbackAttribute("getItemImage", ItemImage);
-            element.AddCallbackAttribute("getItemLabel", ItemLabel);
+            element.AddCallbackAttribute("getItemLabel", getItemLabel);
             element.AddCallbackAttribute("getItemScreentip", ItemScreentip);
             element.AddCallbackAttribute("getItemSupertip", ItemSupertip);
-            element.AddCallbackAttribute("getSelectedItemIndex", SelectedItemIndex);
+            element.AddCallbackAttribute("getSelectedItemIndex", getSelectedItemIndex);
         }
 
         #endregion
 
-        public Func<bool> IsVisibleField { get; private set; }
+        public Func<bool> getVisible { get; set; }
     }
 }

@@ -19,33 +19,6 @@ namespace AddinX.Ribbon.Implementation.Control {
             items.Invoke(Controls);
             return this;
         }
-        /*
-        protected internal override XElement ToXml(XNamespace ns) {
-            var tmpId = (ElementId) Id;
-            var element = new XElement(ns + ElementName
-                , new XAttribute(tmpId.Type.ToString(), tmpId.Value)
-                , new XAttribute("label", Label)
-                , new XAttribute("size", _size.ToString())
-                , new XAttribute("showLabel", _showLabel)
-                , new XAttribute("itemSize", _itemSize.ToString())
-                , _imageVisible
-                    ? string.IsNullOrEmpty(_imageMso)
-                        ? new XAttribute("image", _imagePath)
-                        : new XAttribute("imageMso", _imageMso)
-                    : new XAttribute("showImage", "false")
-                , new XAttribute("getEnabled", "GetEnabled")
-                , new XAttribute("getVisible", "GetVisible")
-                , new XAttribute("tag", tmpId.Value)
-            );
-            var element = base.ToXml(ns);
-           
-            if (Controls.Any()) {
-                element.Add(Controls.ToXml(ns));
-            }
-
-            return element;
-        }
-        */
 
         #region Implementation of IRibbonCallback<out IMenu,out IMenuCommand>
 

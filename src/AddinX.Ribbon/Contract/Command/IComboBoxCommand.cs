@@ -20,9 +20,9 @@ namespace AddinX.Ribbon.Contract.Command
 
         IComboBoxCommand ItemCounts(Func<int> numberItems);
 
-        IComboBoxCommand ItemsId(Func<IList<object>> itemsId);
+        IComboBoxCommand ItemsId(Func<int, string> itemsId);
 
-        IComboBoxCommand ItemsLabel(Func<IList<string>> itemsLabel);
+        IComboBoxCommand ItemsLabel(Func<int, string> itemsLabel);
 
         IComboBoxCommand ItemsScreentip(Func<IList<string>> itemsScreentip);
 

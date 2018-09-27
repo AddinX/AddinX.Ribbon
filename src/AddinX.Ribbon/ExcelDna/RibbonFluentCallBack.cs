@@ -4,41 +4,46 @@ using ExcelDna.Integration.CustomUI;
 namespace AddinX.Ribbon.ExcelDna {
     public abstract partial class RibbonFluent {
         public void OnAction(IRibbonControl control) {
-            if (!(FindCallback(control.Id) is IActionField field)) { return; }
-            field.OnAction.Invoke();
+            if (FindCallback(control.Id) is IActionField field) {
+                field.onAction?.Invoke();
+            }
         }
 
         public void OnActionPressed(IRibbonControl control, bool pressed) {
-            var field = FindCallback(control.Id) as IActionPressedField;
-            field?.onActionPressed(pressed);
+            if (FindCallback(control.Id) is IActionPressedField field) {
+                field.onActionPressed?.Invoke(pressed);
+            }
         }
 
-        public void OnActionDropDown(IRibbonControl control, string selectedId, int selectedIndex) {
-            var field = FindCallback(control.Id) as IDropDownField;
-            field?.OnActionField(selectedIndex);
+        public void OnItemAction(IRibbonControl control, string selectedId, int selectedIndex) {
+            if(FindCallback(control.Id) is IDropDownField field){
+                field.onItemAction?.Invoke(selectedIndex);
+            }
         }
 
         public bool GetEnabled(IRibbonControl control) {
-            return !(FindCallback(control.Id) is IEnabledField field)
-                || field.getEnabled.Invoke();
+            if (FindCallback(control.Id) is IEnabledField field){
+                if (field.getEnabled != null) {
+                    return field.getEnabled();
+                }
+            }
+
+            return false;
         }
 
         public bool GetVisible(IRibbonControl control) {
-            return !(FindCallback(control.Id) is IVisibleField field)
-                || field.IsVisibleField.Invoke();
+            if(FindCallback(control.Id) is IVisibleField field){
+                if (field.getVisible != null) {
+                    return field.getVisible();
+                }
+            }
+
+            return false;
         }
 
         public bool GetPressed(IRibbonControl control) {
             return !(FindCallback(control.Id) is IPressedField field)
                 || field.getPressed.Invoke();
-        }
-
-        public string GetSize(IRibbonControl control) {
-            if (FindCallback(control.Id) is ISizeField field) {
-                return field.getSize.Invoke().ToString();
-            } else {
-                return null;
-            }
         }
 
         public object GetImage(IRibbonControl control) {
@@ -50,56 +55,88 @@ namespace AddinX.Ribbon.ExcelDna {
         }
 
         public string GetText(IRibbonControl control) {
-            return !(FindCallback(control.Id) is ITextField field) ? string.Empty : field.TextField.Invoke();
+            if (FindCallback(control.Id) is ITextField field){
+                if (field.getText != null) {
+                    return field.getText();
+                }
+            }
+            return string.Empty;
         }
 
         public void OnChange(IRibbonControl control, string newValue) {
-            var field = FindCallback(control.Id) as ITextField;
-            field?.OnChangeFieldAction(newValue);
+            if (FindCallback(control.Id) is ITextField field) {
+                field.onChange?.Invoke(newValue);
+            }
         }
 
         public int GetItemCount(IRibbonControl control) {
-            var field = FindCallback(control.Id) as IDynamicItemsField;
-            return field?.ItemCount() ?? 0;
+            if (FindCallback(control.Id) is IDynamicItemsField field) {
+                if (field.getItemCount != null) {
+                    return field.getItemCount();
+                }
+            }
+
+            return 0;
         }
 
         public object GetItemId(IRibbonControl control, int index) {
-            var field = FindCallback(control.Id) as IDynamicItemsField;
-            var list = field?.ItemId();
-            if (list == null || list.Count <= index)
-                return null;
-            return list[index];
+            if (FindCallback(control.Id) is IDynamicItemsField field) {
+                if (field.getItemID != null) {
+                    return field.getItemID(index);
+                }
+            }
+
+            return null;
 
         }
 
         public object GetItemImage(IRibbonControl control, int index) {
-            var field = FindCallback(control.Id) as IDynamicItemsField;
-            return field?.ItemImage()?[index];
+            if (FindCallback(control.Id) is IDynamicItemsField field) {
+                if (field.ItemImage != null) {
+                    return field.ItemImage()?[index];
+                }
+            }
+
+            return null;
         }
 
         public string GetItemLabel(IRibbonControl control, int index) {
-            var field = FindCallback(control.Id) as IDynamicItemsField;
-            return field?.ItemLabel()?[index];
+            if (FindCallback(control.Id) is IDynamicItemsField field) {
+                if (field.getItemLabel != null) {
+                    return field.getItemLabel(index);
+                }
+            }
+
+            return string.Empty;
         }
 
         public string GetItemScreentip(IRibbonControl control, int index) {
-            var field = FindCallback(control.Id) as IDynamicItemsField;
-            return field?.ItemScreentip()?[index];
+            if (FindCallback(control.Id) is IDynamicItemsField field) {
+                return field?.ItemScreentip()?[index];
+            }
+
+            return string.Empty;
         }
 
         public string GetItemSupertip(IRibbonControl control, int index) {
-            var field = FindCallback(control.Id) as IDynamicItemsField;
-            return field?.ItemSupertip()?[index];
+            if (FindCallback(control.Id) is IDynamicItemsField field) {
+                return field?.ItemSupertip()?[index];
+            }
+            return string.Empty;
         }
 
         public string GetLabel(IRibbonControl control) {
-            var field = FindCallback(control.Id) as ILabelField;
-            return field?.LabelField.Invoke() ?? string.Empty;
+            if (FindCallback(control.Id) is ILabelField field) {
+                return field?.getLabel.Invoke() ?? string.Empty;
+            }
+            return string.Empty;
         }
 
         public int GetSelectedItemIndex(IRibbonControl control) {
-            var field = FindCallback(control.Id) as IDropDownField;
-            return field?.SelectedItemIndex?.Invoke() ?? 0;
+            if (FindCallback(control.Id) is IDropDownField field) {
+                return field?.getSelectedItemIndex?.Invoke() ?? 0;
+            }
+            return 0;
         }
 
     }

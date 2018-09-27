@@ -4,12 +4,12 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    internal class CheckBoxCommand : ICheckBoxCommand, IVisibleField, IEnabledField, IPressedField,
+    public class CheckBoxCommand : AbstractCommand, ICheckBoxCommand, IVisibleField, IEnabledField, IPressedField,
         IActionPressedField {
         public Action<bool> onActionPressed { get; set; }
 
         public ICheckBoxCommand IsVisible(Func<bool> condition) {
-            IsVisibleField = condition;
+            getVisible = condition;
             return this;
         }
 
@@ -28,16 +28,20 @@ namespace AddinX.Ribbon.Implementation.Command {
             return this;
         }
 
-        public void WriteCallbackXml(XElement element) {
+        public override void WriteCallbackXml(XElement element) {
             element.AddCallbackAttribute("onAction", "OnActionPressed", onActionPressed);
             element.AddCallbackAttribute("getPressed", getPressed);
-            element.AddCallbackAttribute("getVisible", IsVisibleField);
+            element.AddCallbackAttribute("getVisible", getVisible);
             element.AddCallbackAttribute("getEnabled", getEnabled);
         }
 
+        /// <inheritdoc />
         public Func<bool> getEnabled { get;  set; }
+
+        /// <inheritdoc />
         public Func<bool> getPressed { get;  set; }
 
-        public Func<bool> IsVisibleField { get;  set; }
+        /// <inheritdoc />
+        public Func<bool> getVisible { get;  set; }
     }
 }

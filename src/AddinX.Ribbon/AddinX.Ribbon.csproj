@@ -48,7 +48,6 @@
     <Compile Include="Contract\Command\Field\IImageField.cs" />
     <Compile Include="Contract\Command\Field\ILabelField.cs" />
     <Compile Include="Contract\Command\Field\IPressedField.cs" />
-    <Compile Include="Contract\Command\Field\ISizeField.cs" />
     <Compile Include="Contract\Command\Field\ITextField.cs" />
     <Compile Include="Contract\Command\Field\IVisibleField.cs" />
     <Compile Include="Contract\Command\IBoxCommand.cs" />

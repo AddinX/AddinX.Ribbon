@@ -204,7 +204,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
 
         public IMenuSeparator AddSeparator(string title) {
             var item = new MenuSeparator();
-            item.SetLabel(title);
+            item.SetTitle(title);
             InnerList.Add(item);
             return item;
         }

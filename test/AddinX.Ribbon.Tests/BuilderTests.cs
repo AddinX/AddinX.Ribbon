@@ -1,7 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.Contract.Command.Field;
+using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Ribbon.Group;
 using AddinX.Ribbon.Implementation;
+using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Control;
 using NUnit.Framework;
 
@@ -23,17 +30,53 @@ namespace AddinX.Ribbon.Tests {
                 .SetId("test_btn");
 
             btn.Callback(cmd => {
-                cmd.OnAction = ()=> { Console.WriteLine("test"); };
+                cmd.onAction = ()=> { Console.WriteLine("test"); };
             });
 
             builder.CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test")
                     .Groups(g1 => g1.AddGroup("group").AddItems(g => g.AddButton("b")
                         .Callback(cb => {
-                            cb.OnAction =() => { Console.WriteLine("Test Button"); };
+                            cb.onAction =() => { Console.WriteLine("Test Button"); };
                             cb.getEnabled = () => true;
                         }))));
             Console.WriteLine(builder.GetXmlString());
+        }
+
+        [Test]
+        public void TestOrderInRibbonXml() {
+            var _startMeasureCommand = new ToggleButtonCommand();
+            var callbacks = new CallbackRegsMock();
+            var builder = new RibbonBuilder(){CallbackRigister = callbacks};
+            builder.CustomUi.Ribbon.Tabs(ts => ts.AddTab("测量管理工具")
+                .Groups(g => g.AddGroup("测量管理工具")
+                    .AddItems(items => {
+                        //<toggleButton id="Id_StartMeasuring" description="开始测量" getLabel="GetLabel" getPressed = "GetPressed" size = "large" onAction = "OnToggleButtonAction" getImage = "GetImage" getEnabled = "GetEnabled" />
+                            items.AddToggleButton("开始测量").LargeSize().Callback(_startMeasureCommand);
+                            items.AddSeparator();
+                            items.AddCheckbox("跟踪测量单元格")
+                                .Supertip("如果选中此项，在测量时会选中正在进行的 测量数据单元格,用来指示当前测量的位置")
+                                .Callback(chk => chk.Pressed(() => { return true; }).OnAction(b => Console.WriteLine("跟踪测量单元格" + b)));
+                            //<toggleButton id="Id_SpeechValue" imageMso="SpeakCells" label = "语音报读" supertip = "选中此项，会朗读测量读数，需要系统语音支持" onAction = "OnToggleButtonAction"getPressed = "GetPressed" />
+                            items.AddToggleButton("语音报读").Supertip("选中此项，会朗读测量读数，需要系统语音支持").Callback(t => t.onActionPressed = (b) => Console.WriteLine(t.ControlId + " " + b));
+                            //button id="SetMeasureValuesRange" label="测量数据区域" imageMso="ImportSharePointList" supertip = "设置当前工作表的数据采集区域" onAction = "OnButtonAction" getEnabled = "GetEnabled" />
+                            items.AddButton("测量数据区域").ImageMso("ImportSharePointList").Supertip("设置当前工作表的数据采集区域").Callback(t => t.onAction = () => Console.WriteLine($"{t.ControlId} Action"));    
+                        }
+                    )));
+            Console.WriteLine(builder.GetXmlString());
+            TestCallback(callbacks.Commands);
+        }
+
+        private void TestCallback(IEnumerable<ICommand> commands) {
+            foreach (var command in commands) {
+                if (command is IActionField actionField) {
+                    actionField.onAction?.Invoke();
+                }else if (command is IActionPressedField pressed) {
+                    pressed.onActionPressed?.Invoke(true);
+                }
+
+            }
+
         }
 
         [Test]
@@ -73,5 +116,50 @@ namespace AddinX.Ribbon.Tests {
                 )
             );
         }
+    }
+
+    public class CallbackRegsMock : ICallbackRigister {
+        private readonly IDictionary<string, ICommand> _commands = new SortedDictionary<string, ICommand>();
+
+        public IEnumerable<ICommand> Commands {
+            get { return _commands.Values; }
+        }
+
+        #region Implementation of ICallbackRigister
+        /// <summary>
+        /// 注册命令
+        /// </summary>
+        /// <param name="elementId"></param>
+        /// <param name="command"></param>
+        public void Add(IElementId elementId, ICommand command) {
+            Debug.WriteLine("Add Command {0} {1}", elementId, command.GetType());
+            if (_commands.ContainsKey(elementId.Value)) {
+                _commands[elementId.Value] = command;
+            } else {
+                _commands.Add(elementId.Value, command);
+            }
+        }
+
+        /// <summary>
+        /// 注册命令
+        /// </summary>
+        /// <param name="elementId"></param>
+        /// <param name="command"></param>
+        public void Add(string elementId, ICommand command) {
+            Debug.WriteLine("Add Command {0} {1}", elementId, command.GetType());
+            if (_commands.ContainsKey(elementId)) {
+                _commands[elementId] = command;
+            } else {
+                _commands.Add(elementId, command);
+            }
+        }
+
+        public ICommand Find(string id) {
+            return !_commands.Keys.Contains(id)
+                ? null
+                : _commands[id];
+        }
+
+        #endregion
     }
 }

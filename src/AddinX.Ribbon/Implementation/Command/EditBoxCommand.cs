@@ -4,9 +4,9 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class EditBoxCommand : IEditBoxCommand, IVisibleField, IEnabledField, ITextField {
+    public class EditBoxCommand : AbstractCommand, IEditBoxCommand, IVisibleField, IEnabledField, ITextField {
         public IEditBoxCommand IsVisible(Func<bool> condition) {
-            IsVisibleField = condition;
+            getVisible = condition;
             return this;
         }
 
@@ -16,12 +16,12 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         public IEditBoxCommand GetText(Func<string> defaultValue) {
-            TextField = defaultValue;
+            getText = defaultValue;
             return this;
         }
 
         public IEditBoxCommand OnChange(Action<string> newText) {
-            OnChangeFieldAction = newText;
+            onChange = newText;
             return this;
         }
 
@@ -31,19 +31,19 @@ namespace AddinX.Ribbon.Implementation.Command {
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("getText", TextField);
-            element.AddCallbackAttribute("onChange", OnChangeFieldAction);
+        public override void WriteCallbackXml(XElement element) {
+            element.AddCallbackAttribute("getText", getText);
+            element.AddCallbackAttribute("onChange", onChange);
             element.AddCallbackAttribute("getEnabled", getEnabled);
-            element.AddCallbackAttribute("getVisible", IsVisibleField);
+            element.AddCallbackAttribute("getVisible", getVisible);
         }
 
         #endregion
 
         public Func<bool> getEnabled { get;  set; }
-        public Func<string> TextField { get;  set; }
-        public Action<string> OnChangeFieldAction { get;  set; }
+        public Func<string> getText { get;  set; }
+        public Action<string> onChange { get;  set; }
 
-        public Func<bool> IsVisibleField { get;  set; }
+        public Func<bool> getVisible { get;  set; }
     }
 }

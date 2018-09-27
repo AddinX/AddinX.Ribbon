@@ -14,17 +14,14 @@ namespace AddinX.Ribbon.Implementation.Control {
     public abstract class Control : AddInElement {
        
         protected IElementId Id { get; }
-        protected string Label { get; private set; }
 
         private ICommand _command;
 
         protected Control(string elementName) :base(elementName) {
             Id = new ElementId();
-            Label = string.Empty;
         }
 
         protected internal void SetLabel(string label) {
-            Label = label;
             base.SetAttribute("label",label);
         }
 
@@ -40,16 +37,23 @@ namespace AddinX.Ribbon.Implementation.Control {
             _command = command;
         }
 
-        private void ToCallbackXml(XElement element) {
+        /// <summary>
+        /// 增加 命令回调属性
+        /// </summary>
+        /// <param name="element"></param>
+        private void AddCallbackAttributes(XElement element) {
             if (_command != null) {
                 _command.WriteCallbackXml(element);
+                if (_command is AbstractCommand absCmd) {
+                    absCmd.ControlId = this.Id.Value;
+                }
                 Register?.Add(Id,_command);
             }
         }
         
         protected internal override XElement ToXml(XNamespace ns) {
             var element = base.ToXml(ns,new XAttribute(Id.Type.ToString(), Id.Value));
-            ToCallbackXml(element);
+            AddCallbackAttributes(element);
             return element;
         }
     }

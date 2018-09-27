@@ -12,7 +12,6 @@ namespace AddinX.Ribbon.Implementation.Control {
         public Button() :base("button") {
             NormalSize();
             NoImage();
-            HideLabel();
         }
 
         protected override IButton Interface => this;

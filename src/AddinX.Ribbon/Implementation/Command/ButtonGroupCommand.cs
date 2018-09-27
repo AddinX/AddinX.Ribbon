@@ -4,9 +4,9 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class ButtonGroupCommand : IButtonGroupCommand, IVisibleField {
+    public class ButtonGroupCommand : AbstractCommand,IButtonGroupCommand, IVisibleField {
         public void IsVisible(Func<bool> condition) {
-            IsVisibleField = condition;
+            getVisible = condition;
         }
 
         #region Implementation of ICommand
@@ -15,12 +15,12 @@ namespace AddinX.Ribbon.Implementation.Command {
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("getVisible", IsVisibleField);
+        public override void WriteCallbackXml(XElement element) {
+            element.AddCallbackAttribute("getVisible", getVisible);
         }
 
         #endregion
 
-        public Func<bool> IsVisibleField { get; private set; }
+        public Func<bool> getVisible { get; set; }
     }
 }

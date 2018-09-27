@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
@@ -15,7 +16,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// <param name="element"></param>
         public override void WriteCallbackXml(XElement element) {
             base.WriteCallbackXml(element);
-            element.AddCallbackAttribute("getVisible",IsVisibleField);
+            element.AddCallbackAttribute("getVisible",getVisible);
         }
 
         #endregion
@@ -23,24 +24,24 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         #region Implementation of IVisibleField
 
-        public Func<bool> IsVisibleField { get; set; }
+        public Func<bool> getVisible { get; set; }
 
         #endregion
     }
 
 
-    public class ToggleRegularCommand : IToggleRegularCommand {
+    public class ToggleRegularCommand : AbstractCommand, IToggleRegularCommand {
 
         /// <summary>
         /// 写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public virtual void WriteCallbackXml(XElement element) {
+        public override void WriteCallbackXml(XElement element) {
             element.AddCallbackAttribute("onAction", "OnActionPressed", onActionPressed);
             element.AddCallbackAttribute("getPressed", getPressed);
             element.AddCallbackAttribute("getEnabled", getEnabled);
             element.AddCallbackAttribute("getImage", getImage);
-            element.AddCallbackAttribute("getDescription", GetDescription);
+            element.AddCallbackAttribute("getDescription", getDescription);
         }
 
         #region Implementation of IPressedField
@@ -51,7 +52,7 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         #region Implementation of IDescriptionField
 
-        public Func<string> GetDescription { get; set; }
+        public Func<string> getDescription { get; set; }
 
         #endregion
 
@@ -63,29 +64,35 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         #region Implementation of IImageField
 
-        public Func<object> getImage { get; set; }
+        public Func<Bitmap> getImage { get; set; }
 
         #endregion
 
         #region Implementation of IActionPressedField
 
+        /// <summary>
+        /// onAction
+        /// 回调
+        /// VBA：Sub OnActionPressed(control As IRibbonControl, isPressed As Boolean)
+        /// C#：void OnActionPressed(IRibbonControl control, bool isPressed)
+        /// </summary>
         public Action<bool> onActionPressed { get; set; }
 
         #endregion
     }
 
-    public class ButtonRegularCommand: IButtonRegularCommand {
+    public class ButtonRegularCommand: AbstractCommand, IButtonRegularCommand {
         #region Implementation of ICommand
 
         /// <summary>
         /// 写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public virtual void WriteCallbackXml(XElement element) {
+        public override void WriteCallbackXml(XElement element) {
             element.AddCallbackAttribute("getEnabled", getEnabled);
             element.AddCallbackAttribute("getImage", getImage);
-            element.AddCallbackAttribute("onAction", OnAction);
-            element.AddCallbackAttribute("getDescription",GetDescription);
+            element.AddCallbackAttribute("onAction", onAction);
+            element.AddCallbackAttribute("getDescription",getDescription);
         }
 
         #endregion
@@ -98,19 +105,36 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         #region Implementation of IImageField
 
-        public Func<object> getImage { get; set; }
+        public Func<Bitmap> getImage { get; set; }
 
         #endregion
 
         #region Implementation of IActionField
 
-        public Action OnAction { get; set; }
+        public Action onAction { get; set; }
 
         #endregion
 
         #region Implementation of IDescriptionField
 
-        public Func<string> GetDescription { get; set; }
+        public Func<string> getDescription { get; set; }
+
+        #endregion
+    }
+
+    public abstract class AbstractCommand : ICommand {
+
+
+
+        #region Implementation of ICommand
+
+        public string ControlId { get; protected internal set; }
+
+        /// <summary>
+        /// 写入回调Xml属性
+        /// </summary>
+        /// <param name="element"></param>
+        public abstract void WriteCallbackXml(XElement element);
 
         #endregion
     }
