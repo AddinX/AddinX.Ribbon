@@ -1,8 +1,9 @@
 ﻿using System;
 using AddinX.Ribbon.Contract.Control.MenuUnsize;
+using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class MenuUnsize : ControlContainer<IMenuUnsize>, IMenuUnsize {
+    public class MenuUnsize : ControlContainer<IMenuUnsize,Controls>, IMenuUnsize {
 
         public MenuUnsize(): base( "menu") {
             NoImage();
@@ -13,7 +14,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         
 
         public IMenuUnsize AddItems(Action<IMenuUnsizeControls> items) {
-            items.Invoke(Controls);
+            items.Invoke(Items);
             return this;
         }
     }

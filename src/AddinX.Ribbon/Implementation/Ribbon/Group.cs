@@ -8,7 +8,7 @@ using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
-    public class Group : ControlContainer<IGroup>, IGroup {
+    public class Group : ControlContainer<IGroup,Controls>, IGroup {
         private Controls _boxLauncher;
 
         public Group() :base("group") {}
@@ -56,7 +56,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         #region Implementation of IRibbonItems<out IGroup,out IGroupControls>
 
         public IGroup AddItems(Action<IGroupControls> items) {
-             items.Invoke(base.Controls);
+             items.Invoke(base.Items);
             return this;
         }
 

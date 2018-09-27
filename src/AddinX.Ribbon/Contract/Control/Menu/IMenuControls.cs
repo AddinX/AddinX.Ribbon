@@ -19,6 +19,6 @@ namespace AddinX.Ribbon.Contract.Control.Menu
 
         IMenuUnsize AddMenu(string label);
 
-        IMenuSeparator AddSeparator(string title);
+        IMenuSeparator AddSeparator();
     }
 }

@@ -364,7 +364,7 @@ namespace AddinX.Ribbon.UnitTest
                                             .SetId("BoutonOptionTwo")
                                             .ImageMso("HappyFace");
 
-                                        l.AddSeparator("separatorMenu");
+                                        l.AddSeparator();
                                         l.AddGallery("Colors").SetId("ColorsSelection")
                                             .ShowLabel().NoImage().ShowItemLabel()
                                             .HideItemImage()

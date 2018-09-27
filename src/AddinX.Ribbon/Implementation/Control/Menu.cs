@@ -9,14 +9,14 @@ using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class Menu : ControlContainer<IMenu>, IMenu {
+    public class Menu : ControlContainer<IMenu,Controls>, IMenu {
 
         public Menu(): base( "menu") {
             NoImage();
         }
 
         public IMenu AddItems(Action<IMenuControls> items) {
-            items.Invoke(Controls);
+            items.Invoke(Items);
             return this;
         }
 

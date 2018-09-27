@@ -56,7 +56,7 @@ namespace AddinX.Ribbon.Tests {
                             items.AddSeparator();
                             items.AddCheckbox("跟踪测量单元格")
                                 .Supertip("如果选中此项，在测量时会选中正在进行的 测量数据单元格,用来指示当前测量的位置")
-                                .Callback(chk => chk.Pressed(() => { return true; }).OnAction(b => Console.WriteLine("跟踪测量单元格" + b)));
+                                .Callback(chk => chk.GetPressed(() => { return true; }).OnChecked(b => Console.WriteLine("跟踪测量单元格" + b)));
                             //<toggleButton id="Id_SpeechValue" imageMso="SpeakCells" label = "语音报读" supertip = "选中此项，会朗读测量读数，需要系统语音支持" onAction = "OnToggleButtonAction"getPressed = "GetPressed" />
                             items.AddToggleButton("语音报读").Supertip("选中此项，会朗读测量读数，需要系统语音支持").Callback(t => t.onActionPressed = (b) => Console.WriteLine(t.ControlId + " " + b));
                             //button id="SetMeasureValuesRange" label="测量数据区域" imageMso="ImportSharePointList" supertip = "设置当前工作表的数据采集区域" onAction = "OnButtonAction" getEnabled = "GetEnabled" />
@@ -87,7 +87,7 @@ namespace AddinX.Ribbon.Tests {
                     .Groups(g1 => g1.AddGroup("group").SetId("id")
                         .AddItems(g => g.AddCheckbox("checkbox")
                             .Callback(cb =>
-                                cb.OnAction(b => { Console.WriteLine("Test Checkbox press:" + b); }
+                                cb.OnChecked(b => { Console.WriteLine("Test Checkbox press:" + b); }
                                 )))));
             Console.WriteLine(builder.GetXmlString());
         }

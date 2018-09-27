@@ -71,6 +71,12 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
             return item;
         }
 
+        IMenuSeparator IMenuControls.AddSeparator() {
+            var item = new MenuSeparator();
+            InnerList.Add(item);
+            return item;
+        }
+
         IMenuUnsize IMenuUnsizeControls.AddMenu(string label) {
             var item = new MenuUnsize();
             item.SetLabel(label);
@@ -202,9 +208,8 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
             return item;
         }
 
-        public IMenuSeparator AddSeparator(string title) {
+        IMenuSeparator IMenuUnsizeControls.AddSeparator() {
             var item = new MenuSeparator();
-            item.SetTitle(title);
             InnerList.Add(item);
             return item;
         }

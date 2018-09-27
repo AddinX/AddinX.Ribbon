@@ -2,19 +2,6 @@ using System;
 using AddinX.Ribbon.Contract.Command;
 
 namespace AddinX.Ribbon.Contract.Control {
-    public interface IRibbonControl {
-
-    }
-
-
-    public interface IButtonCommand<out T>  {
-        T OnAction(Action act);
-
-        T GetVisible(Func<bool> condition);
-
-        T GetEnabled(Func<bool> condition);
-    }
-
     public interface IRibbonId<out T>  {
 
         T SetId(string name);
@@ -81,12 +68,14 @@ namespace AddinX.Ribbon.Contract.Control {
         T HideLabel();
     }
 
-    public interface IRibbonExtra<out T> {
+    public interface IRibbonKeytip<out T> {
+        T Keytip(string keytip);
+    }
+
+    public interface IRibbonExtra<out T>:IRibbonKeytip<T> {
        // T Description(string description);
 
         T Supertip(string supertip);
-
-        T Keytip(string keytip);
 
         T Screentip(string screentip);
     }

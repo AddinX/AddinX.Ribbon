@@ -8,22 +8,22 @@ namespace AddinX.Ribbon.Implementation.Command {
         IActionPressedField {
         public Action<bool> onActionPressed { get; set; }
 
-        public ICheckBoxCommand IsVisible(Func<bool> condition) {
+        public ICheckBoxCommand GetVisible(Func<bool> condition) {
             getVisible = condition;
             return this;
         }
 
-        public ICheckBoxCommand IsEnabled(Func<bool> condition) {
+        public ICheckBoxCommand GetEnabled(Func<bool> condition) {
             getEnabled = condition;
             return this;
         }
 
-        public ICheckBoxCommand Pressed(Func<bool> defaultValue) {
+        public ICheckBoxCommand GetPressed(Func<bool> defaultValue) {
             getPressed = defaultValue;
             return this;
         }
 
-        public ICheckBoxCommand OnAction(Action<bool> act) {
+        public ICheckBoxCommand OnChecked(Action<bool> act) {
             onActionPressed = act;
             return this;
         }

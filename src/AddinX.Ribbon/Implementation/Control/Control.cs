@@ -59,17 +59,17 @@ namespace AddinX.Ribbon.Implementation.Control {
     }
     
 
-    public abstract class ControlContainer<TElement> : Control<TElement> {
+    public abstract class ControlContainer<TElement,TContainer> : Control<TElement> where TContainer:AddInList,new() {
         private const string tag_itemSize = "itemSize";
         protected ControlContainer(string elementName) : base(elementName) {
-            Controls = new Controls();
+            Items = new TContainer();
         }
 
-        protected Controls Controls { get; }
+        protected TContainer Items { get; }
 
         protected internal override void SetRegister(ICallbackRigister register) {
             base.SetRegister(register);
-            Controls.SetRegister(register);
+            Items.SetRegister(register);
         }
 
         public TElement ItemNormalSize() {
@@ -84,8 +84,8 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         protected internal override XElement ToXml(XNamespace ns) {
             var element = base.ToXml(ns);
-            foreach (var control in Controls) {
-                element.Add(control.ToXml(ns));
+            foreach (var childElement in Items.ToXml(ns)) {
+                element.Add(childElement);
             }
             return element;
         }
