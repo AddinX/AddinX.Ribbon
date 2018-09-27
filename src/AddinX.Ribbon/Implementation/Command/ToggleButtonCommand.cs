@@ -93,6 +93,7 @@ namespace AddinX.Ribbon.Implementation.Command {
             element.AddCallbackAttribute("getImage", getImage);
             element.AddCallbackAttribute("onAction", onAction);
             element.AddCallbackAttribute("getDescription",getDescription);
+            element.AddCallbackAttribute("getVisible", getVisible);
         }
 
         #endregion
@@ -118,6 +119,18 @@ namespace AddinX.Ribbon.Implementation.Command {
         #region Implementation of IDescriptionField
 
         public Func<string> getDescription { get; set; }
+
+        #endregion
+
+        #region Implementation of IVisibleField
+
+        /// <summary>
+        /// getVisible
+        /// 回调
+        /// VBA：Sub GetVisible(control As IRibbonControl, ByRef returnedVal)
+        /// C#：bool GetVisible(IRibbonControl control)
+        /// </summary>
+        public Func<bool> getVisible { get; set; }
 
         #endregion
     }

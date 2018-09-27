@@ -33,7 +33,7 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         protected override IButtonGroup Interface => this;
 
-        public IButtonGroup AddItems(Action<IButtonGroupControls> items) {
+        public IButtonGroup Items(Action<IButtonGroupControls> items) {
             items.Invoke(_items);
             return this;
         }

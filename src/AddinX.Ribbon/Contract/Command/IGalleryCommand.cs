@@ -9,7 +9,7 @@ namespace AddinX.Ribbon.Contract.Command
 
         IGalleryCommand IsEnabled(Func<bool> condition);
 
-        IGalleryCommand Action(Action<int> act);
+        IGalleryCommand OnItemAction(Action<int> act);
         
         IGalleryCommand ItemSelectionIndex(Func<int> selectedItemIndex);
         
@@ -19,10 +19,10 @@ namespace AddinX.Ribbon.Contract.Command
 
         IGalleryCommand ItemsLabel(Func<int, string> itemsLabel);
 
-        IGalleryCommand ItemsScreentip(Func<IList<string>> itemsScreentip);
+        IGalleryCommand ItemsScreentip(Func<int,string> itemsScreentip);
 
-        IGalleryCommand ItemsSupertip(Func<IList<string>> itemsSupertip);
+        IGalleryCommand ItemsSupertip(Func<int,string> itemsSupertip);
 
-        IGalleryCommand ItemsImage(Func<IList<object>> itemsImage);
+        IGalleryCommand ItemsImage(Func<int,object> itemsImage);
     }
 }

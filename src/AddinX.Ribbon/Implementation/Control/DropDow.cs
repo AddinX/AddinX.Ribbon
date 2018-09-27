@@ -30,14 +30,7 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         protected internal override XElement ToXml(XNamespace ns) {
             var element = base.ToXml(ns);
-            if (_dynamicItemsLoading) {
-                element.Add(new XAttribute("getItemCount", "GetItemCount")
-                    , new XAttribute("getItemID", "GetItemId")
-                    , new XAttribute("getItemImage", "GetItemImage")
-                    , new XAttribute("getItemLabel", "GetItemLabel")
-                    , new XAttribute("getItemScreentip", "GetItemScreentip")
-                    , new XAttribute("getItemSupertip", "GetItemSupertip"));
-            } else {
+            if (!_dynamicItemsLoading) {
                 // Add the Items first
                 if (_data.Any()) {
                     element.Add(_data.ToXml(ns));
@@ -52,7 +45,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        public IRibbonExtra<IDropDown> AddButtons(Action<IDropDownControls> items) {
+        public IDropDown AddButtons(Action<IDropDownControls> items) {
             items.Invoke(_controls);
             return this;
         }
@@ -64,7 +57,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IDropDown AddItems(Action<IItems> items) {
+        public IDropDown Items(Action<IItems> items) {
             _dynamicItemsLoading = false;
             items.Invoke(_data);
             return this;

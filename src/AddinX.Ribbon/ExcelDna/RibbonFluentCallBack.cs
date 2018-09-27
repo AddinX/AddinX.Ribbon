@@ -92,8 +92,8 @@ namespace AddinX.Ribbon.ExcelDna {
 
         public object GetItemImage(IRibbonControl control, int index) {
             if (FindCallback(control.Id) is IDynamicItemsField field) {
-                if (field.ItemImage != null) {
-                    return field.ItemImage()?[index];
+                if (field.getItemImage != null) {
+                    return field.getItemImage(index);
                 }
             }
 
@@ -112,7 +112,7 @@ namespace AddinX.Ribbon.ExcelDna {
 
         public string GetItemScreentip(IRibbonControl control, int index) {
             if (FindCallback(control.Id) is IDynamicItemsField field) {
-                return field?.ItemScreentip()?[index];
+                return field.getItemScreentip?.Invoke(index);
             }
 
             return string.Empty;
@@ -120,7 +120,7 @@ namespace AddinX.Ribbon.ExcelDna {
 
         public string GetItemSupertip(IRibbonControl control, int index) {
             if (FindCallback(control.Id) is IDynamicItemsField field) {
-                return field?.ItemSupertip()?[index];
+                return field.getItemSupertip?.Invoke(index);
             }
             return string.Empty;
         }

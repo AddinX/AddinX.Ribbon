@@ -6,6 +6,18 @@ using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
     public class ComboBoxCommand : AbstractCommand, IComboBoxCommand, ITextField, IEnabledField, IVisibleField, IDynamicItemsField {
+
+        public Func<int> getItemCount { get; set; }
+        public Func<int, string> getItemID { get; set; }
+        public Func<int, string> getItemLabel { get; set; }
+        public Func<int, object> getItemImage { get; set; }
+        public Func<int, string> getItemScreentip { get; set; }
+        public Func<int, string> getItemSupertip { get; set; }
+        public Func<bool> getEnabled { get; set; }
+        public Func<string> getText { get; set; }
+        public Action<string> onChange { get; set; }
+        public Func<bool> getVisible { get; set; }
+
         public IComboBoxCommand IsVisible(Func<bool> condition) {
             getVisible = condition;
             return this;
@@ -41,13 +53,18 @@ namespace AddinX.Ribbon.Implementation.Command {
             return this;
         }
 
-        public IComboBoxCommand ItemsScreentip(Func<IList<string>> itemsScreentip) {
-            ItemScreentip = itemsScreentip;
+        public IComboBoxCommand ItemsScreentip(Func<int,string> itemsScreentip) {
+            getItemScreentip = itemsScreentip;
             return this;
         }
 
-        public IComboBoxCommand ItemsSupertip(Func<IList<string>> itemsSupertip) {
-            ItemSupertip = itemsSupertip;
+        public IComboBoxCommand ItemsSupertip(Func<int,string> itemsSupertip) {
+            getItemSupertip = itemsSupertip;
+            return this;
+        }
+
+        public IComboBoxCommand ItemsImage(Func<int, object> itemsImage) {
+            getItemImage = itemsImage;
             return this;
         }
 
@@ -65,28 +82,16 @@ namespace AddinX.Ribbon.Implementation.Command {
 
             element.AddCallbackAttribute("getItemCount", getItemCount);
             element.AddCallbackAttribute("getItemID", getItemID);
-            element.AddCallbackAttribute("getItemImage", ItemImage);
+            element.AddCallbackAttribute("getItemImage", getItemImage);
             element.AddCallbackAttribute("getItemLabel", getItemLabel);
-            element.AddCallbackAttribute("getItemScreentip", ItemScreentip);
-            element.AddCallbackAttribute("getItemSupertip", ItemSupertip);
+            element.AddCallbackAttribute("getItemScreentip", getItemScreentip);
+            element.AddCallbackAttribute("getItemSupertip", getItemSupertip);
         }
 
         #endregion
 
-        public Func<int> getItemCount { get;  set; }
-        public Func<int, string> getItemID { get;  set; }
-        public Func<IList<object>> ItemImage { get;  set; }
-        public Func<int, string> getItemLabel { get;  set; }
-        public Func<IList<string>> ItemScreentip { get;  set; }
-        public Func<IList<string>> ItemSupertip { get;  set; }
-        public Func<bool> getEnabled { get;  set; }
-        public Func<string> getText { get;  set; }
-        public Action<string> onChange { get;  set; }
-        public Func<bool> getVisible { get;  set; }
 
-        public IComboBoxCommand ItemsImage(Func<IList<object>> itemsImage) {
-            ItemImage = itemsImage;
-            return this;
-        }
+
+
     }
 }

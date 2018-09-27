@@ -10,7 +10,7 @@ namespace AddinX.Ribbon.Contract.Command.Field
         /// VBA£ºSub GetSelectedItemIndex(control As IRibbonControl, ByRef returnedVal)
         /// C#£ºint GetSelectedItemIndex(IRibbonControl control)
         /// </summary>
-        Func<int> getSelectedItemIndex { get; }
+        Func<int> getSelectedItemIndex { get; set; }
 
         /// <summary>
         /// onAction
@@ -18,6 +18,6 @@ namespace AddinX.Ribbon.Contract.Command.Field
         /// VBA£ºSub OnItemAction(control As IRibbonControl, itemID As String, itemIndex As Integer)
         /// C#£ºvoid OnItemAction(IRibbonControl control, string itemID, int itemIndex)
         /// </summary>
-        Action<int> onItemAction { get; }
+        Action<int> onItemAction { get; set; }
     }
 }

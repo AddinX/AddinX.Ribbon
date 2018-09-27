@@ -21,7 +21,11 @@ namespace AddinX.Ribbon.Contract.Command.Field
         /// </summary>
         Func<int,string> getItemID { get; set; }
 
-        Func<IList<object>> ItemImage { get; set; }
+        /// <summary>
+        /// getItemImage
+        /// Callback for an item's image.
+        /// </summary>
+        Func<int, object> getItemImage { get; set; }
 
         /// <summary>
         /// getItemLabel
@@ -29,10 +33,18 @@ namespace AddinX.Ribbon.Contract.Command.Field
         /// VBA£ºSub GetItemLabel(control As IRibbonControl, itemIndex as Integer, ByRef returnedVal)
         /// C#£ºstring GetItemLabel(IRibbonControl control, int itemIndex)
         /// </summary>
-        Func<int, string> getItemLabel { get; set; } 
+        Func<int, string> getItemLabel { get; set; }
 
-        Func<IList<string>> ItemScreentip { get; set; }
+        /// <summary>
+        /// getItemScreentip
+        /// Callback for an item's screentip.
+        /// </summary>
+        Func<int, string> getItemScreentip { get; set; }
 
-        Func<IList<string>> ItemSupertip { get; set; }
+        /// <summary>
+        /// getItemSupertip
+        /// Callback for an item's supertip.
+        /// </summary>
+        Func<int, string> getItemSupertip { get; set; }
     }
 }

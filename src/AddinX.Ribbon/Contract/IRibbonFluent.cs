@@ -3,7 +3,7 @@ using ExcelDna.Integration.CustomUI;
 
 namespace AddinX.Ribbon.Contract
 {
-    public interface IRibbonFluent
+    public interface IRibbonFluent:IRibbonFluentCallback
     {
         string GetRibbonXml();
 

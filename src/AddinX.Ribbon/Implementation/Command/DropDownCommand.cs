@@ -41,18 +41,18 @@ namespace AddinX.Ribbon.Implementation.Command {
             return this;
         }
 
-        public IDropDownCommand ItemsScreentip(Func<IList<string>> itemsScreentip) {
-            ItemScreentip = itemsScreentip;
+        public IDropDownCommand ItemsScreentip(Func<int,string> itemsScreentip) {
+            getItemScreentip = itemsScreentip;
             return this;
         }
 
-        public IDropDownCommand ItemsSupertip(Func<IList<string>> itemsSupertip) {
-            ItemSupertip = itemsSupertip;
+        public IDropDownCommand ItemsSupertip(Func<int, string> itemsSupertip) {
+            getItemSupertip = itemsSupertip;
             return this;
         }
 
-        public IDropDownCommand ItemsImage(Func<IList<object>> itemsImage) {
-            ItemImage = itemsImage;
+        public IDropDownCommand ItemsImage(Func<int, object> itemsImage) {
+            getItemImage = itemsImage;
             return this;
         }
 
@@ -69,10 +69,10 @@ namespace AddinX.Ribbon.Implementation.Command {
 
             element.AddCallbackAttribute("getItemCount", getItemCount);
             element.AddCallbackAttribute("getItemID", "GetItemId", getItemID);
-            element.AddCallbackAttribute("getItemImage", ItemImage);
+            element.AddCallbackAttribute("getItemImage", getItemImage);
             element.AddCallbackAttribute("getItemLabel", getItemLabel);
-            element.AddCallbackAttribute("getItemScreentip", ItemScreentip);
-            element.AddCallbackAttribute("getItemSupertip", ItemSupertip);
+            element.AddCallbackAttribute("getItemScreentip", getItemScreentip);
+            element.AddCallbackAttribute("getItemSupertip", getItemSupertip);
             element.AddCallbackAttribute("getSelectedItemIndex", getSelectedItemIndex);
         }
 
@@ -82,10 +82,10 @@ namespace AddinX.Ribbon.Implementation.Command {
         public Func<int> getSelectedItemIndex { get;  set; }
         public Func<int> getItemCount { get;  set; }
         public Func<int, string> getItemID { get;  set; }
-        public Func<IList<object>> ItemImage { get;  set; }
+        public Func<int,object> getItemImage { get;  set; }
         public Func<int, string> getItemLabel { get;  set; }
-        public Func<IList<string>> ItemScreentip { get;  set; }
-        public Func<IList<string>> ItemSupertip { get;  set; }
+        public Func<int ,string> getItemScreentip { get;  set; }
+        public Func<int,string> getItemSupertip { get;  set; }
         public Func<bool> getEnabled { get;  set; }
         public Func<bool> getVisible { get;  set; }
     }

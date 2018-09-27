@@ -67,7 +67,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        public IComboBox AddItems(Action<IItems> items) {
+        public IComboBox Items(Action<IItems> items) {
             _dynamicItemLoading = false;
             items.Invoke(_data);
             return this;

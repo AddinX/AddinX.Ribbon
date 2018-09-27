@@ -13,8 +13,8 @@ namespace AddinX.Ribbon.Implementation.Control {
         protected override IMenuUnsize Interface => this;
         
 
-        public IMenuUnsize AddItems(Action<IMenuUnsizeControls> items) {
-            items.Invoke(Items);
+        public IMenuUnsize Items(Action<IMenuUnsizeControls> items) {
+            items.Invoke(base.Items);
             return this;
         }
     }

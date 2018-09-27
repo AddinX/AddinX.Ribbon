@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.ExcelDna;
+using AddinX.Ribbon.Implementation;
 
 namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox {
     [ComVisible(true)]
@@ -16,6 +17,7 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox {
         private const string PortfolioAnalyzerBtn = "portfolioAnalyzer";
         private const string ReportingBox = "reportingBox";
         private const string PortfolioPerformanceBtn = "portfolioPerformance";
+        private readonly RibbonCommands _commands = new RibbonCommands();
 
         protected override void CreateFluentRibbon(IRibbonBuilder builder) {
             builder.CustomUi.AddNamespace("acme", "acme.addin.sync").Ribbon.Tabs(c => {
@@ -26,34 +28,40 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox {
                                 d.AddButton("Allocation")
                                     .SetId(PortfolioAllocationBtn)
                                     .LargeSize()
-                                    .ImageMso("HappyFace");
+                                    .ImageMso("HappyFace")
+                                    .Callback((IButtonCommand)_commands.Find(PortfolioAllocationBtn));
+
                                 d.AddBox().SetId(ReportingBox)
-                                    .HorizontalDisplay().AddItems(i => {
+                                    .HorizontalDisplay().Items(i => {
                                         i.AddButton("Performance")
                                             .SetId(PortfolioPerformanceBtn)
                                             .NormalSize()
-                                            .ImageMso("HappyFace");
+                                            .ImageMso("HappyFace")
+                                            .Callback((IButtonCommand)_commands.Find(PortfolioPerformanceBtn));
+
                                         i.AddButton("Contributor").SetId(PortfolioContributorBtn)
                                             .NormalSize().NoImage().ShowLabel()
                                             .Supertip("Portfolio best contributor")
-                                            .Screentip(
-                                                "Display the top / bottom X contributor to the portfolio performance.");
-                                    });
+                                            .Screentip("Display the top / bottom X contributor to the portfolio performance.")
+                                            .Callback((IButtonCommand)_commands.Find(PortfolioContributorBtn));
+                                    }).Callback((IBoxCommand)_commands.Find(ReportingBox));
                             });
                         g.AddGroup("Analytic").SetId(AnalyticsGroup)
                             .Items(i => i.AddButton("Portfolio Analysis").SetId(PortfolioAnalyzerBtn).NormalSize()
-                                .NoImage().ShowLabel());
+                                .NoImage().ShowLabel()
+                            .Callback((IButtonCommand)_commands.Find(PortfolioAnalyzerBtn))
+                            );
                     });
             });
         }
 
-        protected override void CreateRibbonCommand(IRibbonCommands cmds) {
-            cmds.AddButtonCommand(PortfolioAnalyzerBtn).IsEnabled(() => AddinContext.ExcelApp.Worksheets.Count() > 1)
-                .Action(() => MessageBox.Show("Analyzer button clicked"));
+        protected void CreateRibbonCommand(IRibbonCommands cmds) {
+            cmds.AddButtonCommand(PortfolioAnalyzerBtn).GetEnabled(() => AddinContext.ExcelApp.Worksheets.Count() > 1)
+                .OnAction(() => MessageBox.Show("Analyzer button clicked"));
             cmds.AddButtonCommand(PortfolioContributorBtn)
-                .Action(() => MessageBox.Show("Portfolio contributors button clicked"));
+                .OnAction(() => MessageBox.Show("Portfolio contributors button clicked"));
             cmds.AddButtonCommand(PortfolioAllocationBtn)
-                .Action(() => MessageBox.Show("Portfolio allocation button clicked"));
+                .OnAction(() => MessageBox.Show("Portfolio allocation button clicked"));
             cmds.AddBoxCommand(ReportingBox).IsVisible(() => AddinContext.ExcelApp.Worksheets.Count() > 1);
         }
 
@@ -68,6 +76,7 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox {
         public override void OnOpening() {
             AddinContext.ExcelApp.SheetActivateEvent += (e) => RefreshRibbon();
             AddinContext.ExcelApp.SheetChangeEvent += (a, e) => RefreshRibbon();
+            CreateRibbonCommand(_commands);
         }
 
         private void RefreshRibbon() {

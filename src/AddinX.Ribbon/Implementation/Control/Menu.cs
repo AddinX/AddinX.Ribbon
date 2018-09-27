@@ -15,8 +15,8 @@ namespace AddinX.Ribbon.Implementation.Control {
             NoImage();
         }
 
-        public IMenu AddItems(Action<IMenuControls> items) {
-            items.Invoke(Items);
+        public IMenu Items(Action<IMenuControls> items) {
+            items.Invoke(base.Items);
             return this;
         }
 

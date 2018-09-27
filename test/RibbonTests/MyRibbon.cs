@@ -104,7 +104,7 @@ namespace RibbonTests
 
             build.CustomUi.Ribbon.Tabs(ts => ts.AddTab("测量管理工具")
                 .Groups(gs => {
-                    gs.AddGroup("测量管理工具").AddItems(items => {
+                    gs.AddGroup("测量管理工具").Items(items => {
                             items.AddToggleButton("开始测量").LargeSize().Callback(_startMeasureCommand);
                             items.AddSeparator();
                             items.AddCheckbox("跟踪测量单元格")
@@ -135,7 +135,7 @@ namespace RibbonTests
                             items.AddToggleButton("编辑模式").ImageMso("DesignMode").Supertip("选中此项，进入任务编辑模式")
                                 .Callback(_designModeCommand);
                         });
-                    gs.AddGroup("编辑工具").AddItems(items => {
+                    gs.AddGroup("编辑工具").Items(items => {
                             items.AddButton("设置串口参数").ImagePath("setting_32").Supertip("设置插件默认串口配置信息")
                                 .Callback(_configSerialPortCommand);
                             items.AddCheckbox("使用绝对值").Supertip("如果选中此项，忽略测量值符号,强制转换为绝对值")

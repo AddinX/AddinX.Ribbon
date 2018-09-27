@@ -27,13 +27,11 @@ namespace ContextualTab
                         ))));
         }
 
-        protected override void CreateRibbonCommand(IRibbonCommands cmds)
+        protected void CreateRibbonCommand(IRibbonCommands cmds)
         {
-            cmds.AddButtonCommand("Button1").Action(
-                    () => MessageBox.Show("Button 1 clicked"));
+            cmds.AddButtonCommand("Button1").onAction = ()=> MessageBox.Show("Button 1 clicked");
 
-            cmds.AddButtonCommand("Button2").Action(
-                    () => MessageBox.Show("Button 2 clicked"));
+            cmds.AddButtonCommand("Button2").onAction= () => MessageBox.Show("Button 2 clicked");
         }
 
         public override void OnClosing()

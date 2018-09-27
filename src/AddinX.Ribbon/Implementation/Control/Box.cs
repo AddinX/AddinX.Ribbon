@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.Box;
 using AddinX.Ribbon.Contract.Enums;
@@ -16,6 +17,11 @@ namespace AddinX.Ribbon.Implementation.Control {
             _items = new Controls();
         }
 
+        protected internal override void SetRegister(ICallbackRigister register) {
+            base.SetRegister(register);
+            _items?.SetRegister(register);
+        }
+
         protected override IBox Interface => this;
 
         public IBox HorizontalDisplay() {
@@ -28,7 +34,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IBox AddItems(Action<IBoxControls> items) {
+        public IBox Items(Action<IBoxControls> items) {
             items.Invoke(_items);
             return this;
         }

@@ -19,10 +19,10 @@ namespace AddinX.Ribbon.Contract.Command
 
         IDropDownCommand ItemsLabel(Func<int, string> itemsLabel);
 
-        IDropDownCommand ItemsScreentip(Func<IList<string>> itemsScreentip);
+        IDropDownCommand ItemsScreentip(Func<int,string> itemsScreentip);
 
-        IDropDownCommand ItemsSupertip(Func<IList<string>> itemsSupertip);
+        IDropDownCommand ItemsSupertip(Func<int,string> itemsSupertip);
 
-        IDropDownCommand ItemsImage(Func<IList<object>> itemsImage);
+        IDropDownCommand ItemsImage(Func <int ,object> itemsImage);
     }
 }

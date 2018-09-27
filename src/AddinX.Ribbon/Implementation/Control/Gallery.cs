@@ -81,13 +81,13 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
 
-        public IGallery AddItems(Action<IItems> items) {
+        public IGallery Items(Action<IItems> items) {
             _dynamicItemsLoading = false;
             items.Invoke(_data);
             return this;
         }
 
-        public IRibbonGalleryExtra<IGallery> AddButtons(Action<IGalleryControls> items) {
+        public IGallery AddButtons(Action<IGalleryControls> items) {
             items.Invoke(_controls);
             return this;
         }

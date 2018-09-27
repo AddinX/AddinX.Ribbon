@@ -12,7 +12,7 @@ namespace AddinX.Ribbon.Contract.Control.Gallery
         //IGalleryImage, IGalleryItemImage, IGalleryItemLabel,
         //IGalleryLabel, IGalleryItems, IGallerySize
     {
-        IRibbonGalleryExtra<IGallery> AddButtons(Action<IGalleryControls> items);
+        IGallery AddButtons(Action<IGalleryControls> items);
 
     }
 }

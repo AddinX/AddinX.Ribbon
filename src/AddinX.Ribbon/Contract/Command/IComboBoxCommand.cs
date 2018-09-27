@@ -24,8 +24,8 @@ namespace AddinX.Ribbon.Contract.Command
 
         IComboBoxCommand ItemsLabel(Func<int, string> itemsLabel);
 
-        IComboBoxCommand ItemsScreentip(Func<IList<string>> itemsScreentip);
+        IComboBoxCommand ItemsScreentip(Func<int,string> itemsScreentip);
 
-        IComboBoxCommand ItemsSupertip(Func<IList<string>> itemsSupertip);
+        IComboBoxCommand ItemsSupertip(Func<int,string> itemsSupertip);
     }
 }

@@ -19,7 +19,7 @@ namespace AddinX.Ribbon.Tests {
             builder.CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test").SetId("item1")
                     .Groups(g1 => g1.AddGroup("group").SetId("id")
-                        .AddItems(buildAction)));
+                        .Items(buildAction)));
             return builder;
         }
 
@@ -35,7 +35,7 @@ namespace AddinX.Ribbon.Tests {
 
             builder.CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test")
-                    .Groups(g1 => g1.AddGroup("group").AddItems(g => g.AddButton("b")
+                    .Groups(g1 => g1.AddGroup("group").Items(g => g.AddButton("b")
                         .Callback(cb => {
                             cb.onAction =() => { Console.WriteLine("Test Button"); };
                             cb.getEnabled = () => true;
@@ -50,7 +50,7 @@ namespace AddinX.Ribbon.Tests {
             var builder = new RibbonBuilder(){CallbackRigister = callbacks};
             builder.CustomUi.Ribbon.Tabs(ts => ts.AddTab("测量管理工具")
                 .Groups(g => g.AddGroup("测量管理工具")
-                    .AddItems(items => {
+                    .Items(items => {
                         //<toggleButton id="Id_StartMeasuring" description="开始测量" getLabel="GetLabel" getPressed = "GetPressed" size = "large" onAction = "OnToggleButtonAction" getImage = "GetImage" getEnabled = "GetEnabled" />
                             items.AddToggleButton("开始测量").LargeSize().Callback(_startMeasureCommand);
                             items.AddSeparator();
@@ -85,7 +85,7 @@ namespace AddinX.Ribbon.Tests {
             builder.CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test").SetId("item1")
                     .Groups(g1 => g1.AddGroup("group").SetId("id")
-                        .AddItems(g => g.AddCheckbox("checkbox")
+                        .Items(g => g.AddCheckbox("checkbox")
                             .Callback(cb =>
                                 cb.OnChecked(b => { Console.WriteLine("Test Checkbox press:" + b); }
                                 )))));
@@ -97,7 +97,7 @@ namespace AddinX.Ribbon.Tests {
             var builder = BuildInGroup(i => {
                 i.AddComboBox("Colors").SetId("colorsPicking")
                     .ShowLabel().NoImage()
-                    .AddItems(o => {
+                    .Items(o => {
                         o.AddItem("Green").SetId("greenColor");
                         o.AddItem("Red").SetId("redColor").NoImage();
                         o.AddItem("Blue").SetId("blueColor").NoImage();
@@ -112,9 +112,59 @@ namespace AddinX.Ribbon.Tests {
         public void TestAddControl() {
             var builder = new RibbonBuilder();
             builder.CustomUi.Ribbon.Tabs(t => t.AddTab("table")
-                .Groups(g => g.AddGroup("group1").AddItems(gc=>gc.AddButton("测试"))
+                .Groups(g => g.AddGroup("group1").Items(gc=>gc.AddButton("测试"))
                 )
             );
+        }
+
+        [Test]
+        public void TestGalleiesAndMenu() {
+        const string HappyButtonId = "HappyButton1";
+        const string ShowNumberId = "ShowNumberId1";
+        const string HappyButtonId2 = "HappyButton2";
+        const string ShowNumberId2 = "ShowNumberId2";
+        const string MyTabId = "MyTabId";
+        const string DataGroupId = "DataGroupId";
+        const string OptionId = "OptionId";
+        const string GalleryId = "GalleryId";
+        const string DynamicGalleryId = "DynamicGalleryId";
+        const string ButtonMore = "buttonMoreId";
+
+        var builder = new RibbonBuilder();
+            builder.CustomUi.Ribbon.Tabs(c => {
+                c.AddTab("My Tab").SetId(MyTabId)
+                    .Groups(g => {
+                        g.AddGroup("Data").SetId(DataGroupId)
+                            .Items(d => {
+                                d.AddMenu("Option").SetId(OptionId).ShowLabel()
+                                    .ImageMso("FileNew").LargeSize()
+                                    .ItemLargeSize().Items(
+                                        v => {
+                                            v.AddCheckbox("Show numbers").SetId(ShowNumberId);
+                                            v.AddSeparator().SetTitle("Mood");
+                                            v.AddButton("Happy")
+                                                .SetId(HappyButtonId)
+                                                .ImageMso("HappyFace");
+                                            v.AddGallery("Dynamic Option").SetId(DynamicGalleryId)
+                                                .ShowLabel().NoImage().ShowItemLabel().ShowItemImage()
+                                                //.DynamicItems()
+                                                .AddButtons(b => b.AddButton("Button...").SetId(ButtonMore))
+                                                .NumberRows(6).NumberColumns(1);
+                                        });
+                                d.AddGallery("Multi Option").SetId(GalleryId)
+                                    .ShowLabel().LargeSize().NoImage().ShowItemLabel().ShowItemImage()
+                                    .Items(v => {
+                                        v.AddItem("Show numbers").SetId(ShowNumberId2);
+                                        v.AddItem("Happy").SetId(HappyButtonId2).ImageMso("HappyFace");
+                                    });
+                            });
+                    });
+            });
+
+            var str = builder.GetXmlString();
+            Console.WriteLine(str);
+
+            Assert.True(ValidateHelper.Validate(str));
         }
     }
 

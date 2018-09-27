@@ -10,7 +10,7 @@ namespace AddinX.Ribbon.Contract.Command.Field
         /// VBA£ºSub GetText(control As IRibbonControl, ByRef returnedVal)
         /// C#£ºstring GetText(IRibbonControl control)
         /// </summary>
-        Func<string> getText { get; }
+        Func<string> getText { get; set; }
 
         /// <summary>
         /// onChange
@@ -18,6 +18,6 @@ namespace AddinX.Ribbon.Contract.Command.Field
         /// VBA£ºSub OnChange(control As IRibbonControl, text As String)
         /// C#£ºvoid OnChange(IRibbonControl control, string text)
         /// </summary>
-        Action<string> onChange{ get; } 
+        Action<string> onChange{ get; set; } 
     }
 }

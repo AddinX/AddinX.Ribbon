@@ -1,13 +1,15 @@
 using System;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
+using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Control.GalleryUnsize;
 using AddinX.Ribbon.Contract.Control.Item;
+using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class GalleryUnsize : Control<IGalleryUnsize>, IGalleryUnsize {
+    public class GalleryUnsize : Control<IGalleryUnsize,IGalleryCommand>, IGalleryUnsize {
         private bool _dynamicItemsLoading;
         private readonly Items _data;
         private readonly Controls _controls;
@@ -48,14 +50,7 @@ namespace AddinX.Ribbon.Implementation.Control {
 
             var element = base.ToXml(ns);
 
-            if (_dynamicItemsLoading) {
-                element.Add(new XAttribute("getItemCount", "GetItemCount")
-                    , new XAttribute("getItemID", "GetItemId")
-                    , new XAttribute("getItemImage", "GetItemImage")
-                    , new XAttribute("getItemLabel", "GetItemLabel")
-                    , new XAttribute("getItemScreentip", "GetItemScreentip")
-                    , new XAttribute("getItemSupertip", "GetItemSupertip"));
-            } else {
+            if (!_dynamicItemsLoading) {
                 // Add the Items first
                 if (_data?.ToXml(ns) != null) {
                     element.Add(_data.ToXml(ns));
@@ -77,15 +72,23 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IGalleryUnsize AddItems(Action<IItems> items) {
+        public IGalleryUnsize Items(Action<IItems> items) {
             _dynamicItemsLoading = false;
             items.Invoke(_data);
             return this;
         }
 
-        public IRibbonGalleryExtra<IGalleryUnsize> AddButtons(Action<IGalleryUnsizeControls> items) {
+        public IGalleryUnsize AddButtons(Action<IGalleryUnsizeControls> items) {
             items.Invoke(_controls);
             return this;
         }
+
+        #region Implementation of IRibbonCallback<IGalleryCommand>
+
+        public void Callback(Action<IGalleryCommand> builder) {
+            builder?.Invoke(base.GetCommand<GalleryCommand>());
+        }
+
+        #endregion
     }
 }

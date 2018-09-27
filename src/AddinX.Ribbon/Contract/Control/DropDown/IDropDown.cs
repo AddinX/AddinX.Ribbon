@@ -11,6 +11,6 @@ namespace AddinX.Ribbon.Contract.Control.DropDown
         //IDropDownImage, IDropDownItemImage, IDropDownItemLabel,
         //IDropDownLabel, IDropDownItems
     {
-        IRibbonExtra<IDropDown> AddButtons(Action<IDropDownControls> items);
+        IDropDown AddButtons(Action<IDropDownControls> items);
     }
 }

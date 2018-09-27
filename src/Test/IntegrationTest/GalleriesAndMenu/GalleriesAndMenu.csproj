@@ -70,16 +70,6 @@
     <Compile Include="Utils\ResizeImage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Contract\AddinX.Ribbon.Contract.csproj">
-      <Project>{8e0452bb-994c-4996-99fa-931ee5b7e661}</Project>
-      <Name>AddinX.Ribbon.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\ExcelDna\AddinX.Ribbon.ExcelDna.csproj">
-      <Project>{2a669fe9-b98e-4ad8-b137-992f5d536938}</Project>
-      <Name>AddinX.Ribbon.ExcelDna</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\ExcelDna.Build.props" />
     <None Include="GalleriesAndMenu-AddIn.dna" />
     <None Include="Resources\five.jpg" />
@@ -94,6 +84,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AddinX.Ribbon\AddinX.Ribbon.csproj">
+      <Project>{e517e0a2-8f3b-4f76-8987-85c6146d6021}</Project>
+      <Name>AddinX.Ribbon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

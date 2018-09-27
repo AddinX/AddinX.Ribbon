@@ -22,24 +22,23 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Data
             return items.Count;
         }
 
-        public IList<object> Ids()
-        {
-            return new object[] { items.Keys };
+        public string Ids(int index) {
+            return items.Keys.ElementAt(index).ToString();
         }
 
-        public IList<string> Labels()
+        public string Labels(int index)
         {
-            return items.Values.Select(o => o.Label).ToList();
+            return items.Values.ElementAt(index).Label;
         }
 
-        public IList<object> Images()
+        public object Images(int index)
         {
-            return items.Values.Select(o => o.Image).Cast<object>().ToList();
+            return items.Values.ElementAt(index).Image;
         }
 
-        public IList<string> SuperTips()
+        public string SuperTips(int index)
         {
-            return items.Values.Select(o => o.SuperTip).ToList();
+            return items.Values.ElementAt(index).SuperTip;
         }
     }
 }

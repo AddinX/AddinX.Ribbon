@@ -55,7 +55,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
 
         #region Implementation of IRibbonItems<out IGroup,out IGroupControls>
 
-        public IGroup AddItems(Action<IGroupControls> items) {
+        public IGroup Items(Action<IGroupControls> items) {
              items.Invoke(base.Items);
             return this;
         }

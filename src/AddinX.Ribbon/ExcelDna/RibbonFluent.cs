@@ -10,42 +10,35 @@ using AddinX.Ribbon.Implementation;
 using ExcelDna.Integration;
 using ExcelDna.Integration.CustomUI;
 
-namespace AddinX.Ribbon.ExcelDna
-{
+namespace AddinX.Ribbon.ExcelDna {
     [ComVisible(true)]
-    public abstract partial class RibbonFluent : ExcelRibbon, IRibbonFluent
-    {
+    public abstract partial class RibbonFluent : ExcelRibbon, IRibbonFluent {
         protected static IRibbonUI Ribbon;
 
         private ICallbackRigister _callbackRigister;
 
-        protected RibbonFluent()
-        {
+        protected RibbonFluent() {
             _callbackRigister = new RibbonCommands();
         }
 
-        public override void OnBeginShutdown(ref Array custom)
-        {
+        public override void OnBeginShutdown(ref Array custom) {
             OnClosing();
             _callbackRigister = null;
             base.OnBeginShutdown(ref custom);
         }
 
-        public override string GetCustomUI(string ribbonId)
-        {
+        public override string GetCustomUI(string ribbonId) {
             OnOpening();
             var ribbonXml = GetRibbonXml();
             Debug.WriteLine(ribbonXml);
             return ribbonXml;
         }
 
-        public void OnLoad(IRibbonUI ribbon)
-        {
+        public virtual void OnLoad(IRibbonUI ribbon) {
             Ribbon = ribbon;
         }
 
-        public virtual Bitmap OnLoadImage(string imageName)
-        {
+        public virtual Bitmap OnLoadImage(string imageName) {
             return null;
         }
 
@@ -70,7 +63,7 @@ namespace AddinX.Ribbon.ExcelDna
             return builder.GetXmlString();
         }
 
-        public ICommand FindCallback(string id){
+        public ICommand FindCallback(string id) {
             return _callbackRigister.Find(id);
         }
 
@@ -84,6 +77,5 @@ namespace AddinX.Ribbon.ExcelDna
         public abstract void OnClosing();
 
         public abstract void OnOpening();
-
     }
 }

@@ -7,10 +7,6 @@ using AddinX.Ribbon.Contract.Enums;
 namespace AddinX.Ribbon.Implementation.Command {
     public class ButtonCommand : ButtonRegularCommand,IButtonCommand{
 
-        public Func<bool> IsVisibleField { get; set; }
-
-       
-
         #region Implementation of ICommand
 
         /// <summary>
@@ -19,14 +15,26 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// <param name="element"></param>
         public override void WriteCallbackXml(XElement element) {
             base.WriteCallbackXml(element);
-            element.AddCallbackAttribute("getSize", getSize);
         }
 
         #endregion
 
-        #region Implementation of ISizeField
+        #region Implementation of IButtonCommand
 
-        public Func<ControlSize> getSize { get; set; }
+        public IButtonCommand OnAction(Action act) {
+            base.onAction = act;
+            return this;
+        }
+
+        public IButtonCommand GetVisible(Func<bool> condition) {
+            base.getVisible = condition;
+            return this;
+        }
+
+        public IButtonCommand GetEnabled(Func<bool> condition) {
+            base.getEnabled = condition;
+            return this;
+        }
 
         #endregion
     }

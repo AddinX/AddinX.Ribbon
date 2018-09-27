@@ -11,7 +11,7 @@ namespace AddinX.Ribbon.Contract.Command
          //getPressed
     }
 
-    public interface IButtonRegularCommand : ICommand,IDescriptionField, IActionField, IEnabledField,IImageField {
+    public interface IButtonRegularCommand : ICommand,IDescriptionField, IActionField, IEnabledField,IImageField,IVisibleField {
 
     }
 }

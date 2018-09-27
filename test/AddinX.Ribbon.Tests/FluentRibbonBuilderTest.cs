@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Schema;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation;
@@ -54,7 +53,7 @@ namespace AddinX.Ribbon.UnitTest
                     .Groups(g=>
                     {
                         g.AddGroup("reporting").SetId("reportingGroup")
-                            .AddItems(i =>
+                            .Items(i =>
                             {
                                 i.AddButton("Allocation").SetId("portfolioAllocation").LargeSize().ImageMso("HappyFace");
                                 i.AddButton("Contributor").SetId("Contributor").NormalSize()
@@ -63,7 +62,7 @@ namespace AddinX.Ribbon.UnitTest
                                 
                             });
                         g.AddGroup("Analytic").SetId("AnalyticGroup")
-                            .AddItems(i => i.AddButton("Portfolio Analysis").SetId("portfolioAnalyser").NormalSize()
+                            .Items(i => i.AddButton("Portfolio Analysis").SetId("portfolioAnalyser").NormalSize()
                             .NoImage().ShowLabel());
                     });
             });
@@ -80,7 +79,7 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("test").SetId("tab1")
                     .Groups(g => {
                         g.AddGroup("reporting").SetId("reportingGroup")
-                            .AddItems(i => {
+                            .Items(i => {
                                 i.AddButton("Allocation").SetId("portfolioAllocation").LargeSize()
                                     .ImageMso("HappyFace");
                                 i.AddButton("Contributor").SetId("Contributor").NormalSize()
@@ -108,7 +107,7 @@ namespace AddinX.Ribbon.UnitTest
                             c.AddTab("Portfolio").SetId("tab1")
                                 .Groups(g => {
                                     g.AddGroup("reporting").SetId("reportingGroup")
-                                        .AddItems(i => {
+                                        .Items(i => {
                                             i.AddButton("Allocation")
                                                 .SetId("portfolioAllocation")
                                                 .LargeSize()
@@ -120,7 +119,7 @@ namespace AddinX.Ribbon.UnitTest
 
                                         });
                                     g.AddGroup("Analytic").SetId("AnalyticGroup")
-                                        .AddItems(
+                                        .Items(
                                             i =>
                                                 i.AddButton("Portfolio Analysis")
                                                     .SetId("portfolioAnalyser")
@@ -143,8 +142,8 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("test").SetId("tab1")
                     .Groups(g => {
                         g.AddGroup("reporting").SetId("reportingGroup")
-                            .AddItems(i => {
-                                i.AddBox().SetId("ButtonsVertical").VerticalDisplay().AddItems(b => {
+                            .Items(i => {
+                                i.AddBox().SetId("ButtonsVertical").VerticalDisplay().Items(b => {
                                     b.AddButton("Allocation")
                                         .SetId("portfolioAllocation")
                                         .LargeSize()
@@ -154,7 +153,7 @@ namespace AddinX.Ribbon.UnitTest
                                         .Screentip(
                                             "Display the top / bottom X contributor to the portfolio performance.");
                                 });
-                                i.AddBox().SetId("ButtonsHorizontal").HorizontalDisplay().AddItems(b => {
+                                i.AddBox().SetId("ButtonsHorizontal").HorizontalDisplay().Items(b => {
                                     b.AddButton("Portfolio Analysis")
                                         .SetId("portfolioAnalyser").NormalSize()
                                         .NoImage().ShowLabel();
@@ -183,7 +182,7 @@ namespace AddinX.Ribbon.UnitTest
                             c.AddTab("Internal").SetId("tab1")
                                 .Groups(g => {
                                     g.AddGroup("Print settings").SetId("printSettingsGroup")
-                                        .AddItems(i => {
+                                        .Items(i => {
                                             i.AddCheckbox("Center Horizontal").SetId("centerHorizontal")
                                                 .Screentip("Center Content Horizontally");
                                             i.AddCheckbox("Center Vertical").SetId("centerVertical")
@@ -216,10 +215,10 @@ namespace AddinX.Ribbon.UnitTest
                             c.AddTab("Internal").SetId("tab1")
                                 .Groups(g => {
                                     g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                                        .AddItems(i => {
+                                        .Items(i => {
                                             i.AddComboBox("Colors").SetId("colorsPicking")
                                                 .ShowLabel().NoImage()
-                                                .AddItems(o => {
+                                                .Items(o => {
                                                     o.AddItem("Green").SetId("greenColor");
                                                     o.AddItem("Red").SetId("redColor").NoImage();
                                                     o.AddItem("Blue").SetId("blueColor").NoImage();
@@ -228,7 +227,7 @@ namespace AddinX.Ribbon.UnitTest
                                         });
 
                                     g.AddGroup("Time zone settings").SetId("timeZoneSettingsGroup")
-                                        .AddItems(i => {
+                                        .Items(i => {
                                             i.AddComboBox("Country").SetId("countryPicking")
                                                 .ShowLabel().NoImage()
                                                 .DynamicItems().Supertip("Country Picking")
@@ -253,7 +252,7 @@ namespace AddinX.Ribbon.UnitTest
                     c.AddTab("Internal").SetId("tab1")
                         .Groups(g => {
                             g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                                .AddItems(i => {
+                                .Items(i => {
                                     i.AddToggleButton("Hide View Tab").SetId("HideViewTab")
                                         .ShowLabel().LargeSize()
                                         .NoImage().Supertip("Hide View Tab")
@@ -279,11 +278,11 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("Internal").SetId("tab1")
                     .Groups(g => {
                         g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                            .AddItems(i => {
+                            .Items(i => {
                                 i.AddDropDown("Colors").SetId("ColorsSelection")
                                     .ShowLabel().NoImage().ShowItemLabel()
                                     .HideItemImage()
-                                    .AddItems(o => {
+                                    .Items(o => {
                                         o.AddItem("Green").SetId("greenColor");
                                         o.AddItem("Red").SetId("redColor").NoImage();
                                         o.AddItem("Blue").SetId("blueColor").NoImage();
@@ -291,7 +290,7 @@ namespace AddinX.Ribbon.UnitTest
                             });
 
                         g.AddGroup("Units Settings").SetId("UnitsSettingsGroup")
-                            .AddItems(i => {
+                            .Items(i => {
                                 i.AddDropDown("Unit To:").SetId("centimeter2Unit")
                                     .ShowLabel().NoImage().ShowItemLabel().HideItemImage()
                                     .DynamicItems().Supertip("Centimeter Conversion")
@@ -314,11 +313,11 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("Internal").SetId("tab1")
                     .Groups(g => {
                         g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                            .AddItems(i => {
+                            .Items(i => {
                                 i.AddGallery("Colors").SetId("ColorsSelection")
                                     .ShowLabel().NormalSize().NoImage().ShowItemLabel()
                                     .HideItemImage()
-                                    .AddItems(o => {
+                                    .Items(o => {
                                         o.AddItem("Green").SetId("greenColor");
                                         o.AddItem("Red").SetId("redColor").NoImage();
                                         o.AddItem("Blue").SetId("blueColor").NoImage();
@@ -329,7 +328,7 @@ namespace AddinX.Ribbon.UnitTest
                             });
 
                         g.AddGroup("Units Settings").SetId("UnitsSettingsGroup")
-                            .AddItems(i => {
+                            .Items(i => {
                                 i.AddGallery("Unit To:").SetId("centimeter2Unit")
                                     .ShowLabel().NormalSize().NoImage().ShowItemLabel().HideItemImage()
                                     .DynamicItems().Supertip("Centimeter Conversion")
@@ -351,10 +350,10 @@ namespace AddinX.Ribbon.UnitTest
                 c.AddTab("Internal").SetId("tab1")
                     .Groups(g => {
                         g.AddGroup("Extra settings").SetId("extraSettingsGroup")
-                            .AddItems(i => {
+                            .Items(i => {
                                 i.AddMenu("Options").SetId("optionMenu")
                                     .ShowLabel().NoImage().LargeSize().ItemLargeSize()
-                                    .AddItems(l => {
+                                    .Items(l => {
                                         l.AddCheckbox("Option 1").SetId("optionsOne")
                                             .Screentip("CheckBox Option");
                                         l.AddButton("Option 2")
@@ -368,7 +367,7 @@ namespace AddinX.Ribbon.UnitTest
                                         l.AddGallery("Colors").SetId("ColorsSelection")
                                             .ShowLabel().NoImage().ShowItemLabel()
                                             .HideItemImage()
-                                            .AddItems(o => {
+                                            .Items(o => {
                                                 o.AddItem("Green").SetId("greenColor");
                                                 o.AddItem("Red").SetId("redColor").NoImage();
                                                 o.AddItem("Blue").SetId("blueColor").NoImage();
@@ -384,91 +383,5 @@ namespace AddinX.Ribbon.UnitTest
             AssertXml(expected, builder);
         }
 
-    }
-
-    public class XmlValidateTest {
-        public const string NamespaceCustomUI2010 = "http://schemas.microsoft.com/office/2009/07/customui";
-        public const string NamespaceCustomUI2007 = "http://schemas.microsoft.com/office/2006/01/customui";
-
-        private string GetFullPath(string path) {
-            var basePath = typeof(FluentRibbonBuilderTest).Assembly.Location;
-            return Path.Combine(Path.GetDirectoryName(basePath), path);
-        }
-
-        private XmlSchema GetSchema2007() {
-            using (var reader = File.OpenRead(GetFullPath("Schemas\\CustomUI_2006.xsd"))) {
-                return XmlSchema.Read(reader, (s, e) => {
-                    Console.WriteLine(e);
-                });
-            }
-        }
-        private XmlSchema GetSchema2010() {
-            using (var reader = File.OpenRead(GetFullPath("Schemas\\CustomUI14.xsd"))) {
-                return XmlSchema.Read(reader, (s, e) => {
-                    Console.WriteLine(e);
-                });
-            }
-        }
-
-        [Test]
-        public void Validate2010() {
-            var builder = new RibbonBuilder(NamespaceCustomUI2010);
-            BuildUi(builder);
-            var xdoc = XDocument.Parse(builder.GetXmlString());
-            XmlSchemaSet schemas = new XmlSchemaSet();
-            schemas.Add(GetSchema2010());
-            xdoc.Validate(schemas, (s, e) => {
-                Console.WriteLine(e);
-            } );
-        }
-
-        [Test]
-        public void Validate2007() {
-            var builder = new RibbonBuilder(NamespaceCustomUI2007);
-            BuildUi(builder);
-            var xdoc = XDocument.Parse(builder.GetXmlString());
-            XmlSchemaSet schemas = new XmlSchemaSet();
-            schemas.Add(GetSchema2007());
-            xdoc.Validate(schemas, (s, e) => {
-                Console.WriteLine(e);
-            });
-            Console.WriteLine(xdoc.ToString(SaveOptions.OmitDuplicateNamespaces));
-
-            Assert.IsTrue(ValidateHelper.Validate2007(builder.GetXmlString()));
-        }
-
-        private const string BookmarksComboId = "bookmarksCombo";
-        private const string BookmarksDropDownId = "BookmarksDropDownId";
-        private const string MyTabId = "MyTabId";
-        private const string DataGroupId = "DataGroupId";
-        private const string ButtonMore = "buttonMore";
-        private const string ToggleButtonId = "ToggleButtonId";
-
-        private void BuildUi(RibbonBuilder builder) {
-            builder.CustomUi.AddNamespace("acme", "acme.addin.sync").Ribbon.Tabs(c => {
-                c.AddTab("My Tab").SetIdQ("acme", MyTabId)
-                    .Groups(g => {
-                        g.AddGroup("Data").SetIdQ("acme", DataGroupId)
-                            .AddItems(d => {
-                                d.AddButton("My Save").SetIdMso("FileSave")
-                                    .NormalSize().ImageMso("FileSave");
-                                d.AddButton("Button").SetId("buttonOne");
-                                d.AddComboBox("numbers")
-                                    .SetId(BookmarksComboId)
-                                    .ShowLabel().NoImage()
-                                    .DynamicItems();
-
-                                d.AddDropDown("With Image")
-                                    .SetId(BookmarksDropDownId)
-                                    .ShowLabel().NoImage()
-                                    .ShowItemLabel().ShowItemImage().DynamicItems()
-                                    .AddButtons(b => b.AddButton("Button...").SetId(ButtonMore));
-                                d.AddToggleButton("Toggle Button")
-                                    .SetId(ToggleButtonId);
-                            });
-
-                    });
-            });
-        }
     }
 }

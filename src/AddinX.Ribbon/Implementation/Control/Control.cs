@@ -189,13 +189,13 @@ namespace AddinX.Ribbon.Implementation.Control {
         public TElement ImageMso(string name) {
             //_imageVisible = !string.IsNullOrEmpty(name);
             //_imageMso = name;
-            this.SetAttribute(tag_showImage, true);
+           //this.SetAttribute(tag_showImage, true);
             this.SetAttribute(tag_imageMso, name);
             return Interface;
         }
 
         public TElement ImagePath(string path) {
-            this.SetAttribute(tag_showImage, true);
+            //this.SetAttribute(tag_showImage, true);
             this.SetAttribute(tag_image, path);
             //_imageVisible = !string.IsNullOrEmpty(path);;
             //_imagePath = path;
@@ -204,7 +204,7 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         public TElement NoImage() {
             //this.SetAttribute(tag_showImage, false);
-            this.RemoveAttribute(tag_showImage);
+            //this.RemoveAttribute(tag_showImage);
             this.RemoveAttribute(tag_image);
             this.RemoveAttribute(tag_imageMso);
             return Interface;
