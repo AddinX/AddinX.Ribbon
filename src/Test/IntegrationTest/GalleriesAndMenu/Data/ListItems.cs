@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using AddinX.Ribbon.Contract.Command;
+using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Data
 {
@@ -14,7 +16,7 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Data
 
         public void Add(SingleItem item)
         {
-            items.Add(items.Count + 1, item);
+            items.Add(items.Count, item);
         }
 
         public int Count()
@@ -23,22 +25,56 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Data
         }
 
         public string Ids(int index) {
-            return items.Keys.ElementAt(index).ToString();
+            return index.ToString();
         }
 
         public string Labels(int index)
         {
-            return items.Values.ElementAt(index).Label;
+            return items[index].Label;
         }
 
         public object Images(int index)
         {
-            return items.Values.ElementAt(index).Image;
+            return items[index].Image;
         }
 
         public string SuperTips(int index)
         {
-            return items.Values.ElementAt(index).SuperTip;
+            return items[index].SuperTip;
+        }
+    }
+
+    public class ItemsCommandWarper {
+        private List<SingleItem> _items;
+
+
+        public ItemsCommandWarper(IEnumerable<SingleItem> items) {
+            this._items = items.ToList();
+
+        }
+
+        public void Add(SingleItem item) {
+            _items.Add(item);
+        }
+
+        public virtual void OnItemAction(int index) {
+
+        }
+
+        public int SelectedIndex { get; set; }
+
+        public IDropDownCommand ToCommand() {
+            return new DropDownCommand() {
+                getItemCount = ()=>_items.Count,
+                getItemID = i=>i.ToString(),
+                getItemImage = i=>_items[i].Image,
+                getItemSupertip =  i=>_items[i].SuperTip,
+                getSelectedItemIndex = ()=>SelectedIndex,
+                onItemAction = i=> {
+                    SelectedIndex = i;
+                    this.OnItemAction(i);
+                }
+            };
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Drawing;
 
 namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Data
 {
-    internal class SingleItem
+    public class SingleItem
     {
         public string Label { get; set; }
 

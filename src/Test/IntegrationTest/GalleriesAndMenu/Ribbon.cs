@@ -38,7 +38,9 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu {
                                     .ImageMso("FileNew").LargeSize()
                                     .ItemLargeSize().Items(
                                         v => {
-                                            v.AddCheckbox("Show numbers").SetId(ShowNumberId);
+                                            v.AddCheckbox("Show numbers").SetId(ShowNumberId)
+                                                .Callback((ICheckBoxCommand)_commands.Find(ShowNumberId));
+
                                             v.AddSeparator().SetTitle("Mood");
                                             v.AddButton("Happy")
                                                 .SetId(HappyButtonId)
@@ -86,10 +88,7 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu {
 
             cmds.AddGalleryCommand(DynamicGalleryId)
                 .IsEnabled(() => checkboxPressed)
-                .ItemCounts(()=> {
-                    Console.WriteLine($"{DynamicGalleryId} Items Count:{content.Count()}");
-                    return content.Count();
-                })
+                .ItemCounts(()=> content.Count())
                 .ItemsId(i => content.Ids(i))
                 .ItemsLabel(i => content.Labels(i))
                 .ItemsImage(i => content.Images(i))

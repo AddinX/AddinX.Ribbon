@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
@@ -13,8 +14,10 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Utils
         /// <param name="width">The width to resize to.</param>
         /// <param name="height">The height to resize to.</param>
         /// <returns>The resized image.</returns>
-        public static Bitmap Resize(Image image, int width, int height)
-        {
+        public static Bitmap Resize(Image image, int width, int height) {
+
+            return (Bitmap) image.GetThumbnailImage(width, height, null, IntPtr.Zero);
+
             var destRect = new Rectangle(0, 0, width, height);
             var destImage = new Bitmap(width, height);
 
