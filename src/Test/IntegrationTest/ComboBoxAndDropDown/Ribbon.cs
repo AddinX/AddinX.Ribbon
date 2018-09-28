@@ -41,7 +41,7 @@ namespace AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown {
                                     .SetId(BookmarksDropDownId)
                                     .ShowLabel().NoImage()
                                     .ShowItemLabel().ShowItemImage().DynamicItems()
-                                    .AddButtons(b => b.AddButton("Button...").SetId(ButtonMore))
+                                    .Buttons(b => b.AddButton("Button...").SetId(ButtonMore))
                                     .Callback((IDropDownCommand) _commands.Find(BookmarksDropDownId));
 
                                 d.AddToggleButton("Toggle Button")
@@ -68,7 +68,7 @@ namespace AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown {
                 .ItemsLabel(i => _content.Labels(i))
                 .ItemsImage(i => _content.Images(i))
                 .ItemsSupertip(_content.SuperTips)
-                .Action(index => { MessageBox.Show(@"Your selection:" + (index + 1)); });
+                .OnAction(index => { MessageBox.Show(@"Your selection:" + (index + 1)); });
 
             cmds.AddComboBoxCommand(BookmarksComboId)
                 .ItemCounts(_content.Count)

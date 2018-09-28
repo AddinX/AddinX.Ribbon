@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Implementation;
 using ExcelDna.Integration;
 using ExcelDna.Integration.CustomUI;
+using Image = System.Drawing.Image;
 
 namespace AddinX.Ribbon.ExcelDna {
     [ComVisible(true)]
@@ -38,7 +36,7 @@ namespace AddinX.Ribbon.ExcelDna {
             Ribbon = ribbon;
         }
 
-        public virtual Bitmap OnLoadImage(string imageName) {
+        public virtual Image OnLoadImage(string imageName) {
             return null;
         }
 

@@ -1,15 +1,11 @@
 using System;
-using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.Button;
-using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class Button : Control<IButton,IButtonCommand>, IButton {
-
-        public Button() :base("button") {
+    public class Button : Control<IButton, IButtonCommand>, IButton {
+        public Button() : base("button") {
             NormalSize();
             NoImage();
         }

@@ -49,7 +49,7 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu {
                                             v.AddGallery("Dynamic Option").SetId(DynamicGalleryId)
                                                 .ShowLabel().NoImage().ShowItemLabel().ShowItemImage()
                                                 //.DynamicItems()
-                                                //.AddButtons(b => b.AddButton("Button...").SetId(ButtonMore))
+                                                //.Buttons(b => b.AddButton("Button...").SetId(ButtonMore))
                                                 .NumberRows(6).NumberColumns(1)
                                                 .Callback((IGalleryCommand) _commands.Find(DynamicGalleryId));
                                         });
@@ -87,7 +87,7 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu {
             });
 
             cmds.AddGalleryCommand(DynamicGalleryId)
-                .IsEnabled(() => checkboxPressed)
+                .GetEnabled(() => checkboxPressed)
                 .ItemCounts(()=> content.Count())
                 .ItemsId(i => content.Ids(i))
                 .ItemsLabel(i => content.Labels(i))

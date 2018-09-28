@@ -1,9 +1,7 @@
 ﻿using System.Xml.Linq;
 
-namespace AddinX.Ribbon.Contract.Command
-{
+namespace AddinX.Ribbon.Contract.Command {
     public interface ICommand {
-
         /// <summary>
         /// 所在控件Id
         /// </summary>

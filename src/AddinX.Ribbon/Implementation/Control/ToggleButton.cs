@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.ToggleButton;
-using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class ToggleButton : Control<IToggleButton,IToggleButtonCommand>, IToggleButton {
-        public ToggleButton(): base( "toggleButton") {
+    public class ToggleButton : Control<IToggleButton, IToggleButtonCommand>, IToggleButton {
+        public ToggleButton() : base("toggleButton") {
             NoImage();
             NormalSize();
             ShowLabel();

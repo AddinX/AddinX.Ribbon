@@ -33,7 +33,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
@@ -63,7 +62,6 @@
     <Compile Include="Contract\Command\IGroupCommand.cs" />
     <Compile Include="Contract\Command\ILabelCommand.cs" />
     <Compile Include="Contract\Command\IMenuCommand.cs" />
-    <Compile Include="Contract\Command\IRelayCommand.cs" />
     <Compile Include="Contract\Command\IRibbonCommands.cs" />
     <Compile Include="Contract\Command\ISeparatorCommand.cs" />
     <Compile Include="Contract\Command\IToggleButtonCommand.cs" />
@@ -128,7 +126,6 @@
     <Compile Include="Implementation\Command\GroupCommand.cs" />
     <Compile Include="Implementation\Command\LabelCommand.cs" />
     <Compile Include="Implementation\Command\MenuCommand.cs" />
-    <Compile Include="Implementation\Command\RelayCommand.cs" />
     <Compile Include="Implementation\Command\SeparatorCommand.cs" />
     <Compile Include="Implementation\Command\ToggleButtonCommand.cs" />
     <Compile Include="Implementation\Control\AddInElement.cs" />

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -18,12 +17,10 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
     }
 
-    public abstract class AddInList<TItem> : AddInList,IEnumerable<TItem> where TItem:AddInElement{
-
+    public abstract class AddInList<TItem> : AddInList, IEnumerable<TItem> where TItem : AddInElement {
         protected readonly IList<TItem> InnerList = new List<TItem>();
 
         protected AddInList() {
-
         }
 
         protected internal override void SetRegister(ICallbackRigister register) {

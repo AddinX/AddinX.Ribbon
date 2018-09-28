@@ -1,9 +1,7 @@
 using System;
 
-namespace AddinX.Ribbon.Contract.Command.Field
-{
-    public interface IVisibleField
-    {
+namespace AddinX.Ribbon.Contract.Command.Field {
+    public interface IVisibleField {
         /// <summary>
         /// getVisible
         /// »Øµ÷

@@ -9,10 +9,8 @@ using AddinX.Ribbon.Contract.Control.Label;
 using AddinX.Ribbon.Contract.Control.Menu;
 using AddinX.Ribbon.Contract.Control.ToggleButton;
 
-namespace AddinX.Ribbon.Contract.Control.Box
-{
-    public interface IBoxControls
-    {
+namespace AddinX.Ribbon.Contract.Control.Box {
+    public interface IBoxControls {
         IBox AddBox();
 
         IButton AddButton(string label);

@@ -1,10 +1,8 @@
 ﻿using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control;
 
-namespace AddinX.Ribbon.Contract
-{
-    public interface IRibbonBuilder
-    {
+namespace AddinX.Ribbon.Contract {
+    public interface IRibbonBuilder {
         ICustomUi CustomUi { get; }
 
         string GetXmlString();
@@ -14,7 +12,6 @@ namespace AddinX.Ribbon.Contract
     /// Ribbon callbck 注册器
     /// </summary>
     public interface ICallbackRigister {
-
         /// <summary>
         /// 注册命令
         /// </summary>

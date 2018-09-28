@@ -3,13 +3,12 @@ using System.Drawing;
 
 namespace AddinX.Ribbon.Contract.Command.Field {
     public interface IImageField {
-
         /// <summary>
         /// getImage
         /// »Øµ÷
         /// VBA£ºSub GetImage(control As IRibbonControl, ByRef returnedBitmap)
         /// C#£ºBitmap GetImage(IRibbonControl control)
         /// </summary>
-        Func<Bitmap> getImage { get; }
+        Func<Image> getImage { get; }
     }
 }

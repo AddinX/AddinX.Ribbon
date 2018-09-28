@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.ExcelDna;
+using AddinX.Ribbon.Implementation;
 
 namespace AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox
 {
@@ -19,7 +20,9 @@ namespace AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox
 
         private string resultText = "Test";
 
-        public override Bitmap OnLoadImage(string imageName)
+        private RibbonCommands commands = new RibbonCommands();
+
+        public override Image OnLoadImage(string imageName)
         {
             if (imageName == "option")
             {
@@ -42,21 +45,26 @@ namespace AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox
                             {
                                 d.AddEditbox("input Text").SetId(InputText)
                                     .ImagePath("option").MaxLength(7)
-                                    .SizeString(7);
-                                d.AddLabelControl().SetId(OutputText);
+                                    .SizeString(7)
+                                    .Callback((IEditBoxCommand)commands.Find(InputText));
+
+                                d.AddLabelControl().SetId(OutputText)
+                                    .Callback((ILabelCommand)commands.Find(OutputText));
+
                                 d.AddButton("Happy")
                                     .SetId(HappyButtonId)
                                     .LargeSize()
-                                    .ImageMso("HappyFace");
+                                    .ImageMso("HappyFace")
+                                    .Callback((IButtonCommand)commands.Find(HappyButtonId));
                             })
                         .DialogBoxLauncher(i => i.AddDialogBoxLauncher().SetId(BoxLauncherId).Supertip("Box launcher"));
                     });
             });
         }
 
-        protected override void CreateRibbonCommand(IRibbonCommands cmds)
+        protected void CreateRibbonCommand(IRibbonCommands cmds)
         {
-            cmds.AddButtonCommand(HappyButtonId).Action(() => MessageBox.Show("Be Happy !!!"));
+            cmds.AddButtonCommand(HappyButtonId).OnAction(() => MessageBox.Show("Be Happy !!!"));
             
 
             cmds.AddLabelCommand(OutputText).GetLabel(()=> resultText);
@@ -67,7 +75,7 @@ namespace AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox
             })
             .GetText(() => "Hello");
             cmds.AddDialogBoxLauncherCommand(BoxLauncherId)
-                .Action(() => MessageBox.Show("Dialog Box clicked"));
+                .OnAction(() => MessageBox.Show("Dialog Box clicked"));
         }
 
         public override void OnClosing()
@@ -76,7 +84,9 @@ namespace AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox
             AddinContext.ExcelApp = null;
         }
 
-        public override void OnOpening() { }
+        public override void OnOpening() {
+            CreateRibbonCommand(commands);
+        }
         
     }
 }

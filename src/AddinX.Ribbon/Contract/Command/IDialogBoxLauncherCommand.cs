@@ -1,13 +1,11 @@
 ﻿using System;
 
-namespace AddinX.Ribbon.Contract.Command
-{
-    public interface IDialogBoxLauncherCommand : ICommand
-    {
-        IDialogBoxLauncherCommand Action(Action act);
+namespace AddinX.Ribbon.Contract.Command {
+    public interface IDialogBoxLauncherCommand : ICommand {
+        IDialogBoxLauncherCommand OnAction(Action act);
 
-        IDialogBoxLauncherCommand IsVisible(Func<bool> condition);
+        IDialogBoxLauncherCommand GetVisible(Func<bool> condition);
 
-        IDialogBoxLauncherCommand IsEnabled(Func<bool> condition);
+        IDialogBoxLauncherCommand GetEnabled(Func<bool> condition);
     }
 }

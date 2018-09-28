@@ -1,7 +1,5 @@
-namespace AddinX.Ribbon.Contract.Enums
-{
-    public enum IdType
-    {
+namespace AddinX.Ribbon.Contract.Enums {
+    public enum IdType {
         /// <summary>
         ///  Standard id for  a Ribbon element
         /// <example>

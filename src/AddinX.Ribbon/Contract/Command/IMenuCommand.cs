@@ -1,11 +1,9 @@
 using System;
 
-namespace AddinX.Ribbon.Contract.Command
-{
-    public interface IMenuCommand : ICommand
-    {
-        IMenuCommand IsVisible(Func<bool> condition);
+namespace AddinX.Ribbon.Contract.Command {
+    public interface IMenuCommand : ICommand {
+        IMenuCommand GetVisible(Func<bool> condition);
 
-        IMenuCommand IsEnabled(Func<bool> condition);
+        IMenuCommand GetEnabled(Func<bool> condition);
     }
 }

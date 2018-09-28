@@ -148,7 +148,7 @@ namespace AddinX.Ribbon.UnitTest
                         g.AddGroup("reporting").SetId("reportingGroup")
                             .Items(i =>
                             {
-                                i.AddBox().SetId("ButtonsVertical").VerticalDisplay().AddItems(b =>
+                                i.AddBox().SetId("ButtonsVertical").VerticalDisplay().Items(b =>
                                 { 
                                     b.AddButton("Allocation")
                                         .SetId("portfolioAllocation")
@@ -158,7 +158,7 @@ namespace AddinX.Ribbon.UnitTest
                                         .NoImage().ShowLabel().Supertip("Portfolio best contributor")
                                         .Screentip("Display the top / bottom X contributor to the portfolio performance.");
                                 });
-                                i.AddBox().SetId("ButtonsHorizontal").HorizontalDisplay().AddItems(b =>
+                                i.AddBox().SetId("ButtonsHorizontal").HorizontalDisplay().Items(b =>
                                 {
                                     b.AddButton("Portfolio Analysis")
                                         .SetId("portfolioAnalyser").NormalSize()
@@ -242,7 +242,7 @@ namespace AddinX.Ribbon.UnitTest
                                         {
                                             i.AddComboBox("Colors").SetId("colorsPicking")
                                                 .ShowLabel().NoImage()
-                                                .AddItems(o =>
+                                                .Items(o =>
                                                 {
                                                     o.AddItem("Green").SetId("greenColor");
                                                     o.AddItem("Red").SetId("redColor").NoImage();
@@ -290,7 +290,7 @@ namespace AddinX.Ribbon.UnitTest
                                 .Items(i =>
                                 {
                                     i.AddToggleButton("Hide View Tab").SetId("HideViewTab")
-                                        .ShowLabel().Large().NoImage().Supertip("Hide View Tab");
+                                        .ShowLabel().LargeSize().NoImage().Supertip("Hide View Tab");
 
                                 });
                         });
@@ -322,7 +322,7 @@ namespace AddinX.Ribbon.UnitTest
                                 i.AddDropDown("Colors").SetId("ColorsSelection")
                                     .ShowLabel().NoImage().ShowItemLabel()
                                     .HideItemImage()
-                                    .AddItems(o =>
+                                    .Items(o =>
                                     {
                                         o.AddItem("Green").SetId("greenColor");
                                         o.AddItem("Red").SetId("redColor").NoImage();
@@ -370,12 +370,12 @@ namespace AddinX.Ribbon.UnitTest
                                 i.AddGallery("Colors").SetId("ColorsSelection")
                                     .ShowLabel().NormalSize().NoImage().ShowItemLabel()
                                     .HideItemImage()
-                                    .AddItems(o =>
+                                    .Items(o =>
                                     {
                                         o.AddItem("Green").SetId("greenColor");
                                         o.AddItem("Red").SetId("redColor").NoImage();
                                         o.AddItem("Blue").SetId("blueColor").NoImage();
-                                    }).AddButtons(o=>
+                                    }).Buttons(o=>
                                         o.AddButton("Extra Colors").SetId("ExtraColors")
                                         .ImageMso("HappyFace") .ShowLabel()
                                     ).Supertip("Color Picking");
@@ -418,7 +418,7 @@ namespace AddinX.Ribbon.UnitTest
                             {
                                 i.AddMenu("Options").SetId("optionMenu")
                                     .ShowLabel().NoImage().LargeSize().ItemLargeSize()
-                                    .AddItems(l =>
+                                    .Items(l =>
                                     {
                                         l.AddCheckbox("Option 1").SetId("optionsOne")
                                             .Screentip("CheckBox Option");
@@ -429,16 +429,16 @@ namespace AddinX.Ribbon.UnitTest
                                             .SetId("BoutonOptionTwo")
                                             .ImageMso("HappyFace");
 
-                                        l.AddSeparator("separatorMenu");
+                                        l.AddSeparator();
                                         l.AddGallery("Colors").SetId("ColorsSelection")
                                             .ShowLabel().NoImage().ShowItemLabel()
                                             .HideItemImage()
-                                            .AddItems(o =>
+                                            .Items(o =>
                                             {
                                                 o.AddItem("Green").SetId("greenColor");
                                                 o.AddItem("Red").SetId("redColor").NoImage();
                                                 o.AddItem("Blue").SetId("blueColor").NoImage();
-                                            }).AddButtons(o =>
+                                            }).Buttons(o =>
                                                 o.AddButton("Extra Colors").SetId("ExtraColors")
                                                     .NoImage().ShowLabel()
                                             ).Supertip("Color Picking");
@@ -531,7 +531,7 @@ namespace AddinX.Ribbon.UnitTest
                                     .SetId(BookmarksDropDownId)
                                     .ShowLabel().NoImage()
                                     .ShowItemLabel().ShowItemImage().DynamicItems()
-                                    .AddButtons(b => b.AddButton("Button...").SetId(ButtonMore));
+                                    .Buttons(b => b.AddButton("Button...").SetId(ButtonMore));
                                 d.AddToggleButton("Toggle Button")
                                     .SetId(ToggleButtonId);
                             });

@@ -1,10 +1,8 @@
-﻿using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
-using AddinX.Ribbon.Contract.Control.ToggleButtonUnsize;
+﻿using AddinX.Ribbon.Contract.Control.ToggleButtonUnsize;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class ToggleButtonUnsize : Control<IToggleButtonUnsize>, IToggleButtonUnsize {
-        public ToggleButtonUnsize(): base( "toggleButton") {
+        public ToggleButtonUnsize() : base("toggleButton") {
             NoImage();
         }
 
@@ -47,6 +45,5 @@ namespace AddinX.Ribbon.Implementation.Control {
         }*/
 
         protected override IToggleButtonUnsize Interface => this;
-
     }
 }

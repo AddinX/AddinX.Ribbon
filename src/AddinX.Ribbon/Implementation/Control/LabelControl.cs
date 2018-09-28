@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.Label;
 using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class LabelControl : Control<ILabelControl, ILabelCommand>, ILabelControl {
-        public LabelControl(): base( "labelControl") {
+        public LabelControl() : base("labelControl") {
         }
 
 

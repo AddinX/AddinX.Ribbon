@@ -1,9 +1,7 @@
 using System;
 
-namespace AddinX.Ribbon.Contract.Command.Field
-{
-    public interface ITextField
-    {
+namespace AddinX.Ribbon.Contract.Command.Field {
+    public interface ITextField {
         /// <summary>
         /// getText
         /// »Øµ÷
@@ -18,6 +16,6 @@ namespace AddinX.Ribbon.Contract.Command.Field
         /// VBA£ºSub OnChange(control As IRibbonControl, text As String)
         /// C#£ºvoid OnChange(IRibbonControl control, string text)
         /// </summary>
-        Action<string> onChange{ get; set; } 
+        Action<string> onChange { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace AddinX.Ribbon.Implementation.Control {
     public class DialogBoxLauncher : Control<IDialogBoxLauncher, IDialogBoxLauncherCommand>, IDialogBoxLauncher {
         private readonly ButtonUnsize _btn;
 
-        public DialogBoxLauncher(): base( "dialogBoxLauncher") {
+        public DialogBoxLauncher() : base("dialogBoxLauncher") {
             _btn = new ButtonUnsize();
             _btn.HideLabel();
             _btn.NoImage();

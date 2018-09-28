@@ -5,7 +5,7 @@ using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
     public class SeparatorCommand : AbstractCommand, ISeparatorCommand, IVisibleField {
-        public void IsVisible(Func<bool> condition) {
+        public void GetVisible(Func<bool> condition) {
             getVisible = condition;
         }
 
@@ -21,6 +21,6 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         #endregion
 
-        public Func<bool> getVisible { get;  set; }
+        public Func<bool> getVisible { get; set; }
     }
 }

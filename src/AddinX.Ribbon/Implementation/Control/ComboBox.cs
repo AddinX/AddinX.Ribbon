@@ -11,7 +11,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private bool _dynamicItemLoading;
         private readonly Items _data;
 
-        public ComboBox(): base( "comboBox") {
+        public ComboBox() : base("comboBox") {
             _data = new Items();
             //NoImage();
             MaxLength(7);
@@ -25,7 +25,6 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         protected override IComboBox Interface => this;
 
-        
 
         protected internal override XElement ToXml(XNamespace ns) {
             /*var tmpId = (ElementId) Id;
@@ -49,7 +48,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             );*/
 
             var element = base.ToXml(ns);
-           
+
             if (_dynamicItemLoading) {
                 element.Add(new XAttribute("getItemCount", "GetItemCount")
                     , new XAttribute("getItemID", "GetItemId")

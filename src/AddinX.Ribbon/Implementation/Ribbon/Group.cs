@@ -2,16 +2,16 @@
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
-using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Ribbon.Group;
 using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
-    public class Group : ControlContainer<IGroup,Controls>, IGroup {
+    public class Group : ControlContainer<IGroup, Controls>, IGroup {
         private Controls _boxLauncher;
 
-        public Group() :base("group") {}
+        public Group() : base("group") {
+        }
 
         #region Overrides of AddInElement
 
@@ -56,7 +56,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         #region Implementation of IRibbonItems<out IGroup,out IGroupControls>
 
         public IGroup Items(Action<IGroupControls> items) {
-             items.Invoke(base.Items);
+            items.Invoke(base.Items);
             return this;
         }
 

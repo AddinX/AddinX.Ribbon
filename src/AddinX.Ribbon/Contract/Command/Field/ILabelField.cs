@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace AddinX.Ribbon.Contract.Command.Field
-{
-    public interface ILabelField
-    {
+namespace AddinX.Ribbon.Contract.Command.Field {
+    public interface ILabelField {
         /// <summary>
         /// getLabel
         /// 回调

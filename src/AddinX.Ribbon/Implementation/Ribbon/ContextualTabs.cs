@@ -11,7 +11,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
     public class ContextualTabs : AddInElement, IContextualTabs {
         private readonly IList<TabSet> _items;
 
-        public ContextualTabs() :base("contextualTabs") {
+        public ContextualTabs() : base("contextualTabs") {
             _items = new List<TabSet>();
         }
 

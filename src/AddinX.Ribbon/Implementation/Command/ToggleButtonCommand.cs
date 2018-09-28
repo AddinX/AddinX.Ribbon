@@ -3,11 +3,9 @@ using System.Drawing;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
-using AddinX.Ribbon.Contract.Enums;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class ToggleButtonCommand : ToggleRegularCommand, IToggleButtonCommand, IVisibleField{
-
+    public class ToggleButtonCommand : ToggleRegularCommand, IToggleButtonCommand, IVisibleField {
         #region Implementation of ICommand
 
         /// <summary>
@@ -16,7 +14,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// <param name="element"></param>
         public override void WriteCallbackXml(XElement element) {
             base.WriteCallbackXml(element);
-            element.AddCallbackAttribute("getVisible",getVisible);
+            element.AddCallbackAttribute("getVisible", getVisible);
         }
 
         #endregion
@@ -31,7 +29,6 @@ namespace AddinX.Ribbon.Implementation.Command {
 
 
     public class ToggleRegularCommand : AbstractCommand, IToggleRegularCommand {
-
         /// <summary>
         /// 写入回调Xml属性
         /// </summary>
@@ -64,7 +61,7 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         #region Implementation of IImageField
 
-        public Func<Bitmap> getImage { get; set; }
+        public Func<Image> getImage { get; set; }
 
         #endregion
 
@@ -81,7 +78,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         #endregion
     }
 
-    public class ButtonRegularCommand: AbstractCommand, IButtonRegularCommand {
+    public class ButtonRegularCommand : AbstractCommand, IButtonRegularCommand {
         #region Implementation of ICommand
 
         /// <summary>
@@ -92,7 +89,7 @@ namespace AddinX.Ribbon.Implementation.Command {
             element.AddCallbackAttribute("getEnabled", getEnabled);
             element.AddCallbackAttribute("getImage", getImage);
             element.AddCallbackAttribute("onAction", onAction);
-            element.AddCallbackAttribute("getDescription",getDescription);
+            element.AddCallbackAttribute("getDescription", getDescription);
             element.AddCallbackAttribute("getVisible", getVisible);
         }
 
@@ -106,7 +103,7 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         #region Implementation of IImageField
 
-        public Func<Bitmap> getImage { get; set; }
+        public Func<Image> getImage { get; set; }
 
         #endregion
 
@@ -136,9 +133,6 @@ namespace AddinX.Ribbon.Implementation.Command {
     }
 
     public abstract class AbstractCommand : ICommand {
-
-
-
         #region Implementation of ICommand
 
         public string ControlId { get; protected internal set; }

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
-using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Control.DropDown;
 using AddinX.Ribbon.Contract.Control.Item;
 using AddinX.Ribbon.Implementation.Command;
@@ -15,7 +14,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private readonly Items _data;
         private readonly Controls _controls;
 
-        public DropDow(): base( "dropDown") {
+        public DropDow() : base("dropDown") {
             _data = new Items();
             _controls = new Controls();
             NoImage();
@@ -45,7 +44,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        public IDropDown AddButtons(Action<IDropDownControls> items) {
+        public IDropDown Buttons(Action<IDropDownControls> items) {
             items.Invoke(_controls);
             return this;
         }

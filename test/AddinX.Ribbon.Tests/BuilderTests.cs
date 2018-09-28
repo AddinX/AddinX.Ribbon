@@ -148,7 +148,7 @@ namespace AddinX.Ribbon.Tests {
                                             v.AddGallery("Dynamic Option").SetId(DynamicGalleryId)
                                                 .ShowLabel().NoImage().ShowItemLabel().ShowItemImage()
                                                 //.DynamicItems()
-                                                .AddButtons(b => b.AddButton("Button...").SetId(ButtonMore))
+                                                .Buttons(b => b.AddButton("Button...").SetId(ButtonMore))
                                                 .NumberRows(6).NumberColumns(1);
                                         });
                                 d.AddGallery("Multi Option").SetId(GalleryId)

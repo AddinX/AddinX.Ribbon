@@ -104,16 +104,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Contract\AddinX.Ribbon.Contract.csproj">
-      <Project>{8e0452bb-994c-4996-99fa-931ee5b7e661}</Project>
-      <Name>AddinX.Ribbon.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Implementation\AddinX.Ribbon.Implementation.csproj">
-      <Project>{563dfffc-6f88-4bbd-9ce0-98783a8511ce}</Project>
-      <Name>AddinX.Ribbon.Implementation</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Sample\ContextualTabWithBoxes.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -144,6 +134,12 @@
     <Content Include="Sample\GroupWithToggleButton.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AddinX.Ribbon\AddinX.Ribbon.csproj">
+      <Project>{e517e0a2-8f3b-4f76-8987-85c6146d6021}</Project>
+      <Name>AddinX.Ribbon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

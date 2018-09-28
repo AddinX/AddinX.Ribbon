@@ -11,7 +11,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         private bool _startFromStrach;
         private ContextualTabs _contextTabs;
 
-        public Ribbon() :base("ribbon") {
+        public Ribbon() : base("ribbon") {
             _startFromStrach = false;
         }
 
@@ -30,6 +30,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
             if (_tabs == null) {
                 _tabs = new Tabs();
             }
+
             value.Invoke(_tabs);
             return this;
         }
@@ -38,6 +39,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
             if (_contextTabs == null) {
                 _contextTabs = new ContextualTabs();
             }
+
             value.Invoke(_contextTabs);
             return this;
         }

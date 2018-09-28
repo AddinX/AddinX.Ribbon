@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation {
-    public class RibbonCommands : IRibbonCommands , ICallbackRigister {
+    public class RibbonCommands : IRibbonCommands, ICallbackRigister {
         private readonly IDictionary<string, ICommand> _commands = new SortedDictionary<string, ICommand>();
 
         public IToggleButtonCommand AddToggleButtonCommand(string id) {
@@ -38,10 +37,6 @@ namespace AddinX.Ribbon.Implementation {
             var cmd = new DialogBoxLauncherCommand();
             Add(id, cmd);
             return cmd;
-        }
-
-        public IEnumerable<string> GetListCommandNames() {
-            return _commands.Keys.ToList();
         }
 
         public IButtonCommand AddButtonCommand(string id) {
@@ -98,7 +93,7 @@ namespace AddinX.Ribbon.Implementation {
         /// <param name="elementId"></param>
         /// <param name="command"></param>
         public void Add(IElementId elementId, ICommand command) {
-           Add(elementId.Value,command);
+            Add(elementId.Value, command);
         }
 
         /// <summary>

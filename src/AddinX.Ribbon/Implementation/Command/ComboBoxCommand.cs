@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class ComboBoxCommand : AbstractCommand, IComboBoxCommand, ITextField, IEnabledField, IVisibleField, IDynamicItemsField {
-
+    public class ComboBoxCommand : AbstractCommand, IComboBoxCommand, ITextField, IEnabledField, IVisibleField,
+        IDynamicItemsField {
         public Func<int> getItemCount { get; set; }
         public Func<int, string> getItemID { get; set; }
         public Func<int, string> getItemLabel { get; set; }
@@ -18,12 +17,12 @@ namespace AddinX.Ribbon.Implementation.Command {
         public Action<string> onChange { get; set; }
         public Func<bool> getVisible { get; set; }
 
-        public IComboBoxCommand IsVisible(Func<bool> condition) {
+        public IComboBoxCommand GetVisible(Func<bool> condition) {
             getVisible = condition;
             return this;
         }
 
-        public IComboBoxCommand IsEnabled(Func<bool> condition) {
+        public IComboBoxCommand GetEnabled(Func<bool> condition) {
             getEnabled = condition;
             return this;
         }
@@ -53,12 +52,12 @@ namespace AddinX.Ribbon.Implementation.Command {
             return this;
         }
 
-        public IComboBoxCommand ItemsScreentip(Func<int,string> itemsScreentip) {
+        public IComboBoxCommand ItemsScreentip(Func<int, string> itemsScreentip) {
             getItemScreentip = itemsScreentip;
             return this;
         }
 
-        public IComboBoxCommand ItemsSupertip(Func<int,string> itemsSupertip) {
+        public IComboBoxCommand ItemsSupertip(Func<int, string> itemsSupertip) {
             getItemSupertip = itemsSupertip;
             return this;
         }
@@ -89,9 +88,5 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         #endregion
-
-
-
-
     }
 }

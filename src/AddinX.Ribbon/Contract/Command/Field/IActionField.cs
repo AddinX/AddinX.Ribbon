@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace AddinX.Ribbon.Contract.Command.Field
-{
-    public interface IActionField
-    {
+namespace AddinX.Ribbon.Contract.Command.Field {
+    public interface IActionField {
         /// <summary>
         /// onAction 
         /// 回调

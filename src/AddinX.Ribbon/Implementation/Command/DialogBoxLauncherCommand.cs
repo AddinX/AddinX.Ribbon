@@ -4,23 +4,23 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class DialogBoxLauncherCommand : AbstractCommand, IDialogBoxLauncherCommand, IVisibleField, IEnabledField, IActionField {
-
-        public Action onAction { get;  set; }
+    public class DialogBoxLauncherCommand : AbstractCommand, IDialogBoxLauncherCommand, IVisibleField, IEnabledField,
+        IActionField {
+        public Action onAction { get; set; }
         public Func<bool> getEnabled { get; set; }
         public Func<bool> getVisible { get; set; }
 
-        public IDialogBoxLauncherCommand Action(Action act) {
+        public IDialogBoxLauncherCommand OnAction(Action act) {
             onAction = act;
             return this;
         }
 
-        public IDialogBoxLauncherCommand IsVisible(Func<bool> condition) {
+        public IDialogBoxLauncherCommand GetVisible(Func<bool> condition) {
             getVisible = condition;
             return this;
         }
 
-        public IDialogBoxLauncherCommand IsEnabled(Func<bool> condition) {
+        public IDialogBoxLauncherCommand GetEnabled(Func<bool> condition) {
             getEnabled = condition;
             return this;
         }
@@ -38,7 +38,5 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         #endregion
-
-        
     }
 }

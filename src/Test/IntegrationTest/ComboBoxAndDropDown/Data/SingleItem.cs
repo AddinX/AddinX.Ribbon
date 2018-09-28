@@ -6,7 +6,7 @@ namespace AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown.Data
     {
         public string Label { get; set; }
 
-        public Bitmap Image { get; set; }
+        public Image Image { get; set; }
 
         public string SuperTip { get; set; }
     }

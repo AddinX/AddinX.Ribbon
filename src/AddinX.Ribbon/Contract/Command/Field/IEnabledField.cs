@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace AddinX.Ribbon.Contract.Command.Field
-{
-    public interface IEnabledField
-    {
+namespace AddinX.Ribbon.Contract.Command.Field {
+    public interface IEnabledField {
         /// <summary>
         /// getEnabled
         /// 回调

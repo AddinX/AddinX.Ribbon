@@ -3,26 +3,21 @@ using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control;
-using AddinX.Ribbon.Contract.Control.Button;
-using AddinX.Ribbon.Contract.Control.DropDown;
-using AddinX.Ribbon.Contract.Control.Item;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation.Command;
-using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public abstract class Control : AddInElement {
-       
         protected IElementId Id { get; }
 
         private ICommand _command;
 
-        protected Control(string elementName) :base(elementName) {
+        protected Control(string elementName) : base(elementName) {
             Id = new ElementId();
         }
 
         protected internal void SetLabel(string label) {
-            base.SetAttribute("label",label);
+            base.SetAttribute("label", label);
         }
 
         protected TCmd GetCommand<TCmd>() where TCmd : ICommand, new() {
@@ -47,20 +42,23 @@ namespace AddinX.Ribbon.Implementation.Control {
                 if (_command is AbstractCommand absCmd) {
                     absCmd.ControlId = this.Id.Value;
                 }
-                Register?.Add(Id,_command);
+
+                Register?.Add(Id, _command);
             }
         }
-        
+
         protected internal override XElement ToXml(XNamespace ns) {
-            var element = base.ToXml(ns,new XAttribute(Id.Type.ToString(), Id.Value));
+            var element = base.ToXml(ns, new XAttribute(Id.Type.ToString(), Id.Value));
             AddCallbackAttributes(element);
             return element;
         }
     }
-    
 
-    public abstract class ControlContainer<TElement,TContainer> : Control<TElement> where TContainer:AddInList,new() {
+
+    public abstract class ControlContainer<TElement, TContainer> : Control<TElement>
+        where TContainer : AddInList, new() {
         private const string tag_itemSize = "itemSize";
+
         protected ControlContainer(string elementName) : base(elementName) {
             Items = new TContainer();
         }
@@ -73,7 +71,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public TElement ItemNormalSize() {
-            base.SetAttribute(tag_itemSize,ControlSize.normal);
+            base.SetAttribute(tag_itemSize, ControlSize.normal);
             return this.Interface;
         }
 
@@ -87,6 +85,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             foreach (var childElement in Items.ToXml(ns)) {
                 element.Add(childElement);
             }
+
             return element;
         }
     }
@@ -99,13 +98,13 @@ namespace AddinX.Ribbon.Implementation.Control {
             base.SetCommand<TCommand>(command);
         }
 
-        protected TElement BuildCallback<TCmd>(Action<TCommand> builder) where TCmd:TCommand, new() {
+        protected TElement BuildCallback<TCmd>(Action<TCommand> builder) where TCmd : TCommand, new() {
             builder?.Invoke(base.GetCommand<TCmd>());
             return Interface;
         }
     }
 
-    public abstract class Control<TElement> :Control{
+    public abstract class Control<TElement> : Control {
         private const string tag_size = "size";
         private const string tag_getSize = "getSize";
         private const string tag_onAction = "onAction";
@@ -161,7 +160,6 @@ namespace AddinX.Ribbon.Implementation.Control {
         private const string tag_maxLength = "maxLength";
         private const string tag_getText = "getText";
         private const string tag_onChange = "onChange";
- 
 
 
         protected Control(string elementName) : base(elementName) {
@@ -189,7 +187,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         public TElement ImageMso(string name) {
             //_imageVisible = !string.IsNullOrEmpty(name);
             //_imageMso = name;
-           //this.SetAttribute(tag_showImage, true);
+            //this.SetAttribute(tag_showImage, true);
             this.SetAttribute(tag_imageMso, name);
             return Interface;
         }
@@ -308,9 +306,8 @@ namespace AddinX.Ribbon.Implementation.Control {
 
 
         public TElement MaxLength(int maxLength) {
-            SetAttribute(tag_maxLength,maxLength);
+            SetAttribute(tag_maxLength, maxLength);
             return this.Interface;
         }
-
     }
 }

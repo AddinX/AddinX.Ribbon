@@ -1,10 +1,8 @@
-﻿using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
-using AddinX.Ribbon.Contract.Control.MenuSeparator;
+﻿using AddinX.Ribbon.Contract.Control.MenuSeparator;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class MenuSeparator : Control<IMenuSeparator>, IMenuSeparator {
-        public MenuSeparator(): base( "menuSeparator") {
+        public MenuSeparator() : base("menuSeparator") {
         }
 
         protected override IMenuSeparator Interface => this;
@@ -12,7 +10,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         #region Implementation of IMenuSeparator
 
         public IMenuSeparator SetTitle(string title) {
-            base.SetAttribute("title",title);
+            base.SetAttribute("title", title);
             return Interface;
         }
 

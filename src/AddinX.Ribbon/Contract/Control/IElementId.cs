@@ -1,7 +1,6 @@
 ﻿using AddinX.Ribbon.Contract.Enums;
 
-namespace AddinX.Ribbon.Contract.Control
-{
+namespace AddinX.Ribbon.Contract.Control {
     public interface IElementId {
         IElementId SetId(string name);
 
@@ -12,5 +11,5 @@ namespace AddinX.Ribbon.Contract.Control
         string Value { get; }
 
         IdType Type { get; }
-}
+    }
 }

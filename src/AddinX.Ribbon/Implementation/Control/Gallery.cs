@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Security.Authentication.ExtendedProtection.Configuration;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
-using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Control.Gallery;
 using AddinX.Ribbon.Contract.Control.Item;
-using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class Gallery : Control<IGallery, IGalleryCommand>, IGallery {
-
         private bool _dynamicItemsLoading;
         private readonly Items _data;
         private readonly Controls _controls;
 
-        public Gallery(): base( "gallery") {
+        public Gallery() : base("gallery") {
             _data = new Items();
             NormalSize();
             _controls = new Controls();
@@ -74,7 +70,7 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         protected override IGallery Interface => this;
 
-       
+
         public IGallery DynamicItems() {
             _dynamicItemsLoading = true;
             return this;
@@ -87,7 +83,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IGallery AddButtons(Action<IGalleryControls> items) {
+        public IGallery Buttons(Action<IGalleryControls> items) {
             items.Invoke(_controls);
             return this;
         }

@@ -2,11 +2,10 @@
 using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Ribbon.Group;
 
-namespace AddinX.Ribbon.Contract.Ribbon.Tab
-{
+namespace AddinX.Ribbon.Contract.Ribbon.Tab {
     public interface ITab : IRibbonId<ITab>, IRibbonKeytip<ITab>
-    //ITabItems, 
+        //ITabItems, 
     {
-       ITab Groups(Action<IGroups> value);
+        ITab Groups(Action<IGroups> value);
     }
 }

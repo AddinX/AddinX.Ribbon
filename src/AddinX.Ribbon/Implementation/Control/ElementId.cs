@@ -6,7 +6,7 @@ namespace AddinX.Ribbon.Implementation.Control {
     public class ElementId : IElementId {
         private static int _autoId = 1;
         public IdType Type { get; private set; }
-        public  string Value { get; private set; }
+        public string Value { get; private set; }
 
         public ElementId() {
             Value = $"id_{_autoId++:0000}";

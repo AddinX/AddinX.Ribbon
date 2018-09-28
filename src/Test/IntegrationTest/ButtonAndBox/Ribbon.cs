@@ -62,7 +62,7 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox {
                 .OnAction(() => MessageBox.Show("Portfolio contributors button clicked"));
             cmds.AddButtonCommand(PortfolioAllocationBtn)
                 .OnAction(() => MessageBox.Show("Portfolio allocation button clicked"));
-            cmds.AddBoxCommand(ReportingBox).IsVisible(() => AddinContext.ExcelApp.Worksheets.Count() > 1);
+            cmds.AddBoxCommand(ReportingBox).GetVisible(() => AddinContext.ExcelApp.Worksheets.Count() > 1);
         }
 
         public override void OnClosing() {

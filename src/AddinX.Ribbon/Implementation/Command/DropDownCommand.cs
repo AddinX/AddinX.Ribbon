@@ -1,22 +1,22 @@
 using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class DropDownCommand : AbstractCommand, IDropDownCommand, IEnabledField, IVisibleField, IDynamicItemsField, IDropDownField {
-        public IDropDownCommand IsVisible(Func<bool> condition) {
+    public class DropDownCommand : AbstractCommand, IDropDownCommand, IEnabledField, IVisibleField, IDynamicItemsField,
+        IDropDownField {
+        public IDropDownCommand GetVisible(Func<bool> condition) {
             getVisible = condition;
             return this;
         }
 
-        public IDropDownCommand IsEnabled(Func<bool> condition) {
+        public IDropDownCommand GetEnabled(Func<bool> condition) {
             getEnabled = condition;
             return this;
         }
 
-        public IDropDownCommand Action(Action<int> act) {
+        public IDropDownCommand OnAction(Action<int> act) {
             onItemAction = act;
             return this;
         }
@@ -41,7 +41,7 @@ namespace AddinX.Ribbon.Implementation.Command {
             return this;
         }
 
-        public IDropDownCommand ItemsScreentip(Func<int,string> itemsScreentip) {
+        public IDropDownCommand ItemsScreentip(Func<int, string> itemsScreentip) {
             getItemScreentip = itemsScreentip;
             return this;
         }
@@ -78,15 +78,15 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         #endregion
 
-        public Action<int> onItemAction { get;  set; }
-        public Func<int> getSelectedItemIndex { get;  set; }
-        public Func<int> getItemCount { get;  set; }
-        public Func<int, string> getItemID { get;  set; }
-        public Func<int,object> getItemImage { get;  set; }
-        public Func<int, string> getItemLabel { get;  set; }
-        public Func<int ,string> getItemScreentip { get;  set; }
-        public Func<int,string> getItemSupertip { get;  set; }
-        public Func<bool> getEnabled { get;  set; }
-        public Func<bool> getVisible { get;  set; }
+        public Action<int> onItemAction { get; set; }
+        public Func<int> getSelectedItemIndex { get; set; }
+        public Func<int> getItemCount { get; set; }
+        public Func<int, string> getItemID { get; set; }
+        public Func<int, object> getItemImage { get; set; }
+        public Func<int, string> getItemLabel { get; set; }
+        public Func<int, string> getItemScreentip { get; set; }
+        public Func<int, string> getItemSupertip { get; set; }
+        public Func<bool> getEnabled { get; set; }
+        public Func<bool> getVisible { get; set; }
     }
 }

@@ -321,7 +321,7 @@ namespace AddinX.Ribbon.UnitTest
                                         o.AddItem("Green").SetId("greenColor");
                                         o.AddItem("Red").SetId("redColor").NoImage();
                                         o.AddItem("Blue").SetId("blueColor").NoImage();
-                                    }).AddButtons(o =>
+                                    }).Buttons(o =>
                                         o.AddButton("Extra Colors").SetId("ExtraColors")
                                             .ImageMso("HappyFace").ShowLabel()
                                     ).Supertip("Color Picking");
@@ -371,7 +371,7 @@ namespace AddinX.Ribbon.UnitTest
                                                 o.AddItem("Green").SetId("greenColor");
                                                 o.AddItem("Red").SetId("redColor").NoImage();
                                                 o.AddItem("Blue").SetId("blueColor").NoImage();
-                                            }).AddButtons(o =>
+                                            }).Buttons(o =>
                                                 o.AddButton("Extra Colors").SetId("ExtraColors")
                                                     .NoImage().ShowLabel()
                                             ).Supertip("Color Picking");

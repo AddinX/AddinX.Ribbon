@@ -4,15 +4,15 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class MenuCommand : AbstractCommand,IMenuCommand, IVisibleField, IEnabledField {
+    public class MenuCommand : AbstractCommand, IMenuCommand, IVisibleField, IEnabledField {
         public Func<bool> getEnabled { get; set; }
 
-        public IMenuCommand IsVisible(Func<bool> condition) {
+        public IMenuCommand GetVisible(Func<bool> condition) {
             getVisible = condition;
             return this;
         }
 
-        public IMenuCommand IsEnabled(Func<bool> condition) {
+        public IMenuCommand GetEnabled(Func<bool> condition) {
             getEnabled = condition;
             return this;
         }

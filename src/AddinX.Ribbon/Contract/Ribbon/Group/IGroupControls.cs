@@ -11,10 +11,8 @@ using AddinX.Ribbon.Contract.Control.Menu;
 using AddinX.Ribbon.Contract.Control.Separator;
 using AddinX.Ribbon.Contract.Control.ToggleButton;
 
-namespace AddinX.Ribbon.Contract.Ribbon.Group
-{
-    public interface IGroupControls
-    {
+namespace AddinX.Ribbon.Contract.Ribbon.Group {
+    public interface IGroupControls {
         IBox AddBox();
 
         IButton AddButton(string label);

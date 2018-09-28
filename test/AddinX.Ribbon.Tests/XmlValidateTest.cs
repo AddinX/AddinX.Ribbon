@@ -83,7 +83,7 @@ namespace AddinX.Ribbon.UnitTest {
                                     .SetId(BookmarksDropDownId)
                                     .ShowLabel().NoImage()
                                     .ShowItemLabel().ShowItemImage().DynamicItems()
-                                    .AddButtons(b => b.AddButton("Button...").SetId(ButtonMore));
+                                    .Buttons(b => b.AddButton("Button...").SetId(ButtonMore));
                                 d.AddToggleButton("Toggle Button")
                                     .SetId(ToggleButtonId);
                             });

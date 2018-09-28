@@ -144,7 +144,7 @@ namespace RibbonTests
                                 .Callback(b=> {
                                     b.onAction = ()=>{MessageBox.Show("打开日志");};
                                 });
-                        }).Callback(g=>g.IsVisible(()=>DesignMode));
+                        }).Callback(g=>g.GetVisible(()=>DesignMode));
                 })
             );
         }

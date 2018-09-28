@@ -4,8 +4,8 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class ButtonGroupCommand : AbstractCommand,IButtonGroupCommand, IVisibleField {
-        public void IsVisible(Func<bool> condition) {
+    public class ButtonGroupCommand : AbstractCommand, IButtonGroupCommand, IVisibleField {
+        public void GetVisible(Func<bool> condition) {
             getVisible = condition;
         }
 

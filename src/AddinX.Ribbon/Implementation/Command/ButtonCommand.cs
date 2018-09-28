@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Command;
-using AddinX.Ribbon.Contract.Command.Field;
-using AddinX.Ribbon.Contract.Enums;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class ButtonCommand : ButtonRegularCommand,IButtonCommand{
-
+    public class ButtonCommand : ButtonRegularCommand, IButtonCommand {
         #region Implementation of ICommand
 
         /// <summary>

@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.CheckBox;
 using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class Checkbox : Control<ICheckbox, ICheckBoxCommand>, ICheckbox {
-
-        public Checkbox(): base( "checkBox") {
+        public Checkbox() : base("checkBox") {
         }
 
         protected override ICheckbox Interface => this;

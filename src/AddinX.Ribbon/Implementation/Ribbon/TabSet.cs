@@ -12,7 +12,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         private readonly TabSetTabs _tabs;
         private readonly IElementId _id;
 
-        public TabSet() :base("tabSet") {
+        public TabSet() : base("tabSet") {
             _id = new ElementId();
             _tabs = new TabSetTabs();
         }

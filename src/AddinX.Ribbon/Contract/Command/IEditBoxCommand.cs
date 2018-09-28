@@ -1,12 +1,10 @@
 ﻿using System;
 
-namespace AddinX.Ribbon.Contract.Command
-{
-    public interface IEditBoxCommand : ICommand
-    {
-        IEditBoxCommand IsVisible(Func<bool> condition);
+namespace AddinX.Ribbon.Contract.Command {
+    public interface IEditBoxCommand : ICommand {
+        IEditBoxCommand GetVisible(Func<bool> condition);
 
-        IEditBoxCommand IsEnabled(Func<bool> condition);
+        IEditBoxCommand GetEnabled(Func<bool> condition);
 
         /// <summary>
         /// determined what is the default text displayed in the textboxc when the application is launched.

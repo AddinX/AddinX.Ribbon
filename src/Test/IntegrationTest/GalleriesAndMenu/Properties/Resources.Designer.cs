@@ -63,50 +63,50 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap five {
+        internal static System.Drawing.Image five {
             get {
                 object obj = ResourceManager.GetObject("five", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((System.Drawing.Image)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap four {
+        internal static System.Drawing.Image four {
             get {
                 object obj = ResourceManager.GetObject("four", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((System.Drawing.Image)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap one {
+        internal static System.Drawing.Image one {
             get {
                 object obj = ResourceManager.GetObject("one", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((System.Drawing.Image)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap three {
+        internal static System.Drawing.Image three {
             get {
                 object obj = ResourceManager.GetObject("three", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((System.Drawing.Image)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap two {
+        internal static System.Drawing.Image two {
             get {
                 object obj = ResourceManager.GetObject("two", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((System.Drawing.Image)(obj));
             }
         }
     }

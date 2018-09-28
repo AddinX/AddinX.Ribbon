@@ -22,7 +22,8 @@ namespace AddinX.Ribbon.Implementation {
             if (CallbackRigister == null) {
                 CallbackRigister = new RibbonCommands();
             }
-            ((AddInElement)CustomUi).SetRegister(CallbackRigister);
+
+            ((AddInElement) CustomUi).SetRegister(CallbackRigister);
             var doc = new XDocument(new XDeclaration("1.0", "utf-8", null));
             doc.Add(((AddInElement) CustomUi).ToXml(_ns));
             return doc.ToString();
@@ -32,20 +33,20 @@ namespace AddinX.Ribbon.Implementation {
 
         public ICallbackRigister CallbackRigister { get; set; }
 
-
         #endregion
     }
 
     internal static class RibbonXmlBuilderExtensions {
-
-        public static void AddAttribute<T>(this XElement owner, XName attrName,T value,T defaultValue) {
-            if (Equals(value,defaultValue)) {
+        public static void AddAttribute<T>(this XElement owner, XName attrName, T value, T defaultValue) {
+            if (Equals(value, defaultValue)) {
                 return;
             }
-            owner.Add(new XAttribute(attrName,value));
+
+            owner.Add(new XAttribute(attrName, value));
         }
 
-        public static void AddImageAttribute(this XElement owner,bool imageVisible,string imagePath,string imageMso) {
+        public static void AddImageAttribute(this XElement owner, bool imageVisible, string imagePath,
+            string imageMso) {
             if (imageVisible) {
                 owner.AddAttribute("image", imagePath);
                 owner.AddAttribute("imageMso", imageMso);
@@ -58,6 +59,7 @@ namespace AddinX.Ribbon.Implementation {
             if (string.IsNullOrEmpty(value)) {
                 return;
             }
+
             owner.Add(new XAttribute(attrName, value));
         }
 
@@ -65,13 +67,15 @@ namespace AddinX.Ribbon.Implementation {
             if (value == null) {
                 return;
             }
+
             owner.Add(new XAttribute(attrName, value));
         }
 
         public static void AddAttribute<T>(this XElement owner, XName attrName, T value) {
-            if (value == null || Equals(value ,default(T))) {
+            if (value == null || Equals(value, default(T))) {
                 return;
             }
+
             owner.Add(new XAttribute(attrName, value));
         }
 
@@ -79,15 +83,17 @@ namespace AddinX.Ribbon.Implementation {
             if (condition == null) {
                 return;
             }
+
             owner.Add(new XAttribute(attrName, value));
         }
 
         public static void AddCallbackAttribute(this XElement owner, string attrName, object condition) {
             var callbackFuncName = Char.ToUpper(attrName[0]) + attrName.Substring(1);
-            owner.AddAttribute(attrName,callbackFuncName,condition);
+            owner.AddAttribute(attrName, callbackFuncName, condition);
         }
 
-        public static void AddCallbackAttribute(this XElement owner, string attrName, string callbackFuncName, object condition) {
+        public static void AddCallbackAttribute(this XElement owner, string attrName, string callbackFuncName,
+            object condition) {
             owner.AddAttribute(attrName, callbackFuncName, condition);
         }
     }

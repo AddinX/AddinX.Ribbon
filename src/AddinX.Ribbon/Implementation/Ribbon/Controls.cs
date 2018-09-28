@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Control.Box;
 using AddinX.Ribbon.Contract.Control.Button;
 using AddinX.Ribbon.Contract.Control.ButtonGroup;
@@ -25,10 +23,9 @@ using AddinX.Ribbon.Contract.Ribbon.Group;
 using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {
-    public class Controls : AddInList<Control.Control> , IGroupControls, IGalleryControls, IMenuControls
+    public class Controls : AddInList<Control.Control>, IGroupControls, IGalleryControls, IMenuControls
         , IDropDownControls, IGalleryUnsizeControls, IMenuUnsizeControls,
         IGroupDialogBox, IButtonGroupControls, IBoxControls {
- 
         public Controls() {
         }
 

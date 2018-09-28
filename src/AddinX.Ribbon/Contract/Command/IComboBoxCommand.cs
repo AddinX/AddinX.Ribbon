@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace AddinX.Ribbon.Contract.Command
-{
-    public interface IComboBoxCommand: ICommand
-    {
-        IComboBoxCommand IsVisible(Func<bool> condition);
+namespace AddinX.Ribbon.Contract.Command {
+    public interface IComboBoxCommand : ICommand {
+        IComboBoxCommand GetVisible(Func<bool> condition);
 
-        IComboBoxCommand IsEnabled(Func<bool> condition);
+        IComboBoxCommand GetEnabled(Func<bool> condition);
 
         /// <summary>
         /// determined what is the default text displayed in the combo-box when the application is launched.
@@ -24,8 +21,8 @@ namespace AddinX.Ribbon.Contract.Command
 
         IComboBoxCommand ItemsLabel(Func<int, string> itemsLabel);
 
-        IComboBoxCommand ItemsScreentip(Func<int,string> itemsScreentip);
+        IComboBoxCommand ItemsScreentip(Func<int, string> itemsScreentip);
 
-        IComboBoxCommand ItemsSupertip(Func<int,string> itemsSupertip);
+        IComboBoxCommand ItemsSupertip(Func<int, string> itemsSupertip);
     }
 }

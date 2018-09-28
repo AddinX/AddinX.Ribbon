@@ -9,11 +9,11 @@ using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class Box : Control<IBox,IBoxCommand>, IBox {
+    public class Box : Control<IBox, IBoxCommand>, IBox {
         private const string tag_boxStyle = "boxStyle";
         private readonly Controls _items;
 
-        public Box(): base( "box") {
+        public Box() : base("box") {
             _items = new Controls();
         }
 
@@ -30,7 +30,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public IBox VerticalDisplay() {
-            SetAttribute(tag_boxStyle, BoxStyle.vertical); 
+            SetAttribute(tag_boxStyle, BoxStyle.vertical);
             return this;
         }
 
@@ -68,7 +68,8 @@ namespace AddinX.Ribbon.Implementation.Control {
             }
         }
 
-        public static void AddControls<T>(this XElement element, AddInList<T> items, XNamespace ns) where T : AddInElement {
+        public static void AddControls<T>(this XElement element, AddInList<T> items, XNamespace ns)
+            where T : AddInElement {
             if (items == null) {
                 return;
             }

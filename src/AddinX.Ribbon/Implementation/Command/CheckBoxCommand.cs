@@ -36,12 +36,12 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         /// <inheritdoc />
-        public Func<bool> getEnabled { get;  set; }
+        public Func<bool> getEnabled { get; set; }
 
         /// <inheritdoc />
-        public Func<bool> getPressed { get;  set; }
+        public Func<bool> getPressed { get; set; }
 
         /// <inheritdoc />
-        public Func<bool> getVisible { get;  set; }
+        public Func<bool> getVisible { get; set; }
     }
 }

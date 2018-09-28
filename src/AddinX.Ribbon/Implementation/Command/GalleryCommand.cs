@@ -1,28 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class GalleryCommand : AbstractCommand,IGalleryCommand, IEnabledField, IVisibleField, IDynamicItemsField, IDropDownField {
-        public Action<int> onItemAction { get;  set; }
-        public Func<int> getSelectedItemIndex { get;  set; }
-        public Func<int> getItemCount { get;  set; }
-        public Func<int, string> getItemID { get;  set; }
-        public Func<int,object> getItemImage { get;  set; }
-        public Func<int, string> getItemLabel { get;  set; }
-        public Func<int,string> getItemScreentip { get;  set; }
-        public Func<int,string> getItemSupertip { get;  set; }
-        public Func<bool> getEnabled { get;  set; }
+    public class GalleryCommand : AbstractCommand, IGalleryCommand, IEnabledField, IVisibleField, IDynamicItemsField,
+        IDropDownField {
+        public Action<int> onItemAction { get; set; }
+        public Func<int> getSelectedItemIndex { get; set; }
+        public Func<int> getItemCount { get; set; }
+        public Func<int, string> getItemID { get; set; }
+        public Func<int, object> getItemImage { get; set; }
+        public Func<int, string> getItemLabel { get; set; }
+        public Func<int, string> getItemScreentip { get; set; }
+        public Func<int, string> getItemSupertip { get; set; }
+        public Func<bool> getEnabled { get; set; }
         public Func<bool> getVisible { get; set; }
 
-        public IGalleryCommand IsVisible(Func<bool> condition) {
+        public IGalleryCommand GetVisible(Func<bool> condition) {
             getVisible = condition;
             return this;
         }
 
-        public IGalleryCommand IsEnabled(Func<bool> condition) {
+        public IGalleryCommand GetEnabled(Func<bool> condition) {
             getEnabled = condition;
             return this;
         }
@@ -52,17 +52,17 @@ namespace AddinX.Ribbon.Implementation.Command {
             return this;
         }
 
-        public IGalleryCommand ItemsScreentip(Func<int,string> itemsScreentip) {
+        public IGalleryCommand ItemsScreentip(Func<int, string> itemsScreentip) {
             getItemScreentip = itemsScreentip;
             return this;
         }
 
-        public IGalleryCommand ItemsSupertip(Func<int,string> itemsSupertip) {
+        public IGalleryCommand ItemsSupertip(Func<int, string> itemsSupertip) {
             getItemSupertip = itemsSupertip;
             return this;
         }
 
-        public IGalleryCommand ItemsImage(Func<int,object> itemsImage) {
+        public IGalleryCommand ItemsImage(Func<int, object> itemsImage) {
             getItemImage = itemsImage;
             return this;
         }
@@ -88,7 +88,5 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         #endregion
-
-       
     }
 }

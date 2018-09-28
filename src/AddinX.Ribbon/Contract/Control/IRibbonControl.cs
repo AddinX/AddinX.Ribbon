@@ -2,8 +2,7 @@ using System;
 using AddinX.Ribbon.Contract.Command;
 
 namespace AddinX.Ribbon.Contract.Control {
-    public interface IRibbonId<out T>  {
-
+    public interface IRibbonId<out T> {
         T SetId(string name);
 
         T SetIdMso(string name);
@@ -12,19 +11,16 @@ namespace AddinX.Ribbon.Contract.Control {
     }
 
     public interface IRibbonIdQ<out T> {
-
         T SetId(string name);
 
         T SetIdQ(string ns, string name);
     }
 
     public interface IRibbonItemId<out T> {
-
         T SetId(string name);
-
     }
 
-    public interface IRibbonImage<out T>  {
+    public interface IRibbonImage<out T> {
         /// <summary>
         /// ImageMso
         /// </summary>
@@ -38,7 +34,6 @@ namespace AddinX.Ribbon.Contract.Control {
     }
 
     public interface IRibbonSize<out T> {
-
         /// <summary>
         /// 大型尺寸
         /// </summary>
@@ -50,11 +45,9 @@ namespace AddinX.Ribbon.Contract.Control {
         /// </summary>
         /// <returns></returns>
         T NormalSize();
-
     }
 
     public interface IRibbonLabel<out T> {
-
         /// <summary>
         /// 显示标签
         /// </summary>
@@ -72,8 +65,8 @@ namespace AddinX.Ribbon.Contract.Control {
         T Keytip(string keytip);
     }
 
-    public interface IRibbonExtra<out T>:IRibbonKeytip<T> {
-       // T Description(string description);
+    public interface IRibbonExtra<out T> : IRibbonKeytip<T> {
+        // T Description(string description);
 
         T Supertip(string supertip);
 
@@ -81,13 +74,12 @@ namespace AddinX.Ribbon.Contract.Control {
     }
 
     public interface IRibbonSupertip<out T> {
-        
         T Supertip(string supertip);
 
         T Screentip(string screentip);
     }
 
-    public interface IRibbonGalleryExtra<out T> :IRibbonExtra<T> {
+    public interface IRibbonGalleryExtra<out T> : IRibbonExtra<T> {
         T SizeString(int size);
 
         T ItemHeight(int height);
@@ -115,7 +107,7 @@ namespace AddinX.Ribbon.Contract.Control {
         T Items(Action<TItems> items);
     }
 
-    public interface IRibbonDynamic<out T, out TItems>:IRibbonItems<T,TItems> {
+    public interface IRibbonDynamic<out T, out TItems> : IRibbonItems<T, TItems> {
         T DynamicItems();
     }
 
@@ -142,7 +134,7 @@ namespace AddinX.Ribbon.Contract.Control {
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TCommand"></typeparam>
-    public interface IRibbonCallback<TCommand> where TCommand:ICommand {
+    public interface IRibbonCallback<TCommand> where TCommand : ICommand {
         void Callback(Action<TCommand> builder);
 
         void Callback(TCommand command);

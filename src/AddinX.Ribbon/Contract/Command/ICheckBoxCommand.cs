@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace AddinX.Ribbon.Contract.Command
-{
-    public interface ICheckBoxCommand : ICommand
-    {
+namespace AddinX.Ribbon.Contract.Command {
+    public interface ICheckBoxCommand : ICommand {
         ICheckBoxCommand OnChecked(Action<bool> act);
 
         ICheckBoxCommand GetVisible(Func<bool> condition);

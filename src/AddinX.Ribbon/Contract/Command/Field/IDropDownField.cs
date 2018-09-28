@@ -1,9 +1,7 @@
 using System;
 
-namespace AddinX.Ribbon.Contract.Command.Field
-{
-    public interface IDropDownField
-    {
+namespace AddinX.Ribbon.Contract.Command.Field {
+    public interface IDropDownField {
         /// <summary>
         /// getSelectedItemIndex
         /// »Øµ÷

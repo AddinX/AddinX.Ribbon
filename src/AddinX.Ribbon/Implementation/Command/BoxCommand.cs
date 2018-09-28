@@ -5,7 +5,7 @@ using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
     public class BoxCommand : AbstractCommand, IBoxCommand, IVisibleField {
-        public void IsVisible(Func<bool> condition) {
+        public void GetVisible(Func<bool> condition) {
             getVisible = condition;
         }
 

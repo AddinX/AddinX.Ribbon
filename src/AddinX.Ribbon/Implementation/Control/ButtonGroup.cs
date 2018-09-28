@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Control.ButtonGroup;
 using AddinX.Ribbon.Implementation.Command;
@@ -10,7 +9,7 @@ namespace AddinX.Ribbon.Implementation.Control {
     public class ButtonGroup : Control<IButtonGroup, IButtonGroupCommand>, IButtonGroup {
         private readonly Controls _items;
 
-        public ButtonGroup(): base( "buttonGroup") {
+        public ButtonGroup() : base("buttonGroup") {
             _items = new Controls();
         }
 

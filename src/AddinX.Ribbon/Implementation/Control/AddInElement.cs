@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
-using AddinX.Ribbon.Contract.Control;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public abstract class AddInElement {
-   
         private IDictionary<string, object> _attributes;
 
         protected AddInElement(string elementName) {
@@ -25,7 +23,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             if (_attributes.ContainsKey(attrName)) {
                 _attributes[attrName] = value;
             } else {
-                _attributes.Add(attrName,value);
+                _attributes.Add(attrName, value);
             }
         }
 
@@ -33,6 +31,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             if (_attributes == null) {
                 return;
             }
+
             if (_attributes.ContainsKey(attrName)) {
                 _attributes.Remove(attrName);
             }
@@ -58,11 +57,12 @@ namespace AddinX.Ribbon.Implementation.Control {
             return element;
         }
 
-        protected XElement ToXml(XNamespace ns,params XAttribute[] attributes) {
+        protected XElement ToXml(XNamespace ns, params XAttribute[] attributes) {
             var element = new XElement(ns + ElementName);
             foreach (var attr in attributes) {
                 element.Add(attr);
             }
+
             if (_attributes != null) {
                 foreach (var item in _attributes) {
                     element.Add(new XAttribute(item.Key, item.Value));

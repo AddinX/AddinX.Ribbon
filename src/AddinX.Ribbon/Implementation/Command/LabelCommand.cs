@@ -5,17 +5,17 @@ using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
     public class LabelCommand : AbstractCommand, ILabelCommand, IVisibleField, IEnabledField, ILabelField {
-        public Func<bool> getEnabled { get;  set; }
+        public Func<bool> getEnabled { get; set; }
 
         public Func<string> getLabel { get; set; }
 
         public Func<bool> getVisible { get; set; }
 
-        public void IsVisible(Func<bool> condition) {
+        public void GetVisible(Func<bool> condition) {
             getVisible = condition;
         }
 
-        public void IsEnabled(Func<bool> condition) {
+        public void GetEnabled(Func<bool> condition) {
             getEnabled = condition;
         }
 
@@ -36,7 +36,5 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         #endregion
-
-        
     }
 }

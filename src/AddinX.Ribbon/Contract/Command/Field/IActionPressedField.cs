@@ -1,9 +1,7 @@
 using System;
 
-namespace AddinX.Ribbon.Contract.Command.Field
-{
-    public interface IActionPressedField
-    {
+namespace AddinX.Ribbon.Contract.Command.Field {
+    public interface IActionPressedField {
         /// <summary>
         /// onAction
         /// »Øµ÷

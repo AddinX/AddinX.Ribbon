@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
 
-namespace AddinX.Ribbon.Contract.Command.Field
-{
-    public interface IDynamicItemsField
-    {
+namespace AddinX.Ribbon.Contract.Command.Field {
+    public interface IDynamicItemsField {
         /// <summary>
         /// getItemCount
         /// »Øµ÷
@@ -19,7 +16,7 @@ namespace AddinX.Ribbon.Contract.Command.Field
         /// VBA£ºSub GetItemID(control As IRibbonControl, itemIndex As Integer, ByRef returnedVal)
         /// C#£ºstring GetItemID(IRibbonControl control, int itemIndex)
         /// </summary>
-        Func<int,string> getItemID { get; set; }
+        Func<int, string> getItemID { get; set; }
 
         /// <summary>
         /// getItemImage

@@ -2,19 +2,18 @@ using System;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
-using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Control.GalleryUnsize;
 using AddinX.Ribbon.Contract.Control.Item;
 using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
-    public class GalleryUnsize : Control<IGalleryUnsize,IGalleryCommand>, IGalleryUnsize {
+    public class GalleryUnsize : Control<IGalleryUnsize, IGalleryCommand>, IGalleryUnsize {
         private bool _dynamicItemsLoading;
         private readonly Items _data;
         private readonly Controls _controls;
 
-        public GalleryUnsize(): base( "gallery") {
+        public GalleryUnsize() : base("gallery") {
             _data = new Items();
             _controls = new Controls();
             NoImage();
@@ -78,7 +77,7 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IGalleryUnsize AddButtons(Action<IGalleryUnsizeControls> items) {
+        public IGalleryUnsize Buttons(Action<IGalleryUnsizeControls> items) {
             items.Invoke(_controls);
             return this;
         }

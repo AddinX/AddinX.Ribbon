@@ -1,37 +1,36 @@
-using System.Collections.Generic;
+namespace AddinX.Ribbon.Contract.Command {
+    public interface IRibbonCommands {
+        IButtonCommand AddButtonCommand(string controlId);
 
-namespace AddinX.Ribbon.Contract.Command
-{
-    public interface IRibbonCommands
-    {
-        IButtonCommand AddButtonCommand(string id);
+        ICheckBoxCommand AddCheckBoxCommand(string controlId);
 
-        ICheckBoxCommand AddCheckBoxCommand(string id);
+        IComboBoxCommand AddComboBoxCommand(string controlId);
 
-        IComboBoxCommand AddComboBoxCommand(string id);
+        IDropDownCommand AddDropDownCommand(string controlId);
 
-        IDropDownCommand AddDropDownCommand(string id);
+        IEditBoxCommand AddEditBoxCommand(string controlId);
 
-        IEditBoxCommand AddEditBoxCommand(string id);
+        IGalleryCommand AddGalleryCommand(string controlId);
 
-        IGalleryCommand AddGalleryCommand(string id);
+        ILabelCommand AddLabelCommand(string controlId);
 
-        ILabelCommand AddLabelCommand(string id);
+        ISeparatorCommand AddSeparatorCommand(string controlId);
 
-        ISeparatorCommand AddSeparatorCommand(string id);
+        IToggleButtonCommand AddToggleButtonCommand(string controlId);
 
-        IToggleButtonCommand AddToggleButtonCommand(string id);
+        IMenuCommand AddMenuCommand(string controlId);
 
-        IMenuCommand AddMenuCommand(string id);
+        IBoxCommand AddBoxCommand(string controlId);
 
-        IBoxCommand AddBoxCommand(string id);
+        IButtonGroupCommand AddButtonGroupCommand(string controlId);
 
-        IButtonGroupCommand AddButtonGroupCommand(string id);
+        IDialogBoxLauncherCommand AddDialogBoxLauncherCommand(string controlId);
 
-        IDialogBoxLauncherCommand AddDialogBoxLauncherCommand(string id);
-
-        IEnumerable<string> GetListCommandNames();
-
-        ICommand Find(string id);
+        /// <summary>
+        /// Find ICommand instance By control id
+        /// </summary>
+        /// <param name="controlId"></param>
+        /// <returns></returns>
+        ICommand Find(string controlId);
     }
 }

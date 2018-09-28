@@ -1,7 +1,5 @@
-namespace AddinX.Ribbon.Contract.Enums
-{
-    public enum TabSetId
-    {
+namespace AddinX.Ribbon.Contract.Enums {
+    public enum TabSetId {
         TabSetSmartArtTools,
         TabSetChartTools,
         TabSetDrawingTools,

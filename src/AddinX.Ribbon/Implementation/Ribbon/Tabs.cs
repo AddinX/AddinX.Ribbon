@@ -9,7 +9,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
     public class Tabs : AddInElement, ITabs {
         private readonly IList<Tab> _items;
 
-        public Tabs() :base("tabs") {
+        public Tabs() : base("tabs") {
             _items = new List<Tab>();
         }
 

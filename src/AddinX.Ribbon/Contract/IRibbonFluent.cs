@@ -1,10 +1,8 @@
 ﻿using AddinX.Ribbon.Contract.Command;
 using ExcelDna.Integration.CustomUI;
 
-namespace AddinX.Ribbon.Contract
-{
-    public interface IRibbonFluent:IRibbonFluentCallback
-    {
+namespace AddinX.Ribbon.Contract {
+    public interface IRibbonFluent : IRibbonFluentCallback {
         string GetRibbonXml();
 
         ICommand FindCallback(string id);

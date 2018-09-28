@@ -5,7 +5,7 @@ using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class Separator : Control<ISeparator, ISeparatorCommand>, ISeparator {
-        public Separator(): base( "separator") {
+        public Separator() : base("separator") {
         }
 
         protected override ISeparator Interface => this;

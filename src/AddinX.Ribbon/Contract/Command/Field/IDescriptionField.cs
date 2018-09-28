@@ -2,7 +2,6 @@ using System;
 
 namespace AddinX.Ribbon.Contract.Command.Field {
     public interface IDescriptionField {
-
         /// <summary>
         /// getDescription
         /// »Øµ÷

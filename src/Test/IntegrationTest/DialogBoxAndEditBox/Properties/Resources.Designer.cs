@@ -63,20 +63,20 @@ namespace AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap one {
+        internal static System.Drawing.Image one {
             get {
                 object obj = ResourceManager.GetObject("one", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((System.Drawing.Image)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap option {
+        internal static System.Drawing.Image option {
             get {
                 object obj = ResourceManager.GetObject("option", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((System.Drawing.Image)(obj));
             }
         }
     }
