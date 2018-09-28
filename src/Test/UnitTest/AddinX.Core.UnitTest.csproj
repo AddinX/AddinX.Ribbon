@@ -136,9 +136,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AddinX.Ribbon\AddinX.Ribbon.csproj">
-      <Project>{e517e0a2-8f3b-4f76-8987-85c6146d6021}</Project>
-      <Name>AddinX.Ribbon</Name>
+    <ProjectReference Include="..\..\ExcelDna.RibbonFluent\ExcelDna.RibbonFluent.csproj">
+      <Project>{4475793a-880a-4555-acba-1fdfcc44f61e}</Project>
+      <Name>ExcelDna.RibbonFluent</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -37,7 +37,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
             value.Invoke(_tabs);
         }
 
-        public ITabSetItem SetIdMso(TabSetId name) {
+        public ITabSetItem IdMso(TabSetId name) {
             _id.SetMicrosoftId(name.ToString());
             return this;
         }

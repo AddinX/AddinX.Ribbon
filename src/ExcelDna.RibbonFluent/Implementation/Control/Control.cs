@@ -8,12 +8,12 @@ using AddinX.Ribbon.Implementation.Command;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public abstract class Control : AddInElement {
-        protected IElementId Id { get; }
+        protected IElementId ControlId { get; }
 
         private ICommand _command;
 
         protected Control(string elementName) : base(elementName) {
-            Id = new ElementId();
+            ControlId = new ElementId();
         }
 
         protected internal void SetLabel(string label) {
@@ -40,15 +40,15 @@ namespace AddinX.Ribbon.Implementation.Control {
             if (_command != null) {
                 _command.WriteCallbackXml(element);
                 if (_command is AbstractCommand absCmd) {
-                    absCmd.ControlId = this.Id.Value;
+                    absCmd.ControlId = this.ControlId.Value;
                 }
 
-                Register?.Add(Id, _command);
+                Register?.Add(ControlId, _command);
             }
         }
 
         protected internal override XElement ToXml(XNamespace ns) {
-            var element = base.ToXml(ns, new XAttribute(Id.Type.ToString(), Id.Value));
+            var element = base.ToXml(ns, new XAttribute(ControlId.Type.ToString(), ControlId.Value));
             AddCallbackAttributes(element);
             return element;
         }
@@ -120,7 +120,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private const string tag_tag = "tag";
         private const string tag_idMso = "idMso";
         private const string tag_screentip = "screentip";
-        private const string tag_getScreentip = "getScreentip";
+        
         private const string tag_supertip = "supertip";
         private const string tag_getSupertip = "getSupertip";
         private const string tag_label = "label";
@@ -130,7 +130,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         private const string tag_insertAfterQ = "insertAfterQ";
         private const string tag_insertBeforeQ = "insertBeforeQ";
         private const string tag_visible = "visible";
-        private const string tag_getVisible = "getVisible";
+        
         private const string tag_keytip = "keytip";
         private const string tag_getKeytip = "getKeytip";
         private const string tag_showLabel = "showLabel";
@@ -139,6 +139,10 @@ namespace AddinX.Ribbon.Implementation.Control {
         private const string tag_getShowImage = "getShowImage";
         private const string tag_showItemLabel = "showItemLabel";
         private const string tag_showItemImage = "showItemImage";
+        private const string tag_sizeString = "sizeString";
+        private const string tag_showInRibbon = "showInRibbon";
+        private const string tag_maxLength = "maxLength";
+
         private const string tag_invalidateContentOnDrop = "invalidateContentOnDrop";
         private const string tag_columns = "columns";
         private const string tag_rows = "rows";
@@ -146,18 +150,17 @@ namespace AddinX.Ribbon.Implementation.Control {
         private const string tag_itemHeight = "itemHeight";
         private const string tag_getItemWidth = "getItemWidth";
         private const string tag_getItemHeight = "getItemHeight";
-        private const string tag_showInRibbon = "showInRibbon";
         private const string tag_getItemCount = "getItemCount";
         private const string tag_getItemLabel = "getItemLabel";
         private const string tag_getItemScreentip = "getItemScreentip";
         private const string tag_getItemSupertip = "getItemSupertip";
         private const string tag_getItemImage = "getItemImage";
         private const string tag_getItemID = "getItemID";
-        private const string tag_sizeString = "sizeString";
+        private const string tag_getVisible = "getVisible";
         private const string tag_getSelectedItemID = "getSelectedItemID";
         private const string tag_getSelectedItemIndex = "getSelectedItemIndex";
+        private const string tag_getScreentip = "getScreentip";
 
-        private const string tag_maxLength = "maxLength";
         private const string tag_getText = "getText";
         private const string tag_onChange = "onChange";
 
@@ -168,21 +171,20 @@ namespace AddinX.Ribbon.Implementation.Control {
         protected abstract TElement Interface { get; }
 
 
-        public TElement SetIdMso(string name) {
-            Id.SetMicrosoftId(name);
+        public TElement IdMso(string name) {
+            ControlId.SetMicrosoftId(name);
             return Interface;
         }
 
-        public TElement SetIdQ(string ns, string name) {
-            Id.SetNamespaceId(ns, name);
+        public TElement IdQ(string ns, string name) {
+            ControlId.SetNamespaceId(ns, name);
             return Interface;
         }
 
-        public TElement SetId(string name) {
-            Id.SetId(name);
+        public TElement Id(string name) {
+            ControlId.SetId(name);
             return Interface;
         }
-
 
         public TElement ImageMso(string name) {
             //_imageVisible = !string.IsNullOrEmpty(name);

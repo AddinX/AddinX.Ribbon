@@ -4,17 +4,8 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class EditBoxCommand : AbstractCommand, IEditBoxCommand, IVisibleField, IEnabledField, ITextField {
-        public IEditBoxCommand GetVisible(Func<bool> condition) {
-            getVisible = condition;
-            return this;
-        }
-
-        public IEditBoxCommand GetEnabled(Func<bool> condition) {
-            getEnabled = condition;
-            return this;
-        }
-
+    public class EditBoxCommand : ControlCommand<IEditBoxCommand>, IEditBoxCommand, ITextField {
+    
         public IEditBoxCommand GetText(Func<string> defaultValue) {
             getText = defaultValue;
             return this;
@@ -27,23 +18,21 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         #region Implementation of ICommand
 
+        protected override IEditBoxCommand Interface => this;
+
         /// <summary>
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
         public override void WriteCallbackXml(XElement element) {
+            base.WriteCallbackXml(element);
             element.AddCallbackAttribute("getText", getText);
             element.AddCallbackAttribute("onChange", onChange);
-            element.AddCallbackAttribute("getEnabled", getEnabled);
-            element.AddCallbackAttribute("getVisible", getVisible);
         }
 
         #endregion
 
-        public Func<bool> getEnabled { get; set; }
         public Func<string> getText { get; set; }
         public Action<string> onChange { get; set; }
-
-        public Func<bool> getVisible { get; set; }
     }
 }

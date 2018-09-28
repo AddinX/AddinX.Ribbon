@@ -14,7 +14,7 @@ namespace ContextualTab
         protected override void CreateFluentRibbon(IRibbonBuilder build)
         {
             build.CustomUi.Ribbon.ContextualTabs(tabs =>
-                tabs.AddTabSet(set => set.SetIdMso(TabSetId.TabSetDrawingTools)
+                tabs.AddTabSet(set => set.IdMso(TabSetId.TabSetDrawingTools)
                     .Tabs(tab => tab.AddTab("Sample").SetId("SampleContextId")
                         .Groups(g => g.AddGroup("Custom group").SetId("CustomGroupContextId")
                             .Items(d =>

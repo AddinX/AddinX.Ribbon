@@ -22,4 +22,19 @@ namespace AddinX.Ribbon.Contract.Command {
 
         IDropDownCommand ItemsImage(Func<int, object> itemsImage);
     }
+
+    public interface IDynamicItemsCommand<out T> : IControlCommand<T> where T : ICommand {
+        
+        T ItemCount(Func<int> numberItems);
+        
+        T ItemsId(Func<int, string> itemsId);
+        
+        T ItemsLabel(Func<int, string> itemLabelFunc);
+        
+        T ItemsScreentip(Func<int, string> itemsScreentip);
+        
+        T ItemsSupertip(Func<int, string> itemsSupertip);
+        
+        T ItemsImage(Func<int, object> itemImageFunc);
+    }
 }

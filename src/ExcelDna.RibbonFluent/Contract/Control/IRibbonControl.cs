@@ -3,21 +3,21 @@ using AddinX.Ribbon.Contract.Command;
 
 namespace AddinX.Ribbon.Contract.Control {
     public interface IRibbonId<out T> {
-        T SetId(string name);
+        T Id(string name);
 
-        T SetIdMso(string name);
+        T IdMso(string name);
 
-        T SetIdQ(string ns, string name);
+        T IdQ(string ns, string name);
     }
 
     public interface IRibbonIdQ<out T> {
-        T SetId(string name);
+        T Id(string name);
 
-        T SetIdQ(string ns, string name);
+        T IdQ(string ns, string name);
     }
 
     public interface IRibbonItemId<out T> {
-        T SetId(string name);
+        T Id(string name);
     }
 
     public interface IRibbonImage<out T> {

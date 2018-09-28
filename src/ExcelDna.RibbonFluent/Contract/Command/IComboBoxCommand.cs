@@ -1,11 +1,7 @@
 ﻿using System;
 
 namespace AddinX.Ribbon.Contract.Command {
-    public interface IComboBoxCommand : ICommand {
-        IComboBoxCommand GetVisible(Func<bool> condition);
-
-        IComboBoxCommand GetEnabled(Func<bool> condition);
-
+    public interface IComboBoxCommand : IControlCommand<IComboBoxCommand> {
         /// <summary>
         /// determined what is the default text displayed in the combo-box when the application is launched.
         /// </summary>

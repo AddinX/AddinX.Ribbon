@@ -89,4 +89,89 @@ namespace AddinX.Ribbon.Implementation.Command {
         public Func<bool> getEnabled { get; set; }
         public Func<bool> getVisible { get; set; }
     }
+
+    public abstract class DropDownRegularCommand<T> : ControlCommand<T>, IDynamicItemsCommand<T>, IDynamicItemsField where T:ICommand {
+       
+
+        #region Implementation of IDynamicItemsField
+
+        /// <summary>
+        /// getItemCount
+        /// 回调
+        /// VBA：Sub GetItemCount(control As IRibbonControl, ByRef returnedVal)
+        /// C#：int GetItemCount(IRibbonControl control)
+        /// </summary>
+        public Func<int> getItemCount { get; set; }
+
+        /// <summary>
+        /// getItemID
+        /// 回调
+        /// VBA：Sub GetItemID(control As IRibbonControl, itemIndex As Integer, ByRef returnedVal)
+        /// C#：string GetItemID(IRibbonControl control, int itemIndex)
+        /// </summary>
+        public Func<int, string> getItemID { get; set; }
+
+        /// <summary>
+        /// getItemImage
+        /// Callback for an item's image.
+        /// </summary>
+        public Func<int, object> getItemImage { get; set; }
+
+        /// <summary>
+        /// getItemLabel
+        /// 回调
+        /// VBA：Sub GetItemLabel(control As IRibbonControl, itemIndex as Integer, ByRef returnedVal)
+        /// C#：string GetItemLabel(IRibbonControl control, int itemIndex)
+        /// </summary>
+        public Func<int, string> getItemLabel { get; set; }
+
+        /// <summary>
+        /// getItemScreentip
+        /// Callback for an item's screentip.
+        /// </summary>
+        public Func<int, string> getItemScreentip { get; set; }
+
+        /// <summary>
+        /// getItemSupertip
+        /// Callback for an item's supertip.
+        /// </summary>
+        public Func<int, string> getItemSupertip { get; set; }
+
+        #endregion
+
+        #region Implementation of IDynamicItemsCommand<out T>
+
+        
+        public T ItemCount(Func<int> numberItems) {
+            getItemCount = numberItems;
+            return Interface;
+        }
+
+        public T ItemsId(Func<int, string> itemsId) {
+            getItemID = itemsId;
+            return Interface;
+        }
+
+        public T ItemsLabel(Func<int, string> itemLabelFunc) {
+            getItemLabel = itemLabelFunc;
+            return Interface;
+        }
+
+        public T ItemsScreentip(Func<int, string> itemsScreentip) {
+            getItemScreentip = itemsScreentip;
+            return Interface;
+        }
+
+        public T ItemsSupertip(Func<int, string> itemsSupertip) {
+            getItemSupertip = itemsSupertip;
+            return Interface;
+        }
+
+        public T ItemsImage(Func<int, object> itemImageFunc) {
+            getItemImage = itemImageFunc;
+            return Interface;
+        }
+
+        #endregion
+    }
 }

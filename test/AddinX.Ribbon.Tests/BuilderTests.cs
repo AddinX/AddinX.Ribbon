@@ -17,8 +17,8 @@ namespace AddinX.Ribbon.Tests {
         private IRibbonBuilder BuildInGroup(Action<IGroupControls> buildAction) {
             var builder = new RibbonBuilder();
             builder.CustomUi.Ribbon.Tabs(
-                c => c.AddTab("test").SetId("item1")
-                    .Groups(g1 => g1.AddGroup("group").SetId("id")
+                c => c.AddTab("test").Id("item1")
+                    .Groups(g1 => g1.AddGroup("group").Id("id")
                         .Items(buildAction)));
             return builder;
         }
@@ -27,19 +27,15 @@ namespace AddinX.Ribbon.Tests {
         public void BuildButton() {
             var builder = new RibbonBuilder();
             var btn = new Button().Supertip("test").ShowLabel().Description("test button").NoImage()
-                .SetId("test_btn");
+                .Id("test_btn");
 
-            btn.Callback(cmd => {
-                cmd.onAction = ()=> { Console.WriteLine("test"); };
-            });
+            btn.Callback(cmd =>cmd.OnAction(()=> Console.WriteLine("test")));
 
             builder.CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test")
                     .Groups(g1 => g1.AddGroup("group").Items(g => g.AddButton("b")
-                        .Callback(cb => {
-                            cb.onAction =() => { Console.WriteLine("Test Button"); };
-                            cb.getEnabled = () => true;
-                        }))));
+                        .Callback(cb => cb.OnAction(() =>Console.WriteLine("Test Button"))
+                        .GetEnabled(() => true)))));
             Console.WriteLine(builder.GetXmlString());
         }
 
@@ -56,11 +52,12 @@ namespace AddinX.Ribbon.Tests {
                             items.AddSeparator();
                             items.AddCheckbox("跟踪测量单元格")
                                 .Supertip("如果选中此项，在测量时会选中正在进行的 测量数据单元格,用来指示当前测量的位置")
-                                .Callback(chk => chk.GetPressed(() => { return true; }).OnChecked(b => Console.WriteLine("跟踪测量单元格" + b)));
+                                .Callback(chk => chk.GetChecked(() => true).OnChecked(b => Console.WriteLine("跟踪测量单元格" + b)));
                             //<toggleButton id="Id_SpeechValue" imageMso="SpeakCells" label = "语音报读" supertip = "选中此项，会朗读测量读数，需要系统语音支持" onAction = "OnToggleButtonAction"getPressed = "GetPressed" />
-                            items.AddToggleButton("语音报读").Supertip("选中此项，会朗读测量读数，需要系统语音支持").Callback(t => t.onActionPressed = (b) => Console.WriteLine(t.ControlId + " " + b));
+                            items.AddToggleButton("语音报读").Supertip("选中此项，会朗读测量读数，需要系统语音支持").Callback(t => t.OnPressed((b) => Console.WriteLine(t.ControlId + " " + b)));
                             //button id="SetMeasureValuesRange" label="测量数据区域" imageMso="ImportSharePointList" supertip = "设置当前工作表的数据采集区域" onAction = "OnButtonAction" getEnabled = "GetEnabled" />
-                            items.AddButton("测量数据区域").ImageMso("ImportSharePointList").Supertip("设置当前工作表的数据采集区域").Callback(t => t.onAction = () => Console.WriteLine($"{t.ControlId} Action"));    
+                            items.AddButton("测量数据区域").ImageMso("ImportSharePointList").Supertip("设置当前工作表的数据采集区域")
+                                .Callback(t => t.OnAction(() => Console.WriteLine($"{t.ControlId} Action")));    
                         }
                     )));
             Console.WriteLine(builder.GetXmlString());
@@ -83,8 +80,8 @@ namespace AddinX.Ribbon.Tests {
         public void BuildCheckBox() {
             var builder = new RibbonBuilder();
             builder.CustomUi.Ribbon.Tabs(
-                c => c.AddTab("test").SetId("item1")
-                    .Groups(g1 => g1.AddGroup("group").SetId("id")
+                c => c.AddTab("test").Id("item1")
+                    .Groups(g1 => g1.AddGroup("group").Id("id")
                         .Items(g => g.AddCheckbox("checkbox")
                             .Callback(cb =>
                                 cb.OnChecked(b => { Console.WriteLine("Test Checkbox press:" + b); }
@@ -95,12 +92,12 @@ namespace AddinX.Ribbon.Tests {
         [Test]
         public void BuildCombox() {
             var builder = BuildInGroup(i => {
-                i.AddComboBox("Colors").SetId("colorsPicking")
+                i.AddComboBox("Colors").Id("colorsPicking")
                     .ShowLabel().NoImage()
                     .Items(o => {
-                        o.AddItem("Green").SetId("greenColor");
-                        o.AddItem("Red").SetId("redColor").NoImage();
-                        o.AddItem("Blue").SetId("blueColor").NoImage();
+                        o.AddItem("Green").Id("greenColor");
+                        o.AddItem("Red").Id("redColor").NoImage();
+                        o.AddItem("Blue").Id("blueColor").NoImage();
                     }).Supertip("Color Picking")
                     .MaxLength(15).SizeString(15);
             });
@@ -132,30 +129,30 @@ namespace AddinX.Ribbon.Tests {
 
         var builder = new RibbonBuilder();
             builder.CustomUi.Ribbon.Tabs(c => {
-                c.AddTab("My Tab").SetId(MyTabId)
+                c.AddTab("My Tab").Id(MyTabId)
                     .Groups(g => {
-                        g.AddGroup("Data").SetId(DataGroupId)
+                        g.AddGroup("Data").Id(DataGroupId)
                             .Items(d => {
-                                d.AddMenu("Option").SetId(OptionId).ShowLabel()
+                                d.AddMenu("Option").Id(OptionId).ShowLabel()
                                     .ImageMso("FileNew").LargeSize()
                                     .ItemLargeSize().Items(
                                         v => {
-                                            v.AddCheckbox("Show numbers").SetId(ShowNumberId);
+                                            v.AddCheckbox("Show numbers").Id(ShowNumberId);
                                             v.AddSeparator().SetTitle("Mood");
                                             v.AddButton("Happy")
-                                                .SetId(HappyButtonId)
+                                                .Id(HappyButtonId)
                                                 .ImageMso("HappyFace");
-                                            v.AddGallery("Dynamic Option").SetId(DynamicGalleryId)
+                                            v.AddGallery("Dynamic Option").Id(DynamicGalleryId)
                                                 .ShowLabel().NoImage().ShowItemLabel().ShowItemImage()
                                                 //.DynamicItems()
-                                                .Buttons(b => b.AddButton("Button...").SetId(ButtonMore))
+                                                .Buttons(b => b.AddButton("Button...").Id(ButtonMore))
                                                 .NumberRows(6).NumberColumns(1);
                                         });
-                                d.AddGallery("Multi Option").SetId(GalleryId)
+                                d.AddGallery("Multi Option").Id(GalleryId)
                                     .ShowLabel().LargeSize().NoImage().ShowItemLabel().ShowItemImage()
                                     .Items(v => {
-                                        v.AddItem("Show numbers").SetId(ShowNumberId2);
-                                        v.AddItem("Happy").SetId(HappyButtonId2).ImageMso("HappyFace");
+                                        v.AddItem("Show numbers").Id(ShowNumberId2);
+                                        v.AddItem("Happy").Id(HappyButtonId2).ImageMso("HappyFace");
                                     });
                             });
                     });

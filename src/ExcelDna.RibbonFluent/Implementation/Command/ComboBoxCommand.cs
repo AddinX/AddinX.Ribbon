@@ -1,31 +1,20 @@
 ﻿using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class ComboBoxCommand : AbstractCommand, IComboBoxCommand, ITextField, IEnabledField, IVisibleField,
-        IDynamicItemsField {
+    public class ComboBoxCommand : ControlCommand<IComboBoxCommand>, IComboBoxCommand,
+        ITextField, IDynamicItemsField {
         public Func<int> getItemCount { get; set; }
         public Func<int, string> getItemID { get; set; }
         public Func<int, string> getItemLabel { get; set; }
         public Func<int, object> getItemImage { get; set; }
         public Func<int, string> getItemScreentip { get; set; }
         public Func<int, string> getItemSupertip { get; set; }
-        public Func<bool> getEnabled { get; set; }
         public Func<string> getText { get; set; }
         public Action<string> onChange { get; set; }
-        public Func<bool> getVisible { get; set; }
-
-        public IComboBoxCommand GetVisible(Func<bool> condition) {
-            getVisible = condition;
-            return this;
-        }
-
-        public IComboBoxCommand GetEnabled(Func<bool> condition) {
-            getEnabled = condition;
-            return this;
-        }
 
         public IComboBoxCommand GetText(Func<string> defaultValue) {
             getText = defaultValue;
@@ -69,18 +58,19 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         #region Implementation of ICommand
 
+        protected override IComboBoxCommand Interface => this;
+
         /// <summary>
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
         public override void WriteCallbackXml(XElement element) {
+            base.WriteCallbackXml(element);
             element.AddCallbackAttribute("onChange", onChange);
             element.AddCallbackAttribute("getText", getText);
-            element.AddCallbackAttribute("getEnabled", getEnabled);
-            element.AddCallbackAttribute("getVisible", getVisible);
 
             element.AddCallbackAttribute("getItemCount", getItemCount);
-            element.AddCallbackAttribute("getItemID", getItemID);
+            element.AddCallbackAttribute("getItemID",nameof(IRibbonFluentCallback.GetItemId),getItemID);
             element.AddCallbackAttribute("getItemImage", getItemImage);
             element.AddCallbackAttribute("getItemLabel", getItemLabel);
             element.AddCallbackAttribute("getItemScreentip", getItemScreentip);

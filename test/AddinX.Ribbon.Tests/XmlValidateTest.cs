@@ -67,25 +67,25 @@ namespace AddinX.Ribbon.UnitTest {
 
         private void BuildUi(RibbonBuilder builder) {
             builder.CustomUi.AddNamespace("acme", "acme.addin.sync").Ribbon.Tabs(c => {
-                c.AddTab("My Tab").SetIdQ("acme", MyTabId)
+                c.AddTab("My Tab").IdQ("acme", MyTabId)
                     .Groups(g => {
-                        g.AddGroup("Data").SetIdQ("acme", DataGroupId)
+                        g.AddGroup("Data").IdQ("acme", DataGroupId)
                             .Items(d => {
-                                d.AddButton("My Save").SetIdMso("FileSave")
+                                d.AddButton("My Save").IdMso("FileSave")
                                     .NormalSize().ImageMso("FileSave");
-                                d.AddButton("Button").SetId("buttonOne");
+                                d.AddButton("Button").Id("buttonOne");
                                 d.AddComboBox("numbers")
-                                    .SetId(BookmarksComboId)
+                                    .Id(BookmarksComboId)
                                     .ShowLabel().NoImage()
                                     .DynamicItems();
 
                                 d.AddDropDown("With Image")
-                                    .SetId(BookmarksDropDownId)
+                                    .Id(BookmarksDropDownId)
                                     .ShowLabel().NoImage()
                                     .ShowItemLabel().ShowItemImage().DynamicItems()
-                                    .Buttons(b => b.AddButton("Button...").SetId(ButtonMore));
+                                    .Buttons(b => b.AddButton("Button...").Id(ButtonMore));
                                 d.AddToggleButton("Toggle Button")
-                                    .SetId(ToggleButtonId);
+                                    .Id(ToggleButtonId);
                             });
 
                     });

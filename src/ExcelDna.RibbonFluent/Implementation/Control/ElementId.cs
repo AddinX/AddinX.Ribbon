@@ -1,4 +1,3 @@
-using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Control;
 using AddinX.Ribbon.Contract.Enums;
 
@@ -40,9 +39,5 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         #endregion
-
-        internal XAttribute ToXml() {
-            return new XAttribute(Type.ToString(), Value);
-        }
     }
 }
