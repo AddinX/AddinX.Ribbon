@@ -43,7 +43,6 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         #region Implementation of IRibbonCallback<out IGroup,out IGroupCommand>
 
         public void Callback(Action<IGroupCommand> builder) {
-            //base.BuildCallback<GroupCommand>(builder);
             builder?.Invoke(GetCommand<GroupCommand>());
         }
 
@@ -55,8 +54,8 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
 
         #region Implementation of IRibbonItems<out IGroup,out IGroupControls>
 
-        public IGroup Items(Action<IGroupControls> items) {
-            items.Invoke(base.Items);
+        public IGroup Items(Action<IGroupControls> builder) {
+            builder?.Invoke(base.InnerItems);
             return this;
         }
 

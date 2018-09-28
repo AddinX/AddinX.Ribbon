@@ -152,6 +152,7 @@
     <Compile Include="Implementation\Control\Separator.cs" />
     <Compile Include="Implementation\Control\ToggleButton.cs" />
     <Compile Include="Implementation\Control\ToggleButtonUnsize.cs" />
+    <Compile Include="Implementation\Control\XElementExtensions.cs" />
     <Compile Include="Implementation\CustomUi.cs" />
     <Compile Include="Implementation\RibbonBuilder.cs" />
     <Compile Include="Implementation\RibbonCommands.cs" />

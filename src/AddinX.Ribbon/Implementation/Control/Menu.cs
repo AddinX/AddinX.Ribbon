@@ -10,8 +10,8 @@ namespace AddinX.Ribbon.Implementation.Control {
             NoImage();
         }
 
-        public IMenu Items(Action<IMenuControls> items) {
-            items.Invoke(base.Items);
+        public IMenu Items(Action<IMenuControls> builder) {
+            builder.Invoke(base.InnerItems);
             return this;
         }
 

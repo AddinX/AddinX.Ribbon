@@ -12,8 +12,8 @@ namespace AddinX.Ribbon.Implementation.Control {
         protected override IMenuUnsize Interface => this;
 
 
-        public IMenuUnsize Items(Action<IMenuUnsizeControls> items) {
-            items.Invoke(base.Items);
+        public IMenuUnsize Items(Action<IMenuUnsizeControls> builder) {
+            builder?.Invoke(base.InnerItems);
             return this;
         }
     }

@@ -47,13 +47,7 @@ namespace AddinX.Ribbon.Tests {
            var ctbutton = schemaSet.GlobalTypes[new XmlQualifiedName("CT_LabelControl", ns)];
 
             WriteAttribute(schemaSet, ctbutton);
-            return;
-
-            foreach (XmlSchemaObject typesValue in schemaSet.GlobalTypes.Values) {
-                WriteAttribute(schemaSet, typesValue);
-                Console.WriteLine();
-            }
-            
+           
         }
 
         private void WriteAttribute(XmlSchemaSet schema, XmlSchemaObject target) {
@@ -63,7 +57,7 @@ namespace AddinX.Ribbon.Tests {
                     Console.WriteLine(" Parent " + complex.Parent);
                     return;
                 }
-                int i = 1;
+
                 foreach (XmlSchemaAttribute item in complex.AttributeUses.Values) {
                     //Console.WriteLine($"\t{i++}:\t{item.Name}\t{GetAttribeType(schema,item.AttributeSchemaType)}\t{item.Use}\t{item.DefaultValue}");
                     if (item.Parent is XmlSchemaAttributeGroup group) {

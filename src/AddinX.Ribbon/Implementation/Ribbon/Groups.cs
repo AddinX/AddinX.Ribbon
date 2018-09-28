@@ -15,10 +15,5 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
             InnerList.Add(tab);
             return tab;
         }
-
-        protected internal override IEnumerable<XElement> ToXml(XNamespace ns) {
-            return InnerList.Select(
-                gp => gp.ToXml(ns)).ToArray();
-        }
     }
 }

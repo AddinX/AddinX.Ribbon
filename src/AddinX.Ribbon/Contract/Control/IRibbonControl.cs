@@ -104,7 +104,7 @@ namespace AddinX.Ribbon.Contract.Control {
     }
 
     public interface IRibbonItems<out T, out TItems> {
-        T Items(Action<TItems> items);
+        T Items(Action<TItems> builder);
     }
 
     public interface IRibbonDynamic<out T, out TItems> : IRibbonItems<T, TItems> {

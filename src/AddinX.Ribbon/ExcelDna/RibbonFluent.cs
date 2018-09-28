@@ -11,7 +11,7 @@ using Image = System.Drawing.Image;
 namespace AddinX.Ribbon.ExcelDna {
     [ComVisible(true)]
     public abstract partial class RibbonFluent : ExcelRibbon, IRibbonFluent {
-        protected static IRibbonUI Ribbon;
+        protected IRibbonUI Ribbon;
 
         private ICallbackRigister _callbackRigister;
 

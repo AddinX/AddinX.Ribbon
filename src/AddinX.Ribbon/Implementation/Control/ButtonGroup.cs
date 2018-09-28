@@ -21,10 +21,8 @@ namespace AddinX.Ribbon.Implementation.Control {
             );
             */
             var element = base.ToXml(ns);
-            if (_items.HasItems) {
-                foreach (var item in _items.ToXml(ns)) {
-                    element.Add(item);
-                }
+            foreach (var item in _items.ToXml(ns)) {
+                element.Add(item);
             }
 
             return element;
@@ -32,8 +30,8 @@ namespace AddinX.Ribbon.Implementation.Control {
 
         protected override IButtonGroup Interface => this;
 
-        public IButtonGroup Items(Action<IButtonGroupControls> items) {
-            items.Invoke(_items);
+        public IButtonGroup Items(Action<IButtonGroupControls> builder) {
+            builder.Invoke(_items);
             return this;
         }
 

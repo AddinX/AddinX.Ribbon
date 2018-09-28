@@ -12,7 +12,7 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         protected override ITab Interface => this;
 
         public ITab Groups(Action<IGroups> value) {
-            value.Invoke(Items);
+            value.Invoke(InnerItems);
             return this;
         }
     }

@@ -29,11 +29,6 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
         public Controls() {
         }
 
-
-        internal bool HasItems {
-            get { return InnerList.Any(); }
-        }
-
         public IBox AddBox() {
             var item = new Box();
             InnerList.Add(item);
@@ -209,10 +204,6 @@ namespace AddinX.Ribbon.Implementation.Ribbon {
             var item = new MenuSeparator();
             InnerList.Add(item);
             return item;
-        }
-
-        protected internal override IEnumerable<XElement> ToXml(XNamespace ns) {
-            return InnerList.Select(o => o.ToXml(ns));
         }
 
         public IDialogBoxLauncher AddDialogBoxLauncher() {

@@ -24,24 +24,9 @@ namespace RibbonTests
         public bool DesignMode { get; set; }
 
         private static bool pressed = false;
-        private readonly IToggleButtonCommand _startMeasureCommand = new ToggleButtonCommand() {
-            onActionPressed = (b) => {
-                MessageBox.Show("Start Measure " + b);
-                pressed = b;
-                Ribbon.Invalidate();
-            },
-            getImage = () => {
-                if (pressed) {
-                    return Resources.greenLighton_24;
-                } else {
-                    return Resources.redlightoff_24;
-                }
-            },
-            getPressed = () => { return pressed; },
-           // getSize = () => { return pressed ? ControlSize.large : ControlSize.normal; }
-        };
+        private readonly IToggleButtonCommand _startMeasureCommand;
 
-        private readonly IToggleButtonCommand speakCommand = new ToggleButtonCommand() {
+        private readonly IToggleButtonCommand _speakCommand = new ToggleButtonCommand() {
             onActionPressed = b => {
                 Settings.Default.SpeechValue = b;
                 Settings.Default.Save();
@@ -49,34 +34,16 @@ namespace RibbonTests
             getPressed = ()=>Settings.Default.SpeechValue,
         };
 
-        private readonly ICheckBoxCommand hotTraceCommand = new CheckBoxCommand() {
-            onActionPressed = b=> {
-                Settings.Default.IsHotTrace = b;
-                Ribbon.Invalidate();
-            },
-            getPressed = ()=>Settings.Default.IsHotTrace
-        };
+        private readonly ICheckBoxCommand hotTraceCommand;
 
         private readonly IButtonCommand _setMeasureValuesRange = new ButtonCommand() {
             onAction = () => Console.WriteLine($"SetMeasureValuesRange  Action"),
             getEnabled = () => { return Settings.Default.IsHotTrace; }
         };
 
-        private readonly IToggleButtonCommand _fillRightCommand = new ToggleButtonCommand() {
-            onActionPressed = b => {
-                Settings.Default.ValueAppendDiection = b;
-                Ribbon.Invalidate();
-            },
-            getPressed = () => Settings.Default.ValueAppendDiection,
-        };
+        private readonly IToggleButtonCommand _fillRightCommand;
 
-        private readonly IToggleButtonCommand _fillDownCommand = new ToggleButtonCommand() {
-            onActionPressed = b => {
-                Settings.Default.ValueAppendDiection = !b;
-                Ribbon.Invalidate();
-            },
-            getPressed = () => !Settings.Default.ValueAppendDiection,
-        };
+        private readonly IToggleButtonCommand _fillDownCommand;
 
         private readonly IToggleButtonCommand _designModeCommand;
 
@@ -85,6 +52,43 @@ namespace RibbonTests
         };
 
         public MyRibbon() {
+            _fillDownCommand = new ToggleButtonCommand() {
+                onActionPressed = b => {
+                    Settings.Default.ValueAppendDiection = !b;
+                    Ribbon.Invalidate();
+                },
+                getPressed = () => !Settings.Default.ValueAppendDiection,
+            };
+            _fillRightCommand = new ToggleButtonCommand() {
+                onActionPressed = b => {
+                    Settings.Default.ValueAppendDiection = b;
+                    Ribbon.Invalidate();
+                },
+                getPressed = () => Settings.Default.ValueAppendDiection,
+            };
+            hotTraceCommand = new CheckBoxCommand() {
+                onActionPressed = b=> {
+                    Settings.Default.IsHotTrace = b;
+                    Ribbon.Invalidate();
+                },
+                getPressed = ()=>Settings.Default.IsHotTrace
+            };
+            _startMeasureCommand = new ToggleButtonCommand() {
+                onActionPressed = (b) => {
+                    MessageBox.Show("Start Measure " + b);
+                    pressed = b;
+                    Ribbon.Invalidate();
+                },
+                getImage = () => {
+                    if (pressed) {
+                        return Resources.greenLighton_24;
+                    } else {
+                        return Resources.redlightoff_24;
+                    }
+                },
+                getPressed = () => { return pressed; },
+                // getSize = () => { return pressed ? ControlSize.large : ControlSize.normal; }
+            };
             _designModeCommand = new ToggleButtonCommand() {
                 getEnabled = ()=>true,
                 onActionPressed = (b) => {
@@ -113,7 +117,7 @@ namespace RibbonTests
                             //<toggleButton id="Id_SpeechValue" imageMso="SpeakCells" label = "语音报读" supertip = "选中此项，会朗读测量读数，需要系统语音支持" onAction = "OnToggleButtonAction"getPressed = "GetPressed" />
                             items.AddToggleButton("语音报读").ImageMso("SpeakCells")
                                 .Supertip("选中此项，会朗读测量读数，需要系统语音支持")
-                                .Callback(speakCommand);
+                                .Callback(_speakCommand);
                             //button id="SetMeasureValuesRange" label="测量数据区域" imageMso="ImportSharePointList" supertip = "设置当前工作表的数据采集区域" onAction = "OnButtonAction" getEnabled = "GetEnabled" />
                             items.AddButton("测量数据区域").ImageMso("ImportSharePointList")
                                 .Supertip("设置当前工作表的数据采集区域")

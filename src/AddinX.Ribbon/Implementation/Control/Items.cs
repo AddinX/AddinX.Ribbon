@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using AddinX.Ribbon.Contract.Control.Item;
+﻿using AddinX.Ribbon.Contract.Control.Item;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class Items : AddInList<Item>, IItems {
@@ -13,10 +10,6 @@ namespace AddinX.Ribbon.Implementation.Control {
             item.SetLabel(label);
             InnerList.Add(item);
             return item;
-        }
-
-        protected internal override IEnumerable<XElement> ToXml(XNamespace ns) {
-            return InnerList.Select(o => o.ToXml(ns));
         }
     }
 }

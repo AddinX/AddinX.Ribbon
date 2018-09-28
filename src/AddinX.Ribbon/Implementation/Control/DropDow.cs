@@ -56,9 +56,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             return this;
         }
 
-        public IDropDown Items(Action<IItems> items) {
+        public IDropDown Items(Action<IItems> builder) {
             _dynamicItemsLoading = false;
-            items.Invoke(_data);
+            builder.Invoke(_data);
             return this;
         }
 

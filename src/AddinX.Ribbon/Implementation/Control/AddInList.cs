@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 
@@ -28,6 +29,10 @@ namespace AddinX.Ribbon.Implementation.Control {
             foreach (var item in InnerList) {
                 item.SetRegister(register);
             }
+        }
+
+        protected internal override IEnumerable<XElement> ToXml(XNamespace ns) {
+            return InnerList.Select(gp => gp.ToXml(ns));
         }
 
         #region Implementation of IEnumerable
