@@ -1,9 +1,15 @@
 using System;
+using AddinX.Ribbon.Contract.Command.Field;
+using AddinX.Ribbon.Contract.Enums;
 
 namespace AddinX.Ribbon.Contract.Command {
-    public interface IMenuCommand : ICommand {
-        IMenuCommand GetVisible(Func<bool> condition);
+    public interface IMenuCommand : IControlCommand<IMenuCommand> {
 
-        IMenuCommand GetEnabled(Func<bool> condition);
+        /// <summary>
+        /// add getSize Callback
+        /// </summary>
+        /// <param name="sizeFunc"></param>
+        /// <returns></returns>
+        IMenuCommand GetSize(Func<ControlSize> sizeFunc);
     }
 }

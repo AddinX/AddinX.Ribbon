@@ -37,27 +37,27 @@ namespace AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox
         {
             builder.CustomUi.Ribbon.Tabs(c =>
             {
-                c.AddTab("My Tab").SetId(MyTabId)
+                c.AddTab("My Tab").Id(MyTabId)
                     .Groups(g =>
                     {
-                        g.AddGroup("Data").SetId(DataGroupId)
+                        g.AddGroup("Data").Id(DataGroupId)
                             .Items(d =>
                             {
-                                d.AddEditbox("input Text").SetId(InputText)
+                                d.AddEditbox("input Text").Id(InputText)
                                     .ImagePath("option").MaxLength(7)
                                     .SizeString(7)
                                     .Callback((IEditBoxCommand)commands.Find(InputText));
 
-                                d.AddLabelControl().SetId(OutputText)
+                                d.AddLabelControl().Id(OutputText)
                                     .Callback((ILabelCommand)commands.Find(OutputText));
 
                                 d.AddButton("Happy")
-                                    .SetId(HappyButtonId)
+                                    .Id(HappyButtonId)
                                     .LargeSize()
                                     .ImageMso("HappyFace")
                                     .Callback((IButtonCommand)commands.Find(HappyButtonId));
                             })
-                        .DialogBoxLauncher(i => i.AddDialogBoxLauncher().SetId(BoxLauncherId).Supertip("Box launcher"));
+                        .DialogBoxLauncher(i => i.AddDialogBoxLauncher().Id(BoxLauncherId).Supertip("Box launcher"));
                     });
             });
         }

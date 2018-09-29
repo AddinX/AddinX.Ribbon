@@ -7,10 +7,5 @@ namespace AddinX.Ribbon.Contract.Command {
         /// </summary>
         string ControlId { get; }
 
-        /// <summary>
-        /// 写入回调Xml属性
-        /// </summary>
-        /// <param name="element"></param>
-        void WriteCallbackXml(XElement element);
     }
 }

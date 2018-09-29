@@ -15,13 +15,13 @@ namespace ContextualTab
         {
             build.CustomUi.Ribbon.ContextualTabs(tabs =>
                 tabs.AddTabSet(set => set.IdMso(TabSetId.TabSetDrawingTools)
-                    .Tabs(tab => tab.AddTab("Sample").SetId("SampleContextId")
-                        .Groups(g => g.AddGroup("Custom group").SetId("CustomGroupContextId")
+                    .Tabs(tab => tab.AddTab("Sample").Id("SampleContextId")
+                        .Groups(g => g.AddGroup("Custom group").Id("CustomGroupContextId")
                             .Items(d =>
                             {
-                                d.AddButton("Button 1").SetId("Button1")
+                                d.AddButton("Button 1").Id("Button1")
                                     .LargeSize().ImageMso("HappyFace");
-                                d.AddButton("Button 2").SetId("Button2")
+                                d.AddButton("Button 2").Id("Button2")
                                     .LargeSize().ImageMso("Bold");
                             })
                         ))));
@@ -29,9 +29,9 @@ namespace ContextualTab
 
         protected void CreateRibbonCommand(IRibbonCommands cmds)
         {
-            cmds.AddButtonCommand("Button1").onAction = ()=> MessageBox.Show("Button 1 clicked");
+            cmds.AddButtonCommand("Button1").OnAction(()=> MessageBox.Show("Button 1 clicked"));
 
-            cmds.AddButtonCommand("Button2").onAction= () => MessageBox.Show("Button 2 clicked");
+            cmds.AddButtonCommand("Button2").OnAction(() => MessageBox.Show("Button 2 clicked"));
         }
 
         public override void OnClosing()

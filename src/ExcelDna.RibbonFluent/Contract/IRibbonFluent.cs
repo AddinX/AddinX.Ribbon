@@ -30,5 +30,13 @@ namespace AddinX.Ribbon.Contract {
         string GetItemSupertip(IRibbonControl control, int index);
         string GetLabel(IRibbonControl control);
         int GetSelectedItemIndex(IRibbonControl control);
+
+        /// <summary>
+        /// getSize Callback
+        /// </summary>
+        /// <param name="control"></param>
+        /// <returns></returns>
+        string GetSize(IRibbonControl control);
+
     }
 }

@@ -130,5 +130,18 @@ namespace AddinX.Ribbon.ExcelDna {
 
             return 0;
         }
+
+        /// <summary>
+        /// getSize Callback
+        /// </summary>
+        /// <param name="control"></param>
+        /// <returns></returns>
+        public string GetSize(IRibbonControl control) {
+            if (FindCallback(control.Id) is ISizeField field) {
+                return field.getSize?.Invoke().ToString();
+            }
+
+            return null;
+        }
     }
 }

@@ -26,8 +26,8 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         protected override ICheckBoxCommand Interface => this;
 
-        public override void WriteCallbackXml(XElement element) {
-            base.WriteCallbackXml(element);
+        protected internal override void WriteXml(XElement element) {
+            base.WriteXml(element);
             element.AddCallbackAttribute("onAction",nameof(IRibbonFluentCallback.OnActionPressed), onActionPressed);
             element.AddCallbackAttribute("getPressed", getPressed);
         }

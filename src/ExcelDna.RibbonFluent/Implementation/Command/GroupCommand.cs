@@ -4,23 +4,9 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class GroupCommand : AbstractCommand, IGroupCommand, IVisibleField {
-        public void GetVisible(Func<bool> condition) {
-            getVisible = condition;
-        }
+    public class GroupCommand : ControlCommand<IGroupCommand>, IGroupCommand, IVisibleField {
 
-        #region Implementation of ICommand
+        protected override IGroupCommand Interface => this;
 
-        /// <summary>
-        ///     写入回调Xml属性
-        /// </summary>
-        /// <param name="element"></param>
-        public override void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("getVisible", getVisible);
-        }
-
-        #endregion
-
-        public Func<bool> getVisible { get; set; }
     }
 }

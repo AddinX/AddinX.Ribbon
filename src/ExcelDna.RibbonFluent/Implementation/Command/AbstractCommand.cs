@@ -14,7 +14,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// 写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public abstract void WriteCallbackXml(XElement element);
+        protected internal abstract void WriteXml(XElement element);
 
         #endregion
     }

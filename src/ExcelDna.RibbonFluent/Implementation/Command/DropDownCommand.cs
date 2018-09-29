@@ -4,19 +4,14 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class DropDownCommand : AbstractCommand, IDropDownCommand, IEnabledField, IVisibleField, IDynamicItemsField,
+    public class DropDownCommand : DynamicItemsCommand<IDropDownCommand>, IDropDownCommand, IEnabledField, IVisibleField, IDynamicItemsField,
         IDropDownField {
-        public IDropDownCommand GetVisible(Func<bool> condition) {
-            getVisible = condition;
-            return this;
-        }
 
-        public IDropDownCommand GetEnabled(Func<bool> condition) {
-            getEnabled = condition;
-            return this;
-        }
+        public Action<int> onItemAction { get; set; }
+        public Func<int> getSelectedItemIndex { get; set; }
 
-        public IDropDownCommand OnAction(Action<int> act) {
+
+        public IDropDownCommand OnItemAction(Action<int> act) {
             onItemAction = act;
             return this;
         }
@@ -26,72 +21,42 @@ namespace AddinX.Ribbon.Implementation.Command {
             return this;
         }
 
-        public IDropDownCommand ItemCounts(Func<int> numberItems) {
-            getItemCount = numberItems;
-            return this;
-        }
-
-        public IDropDownCommand ItemsId(Func<int, string> itemsId) {
-            getItemID = itemsId;
-            return this;
-        }
-
-        public IDropDownCommand ItemsLabel(Func<int, string> itemsLabel) {
-            getItemLabel = itemsLabel;
-            return this;
-        }
-
-        public IDropDownCommand ItemsScreentip(Func<int, string> itemsScreentip) {
-            getItemScreentip = itemsScreentip;
-            return this;
-        }
-
-        public IDropDownCommand ItemsSupertip(Func<int, string> itemsSupertip) {
-            getItemSupertip = itemsSupertip;
-            return this;
-        }
-
-        public IDropDownCommand ItemsImage(Func<int, object> itemsImage) {
-            getItemImage = itemsImage;
-            return this;
-        }
 
         #region Implementation of ICommand
+
+        protected override IDropDownCommand Interface => this;
 
         /// <summary>
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public override void WriteCallbackXml(XElement element) {
+        protected internal override void WriteXml(XElement element) {
+            base.WriteXml(element);
             element.AddCallbackAttribute("onAction", "OnItemAction", onItemAction);
-            element.AddCallbackAttribute("getEnabled", getEnabled);
-            element.AddCallbackAttribute("getVisible", getVisible);
+            element.AddCallbackAttribute("getSelectedItemIndex", getSelectedItemIndex);
+        }
 
+        #endregion
+
+        
+    }
+
+    public abstract class DynamicItemsCommand<T> : ControlCommand<T>, IDynamicItemsCommand<T>, IDynamicItemsField where T:ICommand {
+
+
+        /// <summary>
+        ///     写入回调Xml属性
+        /// </summary>
+        /// <param name="element"></param>
+        protected internal override void WriteXml(XElement element) {
+            base.WriteXml(element);
             element.AddCallbackAttribute("getItemCount", getItemCount);
             element.AddCallbackAttribute("getItemID", "GetItemId", getItemID);
             element.AddCallbackAttribute("getItemImage", getItemImage);
             element.AddCallbackAttribute("getItemLabel", getItemLabel);
             element.AddCallbackAttribute("getItemScreentip", getItemScreentip);
             element.AddCallbackAttribute("getItemSupertip", getItemSupertip);
-            element.AddCallbackAttribute("getSelectedItemIndex", getSelectedItemIndex);
         }
-
-        #endregion
-
-        public Action<int> onItemAction { get; set; }
-        public Func<int> getSelectedItemIndex { get; set; }
-        public Func<int> getItemCount { get; set; }
-        public Func<int, string> getItemID { get; set; }
-        public Func<int, object> getItemImage { get; set; }
-        public Func<int, string> getItemLabel { get; set; }
-        public Func<int, string> getItemScreentip { get; set; }
-        public Func<int, string> getItemSupertip { get; set; }
-        public Func<bool> getEnabled { get; set; }
-        public Func<bool> getVisible { get; set; }
-    }
-
-    public abstract class DropDownRegularCommand<T> : ControlCommand<T>, IDynamicItemsCommand<T>, IDynamicItemsField where T:ICommand {
-       
 
         #region Implementation of IDynamicItemsField
 
@@ -142,33 +107,33 @@ namespace AddinX.Ribbon.Implementation.Command {
         #region Implementation of IDynamicItemsCommand<out T>
 
         
-        public T ItemCount(Func<int> numberItems) {
-            getItemCount = numberItems;
+        public T GetItemCount(Func<int> itemCount) {
+            getItemCount = itemCount;
             return Interface;
         }
 
-        public T ItemsId(Func<int, string> itemsId) {
+        public T GetItemId(Func<int, string> itemsId) {
             getItemID = itemsId;
             return Interface;
         }
 
-        public T ItemsLabel(Func<int, string> itemLabelFunc) {
-            getItemLabel = itemLabelFunc;
+        public T GetItemLabel(Func<int, string> itemLabel) {
+            getItemLabel = itemLabel;
             return Interface;
         }
 
-        public T ItemsScreentip(Func<int, string> itemsScreentip) {
+        public T GetItemScreentip(Func<int, string> itemsScreentip) {
             getItemScreentip = itemsScreentip;
             return Interface;
         }
 
-        public T ItemsSupertip(Func<int, string> itemsSupertip) {
+        public T GetItemSupertip(Func<int, string> itemsSupertip) {
             getItemSupertip = itemsSupertip;
             return Interface;
         }
 
-        public T ItemsImage(Func<int, object> itemImageFunc) {
-            getItemImage = itemImageFunc;
+        public T GetItemImage(Func<int, object> itemImage) {
+            getItemImage = itemImage;
             return Interface;
         }
 

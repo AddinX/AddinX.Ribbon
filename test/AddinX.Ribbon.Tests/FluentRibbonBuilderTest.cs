@@ -373,7 +373,8 @@ namespace AddinX.Ribbon.UnitTest
                                                 o.AddButton("Extra Colors").Id("ExtraColors")
                                                     .NoImage().ShowLabel()
                                             ).Supertip("Color Picking");
-                                    });
+                                    })
+                                    .Callback(cmds=>cmds.GetSize(()=>ControlSize.large));
                             });
                     });
             });

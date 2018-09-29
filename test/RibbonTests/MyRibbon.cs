@@ -146,7 +146,7 @@ namespace RibbonTests
                                 .Callback(c=>c.OnChecked(Console.WriteLine));
                             items.AddButton("日志文件").Supertip("打开当前日志文件").ImageMso("TableOfContentsGallery")
                                 .Callback(b=> {
-                                    b.onAction = ()=>{MessageBox.Show("打开日志");};
+                                    b.OnAction(()=>{MessageBox.Show("打开日志");});
                                 });
                         }).Callback(g=>g.GetVisible(()=>DesignMode));
                 })

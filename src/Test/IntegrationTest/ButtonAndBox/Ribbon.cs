@@ -21,33 +21,33 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox {
 
         protected override void CreateFluentRibbon(IRibbonBuilder builder) {
             builder.CustomUi.AddNamespace("acme", "acme.addin.sync").Ribbon.Tabs(c => {
-                c.AddTab("My Tab").SetIdQ("acme", MyTabId)
+                c.AddTab("My Tab").IdQ("acme", MyTabId)
                     .Groups(g => {
-                        g.AddGroup("Data").SetIdQ("acme", DataGroupId)
+                        g.AddGroup("Data").IdQ("acme", DataGroupId)
                             .Items(d => {
                                 d.AddButton("Allocation")
-                                    .SetId(PortfolioAllocationBtn)
+                                    .Id(PortfolioAllocationBtn)
                                     .LargeSize()
                                     .ImageMso("HappyFace")
                                     .Callback((IButtonCommand)_commands.Find(PortfolioAllocationBtn));
 
-                                d.AddBox().SetId(ReportingBox)
+                                d.AddBox().Id(ReportingBox)
                                     .HorizontalDisplay().Items(i => {
                                         i.AddButton("Performance")
-                                            .SetId(PortfolioPerformanceBtn)
+                                            .Id(PortfolioPerformanceBtn)
                                             .NormalSize()
                                             .ImageMso("HappyFace")
                                             .Callback((IButtonCommand)_commands.Find(PortfolioPerformanceBtn));
 
-                                        i.AddButton("Contributor").SetId(PortfolioContributorBtn)
+                                        i.AddButton("Contributor").Id(PortfolioContributorBtn)
                                             .NormalSize().NoImage().ShowLabel()
                                             .Supertip("Portfolio best contributor")
                                             .Screentip("Display the top / bottom X contributor to the portfolio performance.")
                                             .Callback((IButtonCommand)_commands.Find(PortfolioContributorBtn));
                                     }).Callback((IBoxCommand)_commands.Find(ReportingBox));
                             });
-                        g.AddGroup("Analytic").SetId(AnalyticsGroup)
-                            .Items(i => i.AddButton("Portfolio Analysis").SetId(PortfolioAnalyzerBtn).NormalSize()
+                        g.AddGroup("Analytic").Id(AnalyticsGroup)
+                            .Items(i => i.AddButton("Portfolio Analysis").Id(PortfolioAnalyzerBtn).NormalSize()
                                 .NoImage().ShowLabel()
                             .Callback((IButtonCommand)_commands.Find(PortfolioAnalyzerBtn))
                             );

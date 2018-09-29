@@ -1,35 +1,38 @@
 ﻿using System;
 using System.Xml.Linq;
+using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
+using AddinX.Ribbon.Contract.Enums;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class MenuCommand : AbstractCommand, IMenuCommand, IVisibleField, IEnabledField {
-        public Func<bool> getEnabled { get; set; }
+    public class MenuCommand : ControlCommand<IMenuCommand>, IMenuCommand, ISizeField{
 
-        public IMenuCommand GetVisible(Func<bool> condition) {
-            getVisible = condition;
-            return this;
+        protected override IMenuCommand Interface => this;
+
+        protected internal override void WriteXml(XElement element) {
+            base.WriteXml(element);
+            element.AddCallbackAttribute("getSize",nameof(IRibbonFluentCallback.GetSize),getSize);
         }
 
-        public IMenuCommand GetEnabled(Func<bool> condition) {
-            getEnabled = condition;
-            return this;
-        }
-
-        #region Implementation of ICommand
+        #region Implementation of IMenuCommand
 
         /// <summary>
-        ///     写入回调Xml属性
+        /// add getSize Callback
         /// </summary>
-        /// <param name="element"></param>
-        public override void WriteCallbackXml(XElement element) {
-            element.AddCallbackAttribute("getEnabled", getEnabled);
-            element.AddCallbackAttribute("getVisible", getVisible);
+        /// <param name="sizeFunc"></param>
+        /// <returns></returns>
+        public IMenuCommand GetSize(Func<ControlSize> sizeFunc) {
+            getSize = sizeFunc;
+            return Interface;
         }
 
         #endregion
 
-        public Func<bool> getVisible { get; set; }
+        #region Implementation of ISizeField
+
+        public Func<ControlSize> getSize { get; set; }
+
+        #endregion
     }
 }

@@ -63,12 +63,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AddinX.Ribbon\AddinX.Ribbon.csproj">
-      <Project>{e517e0a2-8f3b-4f76-8987-85c6146d6021}</Project>
-      <Name>AddinX.Ribbon</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -89,6 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\greenLighton_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ExcelDna.RibbonFluent\ExcelDna.RibbonFluent.csproj">
+      <Project>{4475793a-880a-4555-acba-1fdfcc44f61e}</Project>
+      <Name>ExcelDna.RibbonFluent</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,8 +24,8 @@ namespace AddinX.Ribbon.Implementation.Command {
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public override void WriteCallbackXml(XElement element) {
-            base.WriteCallbackXml(element);
+        protected internal override void WriteXml(XElement element) {
+            base.WriteXml(element);
             element.AddCallbackAttribute("getText", getText);
             element.AddCallbackAttribute("onChange", onChange);
         }

@@ -31,7 +31,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public override void WriteCallbackXml(XElement element) {
+        protected internal override void WriteXml(XElement element) {
             element.AddCallbackAttribute("onAction", onAction);
             element.AddCallbackAttribute("getEnabled", getEnabled);
             element.AddCallbackAttribute("getVisible", getVisible);

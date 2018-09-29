@@ -15,8 +15,8 @@ namespace AddinX.Ribbon.Implementation.Command {
         ///     写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public override void WriteCallbackXml(XElement element) {
-            base.WriteCallbackXml(element);
+        protected internal override void WriteXml(XElement element) {
+            base.WriteXml(element);
             element.AddCallbackAttribute("onAction", "OnActionPressed", onActionPressed);
             element.AddCallbackAttribute("getPressed", getPressed);
         }
@@ -72,8 +72,8 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// 写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public override void WriteCallbackXml(XElement element) {
-            base.WriteCallbackXml(element);
+        protected internal override void WriteXml(XElement element) {
+            base.WriteXml(element);
             element.AddCallbackAttribute("getImage", getImage);
             element.AddCallbackAttribute("getDescription", getDescription);
         }
@@ -119,7 +119,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// 写入回调Xml属性
         /// </summary>
         /// <param name="element"></param>
-        public override void WriteCallbackXml(XElement element) {
+        protected internal override void WriteXml(XElement element) {
             element.AddCallbackAttribute("getEnabled",getEnabled);
             element.AddCallbackAttribute("getVisible", getVisible);
             element.AddCallbackAttribute("getLabel", getLabel);

@@ -37,12 +37,9 @@ namespace AddinX.Ribbon.Implementation.Control {
         /// </summary>
         /// <param name="element"></param>
         private void AddCallbackAttributes(XElement element) {
-            if (_command != null) {
-                _command.WriteCallbackXml(element);
-                if (_command is AbstractCommand absCmd) {
-                    absCmd.ControlId = this.ControlId.Value;
-                }
-
+            if (_command is AbstractCommand cmd) {
+                cmd.WriteXml(element);
+                cmd.ControlId = ControlId.Value;
                 Register?.Add(ControlId, _command);
             }
         }

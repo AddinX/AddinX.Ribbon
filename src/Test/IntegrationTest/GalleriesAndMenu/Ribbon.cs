@@ -30,35 +30,35 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu {
 
         protected override void CreateFluentRibbon(IRibbonBuilder builder) {
             builder.CustomUi.Ribbon.Tabs(c => {
-                c.AddTab("My Tab").SetId(MyTabId)
+                c.AddTab("My Tab").Id(MyTabId)
                     .Groups(g => {
-                        g.AddGroup("Data").SetId(DataGroupId)
+                        g.AddGroup("Data").Id(DataGroupId)
                             .Items(d => {
-                                d.AddMenu("Option").SetId(OptionId).ShowLabel()
+                                d.AddMenu("Option").Id(OptionId).ShowLabel()
                                     .ImageMso("FileNew").LargeSize()
                                     .ItemLargeSize().Items(
                                         v => {
-                                            v.AddCheckbox("Show numbers").SetId(ShowNumberId)
+                                            v.AddCheckbox("Show numbers").Id(ShowNumberId)
                                                 .Callback((ICheckBoxCommand)_commands.Find(ShowNumberId));
 
                                             v.AddSeparator().SetTitle("Mood");
                                             v.AddButton("Happy")
-                                                .SetId(HappyButtonId)
+                                                .Id(HappyButtonId)
                                                 .ImageMso("HappyFace");
 
-                                            v.AddGallery("Dynamic Option").SetId(DynamicGalleryId)
+                                            v.AddGallery("Dynamic Option").Id(DynamicGalleryId)
                                                 .ShowLabel().NoImage().ShowItemLabel().ShowItemImage()
                                                 //.DynamicItems()
-                                                //.Buttons(b => b.AddButton("Button...").SetId(ButtonMore))
+                                                //.Buttons(b => b.AddButton("Button...").Id(ButtonMore))
                                                 .NumberRows(6).NumberColumns(1)
                                                 .Callback((IGalleryCommand) _commands.Find(DynamicGalleryId));
                                         });
 
-                                d.AddGallery("Multi Option").SetId(GalleryId)
+                                d.AddGallery("Multi Option").Id(GalleryId)
                                     .ShowLabel().LargeSize().NoImage().ShowItemLabel().ShowItemImage()
                                     .Items(v => {
-                                        v.AddItem("Show numbers").SetId(ShowNumberId2);
-                                        v.AddItem("Happy").SetId(HappyButtonId2).ImageMso("HappyFace");
+                                        v.AddItem("Show numbers").Id(ShowNumberId2);
+                                        v.AddItem("Happy").Id(HappyButtonId2).ImageMso("HappyFace");
                                     }).Callback((IGalleryCommand) _commands.Find(GalleryId));
                             });
                     });
@@ -66,8 +66,8 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu {
         }
 
         protected void CreateRibbonCommand(IRibbonCommands cmds) {
-            cmds.AddButtonCommand(ButtonMore).onAction = () => MessageBox.Show(@"More...");
-            cmds.AddButtonCommand(HappyButtonId).onAction = () => MessageBox.Show("Be Happy !!!");
+            cmds.AddButtonCommand(ButtonMore).OnAction(() => MessageBox.Show(@"More..."));
+            cmds.AddButtonCommand(HappyButtonId).OnAction(() => MessageBox.Show("Be Happy !!!"));
 
             cmds.AddCheckBoxCommand(ShowNumberId).OnChecked(isPressed => {
                 checkboxPressed = isPressed;
@@ -88,11 +88,11 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu {
 
             cmds.AddGalleryCommand(DynamicGalleryId)
                 .GetEnabled(() => checkboxPressed)
-                .ItemCounts(()=> content.Count())
-                .ItemsId(i => content.Ids(i))
-                .ItemsLabel(i => content.Labels(i))
-                .ItemsImage(i => content.Images(i))
-                .ItemsSupertip(i => content.SuperTips(i))
+                .GetItemCount(()=> content.Count())
+                .GetItemId(i => content.Ids(i))
+                .GetItemLabel(i => content.Labels(i))
+                .GetItemImage(i => content.Images(i))
+                .GetItemSupertip(i => content.SuperTips(i))
                 .ItemSelectionIndex(() => GallerySelectedIndex)
                 .OnItemAction(i => {
                     GallerySelectedIndex = i;
