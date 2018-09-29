@@ -63,6 +63,26 @@ namespace RibbonTests.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap FillDown_16 {
+            get {
+                object obj = ResourceManager.GetObject("FillDown_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap FillRight_16 {
+            get {
+                object obj = ResourceManager.GetObject("FillRight_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap greenLighton_24 {
             get {
                 object obj = ResourceManager.GetObject("greenLighton_24", resourceCulture);
@@ -76,6 +96,26 @@ namespace RibbonTests.Properties {
         internal static System.Drawing.Bitmap redlightoff_24 {
             get {
                 object obj = ResourceManager.GetObject("redlightoff_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap redLighton_24 {
+            get {
+                object obj = ResourceManager.GetObject("redLighton_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap setting_32 {
+            get {
+                object obj = ResourceManager.GetObject("setting_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,17 +1,12 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Xml;
 using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation;
-using AddinX.Ribbon.Implementation.Control;
-using AddinX.Ribbon.Tests;
 using NUnit.Framework;
 
-namespace AddinX.Ribbon.UnitTest
+namespace ExcelDna.RibbonFluent.Tests
 {
     [TestFixture]
     public class FluentRibbonBuilderTest

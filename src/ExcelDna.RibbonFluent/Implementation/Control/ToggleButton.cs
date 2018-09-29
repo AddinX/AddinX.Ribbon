@@ -8,7 +8,6 @@ namespace AddinX.Ribbon.Implementation.Control {
         public ToggleButton() : base("toggleButton") {
             NoImage();
             NormalSize();
-            ShowLabel();
         }
 
         protected override IToggleButton Interface => this;

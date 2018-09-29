@@ -1,14 +1,11 @@
 using System;
-using System.CodeDom;
 using System.IO;
 using System.Reflection;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Schema;
 using NUnit.Framework;
 
-
-namespace AddinX.Ribbon.Tests {
+namespace ExcelDna.RibbonFluent.Tests {
     public class RibbonXmlTests {
 
         private string GetLocalPath(string path) {

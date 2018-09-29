@@ -1,0 +1,27 @@
+﻿<customUI onLoad="OnLoad" loadImage="OnLoadImage" xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+  <ribbon>
+    <tabs>
+      <tab id="id_0001" label="测量管理工具">
+        <group id="id_0002" label="测量管理工具">
+          <toggleButton id="Id_StartMeasuring" size="large" showLabel="true" label="开始测量" />
+          <separator id="id_0004" />
+          <checkBox id="Id_IsHotTrace" label="跟踪测量单元格" supertip="如果选中此项，在测量时会选中正在进行的 测量数据单元格,用来指示当前测量的位置" onAction="OnActionPressed" getPressed="GetPressed" />
+          <toggleButton id="Id_SpeechValue" size="normal" showLabel="true" label="语音报读" imageMso="SpeakCells" supertip="选中此项，会朗读测量读数，需要系统语音支持" onAction="OnActionPressed" getPressed="GetPressed" />
+          <button id="SetMeasureValuesRange" size="normal" label="测量数据区域" imageMso="ImportSharePointList" />
+          <separator id="id_0008" />
+          <toggleButton id="Id_FillDirection.ColumnFirst" size="large" showLabel="true" label="向右填充" image="FillRight_16" supertip="采集数据时,从当前单元格开始向右方填写数据" onAction="OnActionPressed" getPressed="GetPressed" />
+          <toggleButton id="Id_FillDirection.RowFirst" size="large" showLabel="true" label="向下填充" image="FillDown_16" supertip="采集数据时,从当前单元格开始向下方填写数据" onAction="OnActionPressed" getPressed="GetPressed" />
+          <separator id="id_0011" />
+          <toggleButton id="Id_DesignMode" size="normal" showLabel="true" label="编辑模式" imageMso="DesignMode" supertip="选中此项，进入任务编辑模式，开始编辑测量任务" onAction="OnActionPressed" getPressed="GetPressed" />
+          <separator id="id_0013" />
+          <button id="id_0014" size="large" label="激活产品" imageMso="AdpPrimaryKey" />
+        </group>
+        <group id="Id_DesignToolsGroup" label="编辑工具" getVisible="GetVisible">
+          <button id="ConfigSerialPort" size="normal" label="设置串口参数" image="setting_32" />
+          <checkBox id="Id_FroceAbsValue" label="使用绝对值" supertip="如果选中此项，忽略测量值符号,强制转换为绝对值" onAction="OnActionPressed" getPressed="GetPressed" />
+          <button id="OpenLogFile" size="normal" label="日志文件" supertip="打开当前日志文件" onAction="OnAction" />
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>

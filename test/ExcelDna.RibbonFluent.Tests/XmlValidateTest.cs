@@ -3,10 +3,9 @@ using System.IO;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using AddinX.Ribbon.Implementation;
-using AddinX.Ribbon.Tests;
 using NUnit.Framework;
 
-namespace AddinX.Ribbon.UnitTest {
+namespace ExcelDna.RibbonFluent.Tests {
     public class XmlValidateTest {
         public const string NamespaceCustomUI2010 = "http://schemas.microsoft.com/office/2009/07/customui";
         public const string NamespaceCustomUI2007 = "http://schemas.microsoft.com/office/2006/01/customui";

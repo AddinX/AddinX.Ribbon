@@ -90,5 +90,26 @@
       <Name>ExcelDna.RibbonFluent</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FillDown_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FillRight_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\greenLighton_241.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redlightoff_241.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redLighton_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\setting_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\SimpleRibbon.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

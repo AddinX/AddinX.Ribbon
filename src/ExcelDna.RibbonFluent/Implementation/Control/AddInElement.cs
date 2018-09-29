@@ -50,7 +50,9 @@ namespace AddinX.Ribbon.Implementation.Control {
             var element = new XElement(ns + ElementName);
             if (_attributes != null) {
                 foreach (var item in _attributes) {
-                    element.Add(new XAttribute(item.Key, item.Value));
+                    if (item.Value != null) {
+                        element.Add(new XAttribute(item.Key, item.Value));
+                    }
                 }
             }
 
@@ -65,7 +67,9 @@ namespace AddinX.Ribbon.Implementation.Control {
 
             if (_attributes != null) {
                 foreach (var item in _attributes) {
-                    element.Add(new XAttribute(item.Key, item.Value));
+                    if (item.Value != null) {
+                        element.Add(new XAttribute(item.Key, item.Value));
+                    }
                 }
             }
 

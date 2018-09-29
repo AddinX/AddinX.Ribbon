@@ -118,10 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FillDown_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FillDown_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FillRight_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FillRight_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="greenLighton_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\greenLighton_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="redlightoff_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\redlightoff_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redLighton_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redLighton_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="setting_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\setting_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

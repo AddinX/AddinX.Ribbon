@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
@@ -12,7 +11,7 @@ using AddinX.Ribbon.Implementation.Command;
 using AddinX.Ribbon.Implementation.Control;
 using NUnit.Framework;
 
-namespace AddinX.Ribbon.Tests {
+namespace ExcelDna.RibbonFluent.Tests {
     internal class BuilderTests {
         private IRibbonBuilder BuildInGroup(Action<IGroupControls> buildAction) {
             var builder = new RibbonBuilder();

@@ -4,7 +4,7 @@ using System.Xml.Linq;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Validation;
 
-namespace AddinX.Ribbon.Tests {
+namespace ExcelDna.RibbonFluent.Tests {
     public static class ValidateHelper {
 
         public static bool Validate(string xmlStr) {
