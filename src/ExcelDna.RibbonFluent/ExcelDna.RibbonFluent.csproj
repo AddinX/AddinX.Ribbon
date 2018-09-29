@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net40;net45</TargetFrameworks>
-    <Version>1.0.2</Version>
+    <Version>1.0.2-$(VersionSuffix)</Version>
     <RootNamespace>AddinX.Ribbon</RootNamespace>
     <PackageProjectUrl>https://github.com/zwq00000/AddinX.Ribbon</PackageProjectUrl>
     <Description>RibbonFluent builder for ExcelDna, extends AddInX.Ribbon project</Description>
