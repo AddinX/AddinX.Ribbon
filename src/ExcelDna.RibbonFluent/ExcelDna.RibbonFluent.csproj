@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>net40;net45</TargetFrameworks>
-    <Version>1.0.2-$(VersionSuffix)</Version>
+    <VersionPrefix>1.0.2</VersionPrefix>
+    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
     <RootNamespace>AddinX.Ribbon</RootNamespace>
     <PackageProjectUrl>https://github.com/zwq00000/AddinX.Ribbon</PackageProjectUrl>
     <Description>RibbonFluent builder for ExcelDna, extends AddInX.Ribbon project</Description>
@@ -13,8 +14,7 @@
     <AssemblyVersion>1.0.2.0</AssemblyVersion>
     <RepositoryType>git</RepositoryType>
     <Company>Tianjin Lingya Tech CO.</Company>
-    <Authors>zwq00000</Authors>
-    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+    <Authors>zwq00000@gmail.com</Authors>
   </PropertyGroup>
 
   <ItemGroup>
