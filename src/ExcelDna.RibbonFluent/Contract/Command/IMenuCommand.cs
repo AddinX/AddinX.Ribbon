@@ -1,5 +1,4 @@
 using System;
-using AddinX.Ribbon.Contract.Command.Field;
 using AddinX.Ribbon.Contract.Enums;
 
 namespace AddinX.Ribbon.Contract.Command {

@@ -1,6 +1,5 @@
 using System;
 using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
@@ -28,8 +27,8 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         protected internal override void WriteXml(XElement element) {
             base.WriteXml(element);
-            element.AddCallbackAttribute("onAction",nameof(IRibbonFluentCallback.OnActionPressed), onActionPressed);
-            element.AddCallbackAttribute("getPressed", getPressed);
+            AddOnActionPressed(element,onActionPressed);
+            AddGetPressed(element,getPressed);
         }
     }
 }

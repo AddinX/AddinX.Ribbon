@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Enums;
@@ -119,7 +117,7 @@ namespace RibbonTests
                           .Groups(groups => {
                               groups.AddGroup("测量管理工具")
                                   .Items(g => {
-                                      g.AddToggleButton(null).Id(ControlIds.StartMeasuring)
+                                      g.AddToggleButton("测量开关").Id(ControlIds.StartMeasuring)
                                           .LargeSize().Callback(_startMeasureCommand);
                                       g.AddSeparator();
 

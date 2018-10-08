@@ -5,8 +5,7 @@ using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class ToggleButtonCommand : ButtonRegularCommand<IToggleButtonCommand>, IToggleButtonCommand,
-        IDescriptionField, IActionPressedField, IPressedField, IImageField,IVisibleField ,ILabelField{
+    public class ToggleButtonCommand : ButtonRegularCommand<IToggleButtonCommand>, IToggleButtonCommand, IActionPressedField, IPressedField{
     #region Implementation of ICommand
 
         protected override IToggleButtonCommand Interface => this;
@@ -31,7 +30,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         }
 
         public IToggleButtonCommand GetPressed(Func<bool> pressedFunc) {
-            this.getPressed = pressedFunc;
+            getPressed = pressedFunc;
             return this;
         }
 
@@ -74,8 +73,10 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// <param name="element"></param>
         protected internal override void WriteXml(XElement element) {
             base.WriteXml(element);
-            element.AddCallbackAttribute("getImage", getImage);
-            element.AddCallbackAttribute("getDescription", getDescription);
+            //element.AddCallbackAttribute("getImage", getImage);
+            //element.AddCallbackAttribute("getDescription", getDescription);
+            AddGetImage(element,getImage);
+            AddGetDescription(element, getDescription);
         }
 
         #endregion
@@ -97,12 +98,12 @@ namespace AddinX.Ribbon.Implementation.Command {
 
 
         public T GetImage(Func<Image> imageFunc) {
-            this.getImage = imageFunc;
+            getImage = imageFunc;
             return Interface;
         }
 
         public T GetDescription(Func<string> descriptionFunc) {
-            this.getDescription = descriptionFunc;
+            getDescription = descriptionFunc;
             return Interface;
         }
 
@@ -120,9 +121,12 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// </summary>
         /// <param name="element"></param>
         protected internal override void WriteXml(XElement element) {
-            element.AddCallbackAttribute("getEnabled",getEnabled);
-            element.AddCallbackAttribute("getVisible", getVisible);
-            element.AddCallbackAttribute("getLabel", getLabel);
+            AddGetEnabled(element, getEnabled);
+            AddGetVisible(element, getVisible);
+            AddGetLabel(element,getLabel);
+            //element.AddCallbackAttribute("getEnabled",getEnabled);
+            //element.AddCallbackAttribute("getVisible", getVisible);
+            //element.AddCallbackAttribute("getLabel", getLabel);
         }
 
         #region Implementation of IControlCommand<out T>

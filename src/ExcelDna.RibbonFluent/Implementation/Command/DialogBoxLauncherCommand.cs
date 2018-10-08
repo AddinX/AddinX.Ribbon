@@ -32,9 +32,9 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// </summary>
         /// <param name="element"></param>
         protected internal override void WriteXml(XElement element) {
-            element.AddCallbackAttribute("onAction", onAction);
-            element.AddCallbackAttribute("getEnabled", getEnabled);
-            element.AddCallbackAttribute("getVisible", getVisible);
+            AddGetEnabled(element, getEnabled);
+            AddGetVisible(element, getVisible);
+            AddGetVisible(element, getVisible);
         }
 
         #endregion

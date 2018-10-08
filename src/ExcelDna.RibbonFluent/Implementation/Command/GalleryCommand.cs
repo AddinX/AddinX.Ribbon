@@ -31,8 +31,8 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// <param name="element"></param>
         protected internal override void WriteXml(XElement element) {
             base.WriteXml(element);
-            element.AddCallbackAttribute("onAction", "OnItemAction", onItemAction);
-            element.AddCallbackAttribute("getSelectedItemIndex", getSelectedItemIndex);
+            AddOnItemAction(element, onItemAction);
+            AddGetSelectedItemIndex(element, getSelectedItemIndex);
         }
 
         #endregion

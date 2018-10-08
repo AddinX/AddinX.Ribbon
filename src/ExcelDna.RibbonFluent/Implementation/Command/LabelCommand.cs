@@ -1,23 +1,10 @@
-﻿using System;
-using System.Xml.Linq;
-using AddinX.Ribbon.Contract.Command;
-using AddinX.Ribbon.Contract.Command.Field;
+﻿using AddinX.Ribbon.Contract.Command;
 
 namespace AddinX.Ribbon.Implementation.Command {
-    public class LabelCommand : ControlCommand<ILabelCommand>, ILabelCommand
-        //IVisibleField, IEnabledField, ILabelField 
-        {
+    public class LabelCommand : ControlCommand<ILabelCommand>, ILabelCommand {
         #region Implementation of ICommand
 
         protected override ILabelCommand Interface => this;
-
-        /// <summary>
-        ///     写入回调Xml属性
-        /// </summary>
-        /// <param name="element"></param>
-        protected internal override void WriteXml(XElement element) {
-           base.WriteXml(element);
-        }
 
         #endregion
     }

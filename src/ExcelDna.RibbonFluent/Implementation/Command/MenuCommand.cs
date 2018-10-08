@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Linq;
-using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 using AddinX.Ribbon.Contract.Enums;
@@ -12,7 +11,7 @@ namespace AddinX.Ribbon.Implementation.Command {
 
         protected internal override void WriteXml(XElement element) {
             base.WriteXml(element);
-            element.AddCallbackAttribute("getSize",nameof(IRibbonFluentCallback.GetSize),getSize);
+            AddGetSize(element, getSize);
         }
 
         #region Implementation of IMenuCommand

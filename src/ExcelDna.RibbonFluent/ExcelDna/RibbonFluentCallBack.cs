@@ -133,5 +133,12 @@ namespace AddinX.Ribbon.ExcelDna {
 
             return defaultValue;
         }
+
+        /// <inheritdoc />
+        public string GetDescription(IRibbonControl control) {
+            if (FindCallback(control.Id) is IDescriptionField field) return field.getDescription?.Invoke() ?? DefaultLabel;
+
+            return DefaultLabel;
+        }
     }
 }

@@ -26,8 +26,8 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// <param name="element"></param>
         protected internal override void WriteXml(XElement element) {
             base.WriteXml(element);
-            element.AddCallbackAttribute("getText", getText);
-            element.AddCallbackAttribute("onChange", onChange);
+            AddOnChange(element, onChange);
+            AddGetText(element, getText);
         }
 
         #endregion

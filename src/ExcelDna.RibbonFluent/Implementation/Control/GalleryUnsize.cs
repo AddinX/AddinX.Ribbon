@@ -9,7 +9,6 @@ using AddinX.Ribbon.Implementation.Ribbon;
 
 namespace AddinX.Ribbon.Implementation.Control {
     public class GalleryUnsize : Control<IGalleryUnsize, IGalleryCommand>, IGalleryUnsize {
-        private bool _dynamicItemsLoading;
         private readonly Items _data;
         private readonly Controls _controls;
 
@@ -49,30 +48,22 @@ namespace AddinX.Ribbon.Implementation.Control {
 
             var element = base.ToXml(ns);
 
-            if (!_dynamicItemsLoading) {
-                // Add the Items first
-                if (_data?.ToXml(ns) != null) {
-                    element.Add(_data.ToXml(ns));
+            if (!HasCallback) {
+                foreach (var item in _data.ToXml(ns)) {
+                    element.Add(item);
                 }
             }
 
             // Then the buttons
-            if (_controls?.ToXml(ns) != null) {
-                element.Add(_controls.ToXml(ns));
+            foreach (var item in _controls.ToXml(ns)) {
+                element.Add(item);
             }
-
             return element;
         }
 
         protected override IGalleryUnsize Interface => this;
 
-        public IGalleryUnsize DynamicItems() {
-            _dynamicItemsLoading = true;
-            return this;
-        }
-
         public IGalleryUnsize Items(Action<IItems> builder) {
-            _dynamicItemsLoading = false;
             builder.Invoke(_data);
             return this;
         }

@@ -28,13 +28,16 @@ namespace ExcelDna.RibbonFluent.Tests {
             var btn = new Button().Supertip("test").ShowLabel().Description("test button").NoImage()
                 .Id("test_btn");
 
-            btn.Callback(cmd =>cmd.OnAction(()=> Console.WriteLine("test")));
+            btn.Callback(cmd => {
+                cmd.OnAction(() => Console.WriteLine("test"));
+                cmd.GetLabel(() => "Test Button");
+            });
 
             builder.CustomUi.Ribbon.Tabs(
                 c => c.AddTab("test")
                     .Groups(g1 => g1.AddGroup("group").Items(g => g.AddButton("b")
                         .Callback(cb => cb.OnAction(() =>Console.WriteLine("Test Button"))
-                        .GetEnabled(() => true)))));
+                        .GetEnabled(() => true).GetLabel(()=>"Button Callback")))));
             Console.WriteLine(builder.GetXmlString());
         }
 

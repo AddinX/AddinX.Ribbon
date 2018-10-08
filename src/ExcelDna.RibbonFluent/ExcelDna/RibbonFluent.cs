@@ -75,5 +75,9 @@ namespace AddinX.Ribbon.ExcelDna {
         public abstract void OnClosing();
 
         public abstract void OnOpening();
+
+        #region Implementation of IRibbonFluentCallback
+
+        #endregion
     }
 }

@@ -33,6 +33,11 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         /// <summary>
+        /// 控件是否包含Callback命令
+        /// </summary>
+        protected bool HasCallback => _command != null;
+
+        /// <summary>
         /// 增加 命令回调属性
         /// </summary>
         /// <param name="element"></param>
@@ -54,7 +59,7 @@ namespace AddinX.Ribbon.Implementation.Control {
 
     public abstract class ControlContainer<TElement, TContainer> : Control<TElement>
         where TContainer : AddInList, new() {
-        private const string tag_itemSize = "itemSize";
+        
 
         protected ControlContainer(string elementName) : base(elementName) {
             InnerItems = new TContainer();
@@ -68,12 +73,12 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
 
         public TElement ItemNormalSize() {
-            base.SetAttribute(tag_itemSize, ControlSize.normal);
+            base.SetAttribute(AttrNames.itemSize, ControlSize.normal);
             return this.Interface;
         }
 
         public TElement ItemLargeSize() {
-            base.SetAttribute(tag_itemSize, ControlSize.large);
+            base.SetAttribute(AttrNames.itemSize, ControlSize.large);
             return this.Interface;
         }
 
@@ -101,66 +106,7 @@ namespace AddinX.Ribbon.Implementation.Control {
         }
     }
 
-    public abstract class Control<TElement> : Control {
-        private const string tag_size = "size";
-        private const string tag_getSize = "getSize";
-        private const string tag_onAction = "onAction";
-        private const string tag_enabled = "enabled";
-        private const string tag_getEnabled = "getEnabled";
-        private const string tag_description = "description";
-        private const string tag_getDescription = "getDescription";
-        private const string tag_image = "image";
-        private const string tag_imageMso = "imageMso";
-        private const string tag_getImage = "getImage";
-        private const string tag_id = "id";
-        private const string tag_idQ = "idQ";
-        private const string tag_tag = "tag";
-        private const string tag_idMso = "idMso";
-        private const string tag_screentip = "screentip";
-        
-        private const string tag_supertip = "supertip";
-        private const string tag_getSupertip = "getSupertip";
-        private const string tag_label = "label";
-        private const string tag_getLabel = "getLabel";
-        private const string tag_insertAfterMso = "insertAfterMso";
-        private const string tag_insertBeforeMso = "insertBeforeMso";
-        private const string tag_insertAfterQ = "insertAfterQ";
-        private const string tag_insertBeforeQ = "insertBeforeQ";
-        private const string tag_visible = "visible";
-        
-        private const string tag_keytip = "keytip";
-        private const string tag_getKeytip = "getKeytip";
-        private const string tag_showLabel = "showLabel";
-        private const string tag_getShowLabel = "getShowLabel";
-        private const string tag_showImage = "showImage";
-        private const string tag_getShowImage = "getShowImage";
-        private const string tag_showItemLabel = "showItemLabel";
-        private const string tag_showItemImage = "showItemImage";
-        private const string tag_sizeString = "sizeString";
-        private const string tag_showInRibbon = "showInRibbon";
-        private const string tag_maxLength = "maxLength";
-
-        private const string tag_invalidateContentOnDrop = "invalidateContentOnDrop";
-        private const string tag_columns = "columns";
-        private const string tag_rows = "rows";
-        private const string tag_itemWidth = "itemWidth";
-        private const string tag_itemHeight = "itemHeight";
-        private const string tag_getItemWidth = "getItemWidth";
-        private const string tag_getItemHeight = "getItemHeight";
-        private const string tag_getItemCount = "getItemCount";
-        private const string tag_getItemLabel = "getItemLabel";
-        private const string tag_getItemScreentip = "getItemScreentip";
-        private const string tag_getItemSupertip = "getItemSupertip";
-        private const string tag_getItemImage = "getItemImage";
-        private const string tag_getItemID = "getItemID";
-        private const string tag_getVisible = "getVisible";
-        private const string tag_getSelectedItemID = "getSelectedItemID";
-        private const string tag_getSelectedItemIndex = "getSelectedItemIndex";
-        private const string tag_getScreentip = "getScreentip";
-
-        private const string tag_getText = "getText";
-        private const string tag_onChange = "onChange";
-
+    public abstract partial class Control<TElement> : Control {
 
         protected Control(string elementName) : base(elementName) {
         }
@@ -187,13 +133,13 @@ namespace AddinX.Ribbon.Implementation.Control {
             //_imageVisible = !string.IsNullOrEmpty(name);
             //_imageMso = name;
             //this.SetAttribute(tag_showImage, true);
-            this.SetAttribute(tag_imageMso, name);
+            this.SetAttribute(AttrNames.imageMso, name);
             return Interface;
         }
 
         public TElement ImagePath(string path) {
             //this.SetAttribute(tag_showImage, true);
-            this.SetAttribute(tag_image, path);
+            this.SetAttribute(AttrNames.image, path);
             //_imageVisible = !string.IsNullOrEmpty(path);;
             //_imagePath = path;
             return Interface;
@@ -202,110 +148,110 @@ namespace AddinX.Ribbon.Implementation.Control {
         public TElement NoImage() {
             //this.SetAttribute(tag_showImage, false);
             //this.RemoveAttribute(tag_showImage);
-            this.RemoveAttribute(tag_image);
-            this.RemoveAttribute(tag_imageMso);
+            this.RemoveAttribute(AttrNames.image);
+            this.RemoveAttribute(AttrNames.imageMso);
             return Interface;
         }
 
         public TElement Description(string description) {
-            this.SetAttribute(tag_description, description);
+            this.SetAttribute(AttrNames.description, description);
             //_description = description;
             return Interface;
         }
 
         public TElement Keytip(string keytip) {
-            this.SetAttribute(tag_keytip, keytip);
+            this.SetAttribute(AttrNames.keytip, keytip);
             //_keytip = keytip;
             return Interface;
         }
 
         public TElement Supertip(string supertip) {
-            this.SetAttribute(tag_supertip, supertip);
+            this.SetAttribute(AttrNames.supertip, supertip);
             //_supertip = supertip;
             return Interface;
         }
 
         public TElement Screentip(string screentip) {
-            this.SetAttribute(tag_screentip, screentip);
+            this.SetAttribute(AttrNames.screentip, screentip);
             //_screentip = screentip;
             return Interface;
         }
 
         public TElement LargeSize() {
-            this.SetAttribute(tag_size, ControlSize.large);
+            this.SetAttribute(AttrNames.size, ControlSize.large);
             //_size = ControlSize.large;
             return Interface;
         }
 
         public TElement NormalSize() {
-            this.SetAttribute(tag_size, ControlSize.normal);
+            this.SetAttribute(AttrNames.size, ControlSize.normal);
             //_size = ControlSize.normal;
             return Interface;
         }
 
         public TElement ShowLabel() {
-            this.SetAttribute(tag_showLabel, true);
+            this.SetAttribute(AttrNames.showLabel, true);
             //_showLabel = true;
             return Interface;
         }
 
         public TElement HideLabel() {
-            this.SetAttribute(tag_showLabel, false);
+            this.SetAttribute(AttrNames.showLabel, false);
             //_showLabel = false;
             return Interface;
         }
 
         public TElement ShowItemLabel() {
-            this.SetAttribute(tag_showItemLabel, true);
+            this.SetAttribute(AttrNames.showItemLabel, true);
             return Interface;
         }
 
         public TElement HideItemLabel() {
-            this.SetAttribute(tag_showItemLabel, true);
+            this.SetAttribute(AttrNames.showItemLabel, true);
             return Interface;
         }
 
 
         public TElement ShowItemImage() {
-            this.SetAttribute(tag_showItemImage, true);
+            this.SetAttribute(AttrNames.showItemImage, true);
             return Interface;
         }
 
         public TElement HideItemImage() {
-            this.SetAttribute(tag_showItemImage, false);
+            this.SetAttribute(AttrNames.showItemImage, false);
             return Interface;
         }
 
 
         public TElement SizeString(int size) {
-            //this.SetAttribute(tag_size, size);
-            this.SetAttribute(tag_sizeString, new string('W', size));
+            //this.SetAttribute(size, size);
+            this.SetAttribute(AttrNames.sizeString, new string('W', size));
             return this.Interface;
         }
 
         public TElement ItemHeight(int height) {
-            this.SetAttribute(tag_itemHeight, height);
+            this.SetAttribute(AttrNames.itemHeight, height);
             return this.Interface;
         }
 
         public TElement ItemWidth(int width) {
-            this.SetAttribute(tag_itemWidth, width);
+            this.SetAttribute(AttrNames.itemWidth, width);
             return this.Interface;
         }
 
         public TElement NumberRows(int rows) {
-            this.SetAttribute(tag_rows, rows);
+            this.SetAttribute(AttrNames.rows, rows);
             return this.Interface;
         }
 
         public TElement NumberColumns(int cols) {
-            this.SetAttribute(tag_columns, cols);
+            this.SetAttribute(AttrNames.columns, cols);
             return this.Interface;
         }
 
 
         public TElement MaxLength(int maxLength) {
-            SetAttribute(tag_maxLength, maxLength);
+            SetAttribute(AttrNames.maxLength, maxLength);
             return this.Interface;
         }
     }

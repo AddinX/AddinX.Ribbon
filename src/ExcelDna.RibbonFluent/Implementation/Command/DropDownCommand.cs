@@ -32,8 +32,8 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// <param name="element"></param>
         protected internal override void WriteXml(XElement element) {
             base.WriteXml(element);
-            element.AddCallbackAttribute("onAction", "OnItemAction", onItemAction);
-            element.AddCallbackAttribute("getSelectedItemIndex", getSelectedItemIndex);
+            AddOnItemAction(element,onItemAction);
+            AddGetSelectedItemIndex(element,getSelectedItemIndex);
         }
 
         #endregion
@@ -50,12 +50,12 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// <param name="element"></param>
         protected internal override void WriteXml(XElement element) {
             base.WriteXml(element);
-            element.AddCallbackAttribute("getItemCount", getItemCount);
-            element.AddCallbackAttribute("getItemID", "GetItemId", getItemID);
-            element.AddCallbackAttribute("getItemImage", getItemImage);
-            element.AddCallbackAttribute("getItemLabel", getItemLabel);
-            element.AddCallbackAttribute("getItemScreentip", getItemScreentip);
-            element.AddCallbackAttribute("getItemSupertip", getItemSupertip);
+            AddGetItemCount(element, getItemCount);
+            AddGetItemID(element, getItemID);
+            AddGetItemImage(element, getItemImage);
+            AddGetItemLabel(element, getItemLabel);
+            AddGetItemScreentip(element, getItemScreentip);
+            AddGetItemSupertip(element, getItemSupertip);
         }
 
         #region Implementation of IDynamicItemsField

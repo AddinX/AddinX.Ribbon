@@ -20,7 +20,8 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// <param name="element"></param>
         protected internal override void WriteXml(XElement element) {
             base.WriteXml(element);
-            element.AddCallbackAttribute("onAction",onAction);
+            //element.AddCallbackAttribute("onAction",onAction);
+            AddOnAction(element,onAction);
         }
 
         #endregion
@@ -28,7 +29,7 @@ namespace AddinX.Ribbon.Implementation.Command {
         #region Implementation of IButtonCommand
 
         public IButtonCommand OnAction(Action action) {
-            this.onAction = action;
+            onAction = action;
             return Interface;
         }
 

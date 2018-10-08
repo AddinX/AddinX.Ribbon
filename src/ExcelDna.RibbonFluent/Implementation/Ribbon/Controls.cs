@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 using AddinX.Ribbon.Contract.Control.Box;
 using AddinX.Ribbon.Contract.Control.Button;
 using AddinX.Ribbon.Contract.Control.ButtonGroup;

@@ -16,7 +16,8 @@ namespace AddinX.Ribbon.Implementation.Command {
         /// </summary>
         /// <param name="element"></param>
         protected internal override void WriteXml(XElement element) {
-            element.AddCallbackAttribute("getVisible", getVisible);
+            //element.AddCallbackAttribute("getVisible", getVisible);
+            AddGetVisible(element,getVisible);
         }
 
         #endregion

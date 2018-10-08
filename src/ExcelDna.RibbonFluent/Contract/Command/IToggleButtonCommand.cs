@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Contract.Command {
     public interface IToggleButtonCommand : IButtonRegularCommand<IToggleButtonCommand> {

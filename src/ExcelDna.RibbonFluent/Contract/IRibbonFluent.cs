@@ -21,6 +21,7 @@ namespace AddinX.Ribbon.Contract {
         bool GetPressed(IRibbonControl control);
         object GetImage(IRibbonControl control);
         string GetText(IRibbonControl control);
+        string GetDescription(IRibbonControl control);
         void OnChange(IRibbonControl control, string newValue);
         int GetItemCount(IRibbonControl control);
         object GetItemId(IRibbonControl control, int index);

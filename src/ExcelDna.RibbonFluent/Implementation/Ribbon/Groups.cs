@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using AddinX.Ribbon.Contract.Ribbon.Group;
+﻿using AddinX.Ribbon.Contract.Ribbon.Group;
 using AddinX.Ribbon.Implementation.Control;
 
 namespace AddinX.Ribbon.Implementation.Ribbon {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-using AddinX.Ribbon.Contract.Command;
+﻿using AddinX.Ribbon.Contract.Command;
 using AddinX.Ribbon.Contract.Command.Field;
 
 namespace AddinX.Ribbon.Implementation.Command {
