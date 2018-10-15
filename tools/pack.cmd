@@ -10,4 +10,3 @@ cd ../src
 call dotnet pack  ExcelDna.RibbonFluent  --force  -c %Configuration%  %version-suffix%
 
 cd ../tools
-pause
