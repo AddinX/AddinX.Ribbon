@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Schema;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation;
@@ -22,11 +20,12 @@ namespace AddinX.Ribbon.UnitTest
             builder = new RibbonBuilder();
         }
 
+
         [Test]
         public void GroupWithButtons()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithButtons.xml").ToString();
+            var expected = XDocument.Load("Sample/GroupWithButtons.xml");
             
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -51,15 +50,16 @@ namespace AddinX.Ribbon.UnitTest
             // Act
             var str = builder.GetXmlString();
            
+            Assert.True(expected.Compare(str,Console.Out));
             // Assert
-            Assert.AreEqual(expected,str);
+            //Assert.AreEqual(expected,str);
         }
 
         [Test]
         public void GroupWithBoxLauncher()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithDialogBoxLauncher.xml").ToString();
+            var expected = XDocument.Load("Sample/GroupWithDialogBoxLauncher.xml");
 
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -82,16 +82,16 @@ namespace AddinX.Ribbon.UnitTest
 
             // Act
             var str = builder.GetXmlString();
-
+            Assert.True(expected.Compare(str, Console.Out));
             // Assert
-            Assert.AreEqual(expected, str);
+            //Assert.AreEqual(expected, str);
         }
 
         [Test]
         public void ContextualTabWithButtons()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/ContextualTabWithBoxes.xml").ToString();
+            var expected = XDocument.Load("Sample/ContextualTabWithBoxes.xml");
 
             builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts =>
             {
@@ -129,16 +129,16 @@ namespace AddinX.Ribbon.UnitTest
 
             // Act
             var str = builder.GetXmlString();
-
+            Assert.True(expected.Compare(str, Console.Out));
             // Assert
-            Assert.AreEqual(expected, str);
+            //Assert.AreEqual(expected, str);
         }
 
         [Test]
         public void GroupWithBoxes()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithBoxes.xml").ToString();
+            var expected = XDocument.Load("Sample/GroupWithBoxes.xml");
 
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -175,16 +175,16 @@ namespace AddinX.Ribbon.UnitTest
 
             // Act
             var str = builder.GetXmlString();
-
+            Assert.True(expected.Compare(str, Console.Out));
             // Assert
-            Assert.AreEqual(expected, str);
+            //Assert.AreEqual(expected, str);
         }
 
         [Test]
         public void GroupWithCheckBoxAndLabel()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithCheckboxAndLabel.xml").ToString();
+            var expected = XDocument.Load("Sample/GroupWithCheckboxAndLabel.xml");
 
             builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts =>
             {
@@ -217,16 +217,16 @@ namespace AddinX.Ribbon.UnitTest
 
             // Act
             var str = builder.GetXmlString();
-
+            Assert.True(expected.Compare(str, Console.Out));
             // Assert
-            Assert.AreEqual(expected, str);
+            //Assert.AreEqual(expected, str);
         }
 
         [Test]
         public void GroupWithComboBox()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithComboBox.xml").ToString();
+            var expected = XDocument.Load("Sample/GroupWithComboBox.xml");
 
             builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts =>
             {
@@ -269,16 +269,16 @@ namespace AddinX.Ribbon.UnitTest
 
             // Act
             var str = builder.GetXmlString();
-
+            Assert.True(expected.Compare(str, Console.Out));
             // Assert
-            Assert.AreEqual(expected, str);
+            //Assert.AreEqual(expected, str);
         }
 
         [Test]
         public void GroupWithToggleButton()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithToggleButton.xml").ToString();
+            var expected = XDocument.Load("Sample/GroupWithToggleButton.xml");
 
             builder.CustomUi.Ribbon.Tabs(
                 c =>
@@ -300,16 +300,16 @@ namespace AddinX.Ribbon.UnitTest
 
             // Act
             var str = builder.GetXmlString();
-
+            Assert.True(expected.Compare(str, Console.Out));
             // Assert
-            Assert.AreEqual(expected, str);
+            //Assert.AreEqual(expected, str);
         }
 
         [Test]
         public void GroupWithDropDown()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithDropDown.xml").ToString();
+            var expected = XDocument.Load("Sample/GroupWithDropDown.xml");
 
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -348,16 +348,16 @@ namespace AddinX.Ribbon.UnitTest
 
             // Act
             var str = builder.GetXmlString();
-
+            Assert.True(expected.Compare(str, Console.Out));
             // Assert
-            Assert.AreEqual(expected, str);
+            //Assert.AreEqual(expected, str);
         }
 
         [Test]
         public void GroupWithGallery()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithGallery.xml").ToString();
+            var expected = XDocument.Load("Sample/GroupWithGallery.xml");
 
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -397,16 +397,16 @@ namespace AddinX.Ribbon.UnitTest
 
             // Act
             var str = builder.GetXmlString();
-
+            Assert.True(expected.Compare(str, Console.Out));
             // Assert
-            Assert.AreEqual(expected, str);
+            //Assert.AreEqual(expected, str);
         }
 
         [Test]
         public void GroupWithMenu()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithMenu.xml").ToString();
+            var expected = XDocument.Load("Sample/GroupWithMenu.xml");
 
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -451,93 +451,11 @@ namespace AddinX.Ribbon.UnitTest
 
             // Act
             var str = builder.GetXmlString();
-
-            // Assert
-            Assert.AreEqual(expected, str);
-
             Assert.IsTrue(ValidateHelper.Validate(str));
-        }
-    }
 
-    public class XmlValidateTest {
-        public const string NamespaceCustomUI2010 = "http://schemas.microsoft.com/office/2009/07/customui";
-        public const string NamespaceCustomUI2007 = "http://schemas.microsoft.com/office/2006/01/customui";
-
-
-        private XmlSchema GetSchema2007() {
-            using (var reader = File.OpenRead("Schemas\\CustomUI_2006.xsd")) {
-                return XmlSchema.Read(reader, (s, e) => {
-                    Console.WriteLine(e);
-                });
-            }
-        }
-        private XmlSchema GetSchema2010() {
-            using (var reader = File.OpenRead("Schemas\\CustomUI14.xsd")) {
-                return XmlSchema.Read(reader, (s, e) => {
-                    Console.WriteLine(e);
-                });
-            }
-        }
-
-        [Test]
-        public void Validate2010() {
-            var builder = new RibbonBuilder(NamespaceCustomUI2010);
-            BuildUi(builder);
-            var xdoc = XDocument.Parse(builder.GetXmlString());
-            XmlSchemaSet schemas = new XmlSchemaSet();
-            schemas.Add(GetSchema2010());
-            xdoc.Validate(schemas, (s, e) => {
-                Console.WriteLine(e);
-            } );
-        }
-
-        [Test]
-        public void Validate2007() {
-            var builder = new RibbonBuilder(NamespaceCustomUI2007);
-            BuildUi(builder);
-            var xdoc = XDocument.Parse(builder.GetXmlString());
-            XmlSchemaSet schemas = new XmlSchemaSet();
-            schemas.Add(GetSchema2007());
-            xdoc.Validate(schemas, (s, e) => {
-                Console.WriteLine(e);
-            });
-            Console.WriteLine(xdoc.ToString(SaveOptions.OmitDuplicateNamespaces));
-
-            Assert.IsTrue(ValidateHelper.Validate2007(builder.GetXmlString()));
-        }
-
-        private const string BookmarksComboId = "bookmarksCombo";
-        private const string BookmarksDropDownId = "BookmarksDropDownId";
-        private const string MyTabId = "MyTabId";
-        private const string DataGroupId = "DataGroupId";
-        private const string ButtonMore = "buttonMore";
-        private const string ToggleButtonId = "ToggleButtonId";
-
-        private void BuildUi(RibbonBuilder builder) {
-            builder.CustomUi.AddNamespace("acme", "acme.addin.sync").Ribbon.Tabs(c => {
-                c.AddTab("My Tab").IdQ("acme", MyTabId)
-                    .Groups(g => {
-                        g.AddGroup("Data").IdQ("acme", DataGroupId)
-                            .Items(d => {
-                                d.AddButton("My Save").IdMso("FileSave")
-                                    .NormalSize().ImageMso("FileSave");
-                                d.AddButton("Button").Id("buttonOne");
-                                d.AddComboBox("numbers")
-                                    .Id(BookmarksComboId)
-                                    .ShowLabel().NoImage()
-                                    .DynamicItems();
-
-                                d.AddDropDown("With Image")
-                                    .Id(BookmarksDropDownId)
-                                    .ShowLabel().NoImage()
-                                    .ShowItemLabel().ShowItemImage().DynamicItems()
-                                    .Buttons(b => b.AddButton("Button...").Id(ButtonMore));
-                                d.AddToggleButton("Toggle Button")
-                                    .Id(ToggleButtonId);
-                            });
-
-                    });
-            });
+            Assert.True(expected.Compare(str, Console.Out));
+            // Assert
+            //Assert.AreEqual(expected, str);
         }
     }
 }

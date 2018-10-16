@@ -91,6 +91,7 @@
     <Compile Include="FluentRibbonBuilderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidateHelper.cs" />
+    <Compile Include="XmlValidateTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Schemas\CustomUI_2006.xsd">
