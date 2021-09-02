@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Enums;
 using AddinX.Ribbon.Implementation;
@@ -10,10 +11,10 @@ namespace AddinX.Ribbon.UnitTest
     public class FluentRibbonBuilderTest
     {
         private IRibbonBuilder builder;
-       
+
         [SetUp]
         public void SetUp()
-        {   
+        {
             builder = new RibbonBuilder();
         }
 
@@ -21,40 +22,8 @@ namespace AddinX.Ribbon.UnitTest
         public void GroupWithButtons()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithButtons.xml").ToString();
-            
-            builder.CustomUi.Ribbon.Tabs(c =>
-            {
-                c.AddTab("test").SetId("tab1")
-                    .Groups(g=>
-                    {
-                        g.AddGroup("reporting").SetId("reportingGroup")
-                            .Items(i =>
-                            {
-                                i.AddButton("Allocation").SetId("portfolioAllocation").LargeSize().ImageMso("HappyFace");
-                                i.AddButton("Contributor").SetId("Contributor").NormalSize()
-                                    .NoImage().ShowLabel().Supertip("Portfolio best contributor")
-                                    .Screentip("Display the top / bottom X contributor to the portfolio performance.");
-                                
-                            });
-                        g.AddGroup("Analytic").SetId("AnalyticGroup")
-                            .Items(i => i.AddButton("Portfolio Analysis").SetId("portfolioAnalyser").NormalSize()
-                            .NoImage().ShowLabel());
-                    });
-            });
-
-            // Act
-            var str = builder.GetXmlString();
-           
-            // Assert
-            Assert.AreEqual(expected,str);
-        }
-
-        [Test]
-        public void GroupWithBoxLauncher()
-        {
-            // Prepare
-            var expected = XDocument.Load("Sample/GroupWithDialogBoxLauncher.xml").ToString();
+            var fullpath = $"{AppDomain.CurrentDomain.BaseDirectory}Sample/GroupWithButtons.xml";
+            var expected = XDocument.Load(fullpath).ToString();
 
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -68,10 +37,44 @@ namespace AddinX.Ribbon.UnitTest
                                 i.AddButton("Contributor").SetId("Contributor").NormalSize()
                                     .NoImage().ShowLabel().Supertip("Portfolio best contributor")
                                     .Screentip("Display the top / bottom X contributor to the portfolio performance.");
-                                
-                            }).DialogBoxLauncher(o=> o.AddDialogBoxLauncher().SetId("ReportingConfig")
+
+                            });
+                        g.AddGroup("Analytic").SetId("AnalyticGroup")
+                            .Items(i => i.AddButton("Portfolio Analysis").SetId("portfolioAnalyser").NormalSize()
+                            .NoImage().ShowLabel());
+                    });
+            });
+
+            // Act
+            var str = builder.GetXmlString();
+
+            // Assert
+            Assert.AreEqual(expected, str);
+        }
+
+        [Test]
+        public void GroupWithBoxLauncher()
+        {
+            // Prepare
+            var fullpath = $"{AppDomain.CurrentDomain.BaseDirectory}Sample/GroupWithDialogBoxLauncher.xml";
+            var expected = XDocument.Load(fullpath).ToString();
+
+            builder.CustomUi.Ribbon.Tabs(c =>
+            {
+                c.AddTab("test").SetId("tab1")
+                    .Groups(g =>
+                    {
+                        g.AddGroup("reporting").SetId("reportingGroup")
+                            .Items(i =>
+                            {
+                                i.AddButton("Allocation").SetId("portfolioAllocation").LargeSize().ImageMso("HappyFace");
+                                i.AddButton("Contributor").SetId("Contributor").NormalSize()
+                                    .NoImage().ShowLabel().Supertip("Portfolio best contributor")
+                                    .Screentip("Display the top / bottom X contributor to the portfolio performance.");
+
+                            }).DialogBoxLauncher(o => o.AddDialogBoxLauncher().SetId("ReportingConfig")
                                 .Supertip("Allocation Configuration").Screentip("Configuration panel for the Allocation group"));
-                        
+
                     });
             });
 
@@ -86,7 +89,8 @@ namespace AddinX.Ribbon.UnitTest
         public void ContextualTabWithButtons()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/ContextualTabWithBoxes.xml").ToString();
+            var fullpath = $"{AppDomain.CurrentDomain.BaseDirectory}Sample/ContextualTabWithBoxes.xml";
+            var expected = XDocument.Load(fullpath).ToString();
 
             builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts =>
             {
@@ -133,7 +137,8 @@ namespace AddinX.Ribbon.UnitTest
         public void GroupWithBoxes()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithBoxes.xml").ToString();
+            var fullpath = $"{AppDomain.CurrentDomain.BaseDirectory}Sample/GroupWithBoxes.xml";
+            var expected = XDocument.Load(fullpath).ToString();
 
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -144,7 +149,7 @@ namespace AddinX.Ribbon.UnitTest
                             .Items(i =>
                             {
                                 i.AddBox().SetId("ButtonsVertical").VerticalDisplay().AddItems(b =>
-                                { 
+                                {
                                     b.AddButton("Allocation")
                                         .SetId("portfolioAllocation")
                                         .LargeSize()
@@ -179,7 +184,8 @@ namespace AddinX.Ribbon.UnitTest
         public void GroupWithCheckBoxAndLabel()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithCheckboxAndLabel.xml").ToString();
+            var fullpath = $"{AppDomain.CurrentDomain.BaseDirectory}Sample/GroupWithCheckboxAndLabel.xml";
+            var expected = XDocument.Load(fullpath).ToString();
 
             builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts =>
             {
@@ -221,7 +227,9 @@ namespace AddinX.Ribbon.UnitTest
         public void GroupWithComboBox()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithComboBox.xml").ToString();
+            var fullpath = $"{AppDomain.CurrentDomain.BaseDirectory}Sample/GroupWithComboBox.xml";
+            var expected = XDocument.Load(fullpath).ToString();
+
 
             builder.CustomUi.Ribbon.ContextualTabs(ct => ct.AddTabSet(ts =>
             {
@@ -273,7 +281,9 @@ namespace AddinX.Ribbon.UnitTest
         public void GroupWithToggleButton()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithToggleButton.xml").ToString();
+            var fullpath = $"{AppDomain.CurrentDomain.BaseDirectory}Sample/GroupWithToggleButton.xml";
+            var expected = XDocument.Load(fullpath).ToString();
+
 
             builder.CustomUi.Ribbon.Tabs(
                 c =>
@@ -290,7 +300,7 @@ namespace AddinX.Ribbon.UnitTest
                                 });
                         });
                 });
-            
+
 
 
             // Act
@@ -304,7 +314,9 @@ namespace AddinX.Ribbon.UnitTest
         public void GroupWithDropDown()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithDropDown.xml").ToString();
+            var fullpath = $"{AppDomain.CurrentDomain.BaseDirectory}Sample/GroupWithDropDown.xml";
+            var expected = XDocument.Load(fullpath).ToString();
+
 
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -352,7 +364,9 @@ namespace AddinX.Ribbon.UnitTest
         public void GroupWithGallery()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithGallery.xml").ToString();
+            var fullpath = $"{AppDomain.CurrentDomain.BaseDirectory}Sample/GroupWithGallery.xml";
+            var expected = XDocument.Load(fullpath).ToString();
+
 
             builder.CustomUi.Ribbon.Tabs(c =>
             {
@@ -370,9 +384,9 @@ namespace AddinX.Ribbon.UnitTest
                                         o.AddItem("Green").SetId("greenColor");
                                         o.AddItem("Red").SetId("redColor").NoImage();
                                         o.AddItem("Blue").SetId("blueColor").NoImage();
-                                    }).AddButtons(o=>
+                                    }).AddButtons(o =>
                                         o.AddButton("Extra Colors").SetId("ExtraColors")
-                                        .ImageMso("HappyFace") .ShowLabel()
+                                        .ImageMso("HappyFace").ShowLabel()
                                     ).Supertip("Color Picking");
 
                             });
@@ -401,7 +415,9 @@ namespace AddinX.Ribbon.UnitTest
         public void GroupWithMenu()
         {
             // Prepare
-            var expected = XDocument.Load("Sample/GroupWithMenu.xml").ToString();
+            var fullpath = $"{AppDomain.CurrentDomain.BaseDirectory}Sample/GroupWithMenu.xml";
+            var expected = XDocument.Load(fullpath).ToString();
+
 
             builder.CustomUi.Ribbon.Tabs(c =>
             {

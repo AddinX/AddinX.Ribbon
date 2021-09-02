@@ -1,7 +1,7 @@
 ﻿using System;
 using ExcelDna.Integration;
 using ExcelDna.Logging;
-using NetOffice.ExcelApi;
+using Microsoft.Office.Interop.Excel;
 
 namespace ContextualTab
 {
@@ -12,7 +12,7 @@ namespace ContextualTab
             try
             {
                 // The Excel Application object
-                AddinContext.ExcelApp = new Application(null, ExcelDnaUtil.Application);
+                AddinContext.ExcelApp = (Application) ExcelDnaUtil.Application;
 
             }
             catch (Exception e)

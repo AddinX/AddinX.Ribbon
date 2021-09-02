@@ -1,7 +1,7 @@
 ﻿using System;
 using ExcelDna.Integration;
 using ExcelDna.Logging;
-using Application = NetOffice.ExcelApi.Application;
+using Microsoft.Office.Interop.Excel;
 
 namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu
 {
@@ -14,7 +14,7 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu
             try
             {
                 // The Excel Application object
-                AddinContext.ExcelApp = new Application(null, ExcelDnaUtil.Application);
+                AddinContext.ExcelApp = (Application) ExcelDnaUtil.Application;
 
             }
             catch (Exception e)

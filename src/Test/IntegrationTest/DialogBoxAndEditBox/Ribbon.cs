@@ -72,7 +72,7 @@ namespace AddinX.Ribbon.IntegrationTest.DialogBoxAndEditBox
 
         public override void OnClosing()
         {
-            AddinContext.ExcelApp.DisposeChildInstances(true);
+           // AddinContext.ExcelApp.DisposeChildInstances(true);
             AddinContext.ExcelApp = null;
         }
 

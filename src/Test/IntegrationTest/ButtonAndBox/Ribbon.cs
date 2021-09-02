@@ -57,28 +57,41 @@ namespace AddinX.Ribbon.IntegrationTest.ButtonAndBox
 
         protected override void CreateRibbonCommand(IRibbonCommands cmds)
         {
-            cmds.AddButtonCommand(PortfolioAnalyzerBtn).IsEnabled(() => AddinContext.ExcelApp.Worksheets.Count() > 1)
+            
+
+            cmds.AddButtonCommand(PortfolioAnalyzerBtn).IsEnabled(() => SheetCount() > 1)
                 .Action(() => MessageBox.Show("Analyzer button clicked"));
             cmds.AddButtonCommand(PortfolioContributorBtn)
                 .Action(() => MessageBox.Show("Portfolio contributors button clicked"));
             cmds.AddButtonCommand(PortfolioAllocationBtn)
                 .Action(() => MessageBox.Show("Portfolio allocation button clicked"));
-            cmds.AddBoxCommand(ReportingBox).IsVisible(() => AddinContext.ExcelApp.Worksheets.Count() > 1);
+            cmds.AddBoxCommand(ReportingBox).IsVisible(() => SheetCount () > 1);
+        }
+
+        private int SheetCount()
+        {
+            var sheetCount = 0;
+            if (AddinContext.ExcelApp.Workbooks!= null || AddinContext.ExcelApp.Workbooks.Count>0)
+            {
+                sheetCount = AddinContext.ExcelApp.Worksheets.Count;
+            }
+
+            return sheetCount;
         }
 
         public override void OnClosing()
         {
-            AddinContext.ExcelApp.SheetActivateEvent -= (e) => RefreshRibbon();
-            AddinContext.ExcelApp.SheetChangeEvent -= (a, e) => RefreshRibbon();
+            AddinContext.ExcelApp.SheetActivate -= (e) => RefreshRibbon();
+            AddinContext.ExcelApp.SheetChange -= (a, e) => RefreshRibbon();
 
-            AddinContext.ExcelApp.DisposeChildInstances(true);
+            //AddinContext.ExcelApp.DisposeChildInstances(true);
             AddinContext.ExcelApp = null;
         }
 
         public override void OnOpening()
         {
-            AddinContext.ExcelApp.SheetActivateEvent += (e) => RefreshRibbon();
-            AddinContext.ExcelApp.SheetChangeEvent += (a, e) => RefreshRibbon();
+            AddinContext.ExcelApp.SheetActivate += (e) => RefreshRibbon();
+            AddinContext.ExcelApp.SheetChange += (a, e) => RefreshRibbon();
         }
 
         private void RefreshRibbon()

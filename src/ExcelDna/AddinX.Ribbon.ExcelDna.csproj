@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AddinX.Ribbon.ExcelDna</RootNamespace>
     <AssemblyName>AddinX.Ribbon.ExcelDna</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,17 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AddinX.Ribbon.Contract, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AddinX.Ribbon.Contract.1.0.0\lib\net451\AddinX.Ribbon.Contract.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AddinX.Ribbon.Implementation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AddinX.Ribbon.Implementation.1.0.0\lib\net451\AddinX.Ribbon.Implementation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ExcelDna.Integration, Version=0.33.5730.40390, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ExcelDna.Integration.0.33.9\lib\ExcelDna.Integration.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="ExcelDna.Integration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f225e9659857edbe, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ExcelDna.Integration.1.1.0\lib\ExcelDna.Integration.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contract\AddinX.Ribbon.Contract.csproj">
+      <Project>{8e0452bb-994c-4996-99fa-931ee5b7e661}</Project>
+      <Name>AddinX.Ribbon.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Implementation\AddinX.Ribbon.Implementation.csproj">
+      <Project>{563dfffc-6f88-4bbd-9ce0-98783a8511ce}</Project>
+      <Name>AddinX.Ribbon.Implementation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

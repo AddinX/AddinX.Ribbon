@@ -90,7 +90,7 @@ namespace AddinX.Ribbon.IntegrationTest.ComboBoxAndDropDown
 
         public override void OnClosing()
         {
-            AddinContext.ExcelApp.DisposeChildInstances(true);
+            //AddinContext.ExcelApp.DisposeChildInstances(true);
             AddinContext.ExcelApp = null;
         }
 

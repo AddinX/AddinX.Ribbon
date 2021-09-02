@@ -1,4 +1,4 @@
-using NetOffice.ExcelApi;
+using Microsoft.Office.Interop.Excel;
 
 namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu
 {

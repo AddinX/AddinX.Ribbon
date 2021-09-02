@@ -109,14 +109,14 @@ namespace AddinX.Ribbon.IntegrationTest.GalleriesAndMenu
 
         public override void OnClosing()
         {
-            AddinContext.ExcelApp.SheetChangeEvent -= (a, e) => Ribbon.Invalidate();
-            AddinContext.ExcelApp.DisposeChildInstances(true);
+            AddinContext.ExcelApp.SheetChange -= (a, e) => Ribbon.Invalidate();
+           // AddinContext.ExcelApp.DisposeChildInstances(true);
             AddinContext.ExcelApp = null;
         }
 
         public override void OnOpening()
         {
-            AddinContext.ExcelApp.SheetChangeEvent +=(a,e)=> Ribbon.Invalidate();
+            AddinContext.ExcelApp.SheetChange +=(a,e)=> Ribbon.Invalidate();
 
             content = new ListItems();
             content.Add(new SingleItem
